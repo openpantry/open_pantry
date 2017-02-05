@@ -11,6 +11,9 @@ defmodule OpenPantry.Facility do
     field :postal_code, :string
     field :max_occupancy, :integer
     field :square_meterage_storage, :float
+    has_many :users, OpenPantry.User
+    has_many :stocks, OpenPantry.Stock
+    has_many :foods, through: [:stocks, :food]
 
     timestamps()
   end

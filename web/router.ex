@@ -1,5 +1,6 @@
 defmodule OpenPantry.Router do
   use OpenPantry.Web, :router
+  use ExAdmin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,6 +14,11 @@ defmodule OpenPantry.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/admin", ExAdmin do
+    pipe_through :browser
+    admin_routes()
+  end
+
   scope "/", OpenPantry do
     pipe_through :browser # Use the default browser stack
 
@@ -23,6 +29,8 @@ defmodule OpenPantry.Router do
     resources "/food", FoodController
     resources "/food_group_memberships", FoodGroupMembershipController
     resources "/stocks", StockController
+    resources "/users", UserController
+    resources "/user_languages", UserLanguageController
   end
 
   # Other scopes may use custom stacks.

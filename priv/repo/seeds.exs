@@ -9,6 +9,11 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias OpenPantry.Facility
+alias OpenPantry.Language
+alias OpenPantry.Repo
+
+
 facility_params = [
   %{name: "Flatbush",
     max_occupancy: 100,
@@ -37,6 +42,17 @@ facility_params = [
 ]
 
 Enum.each(facility_params, fn(params) ->
-  OpenPantry.Facility.changeset(%OpenPantry.Facility{}, params)
-  |> OpenPantry.Repo.insert!()
+  Facility.changeset(%Facility{}, params)
+  |> Repo.insert!()
 end)
+
+File.read!("priv/repo/languages.json")
+|> Poison.Parser.parse!
+|> Enum.each(
+    fn(language) ->
+      Language.changeset(%Language{}, %{iso_code: language["code"], english_name: language["name"], native_name: language["nativeName"] })
+      |> Repo.insert!()
+    end
+  )
+
+

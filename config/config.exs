@@ -32,6 +32,14 @@ config :ex_admin,
   module: OpenPantry,
   modules: [
     OpenPantry.ExAdmin.Dashboard,
+    OpenPantry.ExAdmin.Language,
+    OpenPantry.ExAdmin.Facility,
+    OpenPantry.ExAdmin.User,
+    OpenPantry.ExAdmin.FoodGroup,
+    OpenPantry.ExAdmin.Food,
+    OpenPantry.ExAdmin.Stock,
+
+
   ]
 
 # Configures Elixir's Logger
@@ -42,3 +50,6 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+

@@ -1,0 +1,23 @@
+<h2>Show user language</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @user_language.user_id %>
+  </li>
+
+  <li>
+    <strong>Language:</strong>
+    <%= @user_language.language_id %>
+  </li>
+
+  <li>
+    <strong>Fluent:</strong>
+    <%= @user_language.fluent %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_language_path(@conn, :edit, @user_language) %>
+<%= link "Back", to: user_language_path(@conn, :index) %>

@@ -16,6 +16,12 @@ defmodule OpenPantry.Food do
     field :protein, :integer
     field :fiber, :integer
     field :description, :string
+    has_many :stocks, OpenPantry.Stock
+    has_many :facilities, through: [:stocks, :facility]
+    has_many :users, through: [:facilities, :user]
+    has_many :food_group_memberships, OpenPantry.FoodGroupMembership
+    has_many :food_groups, through: [:food_group_memberships, :food_group]
+
 
     timestamps()
   end

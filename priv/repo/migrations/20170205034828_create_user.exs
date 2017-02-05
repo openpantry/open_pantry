@@ -1,0 +1,21 @@
+defmodule OpenPantry.Repo.Migrations.CreateUser do
+  use Ecto.Migration
+
+  def change do
+    create table(:users) do
+      add :email, :string
+      add :name, :string
+      add :phone, :string
+      add :ok_to_text, :boolean, default: false, null: false
+      add :family_members, :integer
+      add :protein_credits, :integer
+      add :carb_credits, :integer
+      add :veggie_credits, :integer
+      add :facility_id, references(:facilities, on_delete: :nothing)
+
+      timestamps()
+    end
+    create index(:users, [:facility_id])
+
+  end
+end

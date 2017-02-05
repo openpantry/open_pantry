@@ -1,0 +1,53 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </li>
+
+  <li>
+    <strong>Ok to text:</strong>
+    <%= @user.ok_to_text %>
+  </li>
+
+  <li>
+    <strong>Family members:</strong>
+    <%= @user.family_members %>
+  </li>
+
+  <li>
+    <strong>Protein credits:</strong>
+    <%= @user.protein_credits %>
+  </li>
+
+  <li>
+    <strong>Carb credits:</strong>
+    <%= @user.carb_credits %>
+  </li>
+
+  <li>
+    <strong>Veggie credits:</strong>
+    <%= @user.veggie_credits %>
+  </li>
+
+  <li>
+    <strong>Facility:</strong>
+    <%= @user.facility_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_path(@conn, :edit, @user) %>
+<%= link "Back", to: user_path(@conn, :index) %>
