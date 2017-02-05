@@ -38,8 +38,8 @@ config :ex_admin,
     OpenPantry.ExAdmin.FoodGroup,
     OpenPantry.ExAdmin.Food,
     OpenPantry.ExAdmin.Stock,
-
-
+    OpenPantry.ExAdmin.FoodGroupMembership,
+    OpenPantry.ExAdmin.UserLanguage,
   ]
 
 # Configures Elixir's Logger

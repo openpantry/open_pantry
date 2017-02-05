@@ -12,6 +12,7 @@
       <th>Carb credits</th>
       <th>Veggie credits</th>
       <th>Facility</th>
+      <th>Primary language</th>
 
       <th></th>
     </tr>
@@ -28,6 +29,7 @@
       <td><%= user.carb_credits %></td>
       <td><%= user.veggie_credits %></td>
       <td><%= user.facility_id %></td>
+      <td><%= user.primary_language_id %></td>
 
       <td class="text-right">
         <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>

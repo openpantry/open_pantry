@@ -14,6 +14,7 @@ defmodule OpenPantry.User do
     has_many :foods, through: [:facility, :food]
     has_many :user_languages, OpenPantry.UserLanguage
     has_many :languages, through: [:user_languages, :language]
+    belongs_to :primary_language, OpenPantry.Language
 
     timestamps()
   end

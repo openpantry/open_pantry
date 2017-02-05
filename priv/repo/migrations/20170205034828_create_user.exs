@@ -12,6 +12,7 @@ defmodule OpenPantry.Repo.Migrations.CreateUser do
       add :carb_credits, :integer
       add :veggie_credits, :integer
       add :facility_id, references(:facilities, on_delete: :nothing)
+      add :primary_language_id, references(:languages, on_delete: :nothing)
 
       timestamps()
     end

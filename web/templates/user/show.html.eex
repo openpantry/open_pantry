@@ -47,6 +47,11 @@
     <%= @user.facility_id %>
   </li>
 
+  <li>
+    <strong>Primary language:</strong>
+    <%= @user.primary_language_id %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: user_path(@conn, :edit, @user) %>
