@@ -9,6 +9,7 @@ defmodule OpenPantry.Repo.Migrations.CreateLanguage do
 
       timestamps()
     end
+    create unique_index(:languages, [:iso_code])
 
   end
 end

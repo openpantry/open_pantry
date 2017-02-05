@@ -15,6 +15,7 @@ defmodule OpenPantry.Repo.Migrations.CreateFacility do
 
       timestamps()
     end
+    create unique_index(:facilities, [:name])
 
   end
 end

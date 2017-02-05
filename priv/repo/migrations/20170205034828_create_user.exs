@@ -17,6 +17,7 @@ defmodule OpenPantry.Repo.Migrations.CreateUser do
       timestamps()
     end
     create index(:users, [:facility_id])
+    create unique_index(:users, [:email])
 
   end
 end

@@ -15,7 +15,7 @@ defmodule OpenPantry.FoodGroupMembership do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:proportion, :quantity])
-    |> validate_required([:proportion, :quantity])
+    |> cast(params, [:proportion, :quantity, :food_group_id, :food_id])
+    |> validate_required([:proportion, :quantity, :food_group_id, :food_id])
   end
 end

@@ -24,7 +24,8 @@ defmodule OpenPantry.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :protein_credits, :carb_credits, :veggie_credits])
-    |> validate_required([:email, :name, :phone, :ok_to_text, :family_members, :protein_credits, :carb_credits, :veggie_credits])
+    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :protein_credits, :carb_credits, :veggie_credits, :primary_language_id, :facility_id])
+    |> unique_constraint(:email)
+    |> validate_required([:email, :name, :phone, :ok_to_text, :family_members, :protein_credits, :carb_credits, :veggie_credits, :primary_language_id, :facility_id])
   end
 end

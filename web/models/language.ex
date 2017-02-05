@@ -15,6 +15,7 @@ defmodule OpenPantry.Language do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:iso_code, :english_name, :native_name])
+    |> unique_constraint(:iso_code)
     |> validate_required([:iso_code, :english_name])
   end
 end

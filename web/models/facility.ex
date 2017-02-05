@@ -24,6 +24,7 @@ defmodule OpenPantry.Facility do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :location, :address1, :address2, :city, :region, :postal_code, :max_occupancy, :square_meterage_storage])
-    |> validate_required([:name, :location, :address1, :city, :region, :postal_code])
+    |> unique_constraint(:name)
+    |> validate_required([:name])
   end
 end

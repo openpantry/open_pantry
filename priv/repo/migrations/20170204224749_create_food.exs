@@ -21,6 +21,7 @@ defmodule OpenPantry.Repo.Migrations.CreateFood do
 
       timestamps()
     end
+    create unique_index(:foods, [:name])
 
     Enum.each(Food.mg_columns(), fn column ->
       execute("
