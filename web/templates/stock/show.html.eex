@@ -32,6 +32,21 @@
     <%= @stock.reorder_quantity %>
   </li>
 
+  <li>
+    <strong>Aisle:</strong>
+    <%= @stock.aisle %>
+  </li>
+
+  <li>
+    <strong>Row:</strong>
+    <%= @stock.row %>
+  </li>
+
+  <li>
+    <strong>Shelf:</strong>
+    <%= @stock.shelf %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: stock_path(@conn, :edit, @stock) %>

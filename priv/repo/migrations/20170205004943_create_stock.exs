@@ -7,6 +7,9 @@ defmodule OpenPantry.Repo.Migrations.CreateStock do
       add :arrival, :utc_datetime
       add :expiration, :utc_datetime
       add :reorder_quantity, :integer
+      add :aisle, :string
+      add :row, :string
+      add :shelf, :string
       add :food_id, references(:foods, on_delete: :nothing)
       add :facility_id, references(:facilities, on_delete: :nothing)
 

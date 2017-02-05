@@ -2,7 +2,7 @@ defmodule OpenPantry.StockControllerTest do
   use OpenPantry.ConnCase
 
   alias OpenPantry.Stock
-  @valid_attrs %{arrival: %{day: 17, hour: 14, min: 0, month: 4, sec: 0, year: 2010}, expiration: %{day: 17, hour: 14, min: 0, month: 4, sec: 0, year: 2010}, quantity: 42, reorder_quantity: 42}
+  @valid_attrs %{aisle: "some content", arrival: %{day: 17, hour: 14, min: 0, month: 4, sec: 0, year: 2010}, expiration: %{day: 17, hour: 14, min: 0, month: 4, sec: 0, year: 2010}, quantity: 42, reorder_quantity: 42, row: "some content", shelf: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

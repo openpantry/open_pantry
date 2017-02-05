@@ -9,6 +9,9 @@
       <th>Arrival</th>
       <th>Expiration</th>
       <th>Reorder quantity</th>
+      <th>Aisle</th>
+      <th>Row</th>
+      <th>Shelf</th>
 
       <th></th>
     </tr>
@@ -22,6 +25,9 @@
       <td><%= stock.arrival %></td>
       <td><%= stock.expiration %></td>
       <td><%= stock.reorder_quantity %></td>
+      <td><%= stock.aisle %></td>
+      <td><%= stock.row %></td>
+      <td><%= stock.shelf %></td>
 
       <td class="text-right">
         <%= link "Show", to: stock_path(@conn, :show, stock), class: "btn btn-default btn-xs" %>

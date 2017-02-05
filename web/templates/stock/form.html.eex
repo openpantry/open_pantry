@@ -30,6 +30,24 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :aisle, class: "control-label" %>
+    <%= text_input f, :aisle, class: "form-control" %>
+    <%= error_tag f, :aisle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :row, class: "control-label" %>
+    <%= text_input f, :row, class: "form-control" %>
+    <%= error_tag f, :row %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :shelf, class: "control-label" %>
+    <%= text_input f, :shelf, class: "form-control" %>
+    <%= error_tag f, :shelf %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
