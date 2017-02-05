@@ -33,7 +33,7 @@ defmodule OpenPantry.Food do
     struct
     |> cast(params, [:name, :calories, :calories_from_fat, :description] ++ mg_columns() ++ gram_columns() ++ kg_columns() )
     |> unique_constraint(:name)
-    |> validate_required([:name, :serving_size])
+    |> validate_required([:name])
   end
 
   def mg_columns do
