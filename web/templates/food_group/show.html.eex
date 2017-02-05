@@ -1,0 +1,23 @@
+<h2>Show food group</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @food_group.name %>
+  </li>
+
+  <li>
+    <strong>Exclusive:</strong>
+    <%= @food_group.exclusive %>
+  </li>
+
+  <li>
+    <strong>Daily servings:</strong>
+    <%= @food_group.daily_servings %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: food_group_path(@conn, :edit, @food_group) %>
+<%= link "Back", to: food_group_path(@conn, :index) %>

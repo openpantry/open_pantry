@@ -1,0 +1,52 @@
+<h2>Listing foods</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Serving size</th>
+      <th>Calories</th>
+      <th>Calories from fat</th>
+      <th>Calcium</th>
+      <th>Sodium</th>
+      <th>Cholesterol</th>
+      <th>Carbohydrate</th>
+      <th>Sugars</th>
+      <th>Fat</th>
+      <th>Saturated fat</th>
+      <th>Protein</th>
+      <th>Fiber</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for food <- @foods do %>
+    <tr>
+      <td><%= food.name %></td>
+      <td><%= food.serving_size %></td>
+      <td><%= food.calories %></td>
+      <td><%= food.calories_from_fat %></td>
+      <td><%= food.calcium %></td>
+      <td><%= food.sodium %></td>
+      <td><%= food.cholesterol %></td>
+      <td><%= food.carbohydrate %></td>
+      <td><%= food.sugars %></td>
+      <td><%= food.fat %></td>
+      <td><%= food.saturated_fat %></td>
+      <td><%= food.protein %></td>
+      <td><%= food.fiber %></td>
+      <td><%= food.description %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: food_path(@conn, :show, food), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: food_path(@conn, :edit, food), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: food_path(@conn, :delete, food), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New food", to: food_path(@conn, :new) %>

@@ -1,0 +1,6 @@
+<h2>Edit food group membership</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: food_group_membership_path(@conn, :update, @food_group_membership) %>
+
+<%= link "Back", to: food_group_membership_path(@conn, :index) %>

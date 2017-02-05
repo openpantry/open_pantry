@@ -1,0 +1,28 @@
+<h2>Show food group membership</h2>
+
+<ul>
+
+  <li>
+    <strong>Food:</strong>
+    <%= @food_group_membership.food_id %>
+  </li>
+
+  <li>
+    <strong>Food group:</strong>
+    <%= @food_group_membership.food_group_id %>
+  </li>
+
+  <li>
+    <strong>Proportion:</strong>
+    <%= @food_group_membership.proportion %>
+  </li>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @food_group_membership.quantity %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: food_group_membership_path(@conn, :edit, @food_group_membership) %>
+<%= link "Back", to: food_group_membership_path(@conn, :index) %>

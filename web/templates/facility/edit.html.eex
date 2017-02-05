@@ -1,0 +1,6 @@
+<h2>Edit facility</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: facility_path(@conn, :update, @facility) %>
+
+<%= link "Back", to: facility_path(@conn, :index) %>

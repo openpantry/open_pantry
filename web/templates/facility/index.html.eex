@@ -1,0 +1,42 @@
+<h2>Listing facilities</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Address1</th>
+      <th>Address2</th>
+      <th>City</th>
+      <th>Region</th>
+      <th>Postal code</th>
+      <th>Max occupancy</th>
+      <th>Square meterage storage</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for facility <- @facilities do %>
+    <tr>
+      <td><%= facility.name %></td>
+      <td><%= facility.location %></td>
+      <td><%= facility.address1 %></td>
+      <td><%= facility.address2 %></td>
+      <td><%= facility.city %></td>
+      <td><%= facility.region %></td>
+      <td><%= facility.postal_code %></td>
+      <td><%= facility.max_occupancy %></td>
+      <td><%= facility.square_meterage_storage %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: facility_path(@conn, :show, facility), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: facility_path(@conn, :edit, facility), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: facility_path(@conn, :delete, facility), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New facility", to: facility_path(@conn, :new) %>

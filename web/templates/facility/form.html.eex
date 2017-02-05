@@ -1,0 +1,65 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :location, class: "control-label" %>
+    <%= text_input f, :location, class: "form-control" %>
+    <%= error_tag f, :location %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address1, class: "control-label" %>
+    <%= text_input f, :address1, class: "form-control" %>
+    <%= error_tag f, :address1 %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address2, class: "control-label" %>
+    <%= text_input f, :address2, class: "form-control" %>
+    <%= error_tag f, :address2 %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :city, class: "control-label" %>
+    <%= text_input f, :city, class: "form-control" %>
+    <%= error_tag f, :city %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :region, class: "control-label" %>
+    <%= text_input f, :region, class: "form-control" %>
+    <%= error_tag f, :region %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :postal_code, class: "control-label" %>
+    <%= text_input f, :postal_code, class: "form-control" %>
+    <%= error_tag f, :postal_code %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :max_occupancy, class: "control-label" %>
+    <%= number_input f, :max_occupancy, class: "form-control" %>
+    <%= error_tag f, :max_occupancy %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :square_meterage_storage, class: "control-label" %>
+    <%= number_input f, :square_meterage_storage, step: "any", class: "form-control" %>
+    <%= error_tag f, :square_meterage_storage %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

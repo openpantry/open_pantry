@@ -1,0 +1,38 @@
+<h2>Show stock</h2>
+
+<ul>
+
+  <li>
+    <strong>Food:</strong>
+    <%= @stock.food_id %>
+  </li>
+
+  <li>
+    <strong>Facility:</strong>
+    <%= @stock.facility_id %>
+  </li>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @stock.quantity %>
+  </li>
+
+  <li>
+    <strong>Arrival:</strong>
+    <%= @stock.arrival %>
+  </li>
+
+  <li>
+    <strong>Expiration:</strong>
+    <%= @stock.expiration %>
+  </li>
+
+  <li>
+    <strong>Reorder quantity:</strong>
+    <%= @stock.reorder_quantity %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: stock_path(@conn, :edit, @stock) %>
+<%= link "Back", to: stock_path(@conn, :index) %>

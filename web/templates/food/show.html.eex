@@ -1,0 +1,78 @@
+<h2>Show food</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @food.name %>
+  </li>
+
+  <li>
+    <strong>Serving size:</strong>
+    <%= @food.serving_size %>
+  </li>
+
+  <li>
+    <strong>Calories:</strong>
+    <%= @food.calories %>
+  </li>
+
+  <li>
+    <strong>Calories from fat:</strong>
+    <%= @food.calories_from_fat %>
+  </li>
+
+  <li>
+    <strong>Calcium:</strong>
+    <%= @food.calcium %>
+  </li>
+
+  <li>
+    <strong>Sodium:</strong>
+    <%= @food.sodium %>
+  </li>
+
+  <li>
+    <strong>Cholesterol:</strong>
+    <%= @food.cholesterol %>
+  </li>
+
+  <li>
+    <strong>Carbohydrate:</strong>
+    <%= @food.carbohydrate %>
+  </li>
+
+  <li>
+    <strong>Sugars:</strong>
+    <%= @food.sugars %>
+  </li>
+
+  <li>
+    <strong>Fat:</strong>
+    <%= @food.fat %>
+  </li>
+
+  <li>
+    <strong>Saturated fat:</strong>
+    <%= @food.saturated_fat %>
+  </li>
+
+  <li>
+    <strong>Protein:</strong>
+    <%= @food.protein %>
+  </li>
+
+  <li>
+    <strong>Fiber:</strong>
+    <%= @food.fiber %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @food.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: food_path(@conn, :edit, @food) %>
+<%= link "Back", to: food_path(@conn, :index) %>

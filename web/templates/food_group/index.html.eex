@@ -1,0 +1,30 @@
+<h2>Listing food groups</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Exclusive</th>
+      <th>Daily servings</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for food_group <- @food_groups do %>
+    <tr>
+      <td><%= food_group.name %></td>
+      <td><%= food_group.exclusive %></td>
+      <td><%= food_group.daily_servings %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: food_group_path(@conn, :show, food_group), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: food_group_path(@conn, :edit, food_group), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: food_group_path(@conn, :delete, food_group), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New food group", to: food_group_path(@conn, :new) %>

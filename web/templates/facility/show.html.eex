@@ -1,0 +1,53 @@
+<h2>Show facility</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @facility.name %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @facility.location %>
+  </li>
+
+  <li>
+    <strong>Address1:</strong>
+    <%= @facility.address1 %>
+  </li>
+
+  <li>
+    <strong>Address2:</strong>
+    <%= @facility.address2 %>
+  </li>
+
+  <li>
+    <strong>City:</strong>
+    <%= @facility.city %>
+  </li>
+
+  <li>
+    <strong>Region:</strong>
+    <%= @facility.region %>
+  </li>
+
+  <li>
+    <strong>Postal code:</strong>
+    <%= @facility.postal_code %>
+  </li>
+
+  <li>
+    <strong>Max occupancy:</strong>
+    <%= @facility.max_occupancy %>
+  </li>
+
+  <li>
+    <strong>Square meterage storage:</strong>
+    <%= @facility.square_meterage_storage %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: facility_path(@conn, :edit, @facility) %>
+<%= link "Back", to: facility_path(@conn, :index) %>
