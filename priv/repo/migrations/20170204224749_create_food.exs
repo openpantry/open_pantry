@@ -2,7 +2,7 @@ defmodule OpenPantry.Repo.Migrations.CreateFood do
   use Ecto.Migration
   alias OpenPantry.Food
 
-  def change do
+  def up do
     create table(:foods) do
       add :name, :string
       add :serving_size, :decimal
@@ -38,6 +38,11 @@ defmodule OpenPantry.Repo.Migrations.CreateFood do
         COMMENT on column foods.#{column} is 'weight in kilograms';
       ")
     end)
-
   end
+
+  def down do
+    drop index(:foods, [:name])
+    drop table(:foods)
+  end
+
 end
