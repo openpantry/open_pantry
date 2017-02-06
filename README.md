@@ -14,3 +14,4 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 ## Learn more
 
   * Masbia Pantry: http://www.masbia.org/pantry
+  * Volunteer to help develop this app, or other work with Masbia: http://www.masbia.org/volunteer_signup
