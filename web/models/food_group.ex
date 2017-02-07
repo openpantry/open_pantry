@@ -4,6 +4,8 @@ defmodule OpenPantry.FoodGroup do
   schema "food_groups" do
     field :name, :string
     field :monthly_credits, :integer
+    has_many :food_group_memberships, OpenPantry.FoodGroupMembership, on_delete: :delete_all
+    has_many :foods, through: [:food_group_memberships, :foods]
 
     timestamps()
   end

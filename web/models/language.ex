@@ -5,6 +5,9 @@ defmodule OpenPantry.Language do
     field :iso_code, :string
     field :english_name, :string
     field :native_name, :string
+    has_many :user_languages, OpenPantry.UserLanguage, on_delete: :delete_all
+    has_many :users, through: [:user_languages, :user]
+
 
     timestamps()
   end

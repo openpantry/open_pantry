@@ -10,7 +10,7 @@ defmodule OpenPantry.User do
     field :credits, :map
     belongs_to :facility, OpenPantry.Facility
     has_many :foods, through: [:facility, :food]
-    has_many :user_languages, OpenPantry.UserLanguage
+    has_many :user_languages, OpenPantry.UserLanguage, on_delete: :delete_all
     has_many :languages, through: [:user_languages, :language]
     belongs_to :primary_language, OpenPantry.Language
 
