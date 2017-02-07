@@ -47,6 +47,16 @@
     <%= @stock.shelf %>
   </li>
 
+  <li>
+    <strong>Packaging:</strong>
+    <%= @stock.packaging %>
+  </li>
+
+  <li>
+    <strong>Credits per package:</strong>
+    <%= @stock.credits_per_package %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: stock_path(@conn, :edit, @stock) %>

@@ -48,6 +48,18 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :packaging, class: "control-label" %>
+    <%= text_input f, :packaging, class: "form-control" %>
+    <%= error_tag f, :packaging %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :credits_per_package, class: "control-label" %>
+    <%= number_input f, :credits_per_package, class: "form-control" %>
+    <%= error_tag f, :credits_per_package %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

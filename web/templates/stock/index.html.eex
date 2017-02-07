@@ -12,6 +12,8 @@
       <th>Aisle</th>
       <th>Row</th>
       <th>Shelf</th>
+      <th>Packaging</th>
+      <th>Credits per package</th>
 
       <th></th>
     </tr>
@@ -28,6 +30,8 @@
       <td><%= stock.aisle %></td>
       <td><%= stock.row %></td>
       <td><%= stock.shelf %></td>
+      <td><%= stock.packaging %></td>
+      <td><%= stock.credits_per_package %></td>
 
       <td class="text-right">
         <%= link "Show", to: stock_path(@conn, :show, stock), class: "btn btn-default btn-xs" %>

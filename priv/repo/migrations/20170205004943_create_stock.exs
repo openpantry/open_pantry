@@ -10,6 +10,8 @@ defmodule OpenPantry.Repo.Migrations.CreateStock do
       add :aisle, :string
       add :row, :string
       add :shelf, :string
+      add :packaging, :string
+      add :credits_per_package, :integer
       add :food_id, references(:foods, on_delete: :nothing)
       add :facility_id, references(:facilities, on_delete: :nothing)
 
