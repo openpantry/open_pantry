@@ -18,19 +18,8 @@ defmodule OpenPantry.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {OpenPantry, []},
-     applications: [:logger,
-                    :phoenix,
-                    :phoenix_pubsub,
-                    :phoenix_ecto,
-                    :postgrex,
-                    :phoenix_html,
-                    :ex_admin,
-                    :guardian,
-                    :gettext,
-                    :geo,
-                    :cowboy
-                    ]
-]
+     extra_applications: [:logger]
+    ]
   end
 
   # Specifies which paths to compile per environment.
