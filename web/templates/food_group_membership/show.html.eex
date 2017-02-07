@@ -12,16 +12,6 @@
     <%= @food_group_membership.food_group_id %>
   </li>
 
-  <li>
-    <strong>Proportion:</strong>
-    <%= @food_group_membership.proportion %>
-  </li>
-
-  <li>
-    <strong>Quantity:</strong>
-    <%= @food_group_membership.quantity %>
-  </li>
-
 </ul>
 
 <%= link "Edit", to: food_group_membership_path(@conn, :edit, @food_group_membership) %>

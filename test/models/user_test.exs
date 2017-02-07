@@ -3,7 +3,7 @@ defmodule OpenPantry.UserTest do
 
   alias OpenPantry.User
 
-  @valid_attrs %{carb_credits: 42, email: "some content", family_members: 42, name: "some content", ok_to_text: true, phone: "some content", protein_credits: 42, veggie_credits: 42}
+  @valid_attrs %{credits: %{}, email: "some content", family_members: 42, name: "some content", ok_to_text: true, phone: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

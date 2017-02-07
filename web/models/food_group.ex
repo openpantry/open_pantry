@@ -3,8 +3,7 @@ defmodule OpenPantry.FoodGroup do
 
   schema "food_groups" do
     field :name, :string
-    field :exclusive, :boolean, default: false
-    field :daily_servings, :integer
+    field :monthly_credits, :integer
 
     timestamps()
   end
@@ -14,7 +13,7 @@ defmodule OpenPantry.FoodGroup do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :exclusive, :daily_servings])
-    |> validate_required([:name, :exclusive])
+    |> cast(params, [:name, :monthly_credits])
+    |> validate_required([:name, :monthly_credits])
   end
 end

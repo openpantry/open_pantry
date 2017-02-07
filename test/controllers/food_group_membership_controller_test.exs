@@ -2,7 +2,7 @@ defmodule OpenPantry.FoodGroupMembershipControllerTest do
   use OpenPantry.ConnCase
 
   alias OpenPantry.FoodGroupMembership
-  @valid_attrs %{proportion: "120.5", quantity: 42}
+  @valid_attrs %{}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

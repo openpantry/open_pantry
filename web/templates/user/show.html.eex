@@ -28,21 +28,6 @@
   </li>
 
   <li>
-    <strong>Protein credits:</strong>
-    <%= @user.protein_credits %>
-  </li>
-
-  <li>
-    <strong>Carb credits:</strong>
-    <%= @user.carb_credits %>
-  </li>
-
-  <li>
-    <strong>Veggie credits:</strong>
-    <%= @user.veggie_credits %>
-  </li>
-
-  <li>
     <strong>Facility:</strong>
     <%= @user.facility_id %>
   </li>
@@ -50,6 +35,11 @@
   <li>
     <strong>Primary language:</strong>
     <%= @user.primary_language_id %>
+  </li>
+
+  <li>
+    <strong>Credits:</strong>
+    <%= @user.credits %>
   </li>
 
 </ul>

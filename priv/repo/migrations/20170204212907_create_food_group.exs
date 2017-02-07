@@ -4,8 +4,7 @@ defmodule OpenPantry.Repo.Migrations.CreateFoodGroup do
   def change do
     create table(:food_groups) do
       add :name, :string
-      add :exclusive, :boolean, default: false, null: false
-      add :daily_servings, :integer
+      add :monthly_credits, :integer
 
       timestamps()
     end

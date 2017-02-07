@@ -3,7 +3,7 @@ defmodule OpenPantry.FoodGroupMembershipTest do
 
   alias OpenPantry.FoodGroupMembership
 
-  @valid_attrs %{proportion: "120.5", quantity: 42}
+  @valid_attrs %{}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

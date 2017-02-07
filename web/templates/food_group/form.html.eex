@@ -12,15 +12,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :exclusive, class: "control-label" %>
-    <%= checkbox f, :exclusive, class: "form-control" %>
-    <%= error_tag f, :exclusive %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :daily_servings, class: "control-label" %>
-    <%= number_input f, :daily_servings, class: "form-control" %>
-    <%= error_tag f, :daily_servings %>
+    <%= label f, :monthly_credits, class: "control-label" %>
+    <%= number_input f, :monthly_credits, class: "form-control" %>
+    <%= error_tag f, :monthly_credits %>
   </div>
 
   <div class="form-group">

@@ -11,6 +11,7 @@ defmodule OpenPantry.Stock do
     field :shelf, :string
     belongs_to :food, OpenPantry.Food
     belongs_to :facility, OpenPantry.Facility
+    has_many :food_groups, through: [:food, :food_groups]
 
     timestamps()
   end

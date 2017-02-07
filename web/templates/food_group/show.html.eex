@@ -8,13 +8,8 @@
   </li>
 
   <li>
-    <strong>Exclusive:</strong>
-    <%= @food_group.exclusive %>
-  </li>
-
-  <li>
-    <strong>Daily servings:</strong>
-    <%= @food_group.daily_servings %>
+    <strong>Monthly credits:</strong>
+    <%= @food_group.monthly_credits %>
   </li>
 
 </ul>

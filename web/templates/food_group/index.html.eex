@@ -4,8 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Exclusive</th>
-      <th>Daily servings</th>
+      <th>Monthly credits</th>
 
       <th></th>
     </tr>
@@ -14,8 +13,7 @@
 <%= for food_group <- @food_groups do %>
     <tr>
       <td><%= food_group.name %></td>
-      <td><%= food_group.exclusive %></td>
-      <td><%= food_group.daily_servings %></td>
+      <td><%= food_group.monthly_credits %></td>
 
       <td class="text-right">
         <%= link "Show", to: food_group_path(@conn, :show, food_group), class: "btn btn-default btn-xs" %>

@@ -5,8 +5,6 @@
     <tr>
       <th>Food</th>
       <th>Food group</th>
-      <th>Proportion</th>
-      <th>Quantity</th>
 
       <th></th>
     </tr>
@@ -16,8 +14,6 @@
     <tr>
       <td><%= food_group_membership.food_id %></td>
       <td><%= food_group_membership.food_group_id %></td>
-      <td><%= food_group_membership.proportion %></td>
-      <td><%= food_group_membership.quantity %></td>
 
       <td class="text-right">
         <%= link "Show", to: food_group_membership_path(@conn, :show, food_group_membership), class: "btn btn-default btn-xs" %>

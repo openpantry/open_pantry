@@ -36,21 +36,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :protein_credits, class: "control-label" %>
-    <%= number_input f, :protein_credits, class: "form-control" %>
-    <%= error_tag f, :protein_credits %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :carb_credits, class: "control-label" %>
-    <%= number_input f, :carb_credits, class: "form-control" %>
-    <%= error_tag f, :carb_credits %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :veggie_credits, class: "control-label" %>
-    <%= number_input f, :veggie_credits, class: "form-control" %>
-    <%= error_tag f, :veggie_credits %>
+    <%= label f, :credits, class: "control-label" %>
+    <%= text_input f, :credits, class: "form-control" %>
+    <%= error_tag f, :credits %>
   </div>
 
   <div class="form-group">
