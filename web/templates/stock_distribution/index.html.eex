@@ -1,0 +1,30 @@
+<h2>Listing stock distributions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Stock</th>
+      <th>Food handoff</th>
+      <th>Quantity</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for stock_distribution <- @stock_distributions do %>
+    <tr>
+      <td><%= stock_distribution.stock_id %></td>
+      <td><%= stock_distribution.food_handoff_id %></td>
+      <td><%= stock_distribution.quantity %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: stock_distribution_path(@conn, :show, stock_distribution), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: stock_distribution_path(@conn, :edit, stock_distribution), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: stock_distribution_path(@conn, :delete, stock_distribution), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New stock distribution", to: stock_distribution_path(@conn, :new) %>

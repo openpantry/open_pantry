@@ -1,0 +1,23 @@
+<h2>Show stock distribution</h2>
+
+<ul>
+
+  <li>
+    <strong>Stock:</strong>
+    <%= @stock_distribution.stock_id %>
+  </li>
+
+  <li>
+    <strong>Food handoff:</strong>
+    <%= @stock_distribution.food_handoff_id %>
+  </li>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @stock_distribution.quantity %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: stock_distribution_path(@conn, :edit, @stock_distribution) %>
+<%= link "Back", to: stock_distribution_path(@conn, :index) %>

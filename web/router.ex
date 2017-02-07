@@ -31,6 +31,8 @@ defmodule OpenPantry.Router do
     resources "/stocks", StockController
     resources "/users", UserController
     resources "/user_languages", UserLanguageController
+    resources "/food_handoffs", FoodHandoffController
+    resources "/stock_distributions", StockDistributionController
   end
 
   # Other scopes may use custom stacks.

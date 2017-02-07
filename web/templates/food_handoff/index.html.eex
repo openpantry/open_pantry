@@ -1,0 +1,30 @@
+<h2>Listing food handoffs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Ready for pickup</th>
+      <th>Finalized</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for food_handoff <- @food_handoffs do %>
+    <tr>
+      <td><%= food_handoff.user_id %></td>
+      <td><%= food_handoff.ready_for_pickup %></td>
+      <td><%= food_handoff.finalized %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: food_handoff_path(@conn, :show, food_handoff), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: food_handoff_path(@conn, :edit, food_handoff), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: food_handoff_path(@conn, :delete, food_handoff), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New food handoff", to: food_handoff_path(@conn, :new) %>

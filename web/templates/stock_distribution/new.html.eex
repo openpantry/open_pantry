@@ -1,0 +1,6 @@
+<h2>New stock distribution</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: stock_distribution_path(@conn, :create) %>
+
+<%= link "Back", to: stock_distribution_path(@conn, :index) %>

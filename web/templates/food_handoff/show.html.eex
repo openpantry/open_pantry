@@ -1,0 +1,23 @@
+<h2>Show food handoff</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @food_handoff.user_id %>
+  </li>
+
+  <li>
+    <strong>Ready for pickup:</strong>
+    <%= @food_handoff.ready_for_pickup %>
+  </li>
+
+  <li>
+    <strong>Finalized:</strong>
+    <%= @food_handoff.finalized %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: food_handoff_path(@conn, :edit, @food_handoff) %>
+<%= link "Back", to: food_handoff_path(@conn, :index) %>
