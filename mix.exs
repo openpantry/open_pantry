@@ -38,6 +38,7 @@ defmodule OpenPantry.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:ex_admin, git: "https://github.com/smpallen99/ex_admin/"},
      {:guardian, "~> 0.14"},
+     {:ueberauth, "~> 0.4"},
      {:gettext, "~> 0.11"},
      {:geo, "~> 1.3"},
      {:cowboy, "~> 1.0"}]
