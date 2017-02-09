@@ -1,7 +1,7 @@
-defmodule OpenPantry.FoodHandoff do
+defmodule OpenPantry.UserFoodPackage do
   use OpenPantry.Web, :model
 
-  schema "food_handoffs" do
+  schema "user_food_packages" do
     field :ready_for_pickup, :boolean, default: false
     field :finalized, :boolean, default: false
     belongs_to :user, OpenPantry.User

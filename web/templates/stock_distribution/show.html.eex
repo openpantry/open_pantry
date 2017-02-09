@@ -8,8 +8,8 @@
   </li>
 
   <li>
-    <strong>Food handoff:</strong>
-    <%= @stock_distribution.food_handoff_id %>
+    <strong>User food package:</strong>
+    <%= @stock_distribution.user_food_package_id %>
   </li>
 
   <li>

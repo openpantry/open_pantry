@@ -1,18 +1,18 @@
-defmodule OpenPantry.FoodHandoffTest do
+defmodule OpenPantry.UserFoodPackageTest do
   use OpenPantry.ModelCase
 
-  alias OpenPantry.FoodHandoff
+  alias OpenPantry.UserFoodPackage
 
   @valid_attrs %{finalized: true, ready_for_pickup: true}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = FoodHandoff.changeset(%FoodHandoff{}, @valid_attrs)
+    changeset = UserFoodPackage.changeset(%UserFoodPackage{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = FoodHandoff.changeset(%FoodHandoff{}, @invalid_attrs)
+    changeset = UserFoodPackage.changeset(%UserFoodPackage{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

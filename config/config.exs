@@ -40,7 +40,7 @@ config :ex_admin,
     OpenPantry.ExAdmin.Stock,
     OpenPantry.ExAdmin.FoodGroupMembership,
     OpenPantry.ExAdmin.UserLanguage,
-    OpenPantry.ExAdmin.FoodHandoff,
+    OpenPantry.ExAdmin.UserFoodPackage,
     OpenPantry.ExAdmin.StockDistribution,
   ]
 

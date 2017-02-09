@@ -1,6 +1,0 @@
-<h2>Edit food handoff</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: food_handoff_path(@conn, :update, @food_handoff) %>
-
-<%= link "Back", to: food_handoff_path(@conn, :index) %>

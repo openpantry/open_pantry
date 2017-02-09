@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Stock</th>
-      <th>Food handoff</th>
+      <th>User food package</th>
       <th>Quantity</th>
 
       <th></th>
@@ -14,7 +14,7 @@
 <%= for stock_distribution <- @stock_distributions do %>
     <tr>
       <td><%= stock_distribution.stock_id %></td>
-      <td><%= stock_distribution.food_handoff_id %></td>
+      <td><%= stock_distribution.user_food_package_id %></td>
       <td><%= stock_distribution.quantity %></td>
 
       <td class="text-right">

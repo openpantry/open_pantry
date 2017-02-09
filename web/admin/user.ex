@@ -3,8 +3,6 @@ defmodule OpenPantry.ExAdmin.User do
   alias OpenPantry.Repo
   alias OpenPantry.FoodGroup
 
-  import OpenPantry.Repo
-  import OpenPantry.FoodGroup
   register_resource OpenPantry.User do
 
     index do
@@ -17,6 +15,7 @@ defmodule OpenPantry.ExAdmin.User do
       column :region
       column :postal_code
       column :primary_language
+      column :facility
       column :credits
     end
     show user do

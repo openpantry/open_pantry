@@ -12,8 +12,8 @@ defmodule OpenPantry.User do
     has_many :foods, through: [:facility, :food]
     has_many :user_languages, OpenPantry.UserLanguage, on_delete: :delete_all
     has_many :languages, through: [:user_languages, :language]
-    has_many :food_handoffs, OpenPantry.FoodHandoff
-    has_many :stock_distributions, through: [:food_handoffs, :stock_distributions]
+    has_many :user_food_packages, OpenPantry.UserFoodPackage
+    has_many :stock_distributions, through: [:user_food_packages, :stock_distributions]
     belongs_to :primary_language, OpenPantry.Language
 
     timestamps()

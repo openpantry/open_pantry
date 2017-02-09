@@ -90,18 +90,6 @@ food_params = [
   }
 ]
 
-User.changeset(%User{}, %{name: "Anonymous",
-                          family_members: 1,
-                          primary_language_id: 184,
-                          facility_id: 1,
-                          credits: %{
-                            "Protein" => 30,
-                            "Vegetables" => 50,
-                            "Carbohydrates" => 40
-                          }
-                        })
-|> Repo.insert!()
-
 Enum.each(facility_params, fn(params) ->
   Facility.changeset(%Facility{}, params)
   |> Repo.insert!()
@@ -128,4 +116,15 @@ File.read!("priv/repo/languages.json")
     end
   )
 
+User.changeset(%User{}, %{name: "Anonymous",
+                          family_members: 1,
+                          primary_language_id: 184,
+                          facility_id: 1,
+                          credits: %{
+                            "Protein" => 30,
+                            "Vegetables" => 50,
+                            "Carbohydrates" => 40
+                          }
+                        })
+|> Repo.insert!()
 

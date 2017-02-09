@@ -4,7 +4,7 @@ defmodule OpenPantry.StockDistribution do
   schema "stock_distributions" do
     field :quantity, :integer
     belongs_to :stock, OpenPantry.Stock
-    belongs_to :food_handoff, OpenPantry.FoodHandoff
+    belongs_to :user_food_package, OpenPantry.UserFoodPackage
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule OpenPantry.StockDistribution do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :stock_id, :food_handoff_id])
-    |> validate_required([:quantity, :stock_id, :food_handoff_id])
+    |> cast(params, [:quantity])
+    |> validate_required([:quantity])
   end
 end
