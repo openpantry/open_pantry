@@ -14,7 +14,7 @@ defmodule OpenPantry.StockDistribution do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity])
-    |> validate_required([:quantity])
+    |> cast(params, [:quantity, :stock_id, :user_food_package_id])
+    |> validate_required([:quantity, :stock_id, :user_food_package_id])
   end
 end

@@ -14,6 +14,8 @@ defmodule OpenPantry.Stock do
     belongs_to :food, OpenPantry.Food
     belongs_to :facility, OpenPantry.Facility
     has_many :food_groups, through: [:food, :food_groups]
+    has_many :stock_distributions, OpenPantry.StockDistribution
+    has_many :user_food_packages, through: [:stock_distributions, :user_food_package]
 
     timestamps()
   end
