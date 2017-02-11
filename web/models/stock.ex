@@ -1,6 +1,6 @@
 defmodule OpenPantry.Stock do
   use OpenPantry.Web, :model
-
+  alias OpenPantry.Repo
   schema "stocks" do
     field :quantity, :integer
     field :arrival, Ecto.DateTime
@@ -12,6 +12,8 @@ defmodule OpenPantry.Stock do
     field :packaging, :string
     field :credits_per_package, :integer
     belongs_to :food, OpenPantry.Food
+    belongs_to :meal, OpenPantry.Meal
+    belongs_to :offer, OpenPantry.Offer
     belongs_to :facility, OpenPantry.Facility
     has_many :food_groups, through: [:food, :food_groups]
     has_many :stock_distributions, OpenPantry.StockDistribution
@@ -25,7 +27,39 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :food_id, :facility_id])
-    |> validate_required([:quantity, :food_id, :facility_id])
+    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :food_id, :meal_id, :offer_id, :facility_id])
+    |> validate_required([:quantity, :facility_id, :packaging])
+    |> validate_stockable
   end
+
+  def stockable(stock) do
+    stock.food || stock.meal || stock.offer
+  end
+
+  def stock_item(stock) do
+    stock
+    |> stockable_load
+    |> stockable
+  end
+
+  def stockable_load(stock) do
+    stock
+    |> Repo.preload(:food)
+    |> Repo.preload(:meal)
+    |> Repo.preload(:offer)
+  end
+
+  def validate_stockable(changeset) do
+    [get_field(changeset, :food_id), get_field(changeset, :meal_id), get_field(changeset, :offer_id)]
+    |> Enum.reject(&is_nil/1)
+    |> length
+    |> handle_stockable_error(changeset)
+  end
+
+  def handle_stockable_error(1, changeset), do: changeset
+  def handle_stockable_error(0, changeset), do: add_error(changeset, :food_id, "A stock item must stock a food, meal or offer")
+  def handle_stockable_error(_, changeset), do: add_error(changeset, :meal_id, "A stock item must stock only one food, meal or offer")
+
+
+
 end

@@ -1,0 +1,28 @@
+<h2>Show offer</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @offer.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @offer.description %>
+  </li>
+
+  <li>
+    <strong>Max per person:</strong>
+    <%= @offer.max_per_person %>
+  </li>
+
+  <li>
+    <strong>Max per package:</strong>
+    <%= @offer.max_per_package %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: offer_path(@conn, :edit, @offer) %>
+<%= link "Back", to: offer_path(@conn, :index) %>

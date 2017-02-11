@@ -27,6 +27,8 @@ defmodule OpenPantry.Router do
     resources "/facilities", FacilityController
     resources "/food_groups", FoodGroupController
     resources "/food", FoodController
+    resources "/meals", MealController
+    resources "/offers", OfferController
     resources "/food_group_memberships", FoodGroupMembershipController
     resources "/stocks", StockController
     resources "/users", UserController

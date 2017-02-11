@@ -1,0 +1,93 @@
+<h2>Show meal</h2>
+
+<ul>
+
+  <li>
+    <strong>Entree:</strong>
+    <%= @meal.entree %>
+  </li>
+
+  <li>
+    <strong>Side dish1:</strong>
+    <%= @meal.side_dish1 %>
+  </li>
+
+  <li>
+    <strong>Side dish2:</strong>
+    <%= @meal.side_dish2 %>
+  </li>
+
+  <li>
+    <strong>Dessert:</strong>
+    <%= @meal.dessert %>
+  </li>
+
+  <li>
+    <strong>Calories:</strong>
+    <%= @meal.calories %>
+  </li>
+
+  <li>
+    <strong>Calories from fat:</strong>
+    <%= @meal.calories_from_fat %>
+  </li>
+
+  <li>
+    <strong>Calcium:</strong>
+    <%= @meal.calcium %>
+  </li>
+
+  <li>
+    <strong>Sodium:</strong>
+    <%= @meal.sodium %>
+  </li>
+
+  <li>
+    <strong>Cholesterol:</strong>
+    <%= @meal.cholesterol %>
+  </li>
+
+  <li>
+    <strong>Carbohydrate:</strong>
+    <%= @meal.carbohydrate %>
+  </li>
+
+  <li>
+    <strong>Sugars:</strong>
+    <%= @meal.sugars %>
+  </li>
+
+  <li>
+    <strong>Fat:</strong>
+    <%= @meal.fat %>
+  </li>
+
+  <li>
+    <strong>Saturated fat:</strong>
+    <%= @meal.saturated_fat %>
+  </li>
+
+  <li>
+    <strong>Protein:</strong>
+    <%= @meal.protein %>
+  </li>
+
+  <li>
+    <strong>Fiber:</strong>
+    <%= @meal.fiber %>
+  </li>
+
+  <li>
+    <strong>Weight:</strong>
+    <%= @meal.weight %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @meal.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: meal_path(@conn, :edit, @meal) %>
+<%= link "Back", to: meal_path(@conn, :index) %>
