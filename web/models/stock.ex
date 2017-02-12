@@ -31,14 +31,22 @@ defmodule OpenPantry.Stock do
     |> validate_stockable
   end
 
-  def stockable(stock) do
+  def stockable!(stock) do
     stock.food || stock.meal || stock.offer
   end
 
-  def stock_item(stock) do
+  def stockable(stock) do
     stock
     |> stockable_load
-    |> stockable
+    |> stockable!
+  end
+
+  def stockable_name(stock) do
+    item = stockable(stock)
+    case item.__struct__ do
+      OpenPantry.Food -> item.longdesc
+      _ -> item.name
+    end
   end
 
   def stockable_load(stock) do
