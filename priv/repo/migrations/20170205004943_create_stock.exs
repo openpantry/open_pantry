@@ -12,7 +12,9 @@ defmodule OpenPantry.Repo.Migrations.CreateStock do
       add :shelf, :string
       add :packaging, :string
       add :credits_per_package, :integer
-      add :food_id, references(:foods, on_delete: :nothing)
+      add :food_id, references(:foods, on_delete: :nothing, column: :ndb_no, type: :string), null: false
+      add :meal_id, references(:meals, on_delete: :nothing)
+      add :offer_id, references(:offers, on_delete: :nothing)
       add :facility_id, references(:facilities, on_delete: :nothing)
 
       timestamps()

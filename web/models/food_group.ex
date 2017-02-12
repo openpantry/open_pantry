@@ -1,19 +1,19 @@
 defmodule OpenPantry.FoodGroup do
   use OpenPantry.Web, :model
 
+  @primary_key {:foodgroup_code, :string, []}
+  @derive {Phoenix.Param, key: :foodgroup_code}
+
   schema "food_groups" do
-    field :name, :string
-    field :monthly_credits, :integer
-    many_to_many :foods, OpenPantry.Food, join_through: "food_group_memberships"
-    timestamps()
+    field :foodgroup_desc, :string
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :monthly_credits])
-    |> validate_required([:name, :monthly_credits])
+    |> cast(params, [ :foodgroup_code,
+                      :foodgroup_desc
+                    ])
+    |> validate_required([:foodgroup_code, :foodgroup_desc])
   end
+
 end

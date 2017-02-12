@@ -12,9 +12,6 @@
 alias OpenPantry.Facility
 alias OpenPantry.Language
 alias OpenPantry.Repo
-alias OpenPantry.FoodGroup
-alias OpenPantry.Food
-alias OpenPantry.Stock
 alias OpenPantry.User
 
 
@@ -45,64 +42,8 @@ facility_params = [
   }
 ]
 
-food_group_params = [
-  %{name: "Carbohydrates",
-    monthly_credits: 40
-    },
-  %{name: "Protein",
-    monthly_credits: 30
-    },
-  %{name: "Vegetables",
-    monthly_credits: 50
-  }
-]
-
-food_params = [
-  %{name: "Potatoes", # https://g.co/kgs/nYXogy
-    serving_size: 0.369,
-    calories: 283,
-    sodium: 22,
-    carbohydrate: 64,
-    sugars: 3,
-    protein: 7,
-    fiber: 8
-    },
-
-  %{name: "Spinach", # https://g.co/kgs/xWjQaO
-    serving_size: 0.284,
-    calories: 66,
-    calcium: 0,
-    sodium: 224,
-    carbohydrate: 10,
-    fat: 1,
-    protein: 8,
-    fiber: 6
-    },
-
-  %{name: "Tunafish", # http://nutritiondata.self.com/facts/finfish-and-shellfish-products/4146/2
-    serving_size: 0.154,
-    calories: 179,
-    calories_from_fat: 11,
-    sodium: 521,
-    carbohydrate: 46,
-    fat: 1,
-    protein: 39
-  }
-]
-
 Enum.each(facility_params, fn(params) ->
   Facility.changeset(%Facility{}, params)
-  |> Repo.insert!()
-end)
-
-Enum.each(food_group_params, fn(params) ->
-  FoodGroup.changeset(%FoodGroup{}, params)
-  |> Repo.insert!()
-end)
-
-
-Enum.each(food_params, fn(params) ->
-  Food.changeset(%Food{}, params)
   |> Repo.insert!()
 end)
 

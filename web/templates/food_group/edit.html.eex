@@ -1,6 +1,0 @@
-<h2>Edit food group</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: food_group_path(@conn, :update, @food_group) %>
-
-<%= link "Back", to: food_group_path(@conn, :index) %>

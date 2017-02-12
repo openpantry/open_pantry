@@ -6,7 +6,7 @@ defmodule OpenPantry.ExAdmin.Stock do
 
   end
 
-  def display_name(stock) do
-    Stock.stock_item(stock).name <> " " <> (stock.packaging || "")
-  end
+  # def display_name(stock) do
+  #   Stock.stock_item(stock).name <> " " <> (stock.packaging || "")
+  # end
 end

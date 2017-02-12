@@ -1,50 +1,51 @@
 defmodule OpenPantry.Food do
   use OpenPantry.Web, :model
 
+  @primary_key {:ndb_no, :string, []}
+  @derive {Phoenix.Param, key: :ndb_no}
+
   schema "foods" do
-    field :name, :string
-    field :serving_size, :decimal
-    field :calories, :integer
-    field :calories_from_fat, :integer
-    field :calcium, :integer
-    field :sodium, :integer
-    field :cholesterol, :integer
-    field :carbohydrate, :integer
-    field :sugars, :integer
-    field :fat, :integer
-    field :saturated_fat, :integer
-    field :protein, :integer
-    field :fiber, :integer
-    field :description, :string
-    has_many :stocks, OpenPantry.Stock
+    field :longdesc, :string, null: false
+    field :shortdesc, :string, null: false
+    field :common_name, :string
+    field :manufacturer_name, :string
+    field :survey, :string
+    field :refuse_description, :string
+    field :refuse, :decimal
+    field :scientific_name, :string
+    field :n_factor, :decimal
+    field :pro_factor, :decimal
+    field :fat_factor, :decimal
+    field :cho_factor, :decimal
+    belongs_to :food_group, OpenPantry.FoodGroup, references: :foodgroup_code, foreign_key: :foodgroup_code, type: :string
+    has_many :stocks, OpenPantry.Stock, foreign_key: :food_id
     has_many :facilities, through: [:stocks, :facility]
     has_many :users, through: [:facilities, :user]
-    has_many :food_group_memberships, OpenPantry.FoodGroupMembership
-    has_many :food_groups, through: [:food_group_memberships, :food_group]
-
-
-    timestamps()
   end
+
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :calories, :calories_from_fat, :description] ++ mg_columns() ++ gram_columns() ++ kg_columns() )
-    |> unique_constraint(:name)
-    |> validate_required([:name])
+    |> cast(params, [ :ndb_no,
+                      :foodgroup_code,
+                      :longdesc,
+                      :shortdesc,
+                      :common_name,
+                      :manufacturer_name,
+                      :survey,
+                      :refuse_description,
+                      :refuse,
+                      :scientific_name,
+                      :n_factor,
+                      :pro_factor,
+                      :fat_factor,
+                      :cho_factor
+                    ])
+    |> validate_required([:longdesc, :shortdesc, :foodgroup_code])
+    |> foreign_key_constraint(:foodgroup_code)
   end
 
-  def mg_columns do
-    [:sodium, :cholesterol, :calcium]
-  end
-
-  def gram_columns do
-    [:fat, :saturated_fat, :protein, :fiber, :sugars, :carbohydrate]
-  end
-
-  def kg_columns do
-    [:serving_size]
-  end
 end

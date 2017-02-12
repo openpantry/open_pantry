@@ -11,11 +11,10 @@ defmodule OpenPantry.Stock do
     field :shelf, :string
     field :packaging, :string
     field :credits_per_package, :integer
-    belongs_to :food, OpenPantry.Food
+    belongs_to :food, OpenPantry.Food, references: :ndb_no, type: :string
     belongs_to :meal, OpenPantry.Meal
     belongs_to :offer, OpenPantry.Offer
     belongs_to :facility, OpenPantry.Facility
-    has_many :food_groups, through: [:food, :food_groups]
     has_many :stock_distributions, OpenPantry.StockDistribution
     has_many :user_food_packages, through: [:stock_distributions, :user_food_package]
 
