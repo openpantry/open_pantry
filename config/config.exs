@@ -17,6 +17,27 @@ config :open_pantry, OpenPantry.Endpoint,
   pubsub: [name: OpenPantry.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :open_pantry,
+        OpenPantry.Gettext,
+        locales: ~w(
+                     aa
+                     ab
+                     af
+                     ak
+                     am
+                     an
+                     ar
+                     ce
+                     en
+                     es
+                     ht
+                     fr
+                     he
+                     ar
+                     ru
+                     zh
+                    )
+
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional

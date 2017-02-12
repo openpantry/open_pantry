@@ -21,4 +21,12 @@ defmodule OpenPantry.Language do
     |> unique_constraint(:iso_code)
     |> validate_required([:iso_code, :english_name])
   end
+
+  def primary_list do
+    [locales: locales] = Application.get_env :open_pantry, OpenPantry.Gettext, :locales
+    OpenPantry.Language
+    |> where([l], l.iso_code in ^locales)
+    |> OpenPantry.Repo.all
+  end
+
 end
