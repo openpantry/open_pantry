@@ -1,6 +1,0 @@
-<h2>New user food package</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: user_food_package_path(@conn, :create) %>
-
-<%= link "Back", to: user_food_package_path(@conn, :index) %>
