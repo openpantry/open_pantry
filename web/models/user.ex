@@ -1,9 +1,11 @@
 defmodule OpenPantry.User do
   use OpenPantry.Web, :model
+  use Coherence.Schema
 
   schema "users" do
-    field :email, :string
     field :name, :string
+    field :email, :string
+    coherence_schema()
     field :phone, :string
     field :ok_to_text, :boolean, default: false
     field :family_members, :integer
@@ -22,8 +24,10 @@ defmodule OpenPantry.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :credits, :primary_language_id, :facility_id])
+    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :credits, :primary_language_id, :facility_id] ++ coherence_fields())
     |> unique_constraint(:email)
+    |> validate_format(:email, ~r/@/)
     |> validate_required([:name, :family_members, :primary_language_id, :facility_id])
+    |> validate_coherence(params)
   end
 end

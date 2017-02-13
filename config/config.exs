@@ -38,16 +38,6 @@ config :open_pantry,
                      zh
                     )
 
-config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
-  verify_module: Guardian.JWT,  # optional
-  issuer: "OpenPantry",
-  ttl: { 30, :days },
-  allowed_drift: 2000,
-  verify_issuer: true, # optional
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: OpenPantry.GuardianSerializer
-
 config :ex_admin,
   repo: OpenPantry.Repo,
   module: OpenPantry,
@@ -77,3 +67,17 @@ import_config "#{Mix.env}.exs"
 
 config :xain, :after_callback, {Phoenix.HTML, :raw}
 
+
+# %% Coherence Configuration %%   Don't remove this line
+config :coherence,
+  user_schema: OpenPantry.User,
+  repo: OpenPantry.Repo,
+  module: OpenPantry,
+  logged_out_url: "/",
+  email_from: {"OpenPantry", "openpantry@masbia.org"},
+  opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :registerable]
+
+config :coherence, OpenPantry.Coherence.Mailer,
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: System.get_env("SENDGRID_API_KEY")
+# %% End Coherence Configuration %%
