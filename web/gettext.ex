@@ -21,4 +21,16 @@ defmodule OpenPantry.Gettext do
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
   use Gettext, otp_app: :open_pantry
+
+
+  def supported_locales do
+    known = Gettext.known_locales(OpenPantry.Gettext)
+    allowed = config[:locales]
+
+    MapSet.intersection(Enum.into(known, MapSet.new), Enum.into(allowed, MapSet.new))
+    |> MapSet.to_list
+  end
+
+  defp config, do: Application.get_env(:open_pantry, __MODULE__)
+
 end

@@ -10,6 +10,11 @@ defmodule OpenPantry.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :localized_browser do
+    plug :browser
+    plug OpenPantry.Plug.Locale, "en"
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -20,21 +25,25 @@ defmodule OpenPantry.Router do
   end
 
   scope "/", OpenPantry do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
-    get "/", PageController, :index
     resources "/languages", LanguageController
     resources "/facilities", FacilityController
-    resources "/food_groups", FoodGroupController
-    resources "/food", FoodController
-    resources "/meals", MealController
-    resources "/offers", OfferController
-    resources "/food_group_memberships", FoodGroupMembershipController
-    resources "/stocks", StockController
-    resources "/users", UserController
-    resources "/user_languages", UserLanguageController
-    resources "/user_food_packages", UserFoodPackageController
-    resources "/stock_distributions", StockDistributionController
+  end
+
+  scope "/", OpenPantry do
+    pipe_through :localized_browser # Use the default browser stack
+
+    get "/", PageController, :unused
+  end
+
+
+  scope "/:locale", OpenPantry do
+    pipe_through [:localized_browser]
+
+    get "/", PageController, :index
+    resources "/registrations", RegistrationController
+
   end
 
   # Other scopes may use custom stacks.

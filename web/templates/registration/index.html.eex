@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h2><%= gettext "Are you a registered user?" %></h2>
+</div>
+
+<div class="row">
+    <a href="<%= registration_path(@conn, :index, @conn.assigns.locale) %>"><%= gettext "Yes" %></a>
+    <a href="<%= registration_path(@conn, :index, @conn.assigns.locale) %>"><%= gettext "No" %></a>
+  </div>
+</div>
