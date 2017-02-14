@@ -10,11 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213131915) do
+ActiveRecord::Schema.define(version: 20170214150520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "credit_type_memberships", force: :cascade do |t|
+    t.string   "food_group_id",  limit: 255, null: false
+    t.integer  "credit_type_id",             null: false
+    t.datetime "inserted_at",                null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["credit_type_id"], name: "credit_type_memberships_credit_type_id_index", using: :btree
+    t.index ["food_group_id"], name: "credit_type_memberships_food_group_id_index", using: :btree
+  end
+
+  create_table "credit_types", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.integer  "credits_per_period"
+    t.string   "period_name",        limit: 255
+    t.datetime "inserted_at",                    null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "data_derivation_codes", primary_key: "derivation_code", id: :text, force: :cascade do |t|
     t.text "description", null: false
@@ -193,6 +210,16 @@ ActiveRecord::Schema.define(version: 20170213131915) do
     t.index ["food_id"], name: "stocks_food_id_index", using: :btree
   end
 
+  create_table "user_credits", force: :cascade do |t|
+    t.integer  "balance"
+    t.integer  "user_id"
+    t.integer  "credit_type_id"
+    t.datetime "inserted_at",    null: false
+    t.datetime "updated_at",     null: false
+    t.index ["credit_type_id"], name: "user_credits_credit_type_id_index", using: :btree
+    t.index ["user_id"], name: "user_credits_user_id_index", using: :btree
+  end
+
   create_table "user_food_packages", force: :cascade do |t|
     t.boolean  "ready_for_pickup", default: false, null: false
     t.boolean  "finalized",        default: false, null: false
@@ -218,7 +245,6 @@ ActiveRecord::Schema.define(version: 20170213131915) do
     t.string   "phone",               limit: 255
     t.boolean  "ok_to_text",                      default: false, null: false
     t.integer  "family_members"
-    t.jsonb    "credits"
     t.integer  "facility_id"
     t.integer  "primary_language_id"
     t.datetime "inserted_at",                                     null: false
@@ -239,6 +265,8 @@ ActiveRecord::Schema.define(version: 20170213131915) do
     t.decimal "std_dev"
   end
 
+  add_foreign_key "credit_type_memberships", "credit_types", name: "credit_type_memberships_credit_type_id_fkey"
+  add_foreign_key "credit_type_memberships", "food_groups", primary_key: "foodgroup_code", name: "credit_type_memberships_food_group_id_fkey"
   add_foreign_key "foods", "food_groups", column: "foodgroup_code", primary_key: "foodgroup_code", name: "foods_foodgroup_code_fkey"
   add_foreign_key "footnotes", "foods", column: "ndb_no", primary_key: "ndb_no", name: "footnotes_ndb_no_fkey"
   add_foreign_key "footnotes", "nutrients", column: "nutr_no", primary_key: "nutr_no", name: "footnotes_nutr_no_fkey"
@@ -258,6 +286,8 @@ ActiveRecord::Schema.define(version: 20170213131915) do
   add_foreign_key "stocks", "foods", primary_key: "ndb_no", name: "stocks_food_id_fkey"
   add_foreign_key "stocks", "meals", name: "stocks_meal_id_fkey"
   add_foreign_key "stocks", "offers", name: "stocks_offer_id_fkey"
+  add_foreign_key "user_credits", "credit_types", name: "user_credits_credit_type_id_fkey"
+  add_foreign_key "user_credits", "users", name: "user_credits_user_id_fkey"
   add_foreign_key "user_food_packages", "users", name: "user_food_packages_user_id_fkey"
   add_foreign_key "user_languages", "languages", name: "user_languages_language_id_fkey"
   add_foreign_key "user_languages", "users", name: "user_languages_user_id_fkey"
