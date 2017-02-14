@@ -13,6 +13,7 @@ alias OpenPantry.Facility
 alias OpenPantry.Language
 alias OpenPantry.Repo
 alias OpenPantry.User
+alias OpenPantry.CreditType
 
 
 facility_params = [
@@ -42,11 +43,30 @@ facility_params = [
   }
 ]
 
+credit_type_params = [
+  %{name: "Proteinnoms",
+    credits_per_period: 18,
+    period_name: "Month"
+    },
+  %{name: "Veggienoms",
+    credits_per_period: 18,
+    period_name: "Month"
+    },
+  %{name: "Carbnoms",
+    credits_per_period: 18,
+    period_name: "Month"
+  }
+]
+
 Enum.each(facility_params, fn(params) ->
   Facility.changeset(%Facility{}, params)
   |> Repo.insert!()
 end)
 
+Enum.each(credit_type_params, fn(params) ->
+  CreditType.changeset(%CreditType{}, params)
+  |> Repo.insert!()
+end)
 
 File.read!("priv/repo/languages.json")
 |> Poison.Parser.parse!
@@ -61,11 +81,6 @@ User.changeset(%User{}, %{name: "Anonymous",
                           family_members: 1,
                           primary_language_id: 184,
                           facility_id: 1,
-                          credits: %{
-                            "Protein" => 30,
-                            "Vegetables" => 50,
-                            "Carbohydrates" => 40
-                          }
-                        })
+                         })
 |> Repo.insert!()
 

@@ -1,7 +1,7 @@
 defmodule OpenPantry.ExAdmin.User do
   use ExAdmin.Register
   alias OpenPantry.Repo
-  alias OpenPantry.FoodGroup
+  alias OpenPantry.CreditType
 
   register_resource OpenPantry.User do
 
@@ -16,19 +16,9 @@ defmodule OpenPantry.ExAdmin.User do
       column :postal_code
       column :primary_language
       column :facility
-      column :credits
     end
     show user do
-      attributes_table except: [:credits] #  all: true
-
-      panel "Credits" do
-        table_for user.credits do
-          Repo.all(FoodGroup)
-          |> Enum.each(fn(food_group) ->
-            column food_group.name |> String.to_atom
-          end)
-        end
-      end
+      attributes_table all: [:true] #  all: true
 
     end
     form user do
@@ -43,9 +33,6 @@ defmodule OpenPantry.ExAdmin.User do
         input user, :postal_code
         # input user, :primary_language, OpenPantry.Language
         # input user, :facility, OpenPantry.facility
-      end
-      inputs "Credits" do
-        input user, :credits, schema: Repo.all(FoodGroup) |> Enum.map(&({&1.name |> String.to_atom, :integer}))
       end
 
 
