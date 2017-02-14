@@ -1,0 +1,6 @@
+  open_pantry:
+    adapter: postgresql
+    host: localhost
+    database: open_pantry_dev
+    port: 5432
+    username: postgres

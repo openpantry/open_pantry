@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Facilities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Address1</th>
+      <th>Address2</th>
+      <th>City</th>
+      <th>Region</th>
+      <th>Postal code</th>
+      <th>Max occupancy</th>
+      <th>Square meterage storage</th>
+      <th>Inserted at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @facilities.each do |facility| %>
+      <tr>
+        <td><%= facility.name %></td>
+        <td><%= facility.location %></td>
+        <td><%= facility.address1 %></td>
+        <td><%= facility.address2 %></td>
+        <td><%= facility.city %></td>
+        <td><%= facility.region %></td>
+        <td><%= facility.postal_code %></td>
+        <td><%= facility.max_occupancy %></td>
+        <td><%= facility.square_meterage_storage %></td>
+        <td><%= facility.inserted_at %></td>
+        <td><%= link_to 'Show', facility %></td>
+        <td><%= link_to 'Edit', edit_facility_path(facility) %></td>
+        <td><%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Facility', new_facility_path %>

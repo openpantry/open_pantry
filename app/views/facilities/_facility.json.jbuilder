@@ -1,0 +1,2 @@
+json.extract! facility, :id, :name, :location, :address1, :address2, :city, :region, :postal_code, :max_occupancy, :square_meterage_storage, :inserted_at, :created_at, :updated_at
+json.url facility_url(facility, format: :json)
