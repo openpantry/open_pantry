@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <h2><%= gettext "Thank you for so much registering/logging in!" %></h2>
+</div>
+
+<div classs="credits">
+  <%= for user_credit <- @credits do %>
+    <div>
+       <%= user_credit.credit_type.name %>:<%= user_credit.balance %>
+    </div>
+  <% end %>
+</div>
+
+
+<div class="row">
+  <%= for {stock_type, stocks} <- @stock_by_type do %>
+    <div>
+       <%= display_stock_type(stock_type) %>
+    </div>
+
+
+    <%= for stock <- stocks do %>
+      <%= if stock_type == OpenPantry.Food do %>
+        <div>
+           <%= stock.longdesc %>
+        </div>
+      <% else %>
+        <div>
+           <%= stock.name %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

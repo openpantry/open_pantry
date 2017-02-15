@@ -19,7 +19,8 @@ defmodule OpenPantry.Web do
   def model do
     quote do
       use Ecto.Schema
-
+      alias __MODULE__
+      alias OpenPantry.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query

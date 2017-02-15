@@ -1,6 +1,11 @@
 defmodule OpenPantry.Stock do
   use OpenPantry.Web, :model
   alias OpenPantry.Repo
+  alias OpenPantry.Food
+  alias OpenPantry.Meal
+  alias OpenPantry.Offer
+  alias OpenPantry.Facility
+  alias OpenPantry.StockDistribution
   schema "stocks" do
     field :quantity, :integer
     field :arrival, Ecto.DateTime
@@ -11,11 +16,11 @@ defmodule OpenPantry.Stock do
     field :shelf, :string
     field :packaging, :string
     field :credits_per_package, :integer
-    belongs_to :food, OpenPantry.Food, references: :ndb_no, type: :string
-    belongs_to :meal, OpenPantry.Meal
-    belongs_to :offer, OpenPantry.Offer
-    belongs_to :facility, OpenPantry.Facility
-    has_many :stock_distributions, OpenPantry.StockDistribution
+    belongs_to :food, Food, references: :ndb_no, type: :string
+    belongs_to :meal, Meal
+    belongs_to :offer, Offer
+    belongs_to :facility, Facility
+    has_many :stock_distributions, StockDistribution
     has_many :user_food_packages, through: [:stock_distributions, :user_food_package]
 
     timestamps()
@@ -29,6 +34,10 @@ defmodule OpenPantry.Stock do
     |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :food_id, :meal_id, :offer_id, :facility_id])
     |> validate_required([:quantity, :facility_id, :packaging])
     |> validate_stockable
+  end
+
+  def stock_types do
+    [Food, Meal, Offer]
   end
 
   def stockable!(stock) do

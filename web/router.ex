@@ -39,10 +39,11 @@ defmodule OpenPantry.Router do
 
 
   scope "/:locale", OpenPantry do
-    pipe_through [:localized_browser]
+    pipe_through [:localized_browser, FakeUser]
 
     get "/", PageController, :index
     resources "/registrations", RegistrationController
+    resources "/food_selections", FoodSelectionController
 
   end
 

@@ -24,9 +24,9 @@ defmodule OpenPantry.Language do
 
   def primary_list do
     [locales: locales] = Application.get_env :open_pantry, OpenPantry.Gettext, :locales
-    OpenPantry.Language
+    Language
     |> where([l], l.iso_code in ^locales)
-    |> OpenPantry.Repo.all
+    |> Repo.all
   end
 
 end

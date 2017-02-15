@@ -6,6 +6,8 @@ defmodule OpenPantry.FoodGroup do
 
   schema "food_groups" do
     field :foodgroup_desc, :string
+    has_many :foods, OpenPantry.Food, foreign_key: :ndb_no
+
   end
 
   def changeset(struct, params \\ %{}) do
