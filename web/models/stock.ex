@@ -20,6 +20,8 @@ defmodule OpenPantry.Stock do
     belongs_to :meal, Meal
     belongs_to :offer, Offer
     belongs_to :facility, Facility
+    has_one :food_group, through: [:food, :food_group]
+    has_many :credit_types, through: [:food_group, :credit_types]
     has_many :stock_distributions, StockDistribution
     has_many :user_food_packages, through: [:stock_distributions, :user_food_package]
 

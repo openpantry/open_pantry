@@ -18,11 +18,11 @@ defmodule OpenPantry.Food do
     field :fat_factor, :decimal
     field :cho_factor, :decimal
     belongs_to :food_group, OpenPantry.FoodGroup, references: :foodgroup_code, foreign_key: :foodgroup_code, type: :string
+    has_many :credit_types, through: [:food_group, :credit_types]
     has_many :stocks, OpenPantry.Stock, foreign_key: :food_id
     has_many :facilities, through: [:stocks, :facility]
     has_many :users, through: [:facilities, :user]
   end
-
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
