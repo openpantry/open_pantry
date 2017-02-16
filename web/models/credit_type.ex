@@ -23,4 +23,14 @@ defmodule OpenPantry.CreditType do
     |> cast(params, [:name, :credits_per_period, :period_name])
     |> validate_required([:name, :credits_per_period, :period_name])
   end
+
+  def facility(facility = %Facility{id: facility_id}) do
+    now = DateTime.utc_now
+    from(s in Stock,
+    where: s.arrival < ^now,
+    where: s.expiration > ^now,
+    where: ^facility_id == s.facility_id)
+    |> Repo.all()
+  end
 end
+
