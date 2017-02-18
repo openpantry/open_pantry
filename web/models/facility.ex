@@ -1,7 +1,7 @@
 defmodule OpenPantry.Facility do
   use OpenPantry.Web, :model
-
   alias OpenPantry.Stock
+  alias OpenPantry.CreditType
   schema "facilities" do
     field :name, :string
     field :location, Geo.Point
@@ -32,14 +32,16 @@ defmodule OpenPantry.Facility do
   end
 
 
-  def food_stock_by_credit_type(facility = %Facility{id: id}) do
+  def food_stock_by_credit_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
-    from stock in Stock,
-    join: credit_types in assoc(stock, :credit_types),
-    where: stock.arrival < ^now,
-    where: stock.expiration > ^now,
-    where: ^id == stock.facility_id,
-    preload: [credit_types: credit_types]
+    from(credit_type in CreditType,
+    join: stocks in assoc(credit_type, :stocks),
+    where: stocks.arrival < ^now,
+    where: stocks.expiration > ^now,
+    where: ^id == stocks.facility_id,
+    preload: [stocks: [food: :food_group]])
+    |> Repo.all
+    |> Enum.map(&({&1.name, &1.stocks}))
   end
 
 end
