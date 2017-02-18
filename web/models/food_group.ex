@@ -6,7 +6,7 @@ defmodule OpenPantry.FoodGroup do
 
   schema "food_groups" do
     field :foodgroup_desc, :string
-    has_many :foods, OpenPantry.Food, foreign_key: :ndb_no
+    has_many :foods, OpenPantry.Food, foreign_key: :foodgroup_code
     many_to_many :credit_types, OpenPantry.CreditType, join_through: "credit_type_memberships", join_keys: [food_group_id: :foodgroup_code, credit_type_id: :id]
   end
 
