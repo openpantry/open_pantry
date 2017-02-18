@@ -1,33 +1,110 @@
-<div class="jumbotron">
-  <h2><%= gettext "Thank you for so much registering/logging in!" %></h2>
-</div>
-
-<div classs="credits">
-  <%= for user_credit <- @credits do %>
-    <div>
-       <%= user_credit.credit_type.name %>:<%= user_credit.balance %>
-    </div>
-  <% end %>
-</div>
-
-
-<div class="row">
-  <%= for {stock_type, stocks} <- @stock_by_type do %>
-    <div>
-       <%= display_stock_type(stock_type) %>
-    </div>
-
-
-    <%= for stock <- stocks do %>
-      <%= if stock_type == OpenPantry.Food do %>
-        <div>
-           <%= stock.longdesc %>
-        </div>
-      <% else %>
-        <div>
-           <%= stock.name %>
-        </div>
-      <% end %>
+<div class="container-fluid">
+  <%= gettext "Thank you for so much registering/logging in!" %>
+  <div classs="credits">
+    <%= for user_credit <- @credits do %>
+      <div>
+         <%= user_credit.credit_type.name %>:<%= user_credit.balance %>
+      </div>
     <% end %>
-  <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-4">
+
+          <button type="button" class="btn btn-default">
+            <%= gettext "Back" %>
+          </button>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+          <button type="button" class="btn btn-default">
+            <%= gettext "Log out" %>
+          </button>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+          <button type="button" class="btn btn-default">
+            <%= gettext "Settings" %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <%= for {stock_type, _stocks} <- @food_stock_by_type do %>
+          <li class="active">
+            <a href="#"> <%= stock_type %> </a>
+          </li>
+        <% end %>
+        <li class="dropdown pull-right">
+           <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+            <li class="divider">
+            </li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+      <div class="jumbotron well">
+        <%= for {_stock_type, stocks} <- @food_stock_by_type do %>
+          <ul>
+            <%= for stock <- stocks do %>
+              <li>
+                <p class="description">
+                  <%= stock.food.longdesc %>
+                </p>
+                <p class="packaging">
+                  <%= stock.packaging %>
+                </p>
+                <p class="manufacturer">
+                  <%= stock.food.manufacturer_name %>
+                </p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

@@ -32,11 +32,6 @@ defmodule OpenPantry.User do
     |> Repo.preload(:credit_type)
   end
 
-  def stock_by_type(user) do
-    facility_stocks(user)
-    |> Enum.group_by(&(&1.__struct__))
-  end
-
 
   def facility_stocks(user) do
     Repo.preload(user, :facility).facility
