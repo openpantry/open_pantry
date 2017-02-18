@@ -12,8 +12,7 @@ defmodule OpenPantry.Repo.Migrations.CreateUserCredit do
     alter table(:users) do
       remove :credits
     end
-    create index(:user_credits, [:user_id])
-    create index(:user_credits, [:credit_type_id])
+    create index(:user_credits, [:user_id, :credit_type_id], unique: true)
   end
 
   def down do
