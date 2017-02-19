@@ -1,6 +1,6 @@
 defmodule OpenPantry.UserFoodPackage do
   use OpenPantry.Web, :model
-
+  alias OpenPantry.User
   schema "user_food_packages" do
     field :ready_for_pickup, :boolean, default: false
     field :finalized, :boolean, default: false
@@ -18,4 +18,12 @@ defmodule OpenPantry.UserFoodPackage do
     |> cast(params, [:ready_for_pickup, :finalized, :user_id])
     |> validate_required([:ready_for_pickup, :finalized, :user_id])
   end
+
+  def find_or_create(user = %User{id: id}) do
+    from(package in UserFoodPackage,
+    where: package.finalized == false,
+    where: package.user_id == ^id)
+    |> Repo.one || %UserFoodPackage{user_id: id} |> Repo.insert!()
+  end
+
 end

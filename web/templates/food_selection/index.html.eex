@@ -113,7 +113,7 @@
                         </button>
                       </td>
                       <td class="current-quantity">
-                        0
+                        <%= quantity(stock, @package) %>
                       </td>
                       <td class="remove-action">
                         <button data-action="remove">
