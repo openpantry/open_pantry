@@ -48,45 +48,36 @@
     <div class="col-md-12">
       <ul class="nav nav-tabs">
         <%= for {stock_type, _stocks} <- @food_stock_by_type do %>
-          <li class="active">
-            <a href="#"> <%= stock_type %> </a>
+          <li class="<%= active(stock_type, @food_stock_by_type)%>">
+            <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
           </li>
         <% end %>
-        <li class="dropdown pull-right">
-           <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#">Action</a>
-            </li>
-          </ul>
-        </li>
       </ul>
-      <div class="row">
-        <div class="col-md-8">
-        </div>
-        <div class="col-md-4">
-        </div>
-      </div>
-      <div class="jumbotron well">
+      <div class="tab-content clearfix">
         <%= for {stock_type, stocks} <- @food_stock_by_type do %>
-          <p>
-            <%= stock_type %> <%= gettext("credits remaining:") %> <%=  @credits[stock_type] %>
-          </p>
-          <ul>
-            <%= for stock <- stocks do %>
-              <li>
-                <p class="description">
-                  <%= stock.food.longdesc %>
-                </p>
-                <p class="packaging">
-                  <%= stock.packaging %>
-                </p>
-                <p class="manufacturer">
-                  <%= stock.food.manufacturer_name %>
-                </p>
-              </li>
-            <% end %>
-          </ul>
+          <div class="tab-pane <%= active(stock_type, @food_stock_by_type)%>" id="<%= stock_type %>">
+            <p>
+              <%= stock_type %> <%= gettext("credits remaining:") %> <%=  @credits[stock_type] %>
+            </p>
+            <ul>
+              <%= for stock <- stocks do %>
+                <li>
+                  <span class="credit_cost">
+                    <%= stock.credits_per_package %>  <%= stock_type %>
+                  </span>
+                  <p class="description">
+                    <%= stock.food.longdesc %>
+                  </p>
+                  <p class="packaging">
+                    <%= stock.packaging %>
+                  </p>
+                  <p class="manufacturer">
+                    <%= stock.food.manufacturer_name %>
+                  </p>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
       </div>
     </div>

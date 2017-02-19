@@ -14,4 +14,7 @@ defmodule OpenPantry.FoodSelectionView do
     |> List.last
   end
 
+  def active(first_type, [{first_type, _}|_tail]), do: "active"
+  def active(_, [{_, _}|_tail]), do: ""
+
 end
