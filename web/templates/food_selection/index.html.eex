@@ -76,13 +76,13 @@
             <%= for stock <- stocks do %>
               <li>
                 <p class="description">
-                  <%= stock.food.longdesc %>
+                  <%= Gettext.gettext(OpenPantry.Gettext, stock.food.longdesc) %>
                 </p>
                 <p class="packaging">
-                  <%= stock.packaging %>
+                  <%= Gettext.gettext(OpenPantry.Gettext, stock.packaging) %>
                 </p>
                 <p class="manufacturer">
-                  <%= stock.food.manufacturer_name %>
+                  <%= Gettext.gettext(OpenPantry.Gettext, stock.food.manufacturer_name) %>
                 </p>
               </li>
             <% end %>

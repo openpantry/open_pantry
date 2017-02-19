@@ -14,6 +14,7 @@ mix gettext.merge priv/gettext --locale fr
 mix gettext.merge priv/gettext --locale he
 mix gettext.merge priv/gettext --locale ar
 mix gettext.merge priv/gettext --locale ru
+mix gettext.merge priv/gettext --locale zh
 
 
 

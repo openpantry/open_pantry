@@ -12,10 +12,36 @@ msgstr ""
 
 #: web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}"
-msgstr ""
+msgstr "Welcome to %{name}"
 
+#: web/templates/registration/index.html.eex:6
 msgid "Yes"
-msgstr ""
+msgstr "Yes"
 
+#: web/templates/registration/index.html.eex:7
 msgid "No"
-msgstr ""
+msgstr "No"
+
+#: web/templates/registration/index.html.eex:2
+msgid "Are you a registered user?"
+msgstr "Are you a registered user?"
+
+#: web/templates/food_selection/index.html.eex:9
+msgid "Back"
+msgstr "Back"
+
+#: web/templates/food_selection/index.html.eex:25
+msgid "Log out"
+msgstr "Log out"
+
+#: web/templates/food_selection/index.html.eex:41
+msgid "Settings"
+msgstr "Settings"
+
+#: web/templates/food_selection/index.html.eex:2
+msgid "Thank you for so much registering/logging in!"
+msgstr "Thank you for so much registering/logging in!"
+
+#: web/templates/food_selection/index.html.eex:73
+msgid "credits remaining:"
+msgstr "credits remaining:"
