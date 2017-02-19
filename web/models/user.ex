@@ -28,8 +28,12 @@ defmodule OpenPantry.User do
   end
 
   def credits(user) do
-    Repo.preload(user, :user_credits).user_credits
+    credits = Repo.preload(user, :user_credits).user_credits
     |> Repo.preload(:credit_type)
+    Enum.map(credits, fn credit ->
+      {credit.credit_type.name, credit.balance}
+    end)
+    |> Map.new
   end
 
 
