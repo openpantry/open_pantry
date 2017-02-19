@@ -20,14 +20,7 @@ config :open_pantry, OpenPantry.Endpoint,
 config :open_pantry,
         OpenPantry.Gettext,
         locales: ~w(
-                     aa
-                     ab
-                     af
-                     ak
-                     am
-                     an
                      ar
-                     ce
                      en
                      es
                      ht
