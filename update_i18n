@@ -1,18 +1,10 @@
 #/bin/bash
-mix gettext.merge priv/gettext --locale aa
-mix gettext.merge priv/gettext --locale ab
-mix gettext.merge priv/gettext --locale af
-mix gettext.merge priv/gettext --locale ak
-mix gettext.merge priv/gettext --locale am
-mix gettext.merge priv/gettext --locale an
 mix gettext.merge priv/gettext --locale ar
-mix gettext.merge priv/gettext --locale ce
 mix gettext.merge priv/gettext --locale en
 mix gettext.merge priv/gettext --locale es
 mix gettext.merge priv/gettext --locale ht
 mix gettext.merge priv/gettext --locale fr
 mix gettext.merge priv/gettext --locale he
-mix gettext.merge priv/gettext --locale ar
 mix gettext.merge priv/gettext --locale ru
 mix gettext.merge priv/gettext --locale zh
 
