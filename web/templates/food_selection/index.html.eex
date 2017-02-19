@@ -59,24 +59,76 @@
             <p>
               <%= stock_type %> <%= gettext("credits remaining:") %> <%=  @credits[stock_type] %>
             </p>
-            <ul>
-              <%= for stock <- stocks do %>
-                <li>
-                  <span class="credit_cost">
-                    <%= stock.credits_per_package %>  <%= stock_type %>
-                  </span>
-                  <p class="description">
-                    <%= stock.food.longdesc %>
-                  </p>
-                  <p class="packaging">
-                    <%= stock.packaging %>
-                  </p>
-                  <p class="manufacturer">
-                    <%= stock.food.manufacturer_name %>
-                  </p>
-                </li>
-              <% end %>
-            </ul>
+              <table class='table table-striped js-data-table-accounts'>
+                <%# TBD?
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                %>
+                <thead class='table-header'>
+                  <th><%= gettext("Food description") %></th>
+                  <th><%= gettext("Food packaging") %></th>
+                  <th><%= gettext("Manufacturer info (if available)") %></th>
+                  <th><%= gettext("Weight") %></th>
+                  <th><%= gettext("Quantity available") %></th>
+                  <th><%= gettext("Credits") %></th>
+                  <th class='add-action-col'></th>
+                  <th><%= gettext("Quantity requested") %></th>
+                  <th class='remove-action-col'></th>
+                  <th class='remove-all-action-col'></th>
+                </thead>
+                <tbody>
+                  <%= for stock <- stocks do %>
+                    <tr>
+                      <td class="description">
+                        <%= stock.food.longdesc %>
+                      </td>
+                      <td class="packaging">
+                        <%= stock.packaging %>
+                      </td>
+                      <td class="manufacturer">
+                        <%= stock.food.manufacturer_name %>
+                      </td>
+                      <td class="weight">
+                        Pending dec./clarification/impl.
+                      </td>
+                      <td class="description">
+                        <%= stock.quantity %>
+                      </td>
+                      <td class="credit_cost">
+                        <%= stock.credits_per_package %>  <%= stock_type %>
+                      </td>
+                      <td class="add-action">
+                        <button data-action="add">
+                        +
+                        </button>
+                      </td>
+                      <td class="current-quantity">
+                        0
+                      </td>
+                      <td class="remove-action">
+                        <button data-action="remove">
+                        -
+                        </button>
+                      </td>
+                      <td class="remove-all-action">
+                        <button data-action="remove-all">
+                        X
+                        </button>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
           </div>
         <% end %>
       </div>
