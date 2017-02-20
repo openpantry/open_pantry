@@ -88,7 +88,7 @@
                 </thead>
                 <tbody>
                   <%= for stock <- stocks do %>
-                    <tr>
+                    <tr class="js-stock-row" data-stock-id="<%= stock.id %>">
                       <td class="description">
                         <%= stock.food.longdesc %>
                       </td>
@@ -101,14 +101,14 @@
                       <td class="weight">
                         <%= stock.weight %>
                       </td>
-                      <td class="description">
+                      <td class="available">
                         <%= stock.quantity %>
                       </td>
                       <td class="credit_cost">
                         <%= stock.credits_per_package %>
                       </td>
                       <td class="add-action">
-                        <button data-action="add">
+                        <button class="js-add-stock">
                         +
                         </button>
                       </td>
@@ -116,12 +116,12 @@
                         <%= quantity(stock, @package) %>
                       </td>
                       <td class="remove-action">
-                        <button data-action="remove">
+                        <button class="js-remove-stock">
                         -
                         </button>
                       </td>
-                      <td class="remove-all-action">
-                        <button data-action="remove-all">
+                      <td class="clear-action">
+                        <button class="js-clear-stock">
                         X
                         </button>
                       </td>
