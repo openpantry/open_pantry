@@ -99,7 +99,7 @@
                         <%= stock.food.manufacturer_name %>
                       </td>
                       <td class="weight">
-                        Pending dec./clarification/impl.
+                        <%= stock.weight %>
                       </td>
                       <td class="description">
                         <%= stock.quantity %>

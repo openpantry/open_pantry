@@ -11,6 +11,7 @@ defmodule OpenPantry.Stock do
     field :arrival, Ecto.DateTime
     field :expiration, Ecto.DateTime
     field :reorder_quantity, :integer
+    field :weight, :decimal
     field :aisle, :string
     field :row, :string
     field :shelf, :string
