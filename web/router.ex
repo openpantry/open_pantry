@@ -8,6 +8,8 @@ defmodule OpenPantry.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug FakeUser
+    plug :put_user_token_and_facility
   end
 
   pipeline :localized_browser do
@@ -39,12 +41,23 @@ defmodule OpenPantry.Router do
 
 
   scope "/:locale", OpenPantry do
-    pipe_through [:localized_browser, FakeUser]
+    pipe_through [:localized_browser]
 
     get "/", PageController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController
 
+  end
+
+  defp put_user_token_and_facility(conn, _) do
+    if current_user = conn.assigns[:user] do
+      token = Phoenix.Token.sign(conn, "user socket", current_user.id)
+      conn
+      |> assign(:user_token, token)
+      |> assign(:facility_id, current_user.facility_id)
+    else
+      conn
+    end
   end
 
   # Other scopes may use custom stacks.
