@@ -57,7 +57,7 @@
         <%= for {stock_type, stocks} <- @food_stock_by_type do %>
           <div class="tab-pane <%= active(stock_type, @food_stock_by_type)%>" id="<%= stock_type %>">
             <p>
-              <%= stock_type %> <%= gettext("credits remaining:") %> <%=  @credits[stock_type] %>
+              <%= stock_type %> <%= gettext("remaining:") %> <%=  @credits[stock_type] %>
             </p>
               <table class='table table-striped js-data-table-accounts'>
                 <%# TBD?
@@ -80,7 +80,7 @@
                   <th><%= gettext("Manufacturer info (if available)") %></th>
                   <th><%= gettext("Weight") %></th>
                   <th><%= gettext("Quantity available") %></th>
-                  <th><%= gettext("Credits") %></th>
+                  <th><%= stock_type %> cost</th>
                   <th class='add-action-col'></th>
                   <th><%= gettext("Quantity requested") %></th>
                   <th class='remove-action-col'></th>
@@ -105,7 +105,7 @@
                         <%= stock.quantity %>
                       </td>
                       <td class="credit_cost">
-                        <%= stock.credits_per_package %>  <%= stock_type %>
+                        <%= stock.credits_per_package %>
                       </td>
                       <td class="add-action">
                         <button data-action="add">
