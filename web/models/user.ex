@@ -36,6 +36,12 @@ defmodule OpenPantry.User do
     |> Map.new
   end
 
+  def query(user = %User{id: id}), do: query(id)
+   def query(id, preload \\ []) when is_integer(id) do
+    from(user in User,
+    where: user.id == ^id,
+    preload: ^preload)
+  end
 
   def facility_stocks(user) do
     Repo.preload(user, :facility).facility

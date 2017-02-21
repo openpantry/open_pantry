@@ -14,8 +14,8 @@ defmodule OpenPantry.FoodSelectionView do
     |> List.last
   end
 
-  def active(first_type, [{first_type, _}|_tail]), do: "active"
-  def active(_, [{_, _}|_tail]), do: ""
+  def active(first_type, [{first_type, _, _}|_tail]), do: "active"
+  def active(_, [{_, _, _}|_tail]), do: ""
 
   def quantity(stock, package) do
     if sd = Enum.find(package.stock_distributions, &(&1.stock_id == stock.id)) do

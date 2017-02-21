@@ -41,7 +41,7 @@ defmodule OpenPantry.Facility do
     where: ^id == stocks.facility_id,
     preload: [stocks: [food: :food_group]])
     |> Repo.all
-    |> Enum.map(&({&1.name, &1.stocks}))
+    |> Enum.map(&({&1.name, &1.id, &1.stocks}))
     |> Enum.uniq
   end
 

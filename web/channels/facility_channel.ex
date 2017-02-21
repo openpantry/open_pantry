@@ -2,6 +2,7 @@ defmodule OpenPantry.FacilityChannel do
   use OpenPantry.Web, :channel
   alias OpenPantry.Presence
   alias OpenPantry.Facility
+  alias OpenPantry.StockDistribution
 
 
   def join("facility:" <> facility_id_string, _, socket) do
@@ -21,39 +22,40 @@ defmodule OpenPantry.FacilityChannel do
     # Presence.track(socket, socket.assigns.user_id, join_metadata)
 
     # push socket, "presence_state", Presence.list(socket)
-    push socket, "stocks", %{ stocks: serialize(socket.assigns.stocks) }
     {:noreply, socket}
   end
 
-  def handle_in("request_stock", payload, socket) do
-    # broadcast! socket, "request_stock", payload
-    require IEx
-    IEx.pry
+  def handle_in("request_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
+    updated_stocks = StockDistribution.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)
+    # update_client_stocks(updated_stocks, socket, "remove_stock")
+    # push socket, "stocks", %{ stocks: serialize(updated_stocks) }
     {:noreply, socket}
   end
 
-  def handle_in("release_stock", payload, socket) do
-    # broadcast! socket, "release_stock", payload
-    require IEx
-    IEx.pry
+  def handle_in("release_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
+    updated_stocks = StockDistribution.adjust_stock(stock_id, type_id, -quantity, socket.assigns.user_id)
+    # update_client_stocks(updated_stocks, socket, "add_stock")
+    # push socket, "stocks", %{ stocks: serialize(updated_stocks) }
     {:noreply, socket}
   end
 
-  def handle_in("add_stock", payload, socket) do
-    # broadcast! socket, "add_stock", payload
-    require IEx
-    IEx.pry
-    {:noreply, socket}
+  # def handle_out("add_stock", %{"id" => stock_id, "quantity" => quantity}, socket) do
+  #   # broadcast! socket, "add_stock", payload
+  #   {:noreply, socket}
+  # end
+
+  # def handle_out("remove_stock", %{"id" => stock_id, "quantity" => quantity}, socket) do
+  #   # broadcast! socket, "remove_stock", payload
+  #   {:noreply, socket}
+  # end
+
+  defp update_client_stocks({:ok, stocks}, socket, action) do
+    broadcast! socket, action, serialize({:ok, stocks})
   end
 
-  def handle_in("remove_stock", payload, socket) do
-    # broadcast! socket, "remove_stock", payload
-    require IEx
-    IEx.pry
-    {:noreply, socket}
-  end
+  defp update_client_stocks({:error, _stocks}, action), do: nil
 
-  defp serialize(stocks) do
+  defp serialize({_status, stocks}) do
     Enum.map(stocks, &( [&1.id, &1.quantity] ))
   end
 end

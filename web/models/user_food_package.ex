@@ -1,6 +1,7 @@
 defmodule OpenPantry.UserFoodPackage do
   use OpenPantry.Web, :model
   alias OpenPantry.User
+
   schema "user_food_packages" do
     field :ready_for_pickup, :boolean, default: false
     field :finalized, :boolean, default: false
@@ -20,10 +21,21 @@ defmodule OpenPantry.UserFoodPackage do
   end
 
   def find_or_create(user = %User{id: id}) do
+    find_current(user) || %UserFoodPackage{user_id: id} |> Repo.insert!()
+  end
+
+  def query(id, preload  \\ []) when is_integer(id) do
     from(package in UserFoodPackage,
     where: package.finalized == false,
-    where: package.user_id == ^id)
-    |> Repo.one || %UserFoodPackage{user_id: id} |> Repo.insert!()
+    where: package.user_id == ^id,
+    preload: ^preload)
   end
+
+  def find_current(%User{id: id}), do: find_current(id)
+  def find_current(id) when is_integer(id) do
+    query(id)
+    |> Repo.one
+  end
+
 
 end

@@ -35,8 +35,9 @@ defmodule OpenPantry.Stock do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :food_id, :meal_id, :offer_id, :facility_id])
-    |> validate_required([:quantity, :facility_id, :packaging])
+    |> validate_required([:quantity, :facility_id])
     |> validate_stockable
+    |> check_constraint(:quantity, name: :non_negative_quantity)
   end
 
   def stock_types do
@@ -79,6 +80,20 @@ defmodule OpenPantry.Stock do
   def handle_stockable_error(0, changeset), do: add_error(changeset, :food_id, "A stock item must stock a food, meal or offer")
   def handle_stockable_error(_, changeset), do: add_error(changeset, :meal_id, "A stock item must stock only one food, meal or offer")
 
+  def query(id) when is_integer(id) do
+    from(stock in Stock,
+    where: stock.id == ^id)
+  end
+
+  def query(id, preload  \\ []) when is_integer(id) do
+    from(stock in Stock,
+    where: stock.id == ^id,
+    preload: ^preload)
+  end
+
+  def find(id, preload \\ []) when is_integer(id) do
+    query(id, preload) |> Repo.one!
+  end
 
 
 end

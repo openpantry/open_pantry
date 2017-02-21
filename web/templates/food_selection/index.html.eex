@@ -47,18 +47,18 @@
   <div class="row">
     <div class="col-md-12">
       <ul class="nav nav-tabs">
-        <%= for {stock_type, _stocks} <- @food_stock_by_type do %>
+        <%= for {stock_type, _type_id, _stocks} <- @food_stock_by_type do %>
           <li class="<%= active(stock_type, @food_stock_by_type)%>">
             <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
           </li>
         <% end %>
       </ul>
       <div class="tab-content clearfix">
-        <%= for {stock_type, stocks} <- @food_stock_by_type do %>
+        <%= for {stock_type, type_id, stocks} <- @food_stock_by_type do %>
           <div class="tab-pane <%= active(stock_type, @food_stock_by_type)%>" id="<%= stock_type %>">
             <p>
               <%= stock_type %> <%= gettext("remaining:") %>
-                <span class="js-credit-count" data-credit-type="<%=stock_type %>" >
+                <span class="js-credit-count" data-credit-type="<%= type_id %>" >
                   <%=  @credits[stock_type] %>
                 </span>
             </p>
