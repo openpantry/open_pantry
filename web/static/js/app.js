@@ -18,50 +18,9 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import facility from "./facility.js"
 import socket from "./socket"
 socket.connect();
 let channel = socket.channel(`facility:${window.facilityId}`, {});
 channel.join();
-$(function(){
-  const getAvailable = (row) => parseInt(row.find('.available').html())
-  const getQuantity = (row) => parseInt(row.find('.current-quantity').html())
-  const setQuantity = (row, newQuantity) => row.find('.current-quantity').html(newQuantity)
-
-  var fn;
-  let handlers = {
-    "js-add-stock": function(row){
-      if (getAvailable(row) > 0) {
-        channel.push('request_stock', { id: row.data('stock-id'), quantity: 1 });
-        setQuantity(row, getQuantity(row) + 1)
-      }
-    },
-    "js-remove-stock": function(row){
-      const currentQuantity = getQuantity(row)
-      if (currentQuantity > 0) {
-        channel.push('release_stock', { id: row.data('stock-id'), quantity: 1 });
-        setQuantity(row, currentQuantity - 1)
-      }
-    },
-    "js-clear-stock": function(row){
-      channel.push('release_stock', { id: row.data('stock-id'), quantity: getQuantity(row) });
-      setQuantity(row, 0)
-    }
-  }
-
-
-  $('.js-stock-row').on('click', function(el){
-    if (fn = handlers[el.target.className]){
-      fn($(el.currentTarget));
-    };
-  })
-
-  channel.on('add_stock', payload => {
-
-  });
-
-
-  channel.on('remove_stock', payload => {
-
-  });
-
-})
+$(facility(channel))
