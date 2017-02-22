@@ -4,9 +4,10 @@
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Git clone https://github.com/MasbiaSoupKitchenNetwork/nutes locally and run make, modifying if necessary to point at your Postgres DB and the directory path to your local copy in imports.sql (requires golang to build data_cleanup tool)
-  * Add seed data with `mix run priv/repo/seeds.exs`
+  * Get a database set up, either by downloading this dump (https://s3.amazonaws.com/open-pantry/openpantry.dump) and doing a pg_restore (simplest), or... 
+    * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+    * Git clone https://github.com/MasbiaSoupKitchenNetwork/nutes locally and run make, modifying if necessary to point at your Postgres DB and the directory path to your local copy in imports.sql (requires golang to build data_cleanup tool)
+    * Add seed data with `mix run priv/repo/seeds.exs`
   * Install Node.js dependencies with `yarn install`
   * Start Phoenix endpoint with `mix phoenix.server`
 
