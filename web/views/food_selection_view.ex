@@ -1,6 +1,7 @@
 defmodule OpenPantry.FoodSelectionView do
   use OpenPantry.Web, :view
   alias OpenPantry.Repo
+  alias OpenPantry.Stock
   require IEx
 
   def food_by_group(credit_food_groups) do
@@ -23,6 +24,16 @@ defmodule OpenPantry.FoodSelectionView do
     else
       0
     end
+  end
+
+  def stock_description(stock_distribution) do
+    stock_distribution.stock
+    |> Stock.stock_description
+  end
+
+  def meal_points(map) do
+    Map.values(map)
+    |> Enum.min
   end
 
 end

@@ -48,6 +48,13 @@ defmodule OpenPantry.Stock do
     stock.food || stock.meal || stock.offer
   end
 
+  def stock_description(stock) do
+    loaded_stock = stockable_load(stock)
+    (loaded_stock.food && loaded_stock.food.longdesc)    ||
+    (loaded_stock.meal && loaded_stock.meal.description) ||
+    (loaded_stock.offer && loaded_stock.offer.description)
+  end
+
   def stockable(stock) do
     stock
     |> stockable_load

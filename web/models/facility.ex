@@ -45,4 +45,15 @@ defmodule OpenPantry.Facility do
     |> Enum.uniq
   end
 
+  def meal_stocks(facility = %Facility{id: id}) do
+    now = DateTime.utc_now
+    from(stocks in Stock,
+    where: stocks.arrival < ^now,
+    where: stocks.expiration > ^now,
+    where: ^id == stocks.facility_id,
+    where: fragment("? IS NOT NULL", stocks.meal_id),
+    preload: [:meal])
+    |> Repo.all
+  end
+
 end

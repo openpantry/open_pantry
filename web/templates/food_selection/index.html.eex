@@ -52,6 +52,12 @@
             <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
           </li>
         <% end %>
+        <li>
+          <a href="#meals" data-toggle="tab"> <%= gettext("Meals") %> </a>
+        </li>
+        <li>
+          <a href="#cart" data-toggle="tab"> <%= gettext("Cart") %> </a>
+        </li>
       </ul>
       <div class="tab-content clearfix">
         <%= for {stock_type, type_id, stocks} <- @food_stock_by_type do %>
@@ -62,7 +68,7 @@
                   <%=  @credits[stock_type] %>
                 </span>
             </p>
-              <table class='table table-striped js-data-table-accounts'>
+              <table class='table table-striped'>
                 <%# TBD?
                   <colgroup>
                     <col>
@@ -83,7 +89,7 @@
                   <th><%= gettext("Manufacturer info (if available)") %></th>
                   <th><%= gettext("Weight") %></th>
                   <th><%= gettext("Quantity available") %></th>
-                  <th><%= stock_type %> cost</th>
+                  <th><%= stock_type %> <%= gettext("cost")%></th>
                   <th class='add-action-col'></th>
                   <th><%= gettext("Quantity requested") %></th>
                   <th class='remove-action-col'></th>
@@ -134,6 +140,120 @@
               </table>
           </div>
         <% end %>
+        <div class="tab-pane js-stock-type js-meal-stocks" id="meals">
+          <p>
+            <%= gettext("Possible meals") %> <%= gettext("remaining:") %>
+              <span class="js-credit-count" data-credit-type="meal" >
+                <%=  meal_points(@credits) %>
+              </span>
+          </p>
+            <table class='table table-striped'>
+              <%# TBD?
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+              %>
+              <thead class='table-header'>
+                <th><%= gettext("Meal description") %></th>
+                <th><%= gettext("Meal packaging") %></th>
+                <th><%= gettext("Weight") %></th>
+                <th><%= gettext("Quantity available") %></th>
+                <th><%= gettext("Meal credits") %></th>
+                <th class='add-action-col'></th>
+                <th><%= gettext("Quantity requested") %></th>
+                <th class='remove-action-col'></th>
+                <th class='remove-all-action-col'></th>
+              </thead>
+              <tbody>
+                <%= for stock <- @meal_stocks do %>
+                  <tr class="js-meal-stock-row" data-stock-id="<%= stock.id %>">
+                    <td class="description">
+                      <%= stock.meal && stock.meal.description %>
+                    </td>
+                    <td class="packaging">
+                      <%= stock.packaging %>
+                    </td>
+                    <td class="weight">
+                      <%= stock.weight %>
+                    </td>
+                    <td class="js-meal-available-quantity">
+                      <%= stock.quantity %>
+                    </td>
+                    <td class="js-meal-credit-cost">
+                      <%= stock.credits_per_package %>
+                    </td>
+                    <td class="add-action">
+                      <button class="js-add-stock">
+                      +
+                      </button>
+                    </td>
+                    <td class="js-meal-current-quantity">
+                      <%= quantity(stock, @package) %>
+                    </td>
+                    <td class="remove-action">
+                      <button class="js-meal-remove-stock">
+                      -
+                      </button>
+                    </td>
+                    <td class="clear-action">
+                      <button class="js-meal-clear-stock">
+                      X
+                      </button>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane js-cart" id="cart">
+            <p>
+              <%= gettext("Complete your order!") %>
+            </p>
+            <table class='table table-striped'>
+              <%# TBD?
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+              %>
+              <thead class='table-header'>
+                <th><%= gettext("Item description") %></th>
+                <th><%= gettext("Item packaging") %></th>
+                <th><%= gettext("Weight") %></th>
+                <th><%= gettext("Quantity requested") %></th>
+              </thead>
+              <tbody>
+             <%= for distribution <- @distributions do %>
+                  <tr class="js-meal-stock-row" data-stock-distribution-id="<%= distribution.id %>">
+                    <td class="description">
+                      <%= stock_description(distribution) %>
+                    </td>
+                    <td class="packaging">
+                      <%= distribution.stock.packaging %>
+                    </td>
+                    <td class="weight">
+                      <%= distribution.stock.weight %>
+                    </td>
+                    <td class="js-quantity-requested">
+                      <%= distribution.quantity %>
+                    </td>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
