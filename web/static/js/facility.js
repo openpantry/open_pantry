@@ -1,12 +1,12 @@
 export default function(channel){
-  const getAvailable = (row) => parseInt(row.find('.available').html())
-  const getQuantity  = (row) => parseInt(row.find('.current-quantity').html())
-  const getCost      = (row) => parseInt(row.find('.js-credit-cost').html())
-  const getCredits   = (row) => parseInt(row.parents('.tab-pane').find('.js-credit-count').html())
-  const getType      = (row) => row.parents('.tab-pane').find('.js-credit-count').data('credit-type')
-  const setQuantity  = (row, newQuantity) => row.find('.current-quantity').html(newQuantity)
-  const setCredits   = (row, newQuantity) => row.parents('.tab-pane').find('.js-credit-count').html(newQuantity)
-
+  const getAvailable     = (row) => parseInt(row.find('.js-available-quantity').html())
+  const getQuantity      = (row) => parseInt(row.find('.js-current-quantity').html())
+  const getCost          = (row) => parseInt(row.find('.js-credit-cost').html())
+  const getCredits       = (row) => parseInt(row.parents('.js-stock-type').find('.js-credit-count').html())
+  const getType          = (row) => row.parents('.js-stock-type').find('.js-credit-count').data('credit-type')
+  const setUserQuantity  = (row, newQuantity) => row.find('.js-current-quantity').html(newQuantity)
+  const setTotalQuantity = (row, newQuantity) => row.find('.js-available-quantity').html(newQuantity)
+  const setCredits       = (row, newQuantity) => row.parents('.js-stock-type').find('.js-credit-count').html(newQuantity)
   var fn;
   let handlers = {
     "js-add-stock": function(row){
@@ -14,7 +14,7 @@ export default function(channel){
       const cost    = getCost(row);
       if (getAvailable(row) > 0 && credits >= cost) {
         channel.push('request_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
-        setQuantity(row, getQuantity(row) + 1);
+        setUserQuantity(row, getQuantity(row) + 1);
         setCredits(row, credits - cost);
       }
     },
@@ -24,7 +24,7 @@ export default function(channel){
         const credits = getCredits(row);
         const cost    = getCost(row);
         channel.push('release_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
-        setQuantity(row, currentQuantity - 1);
+        setUserQuantity(row, currentQuantity - 1);
         setCredits(row, credits + cost);
       }
     },
@@ -34,7 +34,7 @@ export default function(channel){
         const credits = getCredits(row);
         const cost    = getCost(row);
         channel.push('release_stock', { id: row.data('stock-id'), quantity: getQuantity(row), type: getType(row) });
-        setQuantity(row, 0)
+        setUserQuantity(row, 0)
         setCredits(row, credits + cost * currentQuantity);
       }
     }
@@ -47,13 +47,9 @@ export default function(channel){
     };
   })
 
-  channel.on('add_stock', payload => {
-
-  });
-
-
-  channel.on('remove_stock', payload => {
-
+  channel.on('set_stock', payload => {
+    var {id, quantity} = payload;
+    setTotalQuantity($(`*[data-stock-id="${id}"]`), quantity);
   });
 
 }

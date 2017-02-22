@@ -1,8 +1,8 @@
 defmodule OpenPantry.FacilityChannel do
   use OpenPantry.Web, :channel
-  alias OpenPantry.Presence
   alias OpenPantry.Facility
   alias OpenPantry.StockDistribution
+  alias OpenPantry.Stock
 
 
   def join("facility:" <> facility_id_string, _, socket) do
@@ -19,43 +19,27 @@ defmodule OpenPantry.FacilityChannel do
 
   def handle_info(:after_join, socket) do
     join_metadata = %{ online_at: :os.system_time(:milli_seconds) }
-    # Presence.track(socket, socket.assigns.user_id, join_metadata)
-
-    # push socket, "presence_state", Presence.list(socket)
     {:noreply, socket}
   end
 
   def handle_in("request_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
-    updated_stocks = StockDistribution.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)
-    # update_client_stocks(updated_stocks, socket, "remove_stock")
-    # push socket, "stocks", %{ stocks: serialize(updated_stocks) }
+    spawn fn -> # DB constraint may error, don't take down channel with it
+      StockDistribution.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)
+      set_stock(stock_id, socket)
+    end
     {:noreply, socket}
   end
 
   def handle_in("release_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
-    updated_stocks = StockDistribution.adjust_stock(stock_id, type_id, -quantity, socket.assigns.user_id)
-    # update_client_stocks(updated_stocks, socket, "add_stock")
-    # push socket, "stocks", %{ stocks: serialize(updated_stocks) }
+    spawn fn -> # ditto, pending possible link or change to use changeset but Multi.update vs Multi.update_all
+      StockDistribution.adjust_stock(stock_id, type_id, -quantity, socket.assigns.user_id)
+      set_stock(stock_id, socket)
+    end
     {:noreply, socket}
   end
 
-  # def handle_out("add_stock", %{"id" => stock_id, "quantity" => quantity}, socket) do
-  #   # broadcast! socket, "add_stock", payload
-  #   {:noreply, socket}
-  # end
-
-  # def handle_out("remove_stock", %{"id" => stock_id, "quantity" => quantity}, socket) do
-  #   # broadcast! socket, "remove_stock", payload
-  #   {:noreply, socket}
-  # end
-
-  defp update_client_stocks({:ok, stocks}, socket, action) do
-    broadcast! socket, action, serialize({:ok, stocks})
+  defp set_stock(stock_id, socket) do
+    broadcast! socket, "set_stock", %{"id" => stock_id, "quantity" => Stock.find(stock_id).quantity}
   end
 
-  defp update_client_stocks({:error, _stocks}, action), do: nil
-
-  defp serialize({_status, stocks}) do
-    Enum.map(stocks, &( [&1.id, &1.quantity] ))
-  end
 end

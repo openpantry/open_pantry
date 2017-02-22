@@ -55,7 +55,7 @@
       </ul>
       <div class="tab-content clearfix">
         <%= for {stock_type, type_id, stocks} <- @food_stock_by_type do %>
-          <div class="tab-pane <%= active(stock_type, @food_stock_by_type)%>" id="<%= stock_type %>">
+          <div class="tab-pane js-stock-type <%= active(stock_type, @food_stock_by_type)%>" id="<%= stock_type %>">
             <p>
               <%= stock_type %> <%= gettext("remaining:") %>
                 <span class="js-credit-count" data-credit-type="<%= type_id %>" >
@@ -104,7 +104,7 @@
                       <td class="weight">
                         <%= stock.weight %>
                       </td>
-                      <td class="available">
+                      <td class="js-available-quantity">
                         <%= stock.quantity %>
                       </td>
                       <td class="js-credit-cost">
@@ -115,7 +115,7 @@
                         +
                         </button>
                       </td>
-                      <td class="current-quantity">
+                      <td class="js-current-quantity">
                         <%= quantity(stock, @package) %>
                       </td>
                       <td class="remove-action">

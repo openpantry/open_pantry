@@ -1,6 +1,7 @@
 /_build
 /cover
 /deps
+/priv/static/js/*
 erl_crash.dump
 node_modules/*
 *.ez
