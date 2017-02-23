@@ -27,6 +27,8 @@ defmodule OpenPantry.User do
     |> validate_required([:name, :family_members, :primary_language_id, :facility_id])
   end
 
+  def credits(user_id) when is_integer(user_id), do: find(user_id) |> credits
+
   def credits(user) do
     credits = Repo.preload(user, :user_credits).user_credits
     |> Repo.preload(:credit_type)
@@ -42,8 +44,9 @@ defmodule OpenPantry.User do
     |> Enum.min
   end
 
+  def find(user_id), do: query(user_id) |> Repo.one!
   def query(user = %User{id: id}), do: query(id)
-   def query(id, preload \\ []) when is_integer(id) do
+  def query(id, preload \\ []) when is_integer(id) do
     from(user in User,
     where: user.id == ^id,
     preload: ^preload)

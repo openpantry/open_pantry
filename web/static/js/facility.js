@@ -52,4 +52,8 @@ export default function(channel){
     setTotalQuantity($(`*[data-stock-id="${id}"]`), quantity);
   });
 
+  channel.on('current_credits', payload => {
+    $.each(payload, (type, credits) => $(`#${type}`).find('.js-credit-count').html(credits) )
+  });
+
 }
