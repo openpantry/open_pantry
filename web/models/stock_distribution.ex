@@ -3,6 +3,7 @@ defmodule OpenPantry.StockDistribution do
   alias OpenPantry.UserFoodPackage
   alias OpenPantry.Stock
   alias OpenPantry.UserCredit
+  alias OpenPantry.CreditType
   alias Ecto.Multi
 
   schema "stock_distributions" do
@@ -26,30 +27,30 @@ defmodule OpenPantry.StockDistribution do
 
   def adjust_stock(stock_id, type_id, quantity, user_id) do
     stock = Stock.find(stock_id)
-    case {stock.meal_id, stock.offer_id, stock.food_id } do
-      {nil, nil, food_id} ->
-        adjust_food_stock(stock, type_id, quantity, user_id)
-      {nil, offer_id, nil} ->
-        adjust_offer_stock(stock, type_id, quantity, user_id)
-      {meal_id, nil, nil} ->
-        adjust_meal_stock(stock, type_id, quantity, user_id)
-      end
-  end
-
-
-  def adjust_food_stock(stock, type_id, quantity, user_id) do
     package = UserFoodPackage.find_current(user_id)
     stock_distribution = find_or_create(package.id, stock.id)
     cost = stock.credits_per_package
     Multi.new
     |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution), [inc: [quantity: quantity]])
     |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
-    |> Multi.update_all(:credit, UserCredit.query(user_id, type_id), [inc: [balance: -(cost*quantity)]])
+    |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
     |> Repo.transaction
   end
 
-  def adjust_offer_stock(stock, type_id, quantity, user_id), do: nil # not implemented yet
-  def adjust_meal_stock(stock, type_id, quantity, user_id), do: nil # not implemented yet
+
+  def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, food_id}) do
+    Multi.update_all(multi, type_id, UserCredit.query(user_id, type_id), [inc: [balance: -(cost*quantity)]])
+  end
+  def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, offer_id, nil}), do: multi
+  def deduct_credits(multi, cost, quantity, _type_id, user_id, {_meal_id, nil, nil}) do
+    from(c in CreditType, select: c.id)
+    |> Repo.all
+    |> Enum.reduce(multi, fn(credit_type_id, multi_accum) -> # deduct credits once for each food type, using above clause
+        deduct_credits(multi_accum, cost, quantity, credit_type_id, user_id, {nil, nil, credit_type_id})
+    end)
+  end
+
+
 
   def package(user_id) do
     UserFoodPackage.query(user_id) |> Repo.one!
