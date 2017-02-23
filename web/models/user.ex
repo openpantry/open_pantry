@@ -30,10 +30,16 @@ defmodule OpenPantry.User do
   def credits(user) do
     credits = Repo.preload(user, :user_credits).user_credits
     |> Repo.preload(:credit_type)
-    Enum.map(credits, fn credit ->
+    food_credits = Enum.map(credits, fn credit ->
       {credit.credit_type.name, credit.balance}
     end)
     |> Map.new
+    Map.put(food_credits, "Meals", meal_points(food_credits))
+  end
+
+  def meal_points(map) do
+    Map.values(map)
+    |> Enum.min
   end
 
   def query(user = %User{id: id}), do: query(id)

@@ -40,10 +40,6 @@ defmodule OpenPantry.Stock do
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end
 
-  def stock_types do
-    [Food, Meal, Offer]
-  end
-
   def stockable!(stock) do
     stock.food || stock.meal || stock.offer
   end

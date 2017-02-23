@@ -25,15 +25,31 @@ defmodule OpenPantry.StockDistribution do
   end
 
   def adjust_stock(stock_id, type_id, quantity, user_id) do
+    stock = Stock.find(stock_id)
+    case {stock.meal_id, stock.offer_id, stock.food_id } do
+      {nil, nil, food_id} ->
+        adjust_food_stock(stock, type_id, quantity, user_id)
+      {nil, offer_id, nil} ->
+        adjust_offer_stock(stock, type_id, quantity, user_id)
+      {meal_id, nil, nil} ->
+        adjust_meal_stock(stock, type_id, quantity, user_id)
+      end
+  end
+
+
+  def adjust_food_stock(stock, type_id, quantity, user_id) do
     package = UserFoodPackage.find_current(user_id)
-    stock_distribution = find_or_create(package.id, stock_id)
-    cost = Stock.find(stock_id).credits_per_package
+    stock_distribution = find_or_create(package.id, stock.id)
+    cost = stock.credits_per_package
     Multi.new
     |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution), [inc: [quantity: quantity]])
-    |> Multi.update_all(:stock, Stock.query(stock_id), [inc: [quantity: -quantity]])
+    |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
     |> Multi.update_all(:credit, UserCredit.query(user_id, type_id), [inc: [balance: -(cost*quantity)]])
     |> Repo.transaction
   end
+
+  def adjust_offer_stock(stock, type_id, quantity, user_id), do: nil # not implemented yet
+  def adjust_meal_stock(stock, type_id, quantity, user_id), do: nil # not implemented yet
 
   def package(user_id) do
     UserFoodPackage.query(user_id) |> Repo.one!

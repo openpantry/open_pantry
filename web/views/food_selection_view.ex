@@ -26,14 +26,8 @@ defmodule OpenPantry.FoodSelectionView do
     end
   end
 
-  def stock_description(stock_distribution) do
-    stock_distribution.stock
-    |> Stock.stock_description
-  end
-
-  def meal_points(map) do
-    Map.values(map)
-    |> Enum.min
+  def description(stock) do
+    Stock.stock_description(stock)
   end
 
 end

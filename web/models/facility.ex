@@ -32,7 +32,7 @@ defmodule OpenPantry.Facility do
   end
 
 
-  def food_stock_by_credit_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
+  def stock_by_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
     from(credit_type in CreditType,
     join: stocks in assoc(credit_type, :stocks),
@@ -43,6 +43,11 @@ defmodule OpenPantry.Facility do
     |> Repo.all
     |> Enum.map(&({&1.name, &1.id, &1.stocks}))
     |> Enum.uniq
+    |> append_meals(facility)
+  end
+
+  def append_meals(food_stocks, facility) do
+    food_stocks ++ [{"Meals", :meals, meal_stocks(facility)}]
   end
 
   def meal_stocks(facility = %Facility{id: id}) do
