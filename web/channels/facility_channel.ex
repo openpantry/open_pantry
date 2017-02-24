@@ -8,10 +8,6 @@ defmodule OpenPantry.FacilityChannel do
 
   def join("facility:" <> facility_id_string, _, socket) do
     facility_id = String.to_integer(facility_id_string)
-    query = from facility in Facility, where: facility.id == ^facility_id, preload: :stocks
-    facility = Repo.one(query)
-    stocks = facility.stocks
-    socket = Phoenix.Socket.assign(socket, :stocks, stocks)
     socket = Phoenix.Socket.assign(socket, :facility_id, facility_id)
 
     send self(), :after_join
