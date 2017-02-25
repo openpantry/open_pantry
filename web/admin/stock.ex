@@ -1,7 +1,7 @@
 defmodule OpenPantry.ExAdmin.Stock do
   use ExAdmin.Register
-  alias OpenPantry.Repo
   alias OpenPantry.Stock
+  alias OpenPantry.Facility
   register_resource OpenPantry.Stock do
     form stock do
       inputs do
@@ -18,7 +18,7 @@ defmodule OpenPantry.ExAdmin.Stock do
         input stock, :packaging
         input stock, :credits_per_package
         # input stock, :food, collection: OpenPantry.Food.all
-        input stock, :facility, collection: OpenPantry.Facility.all
+        input stock, :facility, collection: Facility.all
       end
 
 

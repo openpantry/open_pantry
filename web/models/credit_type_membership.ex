@@ -4,8 +4,6 @@ defmodule OpenPantry.CreditTypeMembership do
   schema "credit_type_memberships" do
     belongs_to :food_group, OpenPantry.FoodGroup, references: :foodgroup_code, type: :string
     belongs_to :credit_type, OpenPantry.CreditType
-
-    timestamps()
   end
 
   @doc """

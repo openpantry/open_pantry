@@ -5,12 +5,11 @@ defmodule OpenPantry.ExAdmin.UserFoodPackage do
 
   end
 
+  @spec display_name(%UserFoodPackage{}) :: String.t
   def display_name(user_food_package) do
-    Repo.preload(user_food_package, :user).user.name <>
-    " " <>
-    (NaiveDateTime.to_date(user_food_package.inserted_at)
-     |> Date.to_string
-    )
+    user_name = Repo.preload(user_food_package, :user).user.name
+    inserted_at = NaiveDateTime.to_date(user_food_package.inserted_at)
+    |> Date.to_string
+    user_name <> " " <> inserted_at
   end
-
 end

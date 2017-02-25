@@ -8,14 +8,7 @@ defmodule OpenPantry.FacilityChannel do
   def join("facility:" <> facility_id_string, _, socket) do
     facility_id = String.to_integer(facility_id_string)
     socket = Phoenix.Socket.assign(socket, :facility_id, facility_id)
-
-    send self(), :after_join
     {:ok, socket}
-  end
-
-  def handle_info(:after_join, socket) do
-    join_metadata = %{ online_at: :os.system_time(:milli_seconds) }
-    {:noreply, socket}
   end
 
   def handle_in("request_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do

@@ -50,7 +50,7 @@ defmodule OpenPantry.Facility do
     food_stocks ++ [{"Meals", :meals, meal_stocks(facility)}]
   end
 
-  def meal_stocks(facility = %Facility{id: id}) do
+  def meal_stocks(%Facility{id: id}) do
     now = DateTime.utc_now
     from(stocks in Stock,
     where: stocks.arrival < ^now,

@@ -9,6 +9,7 @@ defmodule OpenPantry.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     dialyzer: [plt_add_deps: :transitive, plt_add_apps: [:phoenix_live_reload]],
      aliases: aliases(),
      deps: deps()]
   end
@@ -36,6 +37,10 @@ defmodule OpenPantry.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:credo, "~> 0.5", only: [:dev, :test]},
+     {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
+     {:ex_machina, "~> 1.0", only: [:dev, :test]},
+     {:wallaby, "~> 0.14.0", only: :test},
      {:ex_admin, git: "https://github.com/smpallen99/ex_admin/"},
      {:guardian, "~> 0.14"},
      {:gettext, "~> 0.11"},

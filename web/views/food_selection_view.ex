@@ -1,6 +1,5 @@
 defmodule OpenPantry.FoodSelectionView do
   use OpenPantry.Web, :view
-  alias OpenPantry.Repo
   alias OpenPantry.Stock
   require IEx
 

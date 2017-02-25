@@ -50,8 +50,6 @@ defmodule OpenPantry.StockDistribution do
     end)
   end
 
-
-
   def package(user_id) do
     UserFoodPackage.query(user_id) |> Repo.one!
   end

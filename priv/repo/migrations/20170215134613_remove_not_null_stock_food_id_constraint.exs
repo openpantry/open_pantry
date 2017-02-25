@@ -8,5 +8,8 @@ defmodule OpenPantry.Repo.Migrations.RemoveNotNullStockFoodIdConstraint do
   end
 
   def down do
+    alter table(:stocks) do
+      modify :food_id, :string, null: false
+    end
   end
 end

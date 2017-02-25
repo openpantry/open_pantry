@@ -45,7 +45,7 @@ defmodule OpenPantry.User do
   end
 
   def find(user_id), do: query(user_id) |> Repo.one!
-  def query(user = %User{id: id}), do: query(id)
+  def query(%User{id: id}), do: query(id)
   def query(id, preload \\ []) when is_integer(id) do
     from(user in User,
     where: user.id == ^id,
