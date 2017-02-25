@@ -5,7 +5,7 @@ defmodule OpenPantry.CreditTypeMembership do
     belongs_to :food_group, OpenPantry.FoodGroup, references: :foodgroup_code, type: :string
     belongs_to :credit_type, OpenPantry.CreditType
 
-    timestamps()
+    # timestamps()
   end
 
   @doc """

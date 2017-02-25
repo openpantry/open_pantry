@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :open_pantry, OpenPantry.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :open_pantry, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
