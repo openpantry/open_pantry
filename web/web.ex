@@ -29,6 +29,24 @@ defmodule OpenPantry.Web do
         __MODULE__ |> Repo.all
       end
 
+      def find(id) when is_integer(id), do:  query(id) |> Repo.one!
+
+
+      def find(id, preload) when is_integer(id) do
+        query(id, preload) |> Repo.one!
+      end
+
+      def query(id, preload) when is_integer(id) do
+        from(struct in __MODULE__,
+        where: struct.id == ^id,
+        preload: ^preload)
+      end
+
+      def query(id) when is_integer(id) do
+        from(struct in __MODULE__,
+        where: struct.id == ^id)
+      end
+
     end
   end
 

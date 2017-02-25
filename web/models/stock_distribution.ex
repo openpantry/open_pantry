@@ -31,7 +31,7 @@ defmodule OpenPantry.StockDistribution do
     stock_distribution = find_or_create(package.id, stock.id)
     cost = stock.credits_per_package
     Multi.new
-    |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution), [inc: [quantity: quantity]])
+    |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution.id), [inc: [quantity: quantity]])
     |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
     |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
     |> Repo.transaction
@@ -39,7 +39,7 @@ defmodule OpenPantry.StockDistribution do
 
 
   def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, food_id}) do
-    Multi.update_all(multi, type_id, UserCredit.query(user_id, type_id), [inc: [balance: -(cost*quantity)]])
+    Multi.update_all(multi, type_id, UserCredit.query_user_type(user_id, type_id), [inc: [balance: -(cost*quantity)]])
   end
   def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, offer_id, nil}), do: multi
   def deduct_credits(multi, cost, quantity, _type_id, user_id, {_meal_id, nil, nil}) do
@@ -57,27 +57,20 @@ defmodule OpenPantry.StockDistribution do
   end
 
   def find_or_create(user_food_package_id, stock_id) do
-    find(user_food_package_id, stock_id) ||
+    find_by_package_and_stock(user_food_package_id, stock_id) ||
     %StockDistribution{ user_food_package_id: user_food_package_id,
                         stock_id: stock_id, quantity: 0}
     |> Repo.insert!()
   end
 
-  def query(%StockDistribution{id: id}), do: query(id)
-
-  def query(id) when is_integer(id) do
-    from(sd in StockDistribution,
-    where: sd.id == ^id)
-  end
-
-  def query(package_id, stock_id) do
+  def query_by_package_and_stock(package_id, stock_id) do
     from(sd in StockDistribution,
     where: sd.user_food_package_id == ^package_id,
     where: sd.stock_id == ^stock_id)
   end
 
-  def find(package_id, stock_id) do
-    query(package_id, stock_id)
+  def find_by_package_and_stock(package_id, stock_id) do
+    query_by_package_and_stock(package_id, stock_id)
     |> Repo.one
   end
 

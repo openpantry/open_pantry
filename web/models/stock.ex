@@ -83,20 +83,5 @@ defmodule OpenPantry.Stock do
   def handle_stockable_error(0, changeset), do: add_error(changeset, :food_id, "A stock item must stock a food, meal or offer")
   def handle_stockable_error(_, changeset), do: add_error(changeset, :meal_id, "A stock item must stock only one food, meal or offer")
 
-  def query(id) when is_integer(id) do
-    from(stock in Stock,
-    where: stock.id == ^id)
-  end
-
-  def query(id, preload  \\ []) when is_integer(id) do
-    from(stock in Stock,
-    where: stock.id == ^id,
-    preload: ^preload)
-  end
-
-  def find(id, preload \\ []) when is_integer(id) do
-    query(id, preload) |> Repo.one!
-  end
-
 
 end

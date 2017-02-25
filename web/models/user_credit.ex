@@ -19,7 +19,7 @@ defmodule OpenPantry.UserCredit do
     |> check_constraint(:balance, name: :non_negative_balance)
   end
 
-  def query(user_id, type_id) do
+  def query_user_type(user_id, type_id) do
     from(uc in UserCredit,
     where: uc.user_id == ^user_id,
     where: uc.credit_type_id == ^type_id)
