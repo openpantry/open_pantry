@@ -14,6 +14,7 @@ config :logger, level: :warn
 # Configure your database
 config :open_pantry, OpenPantry.Repo,
   adapter: Ecto.Adapters.Postgres,
+  types: OpenPantry.PostgresTypes,  
   username: "postgres",
   password: "postgres",
   database: "open_pantry_test",
