@@ -24,6 +24,11 @@ defmodule OpenPantry.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+
+      def all do
+        __MODULE__ |> Repo.all
+      end
+
     end
   end
 
