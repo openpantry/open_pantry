@@ -1,6 +1,5 @@
 defmodule OpenPantry.FacilityChannel do
   use OpenPantry.Web, :channel
-  alias OpenPantry.Facility
   alias OpenPantry.StockDistribution
   alias OpenPantry.Stock
   alias OpenPantry.User

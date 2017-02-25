@@ -9,7 +9,6 @@ defmodule OpenPantry.FoodSelectionController do
     stock_by_type = Facility.stock_by_type(user.facility)
     package = UserFoodPackage.find_or_create(user) |> Repo.preload(:stock_distributions)
     distributions = package.stock_distributions |> Repo.preload(:stock)
-    meal_stocks = Facility.meal_stocks(user.facility)
     render conn, "index.html",  stock_by_type: stock_by_type,
                                 credits: User.credits(user),
                                 package: package,

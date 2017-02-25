@@ -9,7 +9,7 @@ defmodule OpenPantry.Plug.Locale do
 
     if locale in OpenPantry.Gettext.supported_locales do
       # Check if path contains a valid Locale
-      conn |> assign_locale! locale
+      conn |> assign_locale!(locale)
     else
       # Get locale based on user agent and redirect
       locale = List.first(extract_locale(conn)) || default
@@ -68,16 +68,13 @@ defmodule OpenPantry.Plug.Locale do
     |> Regex.replace(request_path, "\\1#{locale}\\2")
   end
 
-  defp localized_path(request_path, locale) do
-    # If locale is not an ietf tag, it is a page request.
-    "/#{locale}#{request_path}"
-  end
-
   defp redirect_to(conn, path) do
     # Apply query if present
-    unless Blank.blank? conn.query_string do
-      path = path <> "?#{conn.query_string}"
-    end
+    path =  if Blank.blank?(conn.query_string) do
+              path
+            else
+              path <> "?#{conn.query_string}"
+            end
     # Redirect
     conn |> Phoenix.Controller.redirect(to: path)
   end

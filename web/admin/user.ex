@@ -1,7 +1,5 @@
 defmodule OpenPantry.ExAdmin.User do
   use ExAdmin.Register
-  alias OpenPantry.Repo
-  alias OpenPantry.CreditType
 
   register_resource OpenPantry.User do
 
@@ -14,6 +12,7 @@ defmodule OpenPantry.ExAdmin.User do
       column :address2
       column :region
       column :postal_code
+      column :family_members
       column :primary_language
       column :facility
     end
@@ -31,8 +30,9 @@ defmodule OpenPantry.ExAdmin.User do
         input user, :city
         input user, :region
         input user, :postal_code
-        # input user, :primary_language, OpenPantry.Language
-        # input user, :facility, OpenPantry.facility
+        input user, :family_members
+        input user, :facility, collection: OpenPantry.Facility.all
+        input user, :primary_language, collection: OpenPantry.Language.all
       end
 
 
