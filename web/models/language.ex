@@ -22,6 +22,7 @@ defmodule OpenPantry.Language do
     |> validate_required([:iso_code, :english_name])
   end
 
+  @spec primary_list() :: list(%{})
   def primary_list do
     [locales: locales] = Application.get_env :open_pantry, OpenPantry.Gettext, :locales
     Language

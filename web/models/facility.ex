@@ -31,7 +31,7 @@ defmodule OpenPantry.Facility do
     |> validate_required([:name])
   end
 
-
+  @spec stock_by_type(%{}) :: list(tuple())
   def stock_by_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
     from(credit_type in CreditType,
@@ -46,10 +46,12 @@ defmodule OpenPantry.Facility do
     |> append_meals(facility)
   end
 
+  @spec append_meals(list(tuple()), %{}) :: list(tuple())
   def append_meals(food_stocks, facility) do
     food_stocks ++ [{"Meals", :meals, meal_stocks(facility)}]
   end
 
+  @spec meal_stocks(%{}) :: list(%{})
   def meal_stocks(%Facility{id: id}) do
     now = DateTime.utc_now
     from(stocks in Stock,
