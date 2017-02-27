@@ -43,12 +43,17 @@ defmodule OpenPantry.Facility do
     |> Repo.all
     |> Enum.map(&({&1.name, &1.id, &1.stocks}))
     |> Enum.uniq
-    |> append_meals(facility)
+    |> append_meals_if_any(facility)
   end
 
-  @spec append_meals(list(tuple()), %{}) :: list(tuple())
-  def append_meals(food_stocks, facility) do
-    food_stocks ++ [{"Meals", :meals, meal_stocks(facility)}]
+  @spec append_meals_if_any(list(tuple()), %{}) :: list(tuple())
+  def append_meals_if_any(food_stocks, facility) do
+    meal_stocks = meal_stocks(facility)
+    food_stocks ++  if Enum.any?(meal_stocks) do
+                      [{"Meals", :meals, meal_stocks}]
+                    else
+                      []
+                    end
   end
 
   @spec meal_stocks(%{}) :: list(%{})
