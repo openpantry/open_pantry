@@ -50,6 +50,8 @@ defmodule OpenPantry.Web do
         where: struct.id == ^id)
       end
 
+      defoverridable [query: 1, query: 2, find: 1, find: 2]
+
     end
   end
 

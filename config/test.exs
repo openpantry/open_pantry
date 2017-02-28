@@ -1,5 +1,15 @@
 use Mix.Config
 
+defmodule Ownership do
+  def timeout do
+    try do
+      String.to_integer(System.get_env("DB_TIMEOUT"))
+    rescue
+      ArgumentError -> 25_000
+    end
+  end
+end
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :open_pantry, OpenPantry.Endpoint,
@@ -19,4 +29,5 @@ config :open_pantry, OpenPantry.Repo,
   password: "postgres",
   database: "open_pantry_test",
   hostname: "localhost",
+  ownership_timeout: Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox

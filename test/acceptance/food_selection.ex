@@ -2,6 +2,7 @@ defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.AcceptanceCase, async: true
   import OpenPantry.Factory
 
+  @tag timeout: Ownership.timeout
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
       facility = insert(:facility)
       user = insert(:user, facility: facility)
