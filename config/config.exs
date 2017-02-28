@@ -57,7 +57,7 @@ config :ex_admin,
     OpenPantry.ExAdmin.Offer,
     OpenPantry.ExAdmin.Stock,
     OpenPantry.ExAdmin.UserLanguage,
-    OpenPantry.ExAdmin.UserFoodPackage,
+    OpenPantry.ExAdmin.UserOrder,
     OpenPantry.ExAdmin.UserCredit,
     OpenPantry.ExAdmin.StockDistribution,
   ]

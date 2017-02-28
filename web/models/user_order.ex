@@ -1,8 +1,8 @@
-defmodule OpenPantry.UserFoodPackage do
+defmodule OpenPantry.UserOrder do
   use OpenPantry.Web, :model
   alias OpenPantry.User
 
-  schema "user_food_packages" do
+  schema "user_orders" do
     field :ready_for_pickup, :boolean, default: false
     field :finalized, :boolean, default: false
     belongs_to :user, OpenPantry.User
@@ -21,11 +21,11 @@ defmodule OpenPantry.UserFoodPackage do
   end
 
   def find_or_create(user = %User{id: id}) do
-    find_current(user) || %UserFoodPackage{user_id: id} |> Repo.insert!()
+    find_current(user) || %UserOrder{user_id: id} |> Repo.insert!()
   end
 
   def query(id, preload  \\ []) when is_integer(id) do
-    from(package in UserFoodPackage,
+    from(package in UserOrder,
     where: package.finalized == false,
     where: package.user_id == ^id,
     preload: ^preload)
