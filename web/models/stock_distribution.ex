@@ -26,7 +26,7 @@ defmodule OpenPantry.StockDistribution do
   end
 
   def adjust_stock(stock_id, type_id, quantity, user_id) do
-    stock = Stock.find(stock_id)
+    stock = Stock |> find(stock_id)
     package = UserOrder.find_current(user_id)
     stock_distribution = find_or_create(package.id, stock.id)
     cost = stock.credits_per_package
@@ -51,7 +51,7 @@ defmodule OpenPantry.StockDistribution do
   end
 
   def package(user_id) do
-    UserOrder.query(user_id) |> Repo.one!
+    UserOrder |> query(user_id) |> Repo.one!
   end
 
   def find_or_create(user_order_id, stock_id) do
