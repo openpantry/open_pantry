@@ -46,8 +46,8 @@ defmodule OpenPantry.Factory do
       quantity: 20,
       credits_per_package: 1,
       packaging: sequence(:packaging, &"packaging-#{&1}"),
-      arrival: NaiveDateTime.add(NaiveDateTime.utc_now, -1) |> DateTime.from_naive!("Etc/UTC") |> Ecto.DateTime.cast!,
-      expiration: NaiveDateTime.add(NaiveDateTime.utc_now, 1) |> DateTime.from_naive!("Etc/UTC") |> Ecto.DateTime.cast!,
+      arrival: NaiveDateTime.add(NaiveDateTime.utc_now, -100_000) |> DateTime.from_naive!("Etc/UTC") |> Ecto.DateTime.cast!,
+      expiration: NaiveDateTime.add(NaiveDateTime.utc_now, 100_000) |> DateTime.from_naive!("Etc/UTC") |> Ecto.DateTime.cast!,
       facility: build(:facility),
       food: build(:food)
     }

@@ -17,6 +17,6 @@ defmodule OpenPantry.FoodSelectionTest do
     |> find("##{credit_type.name}")
     |> text
 
-    assert first_credit == credit_type.name
+    assert first_credit =~ ~r/#{credit_type.name}/
   end
 end
