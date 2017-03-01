@@ -18,21 +18,21 @@ defmodule OpenPantry.FoodGroup do
     |> validate_required([:foodgroup_code, :foodgroup_desc])
   end
 
-  @spec find(binary()) :: %{}
+  @spec find(String.t) :: %{}
   def find(id) when is_binary(id), do:  query(id) |> Repo.one!
 
-  @spec find(binary(), list()) :: %{}
+  @spec find(String.t, nonempty_list()) :: %{}
   def find(id, preload) when is_binary(id) do
     query(id, preload) |> Repo.one!
   end
 
-  @spec query(binary(), list()) :: %{}
+  @spec query(String.t, nonempty_list()) :: %{}
   def query(id, preload) when is_binary(id) do
     from(struct in __MODULE__,
     where: struct.foodgroup_code == ^id,
     preload: ^preload)
   end
-  @spec query(binary(), list()) :: %{}
+  @spec query(String.t) :: %{}
   def query(id) when is_binary(id) do
     from(struct in __MODULE__,
     where: struct.foodgroup_code == ^id)

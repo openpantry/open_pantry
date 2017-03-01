@@ -25,6 +25,8 @@ defmodule OpenPantry.Web do
       import Ecto.Changeset
       import Ecto.Query
 
+      @type t :: %__MODULE__{}
+
       @spec all() :: list(%{})
       def all do
         __MODULE__ |> Repo.all
@@ -38,19 +40,19 @@ defmodule OpenPantry.Web do
         query(id, preload) |> Repo.one!
       end
 
+      @spec query(integer()) :: %{}
+      def query(id) when is_integer(id) do
+        from(struct in __MODULE__,
+        where: struct.id == ^id)
+      end
       @spec query(integer(), list()) :: %{}
       def query(id, preload) when is_integer(id) do
         from(struct in __MODULE__,
         where: struct.id == ^id,
         preload: ^preload)
       end
-      @spec query(integer(), list()) :: %{}
-      def query(id) when is_integer(id) do
-        from(struct in __MODULE__,
-        where: struct.id == ^id)
-      end
 
-      defoverridable [query: 1, query: 2, find: 1, find: 2]
+      defoverridable [query: 1, query: 2, find: 1, find: 2, all: 0]
 
     end
   end

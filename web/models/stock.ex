@@ -40,12 +40,12 @@ defmodule OpenPantry.Stock do
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end
 
-  @spec stockable!(%Stock{}) :: %{required(:__struct__) => (OpenPantry.Food | OpenPantry.Meal | OpenPantry.Offer)}
+  @spec stockable!(Stock.t) :: Meal.t | Food.t | Offer.t
   def stockable!(stock) do
     stock.food || stock.meal || stock.offer
   end
 
-  @spec stock_description(%Stock{}) :: String.t
+  @spec stock_description(Stock.t) :: String.t
   def stock_description(stock) do
     loaded_stock = stockable_load(stock)
     (loaded_stock.food && loaded_stock.food.longdesc)    ||
@@ -53,14 +53,14 @@ defmodule OpenPantry.Stock do
     (loaded_stock.offer && loaded_stock.offer.description)
   end
 
-  @spec stockable(%Stock{}) :: %Stock{}
+  @spec stockable(Stock.t) :: Stock.t
   def stockable(stock) do
     stock
     |> stockable_load
     |> stockable!
   end
 
-  @spec stockable_name(%Stock{}) :: String.t
+  @spec stockable_name(Stock.t) :: String.t
   def stockable_name(stock) do
     item = stockable(stock)
     case item.__struct__ do
@@ -69,7 +69,7 @@ defmodule OpenPantry.Stock do
     end
   end
 
-  @spec stockable_load(%Stock{}) :: %Stock{}
+  @spec stockable_load(Stock.t) :: Stock.t
   def stockable_load(stock) do
     stock
     |> Repo.preload(:food)
