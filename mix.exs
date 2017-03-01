@@ -41,7 +41,7 @@ defmodule OpenPantry.Mixfile do
      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
      {:ex_machina, "~> 1.0", only: [:dev, :test]},
      {:wallaby, "~> 0.14.0", only: :test},
-     {:ex_admin, git: "https://github.com/smpallen99/ex_admin/"},
+     {:ex_admin, git: "https://github.com/smpallen99/ex_admin.git"},
      {:guardian, "~> 0.14"},
      {:gettext, "~> 0.11"},
      {:geo, "~> 1.3"},
