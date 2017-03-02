@@ -48,12 +48,22 @@ export default function(channel){
   })
 
   channel.on('set_stock', payload => {
-    var {id, quantity} = payload;
+    const {id, quantity} = payload;
     setTotalQuantity($(`*[data-stock-id="${id}"]`), quantity);
   });
 
   channel.on('current_credits', payload => {
     $.each(payload, (type, credits) => $(`#${type}`).find('.js-credit-count').html(credits) )
+  });
+
+  channel.on('update_distribution', payload => {
+    const {id, html} = payload;
+    const existing = $('.js-cart').find(`*[data-stock-distribution-id="${id}"]`).first();
+    if (existing.length) {
+      $(existing).html($(html).html())
+    } else {
+      $('.js-cart').find('tbody').append(html)
+    }
   });
 
 }

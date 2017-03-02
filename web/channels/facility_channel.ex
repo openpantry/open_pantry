@@ -3,6 +3,7 @@ defmodule OpenPantry.FacilityChannel do
   alias OpenPantry.StockDistribution
   alias OpenPantry.Stock
   alias OpenPantry.User
+  alias OpenPantry.SharedView
 
 
   def join("facility:" <> facility_id_string, _, socket) do
@@ -31,6 +32,7 @@ defmodule OpenPantry.FacilityChannel do
     stock = Stock.find(stock_distribution.stock_id)
     broadcast! socket, "set_stock", %{"id" => stock.id, "quantity" => stock.quantity}
     push socket, "current_credits", User.credits(socket.assigns.user_id)
+    push socket, "update_distribution", %{"id" => stock_distribution.id, "html" => SharedView.render_distribution(stock_distribution) }
   end
 
 end
