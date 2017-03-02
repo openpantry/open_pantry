@@ -171,6 +171,7 @@
                     <td class="js-quantity-requested">
                       <%= distribution.quantity %>
                     </td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>
