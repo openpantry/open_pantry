@@ -157,21 +157,8 @@
                 <th><%= gettext("Quantity requested") %></th>
               </thead>
               <tbody>
-             <%= for distribution <- @distributions do %>
-                  <tr class="js-meal-stock-row" data-stock-distribution-id="<%= distribution.id %>">
-                    <td class="description">
-                      <%= description(distribution.stock) %>
-                    </td>
-                    <td class="packaging">
-                      <%= distribution.stock.packaging %>
-                    </td>
-                    <td class="weight">
-                      <%= distribution.stock.weight %>
-                    </td>
-                    <td class="js-quantity-requested">
-                      <%= distribution.quantity %>
-                    </td>
-                  </tr>
+                <%= for distribution <- @distributions do %>
+                  <%= render OpenPantry.SharedView, "distribution.html", distribution: distribution %>
                 <% end %>
               </tbody>
             </table>

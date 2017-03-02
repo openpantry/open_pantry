@@ -1,0 +1,14 @@
+<tr class="js-meal-stock-row" data-stock-distribution-id="<%= @distribution.id %>">
+  <td class="description">
+    <%= stock_description(@distribution.stock) %>
+  </td>
+  <td class="packaging">
+    <%= @distribution.stock.packaging %>
+  </td>
+  <td class="weight">
+    <%= @distribution.stock.weight %>
+  </td>
+  <td class="js-quantity-requested">
+    <%= @distribution.quantity %>
+  </td>
+</tr>
