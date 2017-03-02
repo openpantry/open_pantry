@@ -1,8 +1,9 @@
 export default function(channel){
-  const getAvailable     = (row) => parseInt(row.find('.js-available-quantity').html())
-  const getQuantity      = (row) => parseInt(row.find('.js-current-quantity').html())
-  const getCost          = (row) => parseInt(row.find('.js-credit-cost').html())
-  const getCredits       = (row) => parseInt(row.parents('.js-stock-type').find('.js-credit-count').html())
+  const intFromFindClass = (parent, className) => parseInt(parent.find(className).html(), 10)
+  const getAvailable     = (row) => intFromFindClass(row, '.js-available-quantity')
+  const getQuantity      = (row) => intFromFindClass(row, '.js-current-quantity')
+  const getCost          = (row) => intFromFindClass(row, '.js-credit-cost')
+  const getCredits       = (row) => intFromFindClass(row.parents('.js-stock-type'), '.js-credit-count')
   const getType          = (row) => row.parents('.js-stock-type').find('.js-credit-count').data('credit-type')
   const setUserQuantity  = (row, newQuantity) => row.find('.js-current-quantity').html(newQuantity)
   const setTotalQuantity = (row, newQuantity) => row.find('.js-available-quantity').html(newQuantity)
@@ -58,9 +59,14 @@ export default function(channel){
 
   channel.on('update_distribution', payload => {
     const {id, html} = payload;
+    const $html = $(html)
     const existing = $('.js-cart').find(`*[data-stock-distribution-id="${id}"]`).first();
-    if (existing.length) {
-      $(existing).html($(html).html())
+    const quantity = intFromFindClass($html, '.js-quantity-requested')
+
+    if (existing.length && quantity > 0) {
+      $(existing).html($html.html())
+    } else if (existing.length && quantity == 0) {
+      $(existing).remove()
     } else {
       $('.js-cart').find('tbody').append(html)
     }
