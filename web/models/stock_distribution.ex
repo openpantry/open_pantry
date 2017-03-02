@@ -35,6 +35,7 @@ defmodule OpenPantry.StockDistribution do
     |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
     |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
     |> Repo.transaction
+    stock_distribution
   end
 
 
