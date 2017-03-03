@@ -48,21 +48,21 @@ defmodule OpenPantry.Food do
     |> foreign_key_constraint(:foodgroup_code)
   end
 
-  @spec find(binary()) :: %{}
+  @spec find(binary()) :: Food.t | nil
   def find(id) when is_binary(id), do:  query(id) |> Repo.one!
 
-  @spec find(binary(), list()) :: %{}
+  @spec find(binary(), list(atom())) :: Food.t | nil
   def find(id, preload) when is_binary(id) do
     query(id, preload) |> Repo.one!
   end
 
-  @spec query(binary(), list()) :: %{}
+  @spec query(binary(), list(atom())) :: Ecto.Query.t
   def query(id, preload) when is_binary(id) do
     from(struct in __MODULE__,
     where: struct.ndb_no == ^id,
     preload: ^preload)
   end
-  @spec query(binary(), list()) :: %{}
+  @spec query(binary()) :: Ecto.Query.t
   def query(id) when is_binary(id) do
     from(struct in __MODULE__,
     where: struct.ndb_no == ^id)

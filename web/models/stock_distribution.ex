@@ -25,6 +25,7 @@ defmodule OpenPantry.StockDistribution do
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end
 
+  @spec adjust_stock(integer(), integer(), integer(), integer() ) :: StockDistribution.t
   def adjust_stock(stock_id, type_id, quantity, user_id) do
     stock = Stock.find(stock_id)
     package = UserOrder.find_current(user_id)
@@ -38,7 +39,7 @@ defmodule OpenPantry.StockDistribution do
     stock_distribution
   end
 
-
+  @spec deduct_credits(Ecto.Multi.t, integer(), integer(), integer(), integer(), tuple() ) :: Ecto.Multi.t
   def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, food_id}) do
     Multi.update_all(multi, type_id, UserCredit.query_user_type(user_id, type_id), [inc: [balance: -(cost*quantity)]])
   end
@@ -51,10 +52,12 @@ defmodule OpenPantry.StockDistribution do
     end)
   end
 
+  @spec package(integer()) :: UserOrder.t
   def package(user_id) do
     UserOrder.query(user_id) |> Repo.one!
   end
 
+  @spec find_or_create(integer(), integer()) :: StockDistribution.t
   def find_or_create(user_order_id, stock_id) do
     find_by_package_and_stock(user_order_id, stock_id) ||
     %StockDistribution{ user_order_id: user_order_id,
@@ -62,12 +65,14 @@ defmodule OpenPantry.StockDistribution do
     |> Repo.insert!()
   end
 
+  @spec query_by_package_and_stock(integer(), integer()) :: Ecto.Query.t
   def query_by_package_and_stock(package_id, stock_id) do
     from(sd in StockDistribution,
     where: sd.user_order_id == ^package_id,
     where: sd.stock_id == ^stock_id)
   end
 
+  @spec find_by_package_and_stock(integer(), integer()) :: StockDistribution.t
   def find_by_package_and_stock(package_id, stock_id) do
     query_by_package_and_stock(package_id, stock_id)
     |> Repo.one

@@ -6,25 +6,25 @@ defmodule OpenPantry.SharedRepo do
 
       @type t :: %__MODULE__{}
 
-      @spec all() :: list(%{})
+      @spec all() :: list(__MODULE__.t)
       def all do
         __MODULE__ |> Repo.all
       end
 
-      @spec find(integer()) :: %{}
+      @spec find(integer()) :: __MODULE__.t | nil
       def find(id) when is_integer(id), do:  query(id) |> Repo.one!
 
-      @spec find(integer(), list()) :: %{}
+      @spec find(integer(), list(atom())) :: __MODULE__.t | nil
       def find(id, preload) when is_integer(id) do
         query(id, preload) |> Repo.one!
       end
 
-      @spec query(integer()) :: %{}
+      @spec query(integer()) :: Ecto.Query.t
       def query(id) when is_integer(id) do
         from(struct in __MODULE__,
         where: struct.id == ^id)
       end
-      @spec query(integer(), list()) :: %{}
+      @spec query(integer(), list(atom())) :: Ecto.Query.t
       def query(id, preload) when is_integer(id) do
         from(struct in __MODULE__,
         where: struct.id == ^id,

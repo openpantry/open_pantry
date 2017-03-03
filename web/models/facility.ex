@@ -31,7 +31,7 @@ defmodule OpenPantry.Facility do
     |> validate_required([:name])
   end
 
-  @spec stock_by_type(%{}) :: list(tuple())
+  @spec stock_by_type(Facility.t) :: list(tuple())
   def stock_by_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
     from(credit_type in CreditType,
@@ -47,7 +47,7 @@ defmodule OpenPantry.Facility do
     |> append_meals_if_any(facility)
   end
 
-  @spec append_meals_if_any(list(tuple()), %{}) :: list(tuple())
+  @spec append_meals_if_any(list(tuple()), Facility.t) :: list(tuple())
   def append_meals_if_any(food_stocks, facility) do
     meal_stocks = meal_stocks(facility)
     food_stocks ++  if Enum.any?(meal_stocks) do
@@ -57,7 +57,7 @@ defmodule OpenPantry.Facility do
                     end
   end
 
-  @spec meal_stocks(%{}) :: list(%{})
+  @spec meal_stocks(Facility.t) :: list(Stock.t)
   def meal_stocks(%Facility{id: id}) do
     now = DateTime.utc_now
     from(stocks in Stock,
