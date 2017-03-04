@@ -2,26 +2,36 @@ defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.AcceptanceCase, async: true
   import OpenPantry.Factory
 
-  def complete_facility do
+  def complete_facility(type_count) do
     facility = insert(:facility)
     user = insert(:user, facility: facility)
-    food_group1 = insert(:food_group)
-    food1 = insert(:food, food_group: food_group1)
-    food_group2 = insert(:food_group)
-    food2 = insert(:food, food_group: food_group2)
-    stock1 = insert(:stock, facility: facility, food: food1)
-    stock2 = insert(:stock, facility: facility, food: food2)
-    credit_type1 = insert(:credit_type, food_groups: [food_group1])
-    credit_type2 = insert(:credit_type, food_groups: [food_group2])
-    insert(:user_credit, credit_type: credit_type1, user: user )
-    insert(:user_credit, credit_type: credit_type2, user: user )
-    %{credit_types: [credit_type1, credit_type2], facility: facility, user: user, stocks: [stock1, stock2], foods: [food1, food2], food_groups: [food_group1, food_group2]}
+    food_groups = for _ <- 1..type_count do
+      insert(:food_group)
+    end
+    foods = for food_group <- food_groups do
+      insert(:food, food_group: food_group)
+    end
+    stocks = for food <- foods do
+      insert(:stock, facility: facility, food: food)
+    end
+    credit_types = for food_group <- food_groups do
+      insert(:credit_type, food_groups: [food_group])
+    end
+    user_credits = for credit_type <- credit_types do
+      insert(:user_credit, credit_type: credit_type, user: user )
+    end
+    %{credit_types: credit_types,
+      facility: facility,
+      user: user,
+      user_credits: user_credits,
+      stocks: stocks,
+      foods: foods,
+      food_groups: food_groups
+    }
   end
 
-
-  @tag timeout: Ownership.timeout
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
-    %{credit_types: [credit_type|_]} = complete_facility()
+    %{credit_types: [credit_type|_]} = complete_facility(2)
 
     first_credit = session
     |> visit("/en/food_selections")
@@ -32,7 +42,7 @@ defmodule OpenPantry.FoodSelectionTest do
   end
 
   test "selection table shows first foods in stock on load", %{session: session} do
-    %{credit_types: [credit_type|_], foods: [food|_]} = complete_facility()
+    %{credit_types: [credit_type|_], foods: [food|_]} = complete_facility(2)
 
     first_credit = session
     |> visit("/en/food_selections")
@@ -43,7 +53,7 @@ defmodule OpenPantry.FoodSelectionTest do
   end
 
   test "selection table does not show second food in stock on load", %{session: session} do
-    %{credit_types: [credit_type|_], foods: [_|[food2]]} = complete_facility()
+    %{credit_types: [credit_type|_], foods: [_|[food2]]} = complete_facility(2)
 
     first_credit = session
     |> visit("/en/food_selections")
@@ -53,9 +63,8 @@ defmodule OpenPantry.FoodSelectionTest do
     refute first_credit =~ ~r/#{food2.longdesc}/
   end
 
-  @tag timeout: Ownership.timeout
   test "selection table allows selecting second tab", %{session: session} do
-    %{credit_types: [_|[credit_type2]], foods: [_|[food2]]} = complete_facility()
+    %{credit_types: [_|[credit_type2]], foods: [_|[food2]]} = complete_facility(2)
 
     second_credit = session
     |> visit("/en/food_selections")
