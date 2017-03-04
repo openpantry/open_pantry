@@ -3,10 +3,11 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/app.js": /^(assets\/js)|(assets\/node_modules)/,
-        "js/ex_admin_common.js": ["assets/vendor/ex_admin_common.js"],
-        "js/admin_lte2.js": ["assets/vendor/admin_lte2.js"],
-        "js/jquery.min.js": ["assets/vendor/jquery.min.js"]
+        "js/app.js": ["js\/app.js", "js\/facility.js", "js\/socket.js"],
+        "js/node_deps.js": /^(node_modules)/,
+        "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
+        "js/admin_lte2.js": ["vendor/admin_lte2.js"],
+        "js/jquery.min.js": ["vendor/jquery.min.js"]
       }
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -25,9 +26,9 @@ exports.config = {
     },
     stylesheets: {
       joinTo: {
-        "css/app.css": /^(assets\/css)/,
-        "css/admin_lte2.css": ["assets/vendor/admin_lte2.css"],
-        "css/active_admin.css.css": ["assets/vendor/active_admin.css.css"],
+        "css/app.css": /^(css)/,
+        "css/admin_lte2.css": ["vendor/admin_lte2.css"],
+        "css/active_admin.css.css": ["vendor/active_admin.css.css"],
       },
       order: {
         after: ["assets/css/app.css"] // concat app.css last
@@ -64,7 +65,11 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["/js/app"]
+      "js/app.js": ["js/app"],
+      "js/node_deps.js": ["js/node_deps.js"],
+      "js/ex_admin_common.js":["js/ex_admin_common.js"],
+      "js/admin_lte2.js":["js/admin_lte2.js"],
+      "js/jquery.min.js":["js/jquery.min.js"]
     }
   },
 
