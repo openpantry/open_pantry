@@ -1,6 +1,6 @@
 defmodule OpenPantry.Web.Router do
   use OpenPantry.Web, :router
-  use ExAdmin.Router
+  # use ExAdmin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -21,10 +21,10 @@ defmodule OpenPantry.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/admin", ExAdmin do
-    pipe_through :browser
-    admin_routes()
-  end
+  # scope "/admin", ExAdmin do
+  #   pipe_through :browser
+  #   admin_routes()
+  # end
 
   scope "/", OpenPantry.Web do
     pipe_through :browser

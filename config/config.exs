@@ -41,26 +41,26 @@ config :guardian, Guardian,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: OpenPantry.GuardianSerializer
 
-config :ex_admin,
-  repo: OpenPantry.Repo,
-  module: OpenPantry.Web,
-  modules: [
-    OpenPantry.ExAdmin.Dashboard,
-    OpenPantry.ExAdmin.Language,
-    OpenPantry.ExAdmin.Facility,
-    OpenPantry.ExAdmin.CreditType,
-    OpenPantry.ExAdmin.CreditTypeMembership,
-    OpenPantry.ExAdmin.User,
-    OpenPantry.ExAdmin.FoodGroup,
-    OpenPantry.ExAdmin.Food,
-    OpenPantry.ExAdmin.Meal,
-    OpenPantry.ExAdmin.Offer,
-    OpenPantry.ExAdmin.Stock,
-    OpenPantry.ExAdmin.UserLanguage,
-    OpenPantry.ExAdmin.UserOrder,
-    OpenPantry.ExAdmin.UserCredit,
-    OpenPantry.ExAdmin.StockDistribution,
-  ]
+# config :ex_admin,
+#   repo: OpenPantry.Repo,
+#   module: OpenPantry.Web,
+#   modules: [
+#     OpenPantry.ExAdmin.Dashboard,
+#     OpenPantry.ExAdmin.Language,
+#     OpenPantry.ExAdmin.Facility,
+#     OpenPantry.ExAdmin.CreditType,
+#     OpenPantry.ExAdmin.CreditTypeMembership,
+#     OpenPantry.ExAdmin.User,
+#     OpenPantry.ExAdmin.FoodGroup,
+#     OpenPantry.ExAdmin.Food,
+#     OpenPantry.ExAdmin.Meal,
+#     OpenPantry.ExAdmin.Offer,
+#     OpenPantry.ExAdmin.Stock,
+#     OpenPantry.ExAdmin.UserLanguage,
+#     OpenPantry.ExAdmin.UserOrder,
+#     OpenPantry.ExAdmin.UserCredit,
+#     OpenPantry.ExAdmin.StockDistribution,
+#   ]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -71,5 +71,5 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-config :xain, :after_callback, {Phoenix.HTML, :raw}
+# config :xain, :after_callback, {Phoenix.HTML, :raw}
 
