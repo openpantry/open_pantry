@@ -18,8 +18,10 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import jQuery from 'jquery'
 import facility from "./facility.js"
 import socket from "./socket"
+const $ = jQuery;
 socket.connect();
 let channel = socket.channel(`facility:${window.facilityId}`, {});
 channel.join();

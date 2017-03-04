@@ -3,7 +3,7 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/app.js": /^(web\/static\/js)|(node_modules)/,
+        "js/app.js": /(web\/static\/js)|(node_modules)/,
         "js/ex_admin_common.js": ["web/static/vendor/ex_admin_common.js"],
         "js/admin_lte2.js": ["web/static/vendor/admin_lte2.js"],
         "js/jquery.min.js": ["web/static/vendor/jquery.min.js"]
@@ -17,10 +17,10 @@ exports.config = {
       //
       // To change the order of concatenation of files, explicitly mention here
       // order: {
-      //   before: [
-      //     "web/static/vendor/js/jquery-2.1.1.js",
-      //     "web/static/vendor/js/bootstrap.min.js"
-      //   ]
+        // before: [
+        //   "web/static/vendor/js/jquery-2.1.1.js",
+        //   "web/static/vendor/js/bootstrap.min.js"
+        // ]
       // }
     },
     stylesheets: {
