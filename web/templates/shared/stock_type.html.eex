@@ -54,7 +54,7 @@
             <%= stock.credits_per_package %>
           </td>
           <td class="add-action">
-            <button class="js-add-stock">
+            <button class="js-add-stock" type="button">
             +
             </button>
           </td>
@@ -62,12 +62,12 @@
             <%= quantity(stock, @package) %>
           </td>
           <td class="remove-action">
-            <button class="js-remove-stock">
+            <button class="js-remove-stock" type="button">
             -
             </button>
           </td>
           <td class="clear-action">
-            <button class="js-clear-stock">
+            <button class="js-clear-stock" type="button">
             X
             </button>
           </td>
