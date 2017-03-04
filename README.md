@@ -1,6 +1,13 @@
 # OpenPantry
 ## A management system for pantry programs to help people eat healthy meals with dignity
 
+  * NOTES:
+    * Requirements are still developing, help with all parts of the project are very much welcome!
+    * We haven't finalized registration/authentication/etc requirements, and we want this to be usable by as many organizations as possible
+      * As a result, to defer decisions to the last responsible moment, user login is currently faked to just use first user in database via a "FakeUser" plug in routes.  Almost everything is faked/based on mockups leading up to ":locale/food_selections" route, which is the only functional part of the site besides admin at the moment
+    * We're using ZenHub chrome extension for project management so if you install that you can see some of the epics and feature discussions there, and contribute to the discussion!
+    * If you represent, work with, or know a pantry program that might benefit from using this software, please get in touch or put them in touch so we can try and consider any special requirements or requests they might have sooner than later!
+
   * Getting started with development:
     * Install Postgres (However you like, postgresapp.com or `brew install postgres` are good ways to go on a Mac
     * if using Postgres.app you must initialize a data directory after installing, and follow instructions for adding CLI tools to your Terminal path...  `which psql` but succeed when done
