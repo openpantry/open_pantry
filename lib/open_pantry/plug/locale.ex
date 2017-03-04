@@ -7,7 +7,7 @@ defmodule OpenPantry.Plug.Locale do
   def call(conn, default) do
     locale = conn.params["locale"]
 
-    if locale in OpenPantry.Gettext.supported_locales do
+    if locale in OpenPantry.Web.Gettext.supported_locales do
       # Check if path contains a valid Locale
       conn |> assign_locale!(locale)
     else
@@ -21,7 +21,7 @@ defmodule OpenPantry.Plug.Locale do
 
   defp assign_locale!(conn, value) do
     # Apply the locale as a process var and continue
-    Gettext.put_locale(OpenPantry.Gettext, value)
+    Gettext.put_locale(OpenPantry.Web.Gettext, value)
     conn
     |> assign(:locale, value)
   end
@@ -33,7 +33,7 @@ defmodule OpenPantry.Plug.Locale do
       extract_accept_language(conn)
     end
     # Filter for only known locales
-    |> Enum.filter(fn locale -> Enum.member?(OpenPantry.Gettext.supported_locales, locale) end)
+    |> Enum.filter(fn locale -> Enum.member?(OpenPantry.Web.Gettext.supported_locales, locale) end)
   end
 
   defp extract_accept_language(conn) do

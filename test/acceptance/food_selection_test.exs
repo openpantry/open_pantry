@@ -1,5 +1,5 @@
 defmodule OpenPantry.FoodSelectionTest do
-  use OpenPantry.AcceptanceCase, async: true
+  use OpenPantry.Web.AcceptanceCase, async: true
   import OpenPantry.CompleteFacility
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()

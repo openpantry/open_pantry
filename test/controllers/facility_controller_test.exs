@@ -1,5 +1,5 @@
 defmodule OpenPantry.FacilityControllerTest do
-  use OpenPantry.ConnCase
+  use OpenPantry.Web.ConnCase
 
   alias OpenPantry.Facility
   @invalid_attrs %{}

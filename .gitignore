@@ -3,5 +3,5 @@
 /deps
 /priv/static/js/*
 erl_crash.dump
-node_modules/*
+assets/node_modules/*
 *.ez

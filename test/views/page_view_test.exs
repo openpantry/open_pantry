@@ -1,3 +1,3 @@
-defmodule OpenPantry.PageViewTest do
-  use OpenPantry.ConnCase, async: true
+defmodule OpenPantry.Web.PageViewTest do
+  use OpenPantry.Web.ConnCase, async: true
 end
