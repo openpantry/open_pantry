@@ -10,15 +10,15 @@ config :open_pantry,
   ecto_repos: [OpenPantry.Repo]
 
 # Configures the endpoint
-config :open_pantry, OpenPantry.Endpoint,
+config :open_pantry, OpenPantry.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "EYh36bc9MEymTQNLNEVY83aY+KEngXOMsjRViOmJf33do1Lrtmwrb0x3CcIdkh1g",
-  render_errors: [view: OpenPantry.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: OpenPantry.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: OpenPantry.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 config :open_pantry,
-        OpenPantry.Gettext,
+        OpenPantry.Web.Gettext,
         locales: ~w(
                      ar
                      en
@@ -43,7 +43,7 @@ config :guardian, Guardian,
 
 config :ex_admin,
   repo: OpenPantry.Repo,
-  module: OpenPantry,
+  module: OpenPantry.Web,
   modules: [
     OpenPantry.ExAdmin.Dashboard,
     OpenPantry.ExAdmin.Language,

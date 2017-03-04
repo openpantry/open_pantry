@@ -1,5 +1,5 @@
 defmodule OpenPantry.FoodSelectionTest do
-  use OpenPantry.AcceptanceCase, async: true
+  use OpenPantry.Web.AcceptanceCase, async: true
   import OpenPantry.Factory
 
   @tag timeout: Ownership.timeout

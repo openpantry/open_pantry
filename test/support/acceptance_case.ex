@@ -1,4 +1,4 @@
-defmodule OpenPantry.AcceptanceCase do
+defmodule OpenPantry.Web.AcceptanceCase do
   use ExUnit.CaseTemplate
 
   using do
@@ -10,7 +10,7 @@ defmodule OpenPantry.AcceptanceCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import OpenPantry.Router.Helpers
+      import OpenPantry.Web.Router.Helpers
     end
   end
 

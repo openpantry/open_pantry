@@ -1,4 +1,4 @@
-defmodule OpenPantry.ChannelCase do
+defmodule OpenPantry.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -27,7 +27,7 @@ defmodule OpenPantry.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint OpenPantry.Endpoint
+      @endpoint OpenPantry.Web.Endpoint
     end
   end
 
