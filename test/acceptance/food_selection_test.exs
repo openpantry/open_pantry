@@ -75,15 +75,12 @@ defmodule OpenPantry.FoodSelectionTest do
     assert second_credit =~ ~r/#{food2.longdesc}/
   end
 
-  @tag timeout: Ownership.timeout
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do
     complete_facility(1)
     session = visit(session, "/en/food_selections")
 
-    take_screenshot(session)
     {before_stock, before_requested} = {stock_available(session), stock_requested(session)}
     session = click_button(session, "+")
-    take_screenshot(session)
     {after_stock, after_requested} = {stock_available(session), stock_requested(session)}
 
     assert (before_stock - after_stock) == 1

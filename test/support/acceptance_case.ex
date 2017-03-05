@@ -17,9 +17,7 @@ defmodule OpenPantry.AcceptanceCase do
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(OpenPantry.Repo)
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(OpenPantry.Repo, {:shared, self()})
-    end
+    Ecto.Adapters.SQL.Sandbox.mode(OpenPantry.Repo, {:shared, self()})
 
     metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(OpenPantry.Repo, self())
     {:ok, session} = Wallaby.start_session(metadata: metadata)
