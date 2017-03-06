@@ -1,8 +1,6 @@
 defmodule OpenPantry.CreditType do
   use OpenPantry.Web, :model
-  alias OpenPantry.Facility
   alias OpenPantry.FoodGroup
-  alias OpenPantry.Stock
   schema "credit_types" do
     field :name, :string
     field :credits_per_period, :integer
