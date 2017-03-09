@@ -1,4 +1,4 @@
-defmodule OpenPantry.Web.SharedRepo do
+defmodule OpenPantry.SharedRepo do
   defmacro __using__(_) do
     quote do
       alias OpenPantry.Repo

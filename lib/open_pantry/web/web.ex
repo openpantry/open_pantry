@@ -22,7 +22,7 @@ defmodule OpenPantry.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      use OpenPantry.Web.SharedRepo
+      use OpenPantry.SharedRepo
     end
   end
 
