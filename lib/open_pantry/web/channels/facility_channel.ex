@@ -1,6 +1,6 @@
 defmodule OpenPantry.Web.FacilityChannel do
   use OpenPantry.Web, :channel
-  alias OpenPantry.StockDistribution
+  alias OpenPantry.FoodSelection
   alias OpenPantry.Stock
   alias OpenPantry.User
   alias OpenPantry.Web.SharedView
@@ -14,7 +14,7 @@ defmodule OpenPantry.Web.FacilityChannel do
 
   def handle_in("request_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
     spawn fn -> # DB constraint may error, don't take down channel with it
-      StockDistribution.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)
+      FoodSelection.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)
       |> set_stock(socket)
     end
     {:noreply, socket}
@@ -22,7 +22,7 @@ defmodule OpenPantry.Web.FacilityChannel do
 
   def handle_in("release_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
     spawn fn -> # ditto, pending possible link or change to use changeset but Multi.update vs Multi.update_all
-      StockDistribution.adjust_stock(stock_id, type_id, -quantity, socket.assigns.user_id)
+      FoodSelection.adjust_stock(stock_id, type_id, -quantity, socket.assigns.user_id)
       |> set_stock(socket)
     end
     {:noreply, socket}
