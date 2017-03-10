@@ -5,7 +5,6 @@ defmodule OpenPantry.ExAdmin.Stock do
   register_resource OpenPantry.Stock do
     form stock do
       inputs do
-        input stock, :quantity
         input stock, :packaging
         input stock, :quantity
         input stock, :arrival
@@ -15,9 +14,8 @@ defmodule OpenPantry.ExAdmin.Stock do
         input stock, :aisle
         input stock, :row
         input stock, :shelf
-        input stock, :packaging
         input stock, :credits_per_package
-        # input stock, :food, collection: OpenPantry.Food.all
+        input stock, :food, collection: OpenPantry.Food.all
         input stock, :facility, collection: Facility.all
       end
 
