@@ -2,8 +2,7 @@ defmodule OpenPantry.FoodSelection.Food do
   use Ecto.Schema
 
   import Ecto
-  import Ecto.Changeset
-  import Ecto.Query
+  import Ecto.{Query, Changeset}, warn: false
   alias OpenPantry.FoodSelection.Stock
   use OpenPantry.SharedRepo
   @primary_key {:ndb_no, :string, []}

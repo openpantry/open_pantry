@@ -1,6 +1,7 @@
 defmodule OpenPantry.FoodSelection.Stock do
   use Ecto.Schema
-
+  import Ecto.Query
+  use OpenPantry.SharedRepo
   alias OpenPantry.Repo
   alias OpenPantry.FoodSelection.Food
   alias OpenPantry.Meal
@@ -13,6 +14,7 @@ defmodule OpenPantry.FoodSelection.Stock do
     field :expiration, Ecto.DateTime
     field :packaging, :string
     field :credits_per_package, :integer
+    field :weight, :decimal
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
