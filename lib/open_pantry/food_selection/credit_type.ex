@@ -1,9 +1,7 @@
 defmodule OpenPantry.FoodSelection.CreditType do
   import Ecto.{Query, Changeset}, warn: false
   use Ecto.Schema
-  import Ecto
   use OpenPantry.SharedRepo
-  alias OpenPantry.Facility
   alias OpenPantry.FoodSelection.FoodGroup
   schema "credit_types" do
     field :name, :string

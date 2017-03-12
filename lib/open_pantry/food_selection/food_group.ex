@@ -1,6 +1,5 @@
 defmodule OpenPantry.FoodSelection.FoodGroup do
   use Ecto.Schema
-  import Ecto
   import Ecto.{Query, Changeset}, warn: false
   alias OpenPantry.FoodSelection.Food
   alias OpenPantry.FoodSelection.CreditType

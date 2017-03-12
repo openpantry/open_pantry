@@ -29,6 +29,19 @@ defmodule OpenPantry.FoodSelection do
     |> append_meals_if_any(facility)
   end
 
+  def play() do # way more data than needed, but one query! :-/
+    id = 1
+    now = DateTime.utc_now
+    from(credit_type in CreditType,
+    join: stocks in assoc(credit_type, :stocks),
+    where: stocks.arrival < ^now,
+    where: stocks.expiration > ^now,
+    where: ^id == stocks.facility_id,
+    order_by: credit_type.inserted_at,
+    preload: [stocks: [food: :food_group]])
+    |> Repo.all
+  end
+
   @spec append_meals_if_any(list(tuple()), Facility.t) :: list(tuple())
   def append_meals_if_any(food_stocks, facility) do
     meal_stocks = meal_stocks(facility)
