@@ -2,7 +2,6 @@ defmodule OpenPantry.Stock do
   use OpenPantry.Web, :model
   alias OpenPantry.Repo
   alias OpenPantry.Food
-  alias OpenPantry.FoodSelection
   alias OpenPantry.Meal
   alias OpenPantry.Offer
   alias OpenPantry.Facility

@@ -1,7 +1,6 @@
 defmodule OpenPantry.Web.FoodSelectionController do
   use OpenPantry.Web, :controller
   alias OpenPantry.User
-  alias OpenPantry.Facility
   alias OpenPantry.UserOrder
   alias OpenPantry.FoodSelection
   require IEx

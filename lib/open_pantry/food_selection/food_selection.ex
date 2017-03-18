@@ -79,10 +79,10 @@ defmodule OpenPantry.FoodSelection do
   end
 
   @spec deduct_credits(Ecto.Multi.t, integer(), integer(), integer(), integer(), tuple() ) :: Ecto.Multi.t
-  def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, food_id}) do
+  def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, _food_id}) do
     Multi.update_all(multi, type_id, UserCredit.query_user_type(user_id, type_id), [inc: [balance: -(cost*quantity)]])
   end
-  def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, offer_id, nil}), do: multi
+  def deduct_credits(multi, _cost, _quantity, _type_id, _user_id, {nil, _offer_id, nil}), do: multi
   def deduct_credits(multi, cost, quantity, _type_id, user_id, {_meal_id, nil, nil}) do
     from(c in CreditType, select: c.id)
     |> Repo.all

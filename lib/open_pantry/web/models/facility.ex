@@ -1,7 +1,5 @@
 defmodule OpenPantry.Facility do
   use OpenPantry.Web, :model
-  alias OpenPantry.Stock
-  alias OpenPantry.CreditType
   schema "facilities" do
     field :name, :string
     field :location, Geo.Point

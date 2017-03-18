@@ -1,7 +1,6 @@
 defmodule OpenPantry.FoodSelection.Food do
   use Ecto.Schema
 
-  import Ecto
   import Ecto.{Query, Changeset}, warn: false
   alias OpenPantry.FoodSelection.Stock
   use OpenPantry.SharedRepo
