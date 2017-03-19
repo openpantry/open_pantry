@@ -51,10 +51,8 @@ defmodule OpenPantry.FoodSelectionTest do
     session = visit(session, "/en/food_selections")
 
     {before_stock, before_requested} = {stock_available(session), stock_requested(session)}
-    take_screenshot session
     session = click_button(session, "+")
     Process.sleep(500)
-    take_screenshot session
     {after_stock, after_requested} = {stock_available(session), stock_requested(session)}
 
     assert (before_stock - after_stock) == 1
