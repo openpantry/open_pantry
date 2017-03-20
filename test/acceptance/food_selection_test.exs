@@ -1,6 +1,9 @@
 defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.Web.AcceptanceCase, async: true
+
   import OpenPantry.CompleteFacility
+  import Wallaby.Query, only: [css: 2, button: 1]
+
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()
 
@@ -54,24 +57,16 @@ defmodule OpenPantry.FoodSelectionTest do
     one_credit_facility()
     session = visit(session, "/en/food_selections")
 
-    {before_stock, before_requested} = {stock_available(session), stock_requested(session)}
-    session = click_button(session, "+")
-    Process.sleep(500)
-    {after_stock, after_requested} = {stock_available(session), stock_requested(session)}
+    take_screenshot session
+    assert has?(session, stock_available(20))
+    assert has?(session, stock_requested(0))
 
-    assert (before_stock - after_stock) == 1
-    assert (after_requested - before_requested) == 1
-    Wallaby.end_session(session)
+    click(session, button("+"))
+
+    assert has?(session, stock_available(19))
+    assert has?(session, stock_requested(1))
   end
 
-  def stock_available(session), do: quantity(".js-available-quantity", session)
-  def stock_requested(session), do: quantity(".js-current-quantity", session)
-
-  def quantity(selector, session) do
-    session
-    |> find(Query.css(selector))
-    |> text
-    |> String.to_integer
-  end
-
+  def stock_available(count), do: css(".js-available-quantity", text: "#{count}")
+  def stock_requested(count), do: css(".js-current-quantity", text: "#{count}")
 end
