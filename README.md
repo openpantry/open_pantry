@@ -13,7 +13,7 @@
       * We are using POEditor.com for translation, contribute to translations here: https://poeditor.com/join/project/wBfgEEUCht
 
   * Getting started with development:
-    * Install Postgres (However you like, postgresapp.com or `brew install postgres` are good ways to go on a Mac
+    * Install Postgres (However you like, postgresapp.com or `brew install postgres` are good ways to go on a Mac)
     * if using Postgres.app you must initialize a data directory after installing, and follow instructions for adding CLI tools to your Terminal path...  `which psql` but succeed when done
       * (instructions defaulting to Mac below... for simplicity, linux users extrapolate, Windows, I have no idea, PR's with instructions for either/both welcome)
     * Install Elixir/Erlang (`brew install elixir`)
@@ -25,10 +25,10 @@
       * Dumps and restores are based on the method described here: https://devcenter.heroku.com/articles/heroku-postgres-import-export
     * Install Elixir package dependencies with `mix deps.get`
     * Create the database in Postgres with `mix ecto.create`, assuming default password etc in config works.
-    * Migrate the database to add migrations since dump was created, via `mix ecto.migrate`  
+    * Migrate the database to add migrations since dump was created, via `mix ecto.migrate`
     * Import the dump to the database via `pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d open_pantry_dev openpantry.dump`
     * Install Node.js dependencies with `yarn install`
-    * Start Phoenix endpoint with `mix phoenix.server`, or `iex -S mix phoenix.server` (this gives a server and REPL/console in one window)
+    * Start Phoenix endpoint with `mix phx.server`, or `iex -S mix phx.server` (this gives a server and REPL/console in one window)
   * ALTERNATIVELY (and with much less detail), if you DON'T WANT TO USE the dump file referenced above/want to generate a dump from scratch, the above dump was generated with a complete USDA food/nutrient database approximately as below, along with non-dump steps above:
     * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
     * Git clone https://github.com/MasbiaSoupKitchenNetwork/nutes locally and run make, modifying if necessary to point at your Postgres DB and the directory path to your local copy in imports.sql (requires golang to build data_cleanup tool)
