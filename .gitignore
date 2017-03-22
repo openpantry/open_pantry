@@ -4,4 +4,6 @@
 /priv/static/
 erl_crash.dump
 assets/node_modules/*
+screenshots/*
+openpantry.dump
 *.ez
