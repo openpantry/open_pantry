@@ -12,7 +12,7 @@ end
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :open_pantry, OpenPantry.Endpoint,
+config :open_pantry, OpenPantry.Web.Endpoint,
   http: [port: 4001],
   server: true
 
@@ -31,3 +31,9 @@ config :open_pantry, OpenPantry.Repo,
   hostname: "localhost",
   ownership_timeout: Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :wallaby,
+  max_wait_time: 5_000,
+  screenshot_on_failure: true,
+  js_errors: true,
+  js_logger: :stdio

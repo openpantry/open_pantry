@@ -24,14 +24,14 @@ defmodule OpenPantry.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
-  defp elixirc_paths(_),     do: ["lib", "web"]
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.1"},
+    [{:phoenix, "~> 1.3.0-rc", override: true},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
@@ -39,8 +39,8 @@ defmodule OpenPantry.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:credo, "~> 0.5", only: [:dev, :test]},
      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
-     {:ex_machina, "~> 1.0", only: [:dev, :test]},
-     {:wallaby, "~> 0.14.0", only: :test},
+     {:ex_machina, "~> 2.0", only: [:dev, :test]},
+     {:wallaby, "~> 0.16", only: :test},
      {:ex_admin, git: "https://github.com/smpallen99/ex_admin.git"},
      {:guardian, "~> 0.14"},
      {:gettext, "~> 0.11"},

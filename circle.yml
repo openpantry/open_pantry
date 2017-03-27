@@ -6,6 +6,8 @@ dependencies:
     - ~/.mix
     - _build
     - deps
+  override:
+    - cd assets && npm install
 
 test:
   override:

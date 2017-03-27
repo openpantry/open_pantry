@@ -1,5 +1,5 @@
 defmodule OpenPantry.LanguageControllerTest do
-  use OpenPantry.ConnCase
+  use OpenPantry.Web.ConnCase
 
   alias OpenPantry.Language
   @valid_attrs %{english_name: "some content", iso_code: "some content", native_name: "some content"}

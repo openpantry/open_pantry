@@ -1,7 +1,9 @@
 /_build
 /cover
 /deps
-/priv/static/js/*
+/priv/static/
 erl_crash.dump
-node_modules/*
+assets/node_modules/*
+screenshots/*
+openpantry.dump
 *.ez
