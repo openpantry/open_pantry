@@ -40,7 +40,7 @@ defmodule OpenPantry.Mixfile do
      {:credo, "~> 0.5", only: [:dev, :test]},
      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
      {:ex_machina, "~> 1.0", only: [:dev, :test]},
-     {:wallaby, "~> 0.14.0", only: :test},
+     {:wallaby, "~> 0.16.1", only: :test},
      {:ex_admin, git: "https://github.com/smpallen99/ex_admin.git"},
      {:guardian, "~> 0.14"},
      {:gettext, "~> 0.11"},
