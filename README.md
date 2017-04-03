@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/bglusman/open_pantry.svg?branch=master)](https://travis-ci.org/bglusman/open_pantry)
 # OpenPantry
 ## A management system for pantry programs to help people eat healthy meals with dignity
 
