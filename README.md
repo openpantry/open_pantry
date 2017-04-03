@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/MasbiaSoupKitchenNetwork/open_pantry.svg?branch=master)](https://travis-ci.org/MasbiaSoupKitchenNetwork/open_pantry)
 # OpenPantry
 ## A management system for pantry programs to help people eat healthy meals with dignity
 
@@ -14,10 +15,10 @@
 
   * Getting started with development:
     * Install Postgres (Mac)
-        * Download and install the Postgresapp.com from [their site](https://postgresapp.com/documentation/install.html) 
+        * Download and install the Postgresapp.com from [their site](https://postgresapp.com/documentation/install.html)
             * Execute the following command in Terminal to configure your $PATH, and then close & reopen the window:
             `sudo mkdir -p /etc/paths.d &&
-              echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp` 
+              echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp`
         * With Homebrew
             * Execute (`brew install postgres`) in Terminal
     * if using Postgres.app you must initialize a data directory after installing, and follow instructions for adding CLI tools to your Terminal path...  `which psql` but succeed when done
