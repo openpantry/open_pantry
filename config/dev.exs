@@ -1,5 +1,25 @@
 use Mix.Config
 
+defmodule DevDB do
+  def database_host() do
+    if System.get_env("DOCKER") do
+      "db"
+    else
+      "localhost"
+    end
+  end
+
+  def database_name() do
+    if System.get_env("DOCKER") do
+      "postgres"
+    else
+      "open_pantry_dev"
+    end
+  end
+end
+
+
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -39,6 +59,6 @@ config :open_pantry, OpenPantry.Repo,
   types: OpenPantry.PostgresTypes,
   username: "postgres",
   password: "postgres",
-  database: "open_pantry_dev",
-  hostname: "localhost",
+  database: DevDB.database_name(),
+  hostname: DevDB.database_host(),
   pool_size: 10

@@ -14,6 +14,8 @@ alias OpenPantry.Language
 alias OpenPantry.Repo
 alias OpenPantry.User
 alias OpenPantry.CreditType
+import Ecto.Query
+import OpenPantry.Factory
 
 
 facility_params = [
@@ -58,12 +60,12 @@ credit_type_params = [
   }
 ]
 
-Enum.each(facility_params, fn(params) ->
+facilities = Enum.map(facility_params, fn(params) ->
   Facility.changeset(%Facility{}, params)
   |> Repo.insert!()
 end)
 
-Enum.each(credit_type_params, fn(params) ->
+credit_types = Enum.map(credit_type_params, fn(params) ->
   CreditType.changeset(%CreditType{}, params)
   |> Repo.insert!()
 end)
@@ -84,3 +86,24 @@ User.changeset(%User{}, %{name: "Anonymous",
                          })
 |> Repo.insert!()
 
+for credit_type <- credit_types do
+  insert(:user_credit, credit_type: credit_type, user: (from u in User, where: u.id == 1) |> Repo.one )
+end
+
+food_groups = for _ <- 1..10 do
+  insert(:food_group, credit_types: [Enum.random(credit_types)])
+end
+
+foods = for food_group <- food_groups do
+  for _ <- 1..3 do
+    insert(:food, food_group: food_group)
+  end
+end
+
+Enum.each(facilities, fn(facility) ->
+  for food_group_foods <- foods do
+    for food <- food_group_foods do
+      insert(:stock, facility: facility, food: food)
+    end
+  end
+end)

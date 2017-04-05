@@ -1,0 +1,28 @@
+version: '2'
+services:
+  db:
+    image: mdillon/postgis
+    volumes:
+      - postgres-durable-volume:/var/lib/postgresql/data
+  web:
+    build: .
+    command: mix phx.server
+    environment:
+      DOCKER: 'true'
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+  setup:
+    build: .
+    command: mix do ecto.create, ecto.migrate, run priv/repo/seeds.exs
+    environment:
+      DOCKER: 'true'
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+volumes:
+  postgres-durable-volume:
