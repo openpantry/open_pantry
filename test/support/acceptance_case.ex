@@ -3,8 +3,8 @@ defmodule OpenPantry.Web.AcceptanceCase do
 
   using do
     quote do
+      use Phoenix.ConnTest
       use Wallaby.DSL
-
       alias OpenPantry.Repo
       alias OpenPantry.Web.Endpoint
       import Ecto
@@ -12,6 +12,11 @@ defmodule OpenPantry.Web.AcceptanceCase do
       import Ecto.Query
 
       import OpenPantry.Web.Router.Helpers
+
+      def using_basic_auth(conn) do
+        put_req_header(conn, "authorization", ("Basic " <> Base.encode64("admin:testpass")))
+      end
+
     end
   end
 

@@ -32,6 +32,18 @@ config :open_pantry, OpenPantry.Repo,
   ownership_timeout: Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :open_pantry, admin_auth: [
+  username: "admin",
+  password: "testadminpass",
+  realm: "Admin Area"
+]
+
+config :open_pantry, user_auth: [
+  username: "admin",
+  password: "testpass",
+  realm: "Food Selection"
+]
+
 config :wallaby,
   max_wait_time: 5_000,
   screenshot_on_failure: true,
