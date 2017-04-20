@@ -8,8 +8,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [credit_type|_]} = two_credit_facility()
 
     first_credit = session
-    |> using_basic_auth()
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit_food_selection_with_basic_auth
     |> find(Query.css("##{credit_type.name}"))
     |> text
 
@@ -21,8 +20,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [credit_type|_], foods: [food|_]} = two_credit_facility()
 
     first_credit = session
-    |> using_basic_auth()
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit_food_selection_with_basic_auth
     |> find(Query.css("##{credit_type.name}"))
     |> text
 
@@ -34,8 +32,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [credit_type|_], foods: [_|[food2]]} = two_credit_facility()
 
     first_credit = session
-    |> using_basic_auth()
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit_food_selection_with_basic_auth
     |> find(Query.css("##{credit_type.name}"))
     |> text
 
@@ -47,8 +44,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [_|[credit_type2]], foods: [_|[food2]]} = two_credit_facility()
 
     second_credit = session
-    |> using_basic_auth()
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit_food_selection_with_basic_auth
     |> click_link(credit_type2.name)
     |> find(Query.css("##{credit_type2.name}"))
     |> text
@@ -73,4 +69,9 @@ defmodule OpenPantry.FoodSelectionTest do
 
   def stock_available(count), do: css(".js-available-quantity", text: "#{count}")
   def stock_requested(count), do: css(".js-current-quantity", text: "#{count}")
+  def visit_food_selection_with_basic_auth(session) do
+    session
+    |> visit("http://admin:testpass@" <> food_selection_url(Endpoint, :index, "en"))
+  end
+
 end
