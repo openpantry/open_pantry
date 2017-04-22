@@ -1,4 +1,5 @@
 defmodule OpenPantry.Web.Router do
+  alias OpenPantry.Authentication
   use OpenPantry.Web, :router
   use ExAdmin.Router
 
@@ -22,11 +23,11 @@ defmodule OpenPantry.Web.Router do
   end
 
   pipeline :admin_auth do
-    plug BasicAuth, use_config: {:open_pantry, :admin_auth}
+    plug Authentication, use_config: {:open_pantry, :admin_auth}
   end
 
   pipeline :user_auth do
-    plug BasicAuth, use_config: {:open_pantry, :user_auth}
+    plug Authentication, use_config: {:open_pantry, :user_auth}
   end
 
   scope "/admin", ExAdmin do
