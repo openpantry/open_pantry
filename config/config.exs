@@ -43,6 +43,7 @@ config :open_pantry, user_auth: [
   realm: "Food Selection"
 ]
 
+config :open_pantry, :authentication, BasicAuth
 config :ex_admin,
   repo: OpenPantry.Repo,
   module: OpenPantry.Web,
