@@ -1,4 +1,5 @@
 defmodule OpenPantry.Web.Router do
+  alias OpenPantry.Authentication
   use OpenPantry.Web, :router
   use ExAdmin.Router
 
@@ -21,27 +22,34 @@ defmodule OpenPantry.Web.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin_auth do
+    plug Authentication, use_config: {:open_pantry, :admin_auth}
+  end
+
+  pipeline :user_auth do
+    plug Authentication, use_config: {:open_pantry, :user_auth}
+  end
+
   scope "/admin", ExAdmin do
-    pipe_through :browser
+    pipe_through [:browser, :admin_auth]
     admin_routes()
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through :browser
-
+    pipe_through [:browser, :user_auth]
     resources "/languages", LanguageController
     resources "/facilities", FacilityController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through :localized_browser # Use the default browser stack
+    pipe_through [:localized_browser, :user_auth] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser]
+    pipe_through [:localized_browser, :user_auth, :put_user_token_and_facility]
 
     get "/", PageController, :index
     resources "/registrations", RegistrationController

@@ -4,7 +4,6 @@ defmodule OpenPantry.Web.AcceptanceCase do
   using do
     quote do
       use Wallaby.DSL
-
       alias OpenPantry.Repo
       alias OpenPantry.Web.Endpoint
       import Ecto
@@ -12,6 +11,7 @@ defmodule OpenPantry.Web.AcceptanceCase do
       import Ecto.Query
 
       import OpenPantry.Web.Router.Helpers
+
     end
   end
 

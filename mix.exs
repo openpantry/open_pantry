@@ -43,9 +43,10 @@ defmodule OpenPantry.Mixfile do
      {:ex_machina, "~> 2.0", only: [:dev, :test]},
      {:wallaby, "~> 0.16", only: :test},
      {:ex_admin, git: "https://github.com/smpallen99/ex_admin.git"},
-     {:guardian, "~> 0.14"},
      {:gettext, "~> 0.11"},
      {:geo, "~> 1.3"},
+     {:basic_auth, "~> 2.1"},
+     {:logger_file_backend, "~> 0.0.9"},
      {:cowboy, "~> 1.0"}]
   end
 
