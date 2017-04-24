@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="user-list">
+        <%= for user <- @users do %>
+          <li>
+            <a href="<%= user_selection_path(@conn, :show, user.id) %>"> <%= user.name %>, id: <%= user.id %> </a>
+          </li>
+        <% end %>
+      </ul>
+      <%= form_for @changeset, user_selection_path(@conn, :create), fn f -> %>
+        <label>
+          Name: <%= text_input f, :name %>
+        </label>
+
+        <%= submit "Submit" %>
+      <% end %>
+    </div>
+  </div>
+</div>

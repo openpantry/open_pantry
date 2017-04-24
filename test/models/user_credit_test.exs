@@ -1,9 +1,8 @@
 defmodule OpenPantry.UserCreditTest do
   use OpenPantry.ModelCase
-
   alias OpenPantry.UserCredit
 
-  @valid_attrs %{balance: 42}
+  @valid_attrs %{balance: 42, user_id: 1, credit_type_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
