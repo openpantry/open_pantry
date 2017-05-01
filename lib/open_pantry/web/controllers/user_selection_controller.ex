@@ -34,6 +34,13 @@ defmodule OpenPantry.Web.UserSelectionController do
     redirect_and_notify(conn, user)
   end
 
+  def delete(conn, params) do
+    conn
+    |> clear_session
+    |> delete_resp_header("authorization")
+    |> Plug.Conn.delete_resp_cookie("user_id")
+    |> redirect(to: "/")
+  end
   defp name_from_params(params) do
     if Blank.blank?(params["user"]["name"]) do
       "Anonymous"
@@ -46,7 +53,7 @@ defmodule OpenPantry.Web.UserSelectionController do
   defp redirect_and_notify(conn, user) do
     conn
     |> Plug.Conn.put_resp_cookie("user_id", Integer.to_string(user.id))
-    |> Phoenix.Controller.redirect(to: "/en/")
+    |> redirect(to: "/en/")
     |> put_flash(:info, "You are now logged in as #{user.name}, user id ##{user.id}")
     |> halt
   end
