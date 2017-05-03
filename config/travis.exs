@@ -32,7 +32,7 @@ config :open_pantry, OpenPantry.Repo,
   ownership_timeout: Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :open_pantry, :authentication, OpenPantry.ZeroAuth
+config :open_pantry, :authentication, OpenPantry.CookiePresent
 
 config :wallaby,
   max_wait_time: 5_000,
