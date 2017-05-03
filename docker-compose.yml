@@ -4,25 +4,25 @@ services:
     image: mdillon/postgis
     volumes:
       - postgres-durable-volume:/var/lib/postgresql/data
-  web:
+  default: &default
     build: .
-    command: mix phx.server
     environment:
       DOCKER: 'true'
     volumes:
       - .:/app
+    depends_on:
+      - db
+  web:
+    <<: *default
     ports:
       - "4000:4000"
-    depends_on:
-      - db
+    command: mix phx.server
   setup:
-    build: .
-    command: ./setup 
-    environment:
-      DOCKER: 'true'
-    volumes:
-      - .:/app
-    depends_on:
-      - db
+    <<: *default
+    command: ./setup
+  test:
+    <<: *default
+    command: mix test
+
 volumes:
   postgres-durable-volume:
