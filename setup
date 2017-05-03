@@ -1,0 +1,3 @@
+#!/bin/bash
+mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs
+cd assets && npm install -g yarn && yarn install

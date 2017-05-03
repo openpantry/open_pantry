@@ -17,7 +17,7 @@ services:
       - db
   setup:
     build: .
-    command: mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs
+    command: ./setup 
     environment:
       DOCKER: 'true'
     volumes:
