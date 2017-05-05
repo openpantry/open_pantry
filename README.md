@@ -20,6 +20,9 @@
       * Clone the OpenPantry repo and cd into directory
       * Run `docker-compose run setup`
       * Run `docker-compose up web`
+      * cd into open_pantry and Run `cd Assets` 
+      * run `yarn install`
+
 
 
     * Local/native development on Mac/Linux (detailed instructions only for Mac at present, similar for linux)
