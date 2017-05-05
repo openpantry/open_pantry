@@ -7,7 +7,7 @@
     * We haven't finalized registration/authentication/etc requirements, and we want this to be usable by as many organizations as possible
       * As a result, to defer decisions to the last responsible moment, user login is currently faked to just use first user in database via a "FakeUser" plug in routes.  Almost everything is faked/based on mockups leading up to ":locale/food_selections" route, which is the only functional part of the site besides admin at the moment
     * We're using ZenHub chrome extension for project management so if you install that you can see some of the epics and feature discussions there, and contribute to the discussion!
-    * We have our mockups posted [here](https://invis.io/6NBHX29EG).
+    * We have our mockups posted [here](https://invis.io/QPBK7WPB3).
     * If you represent, work with, or know a pantry program that might benefit from using this software, please get in touch or put them in touch so we can try and consider any special requirements or requests they might have sooner than later!
     * We are attempting to make this multi lingual from the start with as much and as many baked in translations as we can
       * We have partial translations started for 9 languages
