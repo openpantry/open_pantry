@@ -1,5 +1,7 @@
 defmodule OpenPantry.Web.Router do
   alias OpenPantry.Authentication
+  alias OpenPantry.Plug.SetupUser
+  alias OpenPantry.Plug.Locale
   use OpenPantry.Web, :router
   use ExAdmin.Router
 
@@ -9,13 +11,11 @@ defmodule OpenPantry.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug FakeUser
-    plug :put_user_token_and_facility
   end
 
   pipeline :localized_browser do
     plug :browser
-    plug OpenPantry.Plug.Locale, "en"
+    plug Locale, "en"
   end
 
   pipeline :api do
@@ -30,6 +30,10 @@ defmodule OpenPantry.Web.Router do
     plug Authentication, use_config: {:open_pantry, :user_auth}
   end
 
+  pipeline :user_required do
+    plug SetupUser, redirect_url: "/user_selections"
+  end
+
   scope "/admin", ExAdmin do
     pipe_through [:browser, :admin_auth]
     admin_routes()
@@ -39,6 +43,7 @@ defmodule OpenPantry.Web.Router do
     pipe_through [:browser, :user_auth]
     resources "/languages", LanguageController
     resources "/facilities", FacilityController
+    resources "/user_selections", UserSelectionController
   end
 
   scope "/", OpenPantry.Web do
@@ -49,23 +54,12 @@ defmodule OpenPantry.Web.Router do
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :user_auth, :put_user_token_and_facility]
+    pipe_through [:localized_browser, :user_auth, :user_required]
 
     get "/", PageController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController
     resources "/upc_products", UpcProductController
-  end
-
-  defp put_user_token_and_facility(conn, _) do
-    if current_user = conn.assigns[:user] do
-      token = Phoenix.Token.sign(conn, "user socket", current_user.id)
-      conn
-      |> assign(:user_token, token)
-      |> assign(:facility_id, current_user.facility_id)
-    else
-      conn
-    end
   end
 
   # Other scopes may use custom stacks.

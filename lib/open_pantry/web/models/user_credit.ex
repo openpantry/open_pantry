@@ -14,8 +14,8 @@ defmodule OpenPantry.UserCredit do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:balance])
-    |> validate_required([:balance])
+    |> cast(params, [:balance, :credit_type_id, :user_id])
+    |> validate_required([:balance, :credit_type_id, :user_id])
     |> check_constraint(:balance, name: :non_negative_balance)
   end
 

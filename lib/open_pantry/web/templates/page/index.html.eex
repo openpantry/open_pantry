@@ -8,7 +8,7 @@
     <ul>
       <%= for language <-  @languages do %>
         <li>
-          <a href="<%= registration_path(@conn, :index, language.iso_code) %>"><%= language.native_name %></a> ( <%= language.english_name %> )
+          <a href="<%= food_selection_path(@conn, :index, language.iso_code) %>"><%= language.native_name %></a> ( <%= language.english_name %> )
         </li>
       <% end %>
       <li>
