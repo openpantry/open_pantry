@@ -2,8 +2,13 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
-
+      joinTo: {
+        "js/app.js": ["js\/app.js", "js\/facility.js", "js\/socket.js"],
+        "js/node_deps.js": /^(node_modules)/,
+        "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
+        "js/admin_lte2.js": ["vendor/admin_lte2.js"],
+        "js/jquery.min.js": ["vendor/jquery.min.js"]
+      },
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/master/docs/config.md#files
       // joinTo: {
@@ -53,7 +58,11 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["js/app"]
+      "js/app.js": ["js/app"],
+      "js/node_deps.js": ["js/node_deps.js"],
+      "js/ex_admin_common.js":["js/ex_admin_common.js"],
+      "js/admin_lte2.js":["js/admin_lte2.js"],
+      "js/jquery.min.js":["js/jquery.min.js"]
     }
   },
 
