@@ -46,6 +46,7 @@ defmodule OpenPantry.Mixfile do
      {:gettext, "~> 0.11"},
      {:geo, "~> 1.3"},
      {:basic_auth, "~> 2.1"},
+     {:ecto_enum, "~> 1.0"},
      {:logger_file_backend, "~> 0.0.9"},
      {:cowboy, "~> 1.0"}]
   end

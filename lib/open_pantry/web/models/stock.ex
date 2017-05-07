@@ -17,6 +17,7 @@ defmodule OpenPantry.Stock do
     field :shelf, :string
     field :packaging, :string
     field :credits_per_package, :integer
+    field :storage, RefrigerationEnum
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
