@@ -57,6 +57,7 @@ defmodule OpenPantry.Web.Router do
     pipe_through [:localized_browser, :user_auth, :user_required]
 
     get "/", PageController, :index
+    get "/styleguide", StyleController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController
     resources "/upc_products", UpcProductController
