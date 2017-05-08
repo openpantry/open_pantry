@@ -16,14 +16,15 @@
 
   * Getting started with development:
     * Docker/docker-compose (fake, factory generated data but no dependencies)
-      * Install node package manager is not already present `npm install`
-      * Install yarn via `npm install -g yarn`
       * Install docker (on most systems this also installs docker-compose)
       * Clone the OpenPantry repo and cd into directory
       * Run `docker-compose run setup`
       * Run `docker-compose up web`
-      * cd into open_pantry and Run `cd Assets` 
-      * run `yarn install`
+      * Temporary work-around steps for known bug in docker-compose setup:
+        * Install node package manager if not already present via `npm install`
+        * Install yarn via `npm install -g yarn`
+        * cd into open_pantry and Run `cd Assets`
+        * run `yarn install`
 
 
 
@@ -42,7 +43,7 @@
       * Install NPM and yarn (`brew install node && npm install -g yarn`)
       * Clone this repository locally, `git clone git@github.com:MasbiaSoupKitchenNetwork/open_pantry.git`
       * cd into the directory `cd open_pantry`
-      * Download database from s3 via `wget https://s3.amazonaws.com/open-pantry/openpantry.dump`
+      * Download database from s3 via `wget https://s3.amazonaws.com/open-pantry-dev/openpantry_dev.dump`
         * Note we had problems with this dump being improperly generated recently.  I beleive the problem is fixed, but if you downloaded previously or have problems please contact someone for support, it's probably not your fault!
         * Dumps and restores are based on the method described here: https://devcenter.heroku.com/articles/heroku-postgres-import-export
       * Install Elixir package dependencies with `mix deps.get`
