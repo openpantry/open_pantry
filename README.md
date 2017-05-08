@@ -16,10 +16,15 @@
 
   * Getting started with development:
     * Docker/docker-compose (fake, factory generated data but no dependencies)
+      * Install node package manager is not already present `npm install`
+      * Install yarn via `npm install -g yarn`
       * Install docker (on most systems this also installs docker-compose)
       * Clone the OpenPantry repo and cd into directory
       * Run `docker-compose run setup`
       * Run `docker-compose up web`
+      * cd into open_pantry and Run `cd Assets` 
+      * run `yarn install`
+
 
 
     * Local/native development on Mac/Linux (detailed instructions only for Mac at present, similar for linux)
