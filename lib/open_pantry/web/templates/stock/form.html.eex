@@ -1,0 +1,98 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= label f, :food_id, class: "control-label" %>
+    <%= select f, :food_id, food_list, class: "form-control" %>
+    <%= error_tag f, :food %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :facility_id, class: "control-label" %>
+    <%= select f, :facility_id, facility_list, class: "form-control" %>
+    <%= error_tag f, :facility %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :quantity, class: "control-label" %>
+    <%= number_input f, :quantity, class: "form-control" %>
+    <%= error_tag f, :quantity %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :arrival, class: "control-label" %>
+    <%= datetime_select f, :arrival, class: "form-control" %>
+    <%= error_tag f, :arrival %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :expiration, class: "control-label" %>
+    <%= datetime_select f, :expiration, class: "form-control" %>
+    <%= error_tag f, :expiration %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :reorder_quantity, class: "control-label" %>
+    <%= number_input f, :reorder_quantity, class: "form-control" %>
+    <%= error_tag f, :reorder_quantity %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :weight, class: "control-label" %>
+    <%= number_input f, :weight, class: "form-control" %>
+    <%= error_tag f, :weight %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :aisle, class: "control-label" %>
+    <%= text_input f, :aisle, class: "form-control" %>
+    <%= error_tag f, :aisle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :row, class: "control-label" %>
+    <%= text_input f, :row, class: "form-control" %>
+    <%= error_tag f, :row %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :shelf, class: "control-label" %>
+    <%= text_input f, :shelf, class: "form-control" %>
+    <%= error_tag f, :shelf %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :packaging, class: "control-label" %>
+    <%= text_input f, :packaging, class: "form-control" %>
+    <%= error_tag f, :packaging %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :credits_per_package, class: "control-label" %>
+    <%= number_input f, :credits_per_package, class: "form-control" %>
+    <%= error_tag f, :credits_per_package %>
+  </div>
+
+
+  <div class="form-group">
+    <%= label f, :storage, class: "control-label" %>
+    <%= select f, :storage, RefrigerationEnum.__enum_map__,  class: "form-control" %>
+    <%= error_tag f, :storage %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :image, class: "control-label" %>
+    <%= file_input f, :image, class: "form-control" %>
+    <%= error_tag f, :image %>
+  </div>
+
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 defmodule OpenPantry.Image do
+  alias OpenPantry.Stock
   use Arc.Definition
   use Arc.Ecto.Definition
 
@@ -20,9 +21,10 @@ defmodule OpenPantry.Image do
     version
   end
 
-  def storage_dir(_, {file, user}) do
-    "uploads/images/#{user.id}"
+  def storage_dir(_, {_file, stock = %Stock{image: image}}) do
+    "uploads/images/#{stock.id}"
   end
+
 
   def default_url(:thumb) do
     "https://placehold.it/100x100"

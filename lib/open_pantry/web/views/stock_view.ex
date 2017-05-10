@@ -1,16 +1,13 @@
 defmodule OpenPantry.Web.StockView do
   use OpenPantry.Web, :view
-  alias OpenPantry.Web.StockView
 
-  def render("index.json", %{stocks: stocks}) do
-    %{data: render_many(stocks, StockView, "stock.json")}
+  def food_list do
+    OpenPantry.Food.all([:food_group, :credit_types])
+    |> Enum.map(&({"#{&1.longdesc} - #{&1.food_group.foodgroup_desc}", &1.ndb_no}))
   end
 
-  def render("show.json", %{stock: stock}) do
-    %{data: render_one(stock, StockView, "stock.json")}
-  end
-
-  def render("stock.json", %{stock: stock}) do
-    %{id: stock.id}
+  def facility_list do
+    OpenPantry.Facility.all()
+    |> Enum.map(&({&1.name, &1.id}))
   end
 end

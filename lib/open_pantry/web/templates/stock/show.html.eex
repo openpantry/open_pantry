@@ -1,0 +1,13 @@
+<h2>Show stock</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= OpenPantry.Stock.stockable_name(@stock) %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: stock_path(@conn, :edit, @stock) %>
+<%= link "Back", to: stock_path(@conn, :index) %>
