@@ -20,6 +20,7 @@ services:
     command: mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs
     environment:
       DOCKER: 'true'
+      S3_IMAGE_BUCKET: "open-pantry-stock-images-dev"
     volumes:
       - .:/app
     depends_on:

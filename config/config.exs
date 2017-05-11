@@ -77,4 +77,4 @@ import_config "#{Mix.env}.exs"
 config :xain, :after_callback, {Phoenix.HTML, :raw}
 config :arc,
   storage: Arc.Storage.S3,
-  bucket: "open-pantry-stock-images" # hardcoding for now, should probably be env var long term
+  bucket: {:system, "S3_IMAGE_BUCKET"}
