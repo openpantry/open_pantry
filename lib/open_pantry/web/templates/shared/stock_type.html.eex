@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <%= for stock <- @stocks do %>
-        <tr class="js-stock-row" data-stock-id="<%= stock.id %>">
+        <tr class="js-stock-row <%= stock.storage %>" data-stock-id="<%= stock.id %>">
           <td class="description">
             <%= stock_description(stock) %>
           </td>

@@ -35,6 +35,14 @@
       </div>
     </div>
   </div>
+  <div class='legend'>
+    <%= for temperature <- storage_temperatures do %>
+      <div class='<%= temperature %>'>
+        <%= Gettext.gettext(OpenPantry.Web.Gettext, display(temperature)) %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="row">
     <div class="col-md-12">
       <ul class="nav nav-tabs">
