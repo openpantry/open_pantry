@@ -85,6 +85,10 @@
     <%= error_tag f, :storage %>
   </div>
 
+  <%= if @changeset.data.image do %>
+    <%= img_tag(image_url(@changeset.data), class: "image") %>
+  <% end %>
+
   <div class="form-group">
     <%= label f, :image, class: "control-label" %>
     <%= file_input f, :image, class: "form-control" %>

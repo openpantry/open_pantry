@@ -10,4 +10,8 @@ defmodule OpenPantry.Web.StockView do
     OpenPantry.Facility.all()
     |> Enum.map(&({&1.name, &1.id}))
   end
+
+  def image_url(stock) do
+    OpenPantry.Image.url({:stock_image, stock}, :thumb)
+  end
 end

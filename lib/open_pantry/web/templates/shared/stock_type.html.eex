@@ -22,6 +22,7 @@
     %>
     <thead class='table-header'>
       <th><%= gettext("Food description") %></th>
+      <th><%= gettext("Image") %></th>
       <th><%= gettext("Food packaging") %></th>
       <th><%= gettext("Manufacturer info (if available)") %></th>
       <th><%= gettext("Weight") %></th>
@@ -37,6 +38,11 @@
         <tr class="js-stock-row" data-stock-id="<%= stock.id %>">
           <td class="description">
             <%= stock_description(stock) %>
+          </td>
+          <td class="image">
+            <%= if stock.image do %>
+              <%= img_tag(image_url(stock), class: "image") %>
+            <% end %>
           </td>
           <td class="packaging">
             <%= stock.packaging %>

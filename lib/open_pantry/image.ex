@@ -21,7 +21,7 @@ defmodule OpenPantry.Image do
     version
   end
 
-  def storage_dir(_, {_file, stock = %Stock{image: image}}) do
+  def storage_dir(_, {_file, stock = %{image: image, id: id}}) when not is_nil(id) and not is_nil(image) do
     "uploads/images/#{stock.id}"
   end
 

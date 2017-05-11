@@ -8,4 +8,8 @@ defmodule OpenPantry.Web.SharedView do
     render_to_string(__MODULE__, "distribution.html", distribution: StockDistribution.find(id, [:stock]))
   end
 
+  def image_url(stock) do
+    OpenPantry.Image.url({:stock_image, stock}, :thumb)
+  end
+
 end
