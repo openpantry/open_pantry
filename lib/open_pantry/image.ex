@@ -28,4 +28,9 @@ defmodule OpenPantry.Image do
   def default_url(:thumb) do
     "https://placehold.it/100x100"
   end
+
+  if Mix.env == :dev do
+    def __storage, do: Arc.Storage.Local
+  end
+
 end

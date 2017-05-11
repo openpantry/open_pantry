@@ -64,3 +64,7 @@ config :open_pantry, OpenPantry.Repo,
   database: DevDB.database_name(),
   hostname: DevDB.database_host(),
   pool_size: 10
+
+config :arc,
+  storage: Arc.Storage.Local, # comment these lines and add bucket env var to use S3 locally
+  bucket: {:system, "S3_IMAGE_BUCKET"}
