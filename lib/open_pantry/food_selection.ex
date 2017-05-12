@@ -16,13 +16,15 @@ defmodule OpenPantry.FoodSelection do
   @spec stock_by_type(Facility.t) :: list(tuple())
   def stock_by_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
-    from(credit_type in CreditType,
-    join: stocks in assoc(credit_type, :stocks),
-    where: stocks.arrival < ^now,
-    where: stocks.expiration > ^now,
-    where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
-    preload: [stocks: [food: :food_group]])
+    from(stocks in Stock,
+      join:  food_credit_types in assoc(stocks, :credit_types),
+      group_by: food_credit_types.id,
+      select: food_credit_types,
+      where: ^id == stocks.facility_id,
+      where: stocks.arrival < ^now,
+      where: stocks.expiration > ^now,
+      order_by: food_credit_types.id,
+      preload: [stocks: [food: :food_group]])
     |> Repo.all
     |> Enum.map(&({&1.name, &1.id, &1.stocks}))
     |> Enum.uniq
@@ -32,13 +34,15 @@ defmodule OpenPantry.FoodSelection do
   def play() do # way more data than needed, but one query! :-/
     id = 1
     now = DateTime.utc_now
-    from(credit_type in CreditType,
-    join: stocks in assoc(credit_type, :stocks),
-    where: stocks.arrival < ^now,
-    where: stocks.expiration > ^now,
-    where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
-    preload: [stocks: [food: :food_group]])
+    from(stocks in Stock,
+      join:  food_credit_types in assoc(stocks, :credit_types),
+      group_by: food_credit_types.id,
+      select: food_credit_types,
+      where: ^id == stocks.facility_id,
+      where: stocks.arrival < ^now,
+      where: stocks.expiration > ^now,
+      order_by: food_credit_types.id)
+      # preload: [stocks: [food: :food_group]])
     |> Repo.all
   end
 
