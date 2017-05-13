@@ -35,9 +35,11 @@ defmodule OpenPantry.FoodSelection do
     id = 1
     now = DateTime.utc_now
     from(stocks in Stock,
-      join:  food_credit_types in assoc(stocks, :credit_types),
-      group_by: food_credit_types.id,
-      select: food_credit_types,
+      join:  food_stocks in assoc(stocks, :food),
+      join:  food_groups in assoc(food_stocks, :food_group),
+      join:  food_credit_types in assoc(food_groups, :credit_types),
+      # group_by: food_stocks, food_groups: food_groups, stocks: stocks, credit_types: food_credit_types},
+      select: %{foods: food_stocks, food_groups: food_groups, stocks: stocks, credit_types: food_credit_types},
       where: ^id == stocks.facility_id,
       where: stocks.arrival < ^now,
       where: stocks.expiration > ^now,
