@@ -1,0 +1,27 @@
+<h2>Listing stocks</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for stock <- @stocks do %>
+    <tr>
+      <td><%= OpenPantry.Stock.stockable_name(stock) %></td>
+
+
+      <td class="text-right">
+        <%= link "Show", to: stock_path(@conn, :show, stock), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: stock_path(@conn, :edit, stock), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: stock_path(@conn, :delete, stock), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New stock", to: stock_path(@conn, :new) %>

@@ -1,1 +1,26 @@
 @import "variables";
+
+.legend {
+  .room_temperature {
+    color: $room-temp;
+  }
+  .refrigerator {
+    color: $refrigerator;
+  }
+  .freezer {
+     color: $freezer;
+  }
+}
+
+
+.table-striped>tbody {
+  tr.room_temperature>td {
+    color: $room-temp;
+  }
+  tr.refrigerator>td {
+    color: $refrigerator;
+  }
+  tr.freezer>td {
+     color: $freezer;
+  }
+}

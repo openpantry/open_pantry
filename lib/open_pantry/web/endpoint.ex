@@ -23,6 +23,11 @@ defmodule OpenPantry.Web.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+  if Mix.env == :dev do
+    plug Plug.Static,
+      at: "/uploads", from: Path.expand('./uploads'), gzip: false
+  end
+
   plug Plug.RequestId
   plug Plug.Logger
 

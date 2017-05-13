@@ -1,5 +1,6 @@
 defmodule OpenPantry.Stock do
   use OpenPantry.Web, :model
+  use Arc.Ecto.Schema
   alias OpenPantry.Repo
   alias OpenPantry.Food
   alias OpenPantry.Meal
@@ -17,6 +18,8 @@ defmodule OpenPantry.Stock do
     field :shelf, :string
     field :packaging, :string
     field :credits_per_package, :integer
+    field :storage, RefrigerationEnum
+    field :image, OpenPantry.Image.Type
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
@@ -34,8 +37,9 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :food_id, :meal_id, :offer_id, :facility_id])
-    |> validate_required([:quantity, :facility_id])
+    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
+    |> cast_attachments(params, ~w(image)a)
+    |> validate_required([:quantity, :facility_id, :storage])
     |> validate_stockable
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end

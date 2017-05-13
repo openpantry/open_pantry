@@ -1,5 +1,6 @@
 defmodule OpenPantry.FoodSelection.Stock do
   use Ecto.Schema
+  use Arc.Ecto.Schema
   import Ecto.Query
   use OpenPantry.SharedRepo
   alias OpenPantry.Repo
@@ -15,6 +16,8 @@ defmodule OpenPantry.FoodSelection.Stock do
     field :packaging, :string
     field :credits_per_package, :integer
     field :weight, :decimal
+    field :storage, RefrigerationEnum
+    field :image, OpenPantry.Image.Type
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer

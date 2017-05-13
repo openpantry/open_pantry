@@ -1,0 +1,6 @@
+<h2>Edit stock</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: stock_path(@conn, :update, @stock) %>
+
+<%= link "Back", to: stock_path(@conn, :index) %>
