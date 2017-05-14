@@ -51,9 +51,6 @@
             <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
           </li>
         <% end %>
-        <li>
-          <a href="#cart" data-toggle="tab"> <%= gettext("Cart") %> </a>
-        </li>
       </ul>
       <div class="tab-content clearfix">
         <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
@@ -67,35 +64,44 @@
                       credits: @credits
           %>
         <% end %>
-          <div class="tab-pane js-cart" id="cart">
-            <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
-              <%= hidden_input(f, :finalized, value: true) %>
-              <%= submit gettext("Complete your order!") %>
-            <% end %>
-
-            <table class='table table-striped'>
-              <%# TBD?
-                <colgroup>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                </colgroup>
-              %>
-              <thead class='table-header'>
-                <th><%= gettext("Item description") %></th>
-                <th><%= gettext("Item packaging") %></th>
-                <th><%= gettext("Weight") %></th>
-                <th><%= gettext("Quantity requested") %></th>
-              </thead>
-              <tbody>
-                <%= for distribution <- @distributions do %>
-                  <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
         </div>
+      </div>
+
+      <p>
+        <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
+          <%= stock_type %> <%= gettext("remaining:") %>
+          <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
+            <%=  @credits[stock_type] %>
+          </span>
+        <%= end %>
+      </p>
+      <div class="tab-pane js-cart" id="cart">
+        <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
+          <%= hidden_input(f, :finalized, value: true) %>
+          <%= submit gettext("Complete your order!") %>
+        <% end %>
+
+        <table class='table table-striped'>
+          <%# TBD?
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          %>
+          <thead class='table-header'>
+            <th><%= gettext("Item description") %></th>
+            <th><%= gettext("Item packaging") %></th>
+            <th><%= gettext("Weight") %></th>
+            <th><%= gettext("Quantity requested") %></th>
+          </thead>
+          <tbody>
+            <%= for distribution <- @distributions do %>
+              <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
