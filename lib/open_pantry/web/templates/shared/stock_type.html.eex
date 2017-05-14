@@ -5,80 +5,47 @@
         <%=  @credits[@stock_type] %>
       </span>
   </p>
-  <table class='table table-striped'>
-    <%# TBD?
-      <colgroup>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-      </colgroup>
-    %>
-    <thead class='table-header'>
-      <th><%= gettext("Food description") %></th>
-      <th><%= gettext("Image") %></th>
-      <th><%= gettext("Food packaging") %></th>
-      <th><%= gettext("Manufacturer info (if available)") %></th>
-      <th><%= gettext("Weight") %></th>
-      <th><%= gettext("Quantity available") %></th>
-      <th><%= @stock_type %> <%= gettext("cost")%></th>
-      <th class='add-action-col'></th>
-      <th><%= gettext("Quantity requested") %></th>
-      <th class='remove-action-col'></th>
-      <th class='remove-all-action-col'></th>
-    </thead>
-    <tbody>
+  <div class='js-stock-list table table-striped'>
+    <div class=" stock-list">
       <%= for stock <- @stocks do %>
-        <tr class="js-stock-row <%= stock.storage %>" data-stock-id="<%= stock.id %>">
-          <td class="description">
-            <%= stock_description(stock) %>
-          </td>
-          <td class="image">
+        <div class="js-stock-row stock-entry <%= stock.storage %>" data-stock-id="<%= stock.id %>">
+          <div class="stock-image-location">
             <%= if stock.image do %>
-              <%= img_tag(image_url(stock), class: "image") %>
+              <%= img_tag(image_url(stock), class: "stock-image") %>
             <% end %>
-          </td>
-          <td class="packaging">
+          </div>
+          <div class="description">
+            <%= stock_description(stock) %>
+          </div>
+          <div class="packaging">
             <%= stock.packaging %>
-          </td>
-          <td class="manufacturer">
+          </div>
+          <div class="manufacturer">
             <%= stock.food_id && stock.food.manufacturer_name %>
-          </td>
-          <td class="weight">
+          </div>
+          <div class="weight">
             <%= stock.weight %>
-          </td>
-          <td class="js-available-quantity">
+          </div>
+          <div class="js-available-quantity">
             <%= stock.quantity %>
-          </td>
-          <td class="js-credit-cost">
+          </div>
+          <div class="js-credit-cost">
             <%= stock.credits_per_package %>
-          </td>
-          <td class="remove-action">
-            <button class="js-remove-stock" type="button">
-            -
-            </button>
-          </td>
-          <td class="js-current-quantity">
+          </div>
+          <button class="js-remove-stock remove-action" type="button">
+          -
+          </button>
+          <div class="js-current-quantity">
             <%= quantity(stock, @package) %>
-          </td>
-          <td class="add-action">
-            <button class="js-add-stock" type="button">
-            +
-            </button>
-          </td>
-          <td class="clear-action">
-            <button class="js-clear-stock" type="button">
-            X
-            </button>
-          </td>
-        </tr>
+          </div>
+          <button class="js-add-stock add-action" type="button">
+          +
+          </button>
+          <button class="js-clear-stock clear-action" type="button">
+          X
+          </button>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>
