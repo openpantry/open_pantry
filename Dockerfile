@@ -22,6 +22,3 @@ WORKDIR /app
 
 # Install phoenix dependencies
 RUN mix deps.get
-
-# Install node dependecies
-RUN cd assets/ && npm install -g yarn && yarn install && cd ..
