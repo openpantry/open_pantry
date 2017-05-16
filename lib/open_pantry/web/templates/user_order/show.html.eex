@@ -1,0 +1,45 @@
+<h2>Show order</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @order.user.name %>
+    <strong>ID:</strong>
+    <%= @order.user.id %>
+  </li>
+  <li>
+    Finalized: <%= @order.finalized %>, Ready for Pickup: <%= @order.ready_for_pickup %>
+  </li>
+
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for stock_distribution <- @order.stock_distributions do %>
+        <tr>
+          <td><%= stock_distribution.quantity %></td>
+          <td><%= OpenPantry.Stock.stockable_name!(stock_distribution.stock) %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), fn f -> %>
+  <%= hidden_input(f, :finalized, value: !@order.finalized) %>
+  <%= submit "Update Finalized to  #{!@order.finalized}" %>
+<% end %>
+
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), fn f -> %>
+  <%= hidden_input(f, :ready_for_pickup, value: !@order.ready_for_pickup) %>
+  <%= submit "Update Ready for pickup to #{!@order.ready_for_pickup}" %>
+<% end %>
+
+<%= link "Back", to: user_order_path(@conn, :index) %>

@@ -1,0 +1,31 @@
+<h2>Listing orders</h2>
+
+<%= link "Finalized, not ready (default)", to: user_order_path(@conn, :index) %>
+<br/>
+<%= link "Ready for pickup", to: user_order_path(@conn, :index, ready: true) %>
+<br/>
+<%= link "All", to: user_order_path(@conn, :index, all: true) %>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name/ID</th>
+      <th>Finalized</th>
+      <th>Ready for Pickup</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for order <- @orders do %>
+    <tr>
+      <td><%= order.user.name %>, id: <%= order.user.id %></td>
+      <td><%= order.finalized %></td>
+      <td><%= order.ready_for_pickup %></td>
+      <td class="text-right">
+        <%= link "Show/edit order", to: user_order_path(@conn, :show, order), class: "btn btn-default btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
