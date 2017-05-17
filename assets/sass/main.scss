@@ -1,4 +1,5 @@
 @import "variables";
+@import "include-media";
 
 .legend {
   .room_temperature {
@@ -23,4 +24,12 @@
   tr.freezer>td {
      color: $freezer;
   }
+}
+
+div.container, .sass{
+  width: 90vw;
+}
+
+@include-media("<tabletH", "<=tabletV") {
+  width: 90vw;
 }
