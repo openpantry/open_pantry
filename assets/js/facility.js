@@ -43,9 +43,11 @@ export default function(channel){
 
 
   $('.js-stock-row').on('click', function(el){
-    if (fn = handlers[el.target.className]){
-      fn($(el.currentTarget));
-    };
+    el.target.classList.forEach(function(className){
+      if (fn = handlers[className]){
+        fn($(el.currentTarget));
+      };
+    })
   })
 
   channel.on('set_stock', payload => {
@@ -68,7 +70,7 @@ export default function(channel){
     } else if (existing.length && quantity == 0) {
       $(existing).remove()
     } else {
-      $('.js-cart').find('tbody').append(html)
+      $('.js-cart').find('.js-stock-list').append(html)
     }
   });
 

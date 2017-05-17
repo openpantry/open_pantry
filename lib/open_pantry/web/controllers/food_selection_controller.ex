@@ -28,6 +28,7 @@ defmodule OpenPantry.Web.FoodSelectionController do
   defp handle_result({:ok, _}, conn) do
     conn
     |> put_flash(:info, gettext("Your order has been finalized!"))
+    |> Plug.Conn.delete_resp_cookie("user_id")
     |> redirect(to: "/#{conn.assigns.locale || "en" }/")
   end
 
