@@ -93,7 +93,7 @@
           <thead class='table-header'>
             <th><%= gettext("Item description") %></th>
             <th><%= gettext("Item packaging") %></th>
-            <th><%= gettext("Weight") %></th>
+            <th><%= gettext("Total Weight") %></th>
             <th><%= gettext("Quantity requested") %></th>
           </thead>
           <tbody>
