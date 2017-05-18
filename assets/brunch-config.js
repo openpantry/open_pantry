@@ -2,15 +2,12 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
-
-      // To use a separate vendor.js bundle, specify two files path
-      // https://github.com/brunch/brunch/blob/master/docs/config.md#files
-      // joinTo: {
-      //  "js/app.js": /^(js)/,
-      //  "js/vendor.js": /^(vendor)|(deps)/
-      // }
-      //
+      joinTo: {
+        "js/app.js": /^(js)|(node_modules)/,
+        "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
+        "js/admin_lte2.js": ["vendor/admin_lte2.js"],
+        "js/jquery.min.js": ["vendor/jquery.min.js"],
+      },
       // To change the order of concatenation of files, explicitly mention here
       // https://github.com/brunch/brunch/tree/master/docs#concatenation
      order: {
@@ -21,7 +18,14 @@ exports.config = {
       }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": /^(css|sass)/,
+        "css/admin_lte2.css": ["vendor/admin_lte2.css"],
+        "css/active_admin.css.css": ["vendor/active_admin.css.css"],
+      },
+      order: {
+        after: ["css/app.css"] // concat app.css last
+      }
     },
     templates: {
       joinTo: "js/app.js"

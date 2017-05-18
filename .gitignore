@@ -4,7 +4,11 @@
 /priv/static/
 erl_crash.dump
 assets/node_modules/*
+assets/css/main.css*
 screenshots/*
 openpantry.dump
 *.ez
 uploads/*
+assets/css/main.css
+modified:   assets/css/main.css.map
+

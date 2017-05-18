@@ -1,5 +1,6 @@
 @import "variables";
-
+@import "vendors/include-media";
+@import "vendors/meyerwebreset";
 .legend {
   .room_temperature {
     color: $room-temp;
@@ -23,4 +24,12 @@
   tr.freezer>td {
      color: $freezer;
   }
+}
+
+div.container, .sass{
+  width: 90vw;
+}
+
+@include-media("<tabletH", "<=tabletV") {
+  width: 90vw;
 }

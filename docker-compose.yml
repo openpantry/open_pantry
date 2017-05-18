@@ -15,6 +15,7 @@ services:
       - "4000:4000"
     depends_on:
       - db
+      - sass
   setup:
     build: .
     command: mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs
@@ -24,5 +25,11 @@ services:
       - .:/app
     depends_on:
       - db
+  sass:
+    volumes:
+      - ./assets/:/src
+    build:
+      dockerfile: Dockerfile.sass
+      context: .
 volumes:
   postgres-durable-volume:
