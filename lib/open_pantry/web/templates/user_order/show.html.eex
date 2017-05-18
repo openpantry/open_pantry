@@ -17,16 +17,34 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Image</th>
       <th>Quantity</th>
       <th>Name</th>
+      <th>Weight</th>
+      <th>Aisle</th>
+      <th>Row</th>
+      <th>Shelf</th>
+      <th>Packaging</th>
+      <th>Storage</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <%= for stock_distribution <- @order.stock_distributions do %>
         <tr>
+          <td class="image">
+            <%= if stock_distribution.stock.image do %>
+              <%= img_tag(image_url(stock_distribution.stock), class: "stock-image") %>
+            <% end %>
+          </td>
           <td><%= stock_distribution.quantity %></td>
           <td><%= OpenPantry.Stock.stockable_name!(stock_distribution.stock) %></td>
+          <td><%= stock_distribution.stock.weight %></td>
+          <td><%= stock_distribution.stock.aisle %></td>
+          <td><%= stock_distribution.stock.row %></td>
+          <td><%= stock_distribution.stock.shelf %></td>
+          <td><%= stock_distribution.stock.packaging %></td>
+          <td><%= stock_distribution.stock.storage %></td>
         </tr>
     <% end %>
   </tbody>

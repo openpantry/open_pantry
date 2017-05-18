@@ -57,7 +57,7 @@
       </ul>
       <div class="tab-content clearfix">
         <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
-          <%= render OpenPantry.Web.SharedView,
+          <%= render SharedView,
                       "stock_type.html",
                       stock_type: stock_type,
                       type_id: type_id,
@@ -90,7 +90,7 @@
               </thead>
               <tbody>
                 <%= for distribution <- @distributions do %>
-                  <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
+                  <%= render SharedView, "distribution.html", distribution: distribution %>
                 <% end %>
               </tbody>
             </table>

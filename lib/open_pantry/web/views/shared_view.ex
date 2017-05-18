@@ -3,13 +3,14 @@ defmodule OpenPantry.Web.SharedView do
   import OpenPantry.Stock
   import OpenPantry.Web.DisplayLogic
   alias OpenPantry.StockDistribution
+  alias OpenPantry.Image
 
   def render_distribution(%StockDistribution{id: id}) do
     render_to_string(__MODULE__, "distribution.html", distribution: StockDistribution.find(id, [:stock]))
   end
 
   def image_url(stock) do
-    OpenPantry.Image.url({:stock_image, stock}, :thumb)
+    Image.url({:stock_image, stock}, :thumb)
   end
 
 end
