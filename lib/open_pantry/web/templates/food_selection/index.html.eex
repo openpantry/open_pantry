@@ -82,28 +82,19 @@
             <%= submit gettext("Complete your order!") %>
           <% end %>
 
-          <table class='table table-striped'>
-            <%# TBD?
-              <colgroup>
-                <col>
-                <col>
-                <col>
-                <col>
-              </colgroup>
-            %>
-            <thead class='table-header'>
-              <th><%= gettext("Item description") %></th>
-              <th><%= gettext("Item packaging") %></th>
-              <th><%= gettext("Weight") %></th>
-              <th><%= gettext("Quantity requested") %></th>
-            </thead>
-            <tbody>
-              <%= for distribution <- @distributions do %>
-                <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+        <table class='table table-striped'>
+          <thead class='table-header'>
+            <th><%= gettext("Item description") %></th>
+            <th><%= gettext("Item packaging") %></th>
+            <th><%= gettext("Total Weight") %></th>
+            <th><%= gettext("Quantity requested") %></th>
+          </thead>
+          <tbody>
+            <%= for distribution <- @distributions do %>
+              <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
