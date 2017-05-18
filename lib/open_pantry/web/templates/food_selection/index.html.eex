@@ -67,14 +67,14 @@
         </div>
       </div>
 
-      <p>
+      <div>
         <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
           <%= stock_type %> <%= gettext("remaining:") %>
           <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
             <%=  @credits[stock_type] %>
           </span>
         <%= end %>
-      </p>
+      </div>
       <div class="tab-pane js-cart" id="cart">
         <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
           <%= hidden_input(f, :finalized, value: true) %>
