@@ -1,6 +1,13 @@
-@import "variables";
-@import "vendors/include-media";
 @import "vendors/meyerwebreset";
+@import "variables";
+@import "mixins";
+@import "vendors/include-media";
+@import "vendors/responsive-typography";
+
+html {
+  font-family: $bodyFont;
+}
+
 .legend {
   .room_temperature {
     color: $room-temp;
@@ -26,10 +33,6 @@
   }
 }
 
-div.container, .sass{
-  width: 90vw;
-}
 
-@include-media("<tabletH", "<=tabletV") {
-  width: 90vw;
-}
+
+// Layout

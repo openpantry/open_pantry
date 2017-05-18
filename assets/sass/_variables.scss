@@ -1,4 +1,33 @@
-// Example file.
-$room-temp: red;
+// Responsive Breakpoints for include-media
+$breakpoints: (
+  'phone': 37.5rem,
+  'textBreak': 50rem,
+  'tabletV': 56.25rem,
+  'tabletH': 75rem,
+  'desktop': 112.5rem,
+) !default;
+
+
+
+
+
+// Font 
+$bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$headerFont: $bodyFont;
+
+
+
+// Line Height
+$baseLineHeight: 1.2rem;
+$h1LineHeight: 2rem;
+$h2LineHeight: 1.5rem;
+$h3LineHeight: 1.25rem;
+$h4LineHeight: 1rem;
+$h5LineHeight: 0.875rem;
+
+
+
+// Colors
+$room-temp: red; 
 $refrigerator: gray;
 $freezer: blue;
