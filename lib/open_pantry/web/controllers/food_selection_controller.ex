@@ -17,9 +17,8 @@ defmodule OpenPantry.Web.FoodSelectionController do
                                 distributions: distributions,
                                 user_order: UserOrder.changeset(user_order)
   end
-  def update(conn, params) do
-    conn.assigns.user
-    |> UserOrder.find_current
+  def update(conn, params = %{"id" => id}) do
+    UserOrder.find(String.to_integer(id))
     |> UserOrder.changeset(permitted_params(params))
     |> Repo.update
     |> handle_result(conn)
@@ -38,6 +37,6 @@ defmodule OpenPantry.Web.FoodSelectionController do
   end
 
   defp permitted_params(params) do
-    %{finalized: !!params["user_order"]["finalized"]}
+    %{finalized: !!params["user_order"]["finalized"], ready_for_pickup: !!params["user_order"]["ready_for_pickup"]}
   end
 end

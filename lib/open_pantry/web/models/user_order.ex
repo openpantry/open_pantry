@@ -7,7 +7,10 @@ defmodule OpenPantry.UserOrder do
     field :finalized, :boolean, default: false
     belongs_to :user, OpenPantry.User
     has_many :stock_distributions, OpenPantry.StockDistribution, on_delete: :delete_all
-
+    has_many :stocks, through: [:stock_distributions, :stock]
+    has_many :foods, through: [:stocks, :food]
+    has_many :meals, through: [:stocks, :meal]
+    has_many :offers, through: [:stocks, :offer]
     timestamps()
   end
 
@@ -24,7 +27,7 @@ defmodule OpenPantry.UserOrder do
     find_current(user) || %UserOrder{user_id: id} |> Repo.insert!()
   end
 
-  def query(id, preload  \\ []) when is_integer(id) do
+  def user_query(id, preload  \\ []) when is_integer(id) do
     from(package in UserOrder,
     where: package.finalized == false,
     where: package.user_id == ^id,
@@ -33,7 +36,7 @@ defmodule OpenPantry.UserOrder do
 
   def find_current(%User{id: id}), do: find_current(id)
   def find_current(id) when is_integer(id) do
-    query(id)
+    user_query(id)
     |> Repo.one
   end
 

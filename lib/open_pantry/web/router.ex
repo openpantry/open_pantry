@@ -42,6 +42,7 @@ defmodule OpenPantry.Web.Router do
   scope "/manage", OpenPantry.Web do
     pipe_through [:browser, :admin_auth]
     resources "/stocks", StockController
+    resources "/orders", UserOrderController, only: [:index, :show]
     resources "/facilities", FacilityController
   end
 
