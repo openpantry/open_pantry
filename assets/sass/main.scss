@@ -4,8 +4,29 @@
 @import "mixins";
 @import "vendors/include-media";
 
-// Layout
+// Base Layout
+div.container-fluid {
+  display: flex;
+}
+div.stock-selection-container {
+  width: 100vw/$goldenRatio;
+}
 
+div.right-side-container {
+  width: 100vw-99vw/$goldenRatio;
+}
+
+div.remaining-noms-container {
+  height: 100vh-99vh/$goldenRatio;
+}
+
+#cart {
+  height: 100vh/goldenRatio;
+}
+
+div.account-action-buttons {
+  display: block;
+}
 
 // Font
 html {
