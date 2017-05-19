@@ -1,101 +1,71 @@
 <div class="container-fluid">
-  <%= gettext "Thank you for so much registering/logging in!" %>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-4">
 
-          <a class="btn btn-default" href="<%= page_path(@conn, :index, @conn.assigns.locale ) %>"><%= gettext "Back" %></a>
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-          <%= button(gettext("Log out"), to: user_selection_path(@conn, :delete, @conn.assigns[:user].id, method: :delete), method: "delete", class: "btn btn-default")  %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--div class='legend'>
-    <%= for temperature <- storage_temperatures do %>
-      <div class='<%= temperature %>'>
-        <%= Gettext.gettext(OpenPantry.Web.Gettext, display(temperature)) %>
-      </div>
-    <% end %>
-  </div-->
-
-  <div class="row">
-    <div class="col-md-12">
-      <ul class="nav nav-tabs">
-        <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
-          <div class="<%= active(stock_type, @stock_by_type)%>">
-            <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
-          </div>
+    <!--div class='legend'>
+        <%= for temperature <- storage_temperatures do %>
+            <div class='<%= temperature %>'>
+                <%= Gettext.gettext(OpenPantry.Web.Gettext, display(temperature)) %>
+            </div>
         <% end %>
-      </ul>
-      <div class="tab-content clearfix">
-        <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
-          <%= render OpenPantry.Web.SharedView,
-                      "stock_type.html",
-                      stock_type: stock_type,
-                      type_id: type_id,
-                      stock_by_type: @stock_by_type,
-                      stocks: stocks,
-                      package: @package,
-                      credits: @credits
-          %>
-        <% end %>
-        </div>
-      </div>
+    </div-->
 
-      <div class= "right-side-container">
+    <div class="stock-selection-container">
+        <ul class="nav nav-tabs">
+            <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
+                <div class="<%= active(stock_type, @stock_by_type)%>">
+                    <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
+                </div>
+            <% end %>
+        </ul>
+
+        <div class="tab-content clearfix">
+            <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
+                <%= render OpenPantry.Web.SharedView,
+                "stock_type.html",
+                stock_type: stock_type,
+                type_id: type_id,
+                stock_by_type: @stock_by_type,
+                stocks: stocks,
+                package: @package,
+                credits: @credits
+            %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class= "right-side-container">
+
         <div class="remaining-noms-container">
-          <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
+            <%= gettext "Thank you for so much registering/logging in!" %>
+
+            <a class="btn btn-default" href="<%= page_path(@conn, :index, @conn.assigns.locale ) %>"><%= gettext "Back" %></a>
+            <%= button(gettext("Log out"), to: user_selection_path(@conn, :delete, @conn.assigns[:user].id, method: :delete), method: "delete", class: "btn btn-default")  %>
+            <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
             <%= stock_type %> <%= gettext("remaining:") %>
             <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
-              <%=  @credits[stock_type] %>
+            <%=  @credits[stock_type] %>
             </span>
-          <%= end %>
+            <%= end %>
         </div>
-        <div class="tab-pane js-cart" id="cart">
-          <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
+
+        <div class="tab-pane js-cart cart-container" id="cart">
+            <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
             <%= hidden_input(f, :finalized, value: true) %>
             <%= submit gettext("Complete your order!") %>
-          <% end %>
-
-        <table class='table table-striped'>
-          <thead class='table-header'>
-            <th><%= gettext("Item description") %></th>
-            <th><%= gettext("Item packaging") %></th>
-            <th><%= gettext("Total Weight") %></th>
-            <th><%= gettext("Quantity requested") %></th>
-          </thead>
-          <tbody>
-            <%= for distribution <- @distributions do %>
-              <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
             <% end %>
-          </tbody>
-        </table>
-      </div>
+
+            <table class='table table-striped'>
+                <thead class='table-header'>
+                    <th><%= gettext("Item description") %></th>
+                    <th><%= gettext("Item packaging") %></th>
+                    <th><%= gettext("Total Weight") %></th>
+                    <th><%= gettext("Quantity requested") %></th>
+                </thead>
+                <tbody>
+                    <%= for distribution <- @distributions do %>
+                    <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>

@@ -1,12 +1,47 @@
 @import "vendors/meyerwebreset";
+@import "vendors/responsive-typography";
 @import "variables";
 @import "mixins";
 @import "vendors/include-media";
-@import "vendors/responsive-typography";
 
+// Layout
+
+
+// Font
 html {
   font-family: $bodyFont;
 }
+
+// Modular Font-Size Calculations
+html {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
+}
+
+h1 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+}
+
+h2 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+}
+
+h3 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
+}
+
+h4 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
+}
+
+h5 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+h6 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h6Min, $h6Max);
+}
+
+
 
 .legend {
   .room_temperature {

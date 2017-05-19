@@ -1,13 +1,18 @@
 // Responsive Breakpoints for include-media
+$minViewWidth: 20rem; //320px
+$midViewWidth: 56.25rem;  // 900px 
+$maxViewWidth: 112.5rem; //1800px
+
 $breakpoints: (
-  'phone': 37.5rem,
-  'textBreak': 50rem,
-  'tabletV': 56.25rem,
-  'tabletH': 75rem,
-  'desktop': 112.5rem,
+  'phone': $minViewWidth,
+  'textBreak': 50rem, //800px
+  'tabletV': $midViewWidth,
+  'tabletH': 75rem, //1200px
+  'desktop': $maxViewWidth,
 ) !default;
 
-
+// layout
+$goldenratio: 1.618;
 
 
 
@@ -15,6 +20,30 @@ $breakpoints: (
 $bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $headerFont: $bodyFont;
 
+$minFontSize: 1rem; 
+$maxFontSize: 1.5rem; //24px @16px base
+
+$modularHeadingScaleLarge: 1.333; // Perfect Fourth
+$modularHeadingScaleSmall: 1.125; // Major Second
+
+// Modular Heading Scale
+$h1Min: 1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h1Max: 1rem*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h2Min: 1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h2Max: 1rem*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h3Min:1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h3Max: 1rem *$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h4Min:1rem*$modularHeadingScaleSmall;
+$h4Max:1rem*$modularHeadingScaleLarge;
+
+$h5Min:1rem;
+$h5Max:1rem;
+
+$h6Min:1rem/$modularHeadingScaleSmall;
+$h6Max:1rem/$modularHeadingScaleLarge;
 
 
 // Line Height
