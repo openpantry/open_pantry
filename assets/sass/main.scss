@@ -4,19 +4,19 @@
 @import "mixins";
 @import "vendors/include-media";
 
-// Base Layout
-div.container-fluid {
+// Core Layout
+.container-fluid {
   display: flex;
 }
-div.stock-selection-container {
+.stock-selection-container {
   width: 100vw/$goldenRatio;
 }
 
-div.right-side-container {
+.right-side-container {
   width: 100vw-99vw/$goldenRatio;
 }
 
-div.remaining-noms-container {
+.remaining-noms-container {
   height: 100vh-99vh/$goldenRatio;
 }
 
@@ -24,8 +24,19 @@ div.remaining-noms-container {
   height: 100vh/goldenRatio;
 }
 
-div.account-action-buttons {
+.account-action-buttons {
   display: block;
+}
+
+// Tab-nav
+.tab-pane {
+  display:none;
+
+  &.active {
+    display: inline-block;
+
+  }
+
 }
 
 // Font
