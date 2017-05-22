@@ -14,13 +14,16 @@ $breakpoints: (
 // layout
 $goldenRatio: 1.618;
 $navTabHeight: 5vh;
+$nomsContainerHeight: 30vh;
 $stockContainerWidth: 100vw/$goldenRatio;
 $nomsNcartContainerWidth: 100vw-99vw/$goldenRatio;
-$nomsContainerHeight: 30vh;
+
 $cartHeight: 100vh-$nomsContainerHeight;
 $stockEntryImageSize: 7vw;
-$nomTypeRemainingSize: 15vh;
+$stockEntryHeight: 10vh;
+$nomTypeRemainingSize: 12vh;
 $gutterWidth: 1vw;
+$stockListHeight: 95vh - $navTabHeight - $nomTypeRemainingSize;
 
 
 // Font 

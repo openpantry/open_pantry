@@ -57,16 +57,14 @@
       <h3>
         <%= gettext "Shopping Cart" %>
       </h3>
-      <table class='table table-striped'>
-        <tbody>
+      <div class='table table-striped'>
           <%= for distribution <- @distributions do %>
           <%= render SharedView, "distribution.html", distribution: distribution %>
           <% end %>
-        </tbody>
-      </table>
+      </div>
       <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
       <%= hidden_input(f, :finalized, value: true) %>
-      <%= submit gettext("Complete your order!") %>
+      <span class="checkout-button"><%= submit gettext("Complete your order!") %></span>
       <% end %>
     </div>
   </div>

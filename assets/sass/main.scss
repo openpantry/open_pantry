@@ -6,6 +6,7 @@
 // Layout
 .container {
   display: flex;
+  height: 100vh
 }
 // Food selection Layout
 .container-fluid {
@@ -13,6 +14,7 @@
 }
 .stock-selection-container {
   width: $stockContainerWidth;
+  
 }
 
 .right-side-container {
@@ -27,10 +29,23 @@
 }
 
 #cart {
-  height: $cartHeight;
+  display: flex;
+  flex-direction: column;
 }
 
-.account-action-buttons {
+.cart-items-container {
+  display: flex; 
+  justify-content: space-between;
+  .cart-detail {
+    display: inline-block;
+  }
+}
+
+.checkout-button {
+  align-self: flex-end;
+}
+
+  .account-action-buttons {
   display: block;
   width: 100%
 }
@@ -40,6 +55,7 @@
 .nav-tab-container {
   display: flex;
   width: 100%;
+
   a {
     width: $stockContainerWidth/3;
     text-align: center;
@@ -49,6 +65,12 @@
 .nav-tab {
   flex-grow: 1;
   height: $navTabHeight;
+  display: flex;
+  justify-content: center;
+  h3 {
+    align-self: center;  
+
+  }
 }
 
 .tab-content{
@@ -74,6 +96,8 @@
 .stock-list {
   display: flex;
   flex-direction: column;
+  min-height: $stockListHeight;
+  overflow-y: auto;
 }
 .stock-entry {
   width: $stockContainerWidth;
