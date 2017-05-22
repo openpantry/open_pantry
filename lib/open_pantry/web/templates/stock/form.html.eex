@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= label f, :food_id, class: "control-label" %>
-    <%= select f, :food_id, food_list, class: "form-control" %>
+    <%= select f, :food_id, food_list, class: "form-control select2" %>
     <%= error_tag f, :food %>
   </div>
 
