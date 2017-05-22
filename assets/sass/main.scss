@@ -23,7 +23,6 @@
   display: flex;
   height: $nomsContainerHeight;
   flex-direction: column;
-
 }
 
 #cart {
@@ -140,7 +139,11 @@ h5 {
 }
 
 h6 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h6Min, $h6Max);
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+.add_sub-svg {
+  @include fluid-type(height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max );
 }
 
 
