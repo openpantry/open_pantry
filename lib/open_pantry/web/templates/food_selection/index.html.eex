@@ -9,15 +9,15 @@
   </div-->
 
   <div class="stock-selection-container">
-      <ul class="nav nav-tabs">
+      <div class="nav nav-tabs">
           <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
               <div class="<%= active(stock_type, @stock_by_type)%>">
-                  <h3>
-                    <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
-                  </h3>
+                  <a class="tab-boxes" href="#<%= stock_type %>" data-toggle="tab"> 
+                    <h3> <%= stock_type %></h3>
+                  </a>
               </div>
           <% end %>
-      </ul>
+      </div>
 
       <div class="tab-content clearfix">
           <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
