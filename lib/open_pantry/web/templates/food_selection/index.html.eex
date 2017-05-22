@@ -9,29 +9,29 @@
   </div-->
 
   <div class="stock-selection-container">
-      <ul class="nav nav-tabs">
-          <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
-              <div class="<%= active(stock_type, @stock_by_type)%>">
-                  <h3>
-                    <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
-                  </h3>
-              </div>
-          <% end %>
-      </ul>
+    <ul class="nav nav-tabs">
+      <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
+        <div class="<%= active(stock_type, @stock_by_type)%>">
+          <h3>
+            <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
+          </h3>
+        </div>
+      <% end %>
+    </ul>
 
-      <div class="tab-content clearfix">
-          <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
-              <%= render SharedView,
-              "stock_type.html",
-              stock_type: stock_type,
-              type_id: type_id,
-              stock_by_type: @stock_by_type,
-              stocks: stocks,
-              package: @package,
-              credits: @credits
-          %>
-          <% end %>
-      </div>
+    <div class="tab-content clearfix">
+      <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
+          <%= render SharedView,
+          "stock_type.html",
+          stock_type: stock_type,
+          type_id: type_id,
+          stock_by_type: @stock_by_type,
+          stocks: stocks,
+          package: @package,
+          credits: @credits
+      %>
+      <% end %>
+    </div>
   </div>
 
   <div class= "right-side-container">
