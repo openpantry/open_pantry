@@ -21,7 +21,7 @@ defmodule OpenPantry.FoodSelection do
     where: stocks.arrival < ^now,
     where: stocks.expiration > ^now,
     where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
+    order_by: credit_type.name,
     preload: [stocks: [food: :food_group]])
     |> Repo.all
     |> Enum.map(&({&1.name, &1.id, &1.stocks}))
@@ -37,7 +37,7 @@ defmodule OpenPantry.FoodSelection do
     where: stocks.arrival < ^now,
     where: stocks.expiration > ^now,
     where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
+    order_by: credit_type.name,
     preload: [stocks: [food: :food_group]])
     |> Repo.all
   end
