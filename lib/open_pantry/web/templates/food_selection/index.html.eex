@@ -9,29 +9,29 @@
   </div-->
 
   <div class="stock-selection-container">
-      <div class="nav nav-tabs">
-          <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
-              <div class="<%= active(stock_type, @stock_by_type)%>">
-                  <a class="tab-boxes" href="#<%= stock_type %>" data-toggle="tab"> 
-                    <h3> <%= stock_type %></h3>
-                  </a>
-              </div>
-          <% end %>
-      </div>
+    <div class="nav nav-tab-container">
+      <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
+        <div class="<%= active(stock_type, @stock_by_type)%>">
+            <a class="nav-tab" href="#<%= stock_type %>" data-toggle="tab"> 
+              <h3><%= stock_type %> </h3>
+            </a>
+        </div>
+      <% end %>
+    </div>
 
-      <div class="tab-content clearfix">
-          <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
-              <%= render SharedView,
-              "stock_type.html",
-              stock_type: stock_type,
-              type_id: type_id,
-              stock_by_type: @stock_by_type,
-              stocks: stocks,
-              package: @package,
-              credits: @credits
-          %>
-          <% end %>
-      </div>
+    <div class="tab-content clearfix">
+      <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
+          <%= render SharedView,
+          "stock_type.html",
+          stock_type: stock_type,
+          type_id: type_id,
+          stock_by_type: @stock_by_type,
+          stocks: stocks,
+          package: @package,
+          credits: @credits
+      %>
+      <% end %>
+    </div>
   </div>
 
   <div class= "right-side-container">
@@ -45,8 +45,10 @@
       </div>
       <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
         <div class="credits-remaining"> <%= stock_type %> <%= gettext("remaining:") %></div>
-        <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
-          <%=  @credits[stock_type] %>
+        <span class="js-<%= stock_type %>-credit-count">
+          <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
+            <%=  @credits[stock_type] %>
+          </span>
         </span>
       <%= end %>
     </div>
