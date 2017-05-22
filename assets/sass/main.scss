@@ -1,4 +1,156 @@
+@import "vendors/meyerwebreset";
+@import "vendors/responsive-typography";
 @import "variables";
+@import "mixins";
+@import "vendors/include-media";
+// Layout
+.container {
+}
+// Food selection Layout
+.container-fluid {
+  display: flex;
+}
+.stock-selection-container {
+  width: $stockContainerWidth;
+}
+
+.right-side-container {
+  width: $nomsNcartContainerWidth;
+  margin-left: $gutterWidth;
+}
+
+.account-info-container {
+  display: flex;
+  height: $nomsContainerHeight;
+  flex-direction: column;
+}
+
+#cart {
+  height: $cartHeight;
+}
+
+.account-action-buttons {
+  display: block;
+  width: 100%
+}
+
+
+// Tab-nav layout
+.nav-tabs {
+  display: flex;
+  width: 100%;
+  a {
+    width: $stockContainerWidth/3;
+    text-align: center;
+  }
+}
+
+.tab-content{
+  .tab-pane {
+    display:none;
+
+    &.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+
+  }
+}
+.nom-type-remaining {
+  display: flex;
+  width: 100%;
+  height: $nomTypeRemainingSize;
+  justify-content: center;
+  align-items: center;
+}
+// Stock entry layout
+.stock-list {
+  display: flex;
+  flex-direction: column;
+}
+.stock-entry {
+  width: $stockContainerWidth;
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 0;
+
+  svg {
+    height: 3vh;
+  }
+}
+
+.item-details {
+  display: flex; 
+  flex-direction: row;
+
+}
+
+.stock-image-location, .stock-image {
+  width: $stockEntryImageSize;
+  height: $stockEntryImageSize;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item_control-container {
+  display: flex;
+}
+
+.quantity-available {
+  align-self: center;
+}
+
+.remove-amount-add-button-container {
+    display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-around;
+}
+
+// Font
+html {
+  font-family: $bodyFont;
+}
+
+// Modular Font-Size Calculations
+html {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
+}
+
+h1 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+}
+
+h2 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+}
+
+h3 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
+}
+
+h4 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
+}
+
+h5 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+h6 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+.add_sub-svg {
+  @include fluid-type(height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max );
+}
+
+
 
 .legend {
   .room_temperature {
@@ -24,3 +176,7 @@
      color: $freezer;
   }
 }
+
+
+
+// Layout

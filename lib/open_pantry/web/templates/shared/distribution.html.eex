@@ -5,8 +5,8 @@
   <td class="packaging">
     <%= @distribution.stock.packaging %>
   </td>
-  <td class="weight">
-    <%= @distribution.stock.weight %>
+  <td class="total-weight">
+    <%= StockDistribution.total_weight(@distribution)%>
   </td>
   <td class="js-quantity-requested">
     <%= @distribution.quantity %>

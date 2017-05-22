@@ -9,3 +9,6 @@ screenshots/*
 openpantry.dump
 *.ez
 uploads/*
+assets/css/main.css
+modified:   assets/css/main.css.map
+

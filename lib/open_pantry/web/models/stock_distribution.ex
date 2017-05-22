@@ -48,4 +48,8 @@ defmodule OpenPantry.StockDistribution do
     |> Repo.one
   end
 
+  def total_weight(%StockDistribution{stock: stock, quantity: quantity}) do
+    stock.weight && Decimal.mult(stock.weight, Decimal.new(quantity))
+  end
+
 end
