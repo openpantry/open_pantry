@@ -45,8 +45,10 @@
       </div>
       <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
         <div class="credits-remaining"> <%= stock_type %> <%= gettext("remaining:") %></div>
-        <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
-          <%=  @credits[stock_type] %>
+        <span class="js-<%= stock_type %>-credit-count">
+          <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
+            <%=  @credits[stock_type] %>
+          </span>
         </span>
       <%= end %>
     </div>

@@ -56,7 +56,7 @@ export default function(channel){
   });
 
   channel.on('current_credits', payload => {
-    $.each(payload, (type, credits) => $(`#${type}`).find('.js-credit-count').html(credits) )
+    $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
   });
 
   channel.on('update_distribution', payload => {
