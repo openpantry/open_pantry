@@ -34,13 +34,14 @@ defmodule OpenPantry.Web.UserSelectionController do
     redirect_and_notify(conn, user)
   end
 
-  def delete(conn, params) do
+  def delete(conn, _params) do
     conn
     |> clear_session
     |> delete_resp_header("authorization")
     |> Plug.Conn.delete_resp_cookie("user_id")
     |> redirect(to: "/")
   end
+
   defp name_from_params(params) do
     if Blank.blank?(params["user"]["name"]) do
       "Anonymous"

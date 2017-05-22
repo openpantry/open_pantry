@@ -64,6 +64,15 @@ defmodule OpenPantry.Stock do
     |> stockable!
   end
 
+  @spec stockable_name!(Stock.t) :: String.t
+  def stockable_name!(stock) do
+    item = stockable!(stock)
+    case item.__struct__ do
+      OpenPantry.Food -> item.longdesc
+      _ -> item.name
+    end
+  end
+
   @spec stockable_name(Stock.t) :: String.t
   def stockable_name(stock) do
     item = stockable(stock)

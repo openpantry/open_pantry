@@ -1,5 +1,4 @@
 defmodule OpenPantry.Image do
-  alias OpenPantry.Stock
   use Arc.Definition
   use Arc.Ecto.Definition
 
@@ -21,7 +20,7 @@ defmodule OpenPantry.Image do
     version
   end
 
-  def storage_dir(_, {_file, stock = %{image: image, id: id}}) when not is_nil(id) do
+  def storage_dir(_, {_file, stock = %{image: _image, id: id}}) when not is_nil(id) do
     "uploads/images/#{stock.id}"
   end
 

@@ -33,7 +33,6 @@
             <% end %>
         </div>
     </div>
-
     <div class= "right-side-container">
 
         <div class="account-info-container">
@@ -51,6 +50,44 @@
             </span>
             <%= end %>
         </div>
+  </div>
+  <div class='legend'>
+    <%= for temperature <- storage_temperatures() do %>
+      <div class='<%= temperature %>'>
+        <%= Gettext.gettext(OpenPantry.Web.Gettext, display(temperature)) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
+          <li class="<%= active(stock_type, @stock_by_type)%>">
+            <a href="#<%= stock_type %>" data-toggle="tab"> <%= stock_type %> </a>
+          </li>
+        <% end %>
+        <li>
+          <a href="#cart" data-toggle="tab"> <%= gettext("Cart") %> </a>
+        </li>
+      </ul>
+      <div class="tab-content clearfix">
+        <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
+          <%= render SharedView,
+                      "stock_type.html",
+                      stock_type: stock_type,
+                      type_id: type_id,
+                      stock_by_type: @stock_by_type,
+                      stocks: stocks,
+                      package: @package,
+                      credits: @credits
+          %>
+        <% end %>
+          <div class="tab-pane js-cart" id="cart">
+            <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
+              <%= hidden_input(f, :finalized, value: true) %>
+              <%= submit gettext("Complete your order!") %>
+            <% end %>
 
         <div class="tab-pane js-cart cart-container" id="cart">
         <h3>
@@ -69,6 +106,25 @@
                     <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
                     <% end %>
                 </tbody>
+              <%# TBD?
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+              %>
+              <thead class='table-header'>
+                <th><%= gettext("Item description") %></th>
+                <th><%= gettext("Item packaging") %></th>
+                <th><%= gettext("Weight") %></th>
+                <th><%= gettext("Quantity requested") %></th>
+              </thead>
+              <tbody>
+                <%= for distribution <- @distributions do %>
+                  <%= render SharedView, "distribution.html", distribution: distribution %>
+                <% end %>
+              </tbody>
             </table>
 
             
