@@ -58,12 +58,12 @@
         </h3>
             
             <table class='table table-striped'>
-                <thead class='table-header'>
+                <!--thead class='table-header'>
                     <th><%= gettext("Item description") %></th>
                     <th><%= gettext("Item packaging") %></th>
                     <th><%= gettext("Total Weight") %></th>
                     <th><%= gettext("Quantity requested") %></th>
-                </thead>
+                </thead-->
                 <tbody>
                     <%= for distribution <- @distributions do %>
                     <%= render OpenPantry.Web.SharedView, "distribution.html", distribution: distribution %>
