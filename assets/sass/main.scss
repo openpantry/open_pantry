@@ -37,13 +37,18 @@
 
 
 // Tab-nav layout
-.nav-tabs {
+.nav-tab-container {
   display: flex;
   width: 100%;
   a {
     width: $stockContainerWidth/3;
     text-align: center;
   }
+}
+
+.nav-tab {
+  flex-grow: 1;
+  height: $navTabHeight;
 }
 
 .tab-content{

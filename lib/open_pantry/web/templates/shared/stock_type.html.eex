@@ -1,7 +1,7 @@
 <div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= @stock_type %>">
-  <div class="nom-type-remaining js-<%= @stock_type %>-credit-count">
+  <div class="nom-type-remaining">
     <h2>
-      <%= @stock_type %> <%= gettext("Remaining:") %>
+      <%= @stock_type %> <%= gettext("remaining:") %>
       <span class="js-credit-count credit-amount" data-credit-type="<%= @type_id %>" >
         <%=  @credits[@stock_type] %>
       </span>
@@ -36,7 +36,7 @@
             <%= stock.weight %>
           </div-->
           <div class="js-available-quantity quantity-available">
-            <%= stock.quantity %> <%= gettext(" remaining") %>
+            <%= stock.quantity %> <%= gettext(" available") %>
           </div>
           <div class="item_control-container">
             <div class="remove-amount-add-button-container">
