@@ -6,7 +6,7 @@ services:
       - postgres-durable-volume:/var/lib/postgresql/data
   web:
     build: .
-    command: mix phx.server
+    command:   mix phx.server
     environment:
       DOCKER: 'true'
     volumes:

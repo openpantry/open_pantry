@@ -45,7 +45,7 @@
                 <%= button(gettext("Log out"), to: user_selection_path(@conn, :delete, @conn.assigns[:user].id, method: :delete), method: "delete", class: "btn btn-default")  %>
             </div>
             <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
-            <%= stock_type %> <%= gettext("remaining:") %>
+            <div class="credits-remaining"> <%= stock_type %> <%= gettext("remaining:") %></div>
             <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
             <%=  @credits[stock_type] %>
             </span>
