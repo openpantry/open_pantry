@@ -3,6 +3,13 @@
 @import "variables";
 @import "mixins";
 @import "vendors/include-media";
+
+.stock-entry {
+  .hidden {
+    display: none;
+  }
+}
+
 // Layout
 .container {
   display: flex;
