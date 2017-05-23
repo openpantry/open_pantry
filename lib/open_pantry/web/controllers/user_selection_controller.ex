@@ -6,7 +6,6 @@ defmodule OpenPantry.Web.UserSelectionController do
   alias OpenPantry.Facility
   @hardcoded_facility_id 1
   @unknown_language_id 184
-  @start_credit_balance 18
 
   def index(conn, _params) do
     facility = Facility.find(@hardcoded_facility_id, :users)
@@ -20,7 +19,7 @@ defmodule OpenPantry.Web.UserSelectionController do
 
   def create(conn, params) do
     user =  User.changeset(%User{}, %{name: name_from_params(params),
-                                      family_members: 1,
+                                      family_members: family_members_from_params(params),
                                       primary_language_id: @unknown_language_id,
                                       facility_id: @hardcoded_facility_id,
                                      })
@@ -28,7 +27,7 @@ defmodule OpenPantry.Web.UserSelectionController do
 
     for credit_type <- CreditType |> Repo.all do
       UserCredit.changeset(%UserCredit{},
-        %{credit_type_id: credit_type.id, user_id: user.id, balance: @start_credit_balance })
+        %{credit_type_id: credit_type.id, user_id: user.id, balance: credit_type.credits_per_period * user.family_members })
       |> Repo.insert!()
     end
     redirect_and_notify(conn, user)
@@ -47,6 +46,14 @@ defmodule OpenPantry.Web.UserSelectionController do
       "Anonymous"
     else
       params["user"]["name"]
+    end
+  end
+
+  defp family_members_from_params(params) do
+    if Blank.blank?(params["user"]["family_members"]) do
+      1
+    else
+      String.to_integer(params["user"]["family_members"])
     end
   end
 

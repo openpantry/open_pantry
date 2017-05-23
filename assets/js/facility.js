@@ -50,6 +50,11 @@ export default function(channel){
     })
   })
 
+  $('.js-add-cart').on('click', function(el){
+    el.target.classList = el.target.classList + " hidden"
+    $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
+  })
+
   channel.on('set_stock', payload => {
     const {id, quantity} = payload;
     setTotalQuantity($(`*[data-stock-id="${id}"]`), quantity);
