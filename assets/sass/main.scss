@@ -9,7 +9,8 @@
   height: 100vh
 }
 // Food selection Layout
-.container-fluid {
+.container-fluid, 
+.main{
   display: flex;
 }
 .stock-selection-container {
@@ -17,13 +18,14 @@
 }
 
 .shopping-cart-svg {
-  height: 6vh;
+  width: $gutterWidth;
   display: block;
 }
 
 .right-side-container {
   width: $nomsNcartContainerWidth;
   margin-left: $gutterWidth;
+  height: 100%
 }
 
 .account-info-container {
@@ -32,24 +34,7 @@
   flex-direction: column;
 }
 
-#cart {
-  display: flex;
-  flex-direction: column;
-}
-
-.cart-items-container {
-  display: flex; 
-  justify-content: space-between;
-  .cart-detail {
-    display: inline-block;
-  }
-}
-
-.checkout-button {
-  align-self: flex-end;
-}
-
-  .account-action-buttons {
+.account-action-buttons {
   display: block;
   width: 100%
 }
@@ -85,8 +70,6 @@
       display: flex;
       flex-direction: column;
     }
-
-
   }
 }
 .nom-type-remaining {
@@ -100,7 +83,7 @@
 .stock-list {
   display: flex;
   flex-direction: column;
-  min-height: $stockListHeight;
+  max-height: $stockListHeight;
   overflow-y: auto;
 }
 .stock-entry {
@@ -108,16 +91,12 @@
   display: flex;
   justify-content: space-between;
   margin: 1vh 0;
-
-  svg {
-    height: 3vh;
-  }
+  min-height: $stockEntryHeight;
 }
 
 .item-details {
   display: flex; 
   flex-direction: row;
-
 }
 
 .stock-image-location, .stock-image {
@@ -139,11 +118,75 @@
   align-self: center;
 }
 
+
+// Cart
+
+#cart {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-container {
+  display: flex; 
+}
+
+
+.cart-items-container {
+  display: flex; 
+  justify-content: space-between; 
+}
+
+.cart-line_entry {
+    width: $nomsNcartContainerWidth;
+  }
+
+  .cart-detail {
+    display: inline-block ;
+      }
+
+.checkout-button {
+  align-self: flex-end;
+}
+
+
+//Buttons
+button {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
 .remove-amount-add-button-container {
-    display: flex;
+ display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+button.plus-minus-button {
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: $plusMinusButtonWidth;
+}
+
+button.add-to-cart  {
+  display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: $addToCartWidth;
+}
+
+ svg.plus-svg, 
+ svg.minus-svg, 
+ svg.trashcan-svg {
+  width: $gutterWidth;
+ }
+
+.clear-action {
+  width: $trashWidth;
 }
 
 // Font

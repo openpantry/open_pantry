@@ -1,10 +1,9 @@
-<div class="js-meal-stock-row cart-items-container" data-stock-distribution-id="<%= @distribution.id %>">
+<div class="js-meal-stock-row cart-line_entry" data-stock-distribution-id="<%= @distribution.id %>">
   <div>
     <p class="js-quantity-requested cart-detail">
       <%= @distribution.quantity %>
     </p>
-    <%= gettext(" -") %>
-
+    <%= gettext("-") %>
     <p class="description cart-detail">
       <%= stock_description(@distribution.stock) %>
     </p>
@@ -12,7 +11,7 @@
   <p class="packaging cart-detail">
     <%= @distribution.stock.packaging %>
   </p>
-  <p class="total-weight cart-detail">
+  <p class="js-total-weight cart-detail">
     <%= StockDistribution.total_weight(@distribution)%>
   </p>
 

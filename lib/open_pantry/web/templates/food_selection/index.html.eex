@@ -57,7 +57,7 @@
       <h3>
         <%= gettext "Shopping Cart" %>
       </h3>
-      <div class='table table-striped'>
+      <div class='table table-striped cart-container'>
           <%= for distribution <- @distributions do %>
           <%= render SharedView, "distribution.html", distribution: distribution %>
           <% end %>

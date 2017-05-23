@@ -13,18 +13,23 @@ $breakpoints: (
 
 // layout
 $goldenRatio: 1.618;
-$navTabHeight: 5vh;
-$nomsContainerHeight: 30vh;
+$navTabHeight: 8vh;
+$nomsContainerHeight: 32vh;
 $stockContainerWidth: 100vw/$goldenRatio;
-$nomsNcartContainerWidth: 100vw-99vw/$goldenRatio;
+$nomsNcartContainerWidth: 99vw-100vw/$goldenRatio;
 
 $cartHeight: 100vh-$nomsContainerHeight;
 $stockEntryImageSize: 7vw;
 $stockEntryHeight: 10vh;
 $nomTypeRemainingSize: 12vh;
-$gutterWidth: 1vw;
+$gutterWidth: 2vw;
 $stockListHeight: 95vh - $navTabHeight - $nomTypeRemainingSize;
 
+// buttons
+$stockshoppingCartWidth: 3vw;
+$trashWidth: $gutterWidth*2;
+$plusMinusButtonWidth: 2*$gutterWidth;
+$addToCartWidth: $trashWidth + $plusMinusButtonWidth;
 
 // Font 
 $bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
