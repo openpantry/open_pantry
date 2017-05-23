@@ -43,7 +43,7 @@
               <button class="js-remove-stock plus-minus-button" type="button">
                 <svg class="minus-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><style>.cls-1{fill:#231f20;}</style></defs><title><%= gettext("Minus") %></title><path class="js-remove-stock add_sub-svg" d="M832.771,625H167.229a125,125,0,1,1,0-250H832.771a125,125,0,0,1,0,250Z"/></svg>
               </button>
-              <div class="js-current-quantity">
+              <div class="js-current-quantity item_quanitty-counter">
                 <%= quantity(stock, @package) %>
               </div>
               <button class="js-add-stock plus-minus-button" type="button">
