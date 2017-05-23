@@ -118,9 +118,7 @@
   align-self: center;
 }
 
-.item_quanitty-counter {
-  width: $plusMinusButtonWidth;
-}
+
 
 //Buttons
 button {
@@ -168,6 +166,10 @@ button.add-to-cart  {
 #cart {
   display: flex;
   flex-direction: column;
+}
+
+.cart-container {
+  display: flex; 
 }
 
 
