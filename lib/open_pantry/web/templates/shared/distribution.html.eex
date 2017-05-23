@@ -14,5 +14,4 @@
   <p class="js-total-weight cart-detail">
     <%= StockDistribution.total_weight(@distribution)%>
   </p>
-
 </div>
