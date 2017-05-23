@@ -56,7 +56,7 @@ defmodule OpenPantry.Factory do
   def credit_type_factory do
     %OpenPantry.CreditType{
       name: sequence(:credit_type_name, &"credit_type_name-#{&1}"),
-      credits_per_period: 18,
+      credits_per_period: 180,
       period_name: sequence(:period_name, &"period_name-#{&1}"),
       food_groups: [build(:food_group)]
     }
@@ -64,7 +64,7 @@ defmodule OpenPantry.Factory do
 
   def user_credit_factory do
     %OpenPantry.UserCredit{
-      balance: 18,
+      balance: 180,
       user: build(:user),
       credit_type: build(:credit_type)
     }

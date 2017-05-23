@@ -12,7 +12,9 @@
         <label>
           Name: <%= text_input f, :name %>
         </label>
-
+        <label>
+          Family members (default to 1): <%= number_input f, :family_members %>
+        </label>
         <%= submit "Submit" %>
       <% end %>
     </div>
