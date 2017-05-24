@@ -8,7 +8,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class = "stock-list">
 <%= for stock <- @stocks do %>
     <tr>
       <td><%= OpenPantry.Stock.stockable_name(stock) %></td>

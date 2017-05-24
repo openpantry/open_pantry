@@ -1,6 +1,6 @@
 <h2>Show stock</h2>
 
-<ul>
+<ul class="manage_stocks-list">
 
   <li>
     <strong>Name:</strong>

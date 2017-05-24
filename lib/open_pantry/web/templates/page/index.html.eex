@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-lg-6">
     <h4>Languages</h4>
-    <ul>
+    <ul class="flex-column">
       <%= for language <-  @languages do %>
         <li>
           <a href="<%= food_selection_path(@conn, :index, language.iso_code) %>"><%= language.native_name %></a> ( <%= language.english_name %> )

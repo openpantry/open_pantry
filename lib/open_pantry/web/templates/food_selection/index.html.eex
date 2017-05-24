@@ -37,7 +37,7 @@
   <div class= "right-side-container">
     <div class="account-info-container">
       <h4>
-        <%= gettext "Thank you for so much logging in!" %>
+        <%= gettext "Thank you for testing our Beta app!" %>
       </h4>
       <div class="account-action-buttons">
           <a class="btn btn-default" href="<%= page_path(@conn, :index, @conn.assigns.locale ) %>"><%= gettext "Back" %></a>
@@ -57,17 +57,14 @@
       <h3>
         <%= gettext "Shopping Cart" %>
       </h3>
-      <div class='table table-striped js-stock-list'>
+      <div class='table table-striped js-stock-list cart-items-container'>
           <%= for distribution <- @distributions do %>
           <%= render SharedView, "distribution.html", distribution: distribution %>
           <% end %>
       </div>
-      <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), fn f -> %>
+      <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button "], fn f -> %>
       <%= hidden_input(f, :finalized, value: true) %>
-        <object type="" data="" >
-          <param name="../" value="">
-        </object>
-      <span class="checkout-button"><%= submit gettext("Complete your order!") %></span>
+      <h3 class="checkout-button btn-primary">Complete your order!</h3>
       <% end %>
     </div>
   </div>
