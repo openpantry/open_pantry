@@ -14,9 +14,9 @@
 
 </ul>
 
-<table class="table table-striped">
+<table class="table table-striped orders-table clear-user-agent-styles">
   <thead>
-    <tr>
+    <tr class="orders-table">
       <th>Image</th>
       <th>Quantity</th>
       <th>Name</th>
@@ -29,10 +29,10 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="orders-table"">
     <%= for stock_distribution <- @order.stock_distributions do %>
-        <tr>
-          <td class="image">
+        <tr class="orders-table">
+          <td>
             <%= if stock_distribution.stock.image do %>
               <%= img_tag(image_url(stock_distribution.stock), class: "stock-image") %>
             <% end %>
@@ -50,12 +50,12 @@
   </tbody>
 </table>
 
-<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), fn f -> %>
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), [class: "btn-primary"], fn f -> %>
   <%= hidden_input(f, :finalized, value: !@order.finalized) %>
   <%= submit "Update Finalized to  #{!@order.finalized}" %>
 <% end %>
 
-<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), fn f -> %>
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), [class: "btn-primary"], fn f -> %>
   <%= hidden_input(f, :ready_for_pickup, value: !@order.ready_for_pickup) %>
   <%= submit "Update Ready for pickup to #{!@order.ready_for_pickup}" %>
 <% end %>

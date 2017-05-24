@@ -7,7 +7,7 @@
 <%= link "All", to: user_order_path(@conn, :index, all: true) %>
 
 
-<table class="table table-striped">
+<table class="table table-striped orders-choose_user">
   <thead>
     <tr>
       <th>Name/ID</th>
@@ -18,7 +18,7 @@
   </thead>
   <tbody>
 <%= for order <- @orders do %>
-    <tr>
+    <tr class="orders-single_entry">
       <td><%= order.user.name %>, id: <%= order.user.id %></td>
       <td><%= order.finalized %></td>
       <td><%= order.ready_for_pickup %></td>
