@@ -9,9 +9,9 @@ defmodule OpenPantry.Stock do
   alias OpenPantry.StockDistribution
   schema "stocks" do
     field :quantity, :integer
-    field :arrival, Ecto.DateTime
-    field :expiration, Ecto.DateTime
     field :override_text, :string
+    field :arrival, Ecto.Date
+    field :expiration, Ecto.Date
     field :reorder_quantity, :integer
     field :weight, :decimal
     field :aisle, :string

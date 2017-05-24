@@ -26,13 +26,13 @@
 
   <div class="form-group">
     <%= label f, :arrival, class: "control-label" %>
-    <%= datetime_select f, :arrival, class: "form-control" %>
+    <%= date_select f, :arrival, class: "form-control" %>
     <%= error_tag f, :arrival %>
   </div>
 
   <div class="form-group">
     <%= label f, :expiration, class: "control-label" %>
-    <%= datetime_select f, :expiration, class: "form-control" %>
+    <%= date_select f, :expiration, class: "form-control" %>
     <%= error_tag f, :expiration %>
   </div>
 
