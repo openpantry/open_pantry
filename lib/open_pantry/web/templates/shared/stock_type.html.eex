@@ -25,7 +25,12 @@
                 <h5><%= stock.packaging %></h5>
               </div>
               <div>
-                <h5 class="js-credit-cost"><%= gettext("Price: ") %><%= stock.credits_per_package %> <%= gettext(" noms") %></h5>
+                <h5><%= gettext("Price: ") %>
+                  <span class="js-credit-cost">
+                    <%= stock.credits_per_package %>
+                  </span>
+                  <%= gettext(" noms") %>
+                </h5>
               </div>
             </div>
           </div>
@@ -48,7 +53,7 @@
                   <%= quantity(stock, @package) %>
                 </div>
                 <button class="js-add-stock plus-minus-button" type="button">
-                  <svg class="plus-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><style>.cls-1{fill:#231f20;}</style></defs><title> <%= gettext("Plus") %></title><path class=" js-add-stock add_sub-svg" d="M832.771,375H625V167.229a125,125,0,1,0-250,0V375H167.229a125,125,0,1,0,0,250H375V832.771a125,125,0,0,0,250,0V625H832.771a125,125,0,0,0,0-250Z"/></svg>
+                  <svg class="plus-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><style>.cls-1{fill:#231f20;}</style></defs><title> <%= gettext("Plus") %></title><path class=" add_sub-svg" d="M832.771,375H625V167.229a125,125,0,1,0-250,0V375H167.229a125,125,0,1,0,0,250H375V832.771a125,125,0,0,0,250,0V625H832.771a125,125,0,0,0,0-250Z"/></svg>
                 </button>
               </div>
               <button class="clear-action js-clear-stock" type="button">
