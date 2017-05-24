@@ -62,9 +62,9 @@
           <%= render SharedView, "distribution.html", distribution: distribution %>
           <% end %>
       </div>
-      <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button "], fn f -> %>
+      <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button"], fn f -> %>
       <%= hidden_input(f, :finalized, value: true) %>
-      <h3 class="checkout-button btn-primary">Complete your order!</h3>
+      <h3 class="checkout-button">Complete your order!</h3>
       <% end %>
     </div>
   </div>
