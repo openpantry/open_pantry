@@ -54,7 +54,7 @@
     </div>
 
     <div class="tab-pane js-cart cart-container" id="cart">
-      <h3>
+      <h3 class="cart-heading">
         <%= gettext "Shopping Cart" %>
       </h3>
       <div class='table table-striped js-stock-list cart-items-container'>
@@ -64,7 +64,7 @@
       </div>
       <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button"], fn f -> %>
       <%= hidden_input(f, :finalized, value: true) %>
-      <%= gettext "Complete your order!" %>
+      <%= submit gettext("Complete your order!") %>
       <% end %>
     </div>
   </div>
