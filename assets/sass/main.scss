@@ -52,7 +52,7 @@
   button.btn.btn-default {
     margin: 0.5rem;
     padding: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: textColor;
     text-decoration: none;
     border: 2px solid $textColor;
@@ -154,6 +154,7 @@
 
 button.btn-primary {
   border: 1px solid $textColor;
+  border-radius: 5px;
   padding: .2rem;
 }
 button {
@@ -207,7 +208,6 @@ button.add-to-cart  {
 
 .cart-container {
   display: flex; 
-
 }
 
 
@@ -232,11 +232,13 @@ button.add-to-cart  {
   }
 
 .checkout-button {
+  color: white;
   padding: $gutterWidth;
 }
 
 form.shopping_cart-button {
-  border: 1px solid $textColor;
+  // border: 1px solid $textColor;
+  background-color: #2A2A2A;
   width: 100%;
   text-align: center;
   align-self: center;
@@ -252,10 +254,26 @@ main {
   display: block;
 }
 
-input.form-control {
+input.form-control, 
+#user_family_members {
   box-shadow: inset 0 0 0.1rem 0 rgba(0,0,0,0.5);
 }
 
+// User selection/entry
+// 
+ul.user-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.h2-heading {
+  margin: 1vw;
+}
+
+.h3-heading {
+  margin: 1vw;
+  display: block;
+}
 
 // Font
 html {
@@ -274,7 +292,7 @@ h1 {
 
 h2 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
-  margin: $gutterWidth ;
+  margin: $gutterWidth;
 }
 
 h3 {
