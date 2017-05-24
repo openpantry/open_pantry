@@ -13,6 +13,7 @@ defmodule OpenPantry.FoodSelection.Stock do
     field :quantity, :integer
     field :arrival, Ecto.DateTime
     field :expiration, Ecto.DateTime
+    field :override_text, :string
     field :packaging, :string
     field :credits_per_package, :integer
     field :weight, :decimal

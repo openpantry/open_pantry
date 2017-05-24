@@ -11,6 +11,7 @@ defmodule OpenPantry.Stock do
     field :quantity, :integer
     field :arrival, Ecto.DateTime
     field :expiration, Ecto.DateTime
+    field :override_text, :string
     field :reorder_quantity, :integer
     field :weight, :decimal
     field :aisle, :string
@@ -37,7 +38,7 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
+    |> cast(params, [:quantity, :override_text, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
     |> cast_attachments(params, ~w(image)a)
     |> validate_required([:quantity, :facility_id, :storage])
     |> validate_stockable
