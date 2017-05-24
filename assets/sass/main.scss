@@ -231,10 +231,6 @@ button.add-to-cart  {
     display: inline-block ;
   }
 
-.checkout-button {
-  color: white;
-  padding: $gutterWidth;
-}
 
 form.shopping_cart-button {
   // border: 1px solid $textColor;
@@ -242,6 +238,8 @@ form.shopping_cart-button {
   width: 100%;
   text-align: center;
   align-self: center;
+  color: white;
+  padding: $gutterWidth;
 }
 
 // Manage pages
