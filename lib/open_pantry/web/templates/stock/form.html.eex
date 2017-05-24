@@ -25,6 +25,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :override_text, class: "control-label" %>
+    <%= text_input f, :override_text, class: "form-control" %>
+    <%= error_tag f, :override_text %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :arrival, class: "control-label" %>
     <%= date_select f, :arrival, class: "form-control" %>
     <%= error_tag f, :arrival %>
