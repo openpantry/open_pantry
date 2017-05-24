@@ -202,8 +202,11 @@ button.add-to-cart  {
 #cart {
   display: flex;
   flex-direction: column;
-  padding: 1vw;
   border-top: 1vw solid black;
+}
+
+.cart-heading {
+  padding: 1vw;
 }
 
 .cart-container {
@@ -219,12 +222,12 @@ button.add-to-cart  {
   justify-content: flex-start; 
   padding: 1vh 1vh 0;
   overflow-y: auto;
-  height: 48vh;
+  height: 44.35vh;
 }
 
 .cart-line_entry {
   margin: 0.2vh 0;
-  max-height: 1.5rem;
+  max-height: 1.2rem;
 }
 
 .cart-detail {
@@ -232,10 +235,11 @@ button.add-to-cart  {
   }
 
 
-form.shopping_cart-button {
+form.shopping_cart-button  button{
   // border: 1px solid $textColor;
+  font-size: 1.5rem;
   background-color: #2A2A2A;
-  width: 100%;
+  width: $nomsNcartContainerWidth;
   text-align: center;
   align-self: center;
   color: white;
