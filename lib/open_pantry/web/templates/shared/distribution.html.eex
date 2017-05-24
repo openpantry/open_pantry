@@ -1,5 +1,5 @@
 <div class="js-meal-stock-row cart-line_entry" data-stock-distribution-id="<%= @distribution.id %>">
-  <div>
+  <div class="cart-line_entry" >
     <p class="js-quantity-requested cart-detail">
       <%= @distribution.quantity %>
     </p>

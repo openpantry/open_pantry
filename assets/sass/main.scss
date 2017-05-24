@@ -30,20 +30,37 @@
 }
 
 .right-side-container {
-  width: $nomsNcartContainerWidth;
-  margin-left: $gutterWidth;
-  height: 100%
+  border-left: $gutterWidth/2 solid $textColor;;
+  width: $nomsNcartContainerWidth - 1vw;
+  height: 100vh;
 }
 
 .account-info-container {
   display: flex;
-  height: $nomsContainerHeight;
+  height: $nomsContainerHeight - 3vh;
   flex-direction: column;
+  justify-content: space-around;
+  padding: 1vw;
 }
 
 .account-action-buttons {
-  display: block;
-  width: 100%
+  display: flex ;
+  width: 100%;
+  justify-content: space-around;
+
+  a.btn.btn-default,
+  button.btn.btn-default {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    color: textColor;
+    text-decoration: none;
+    border: 2px solid $textColor;
+    border-radius: 1vh;
+    text-align: center;
+    line-height: normal;
+  }
+
 }
 
 
@@ -111,7 +128,8 @@
   height: $stockEntryImageSize;
 }
 
-.item-info {
+.item-info, 
+.flex-column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -121,6 +139,11 @@
   display: flex;
 }
 
+.quantity_control_trash-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .quantity-available {
   align-self: center;
 }
@@ -128,6 +151,11 @@
 
 
 //Buttons
+
+button.btn-primary {
+  border: 1px solid $textColor;
+  padding: .2rem;
+}
 button {
   background: transparent;
   border: none;
@@ -173,35 +201,66 @@ button.add-to-cart  {
 #cart {
   display: flex;
   flex-direction: column;
+  padding: 1vw;
+  border-top: 1vw solid black;
 }
 
 .cart-container {
   display: flex; 
+
 }
 
 
 .cart-items-container {
+  margin-top: 2vh;
   display: flex; 
-  justify-content: space-between; 
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start; 
+  padding: 1vh 1vh 0;
+  overflow-y: auto;
+  height: 48vh;
 }
 
 .cart-line_entry {
-    width: $nomsNcartContainerWidth;
-  }
-
-  .cart-detail {
-    display: inline-block ;
-      }
-
-.checkout-button {
-  align-self: flex-end;
+  margin: 0.2vh 0;
+  max-height: 1.5rem;
 }
 
+.cart-detail {
+    display: inline-block ;
+  }
+
+.checkout-button {
+  padding: $gutterWidth;
+}
+
+form.shopping_cart-button {
+  border: 1px solid $textColor;
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+// Manage pages
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group{
+  display: block;
+}
+
+input.form-control {
+  box-shadow: inset 0 0 0.1rem 0 rgba(0,0,0,0.5);
+}
 
 
 // Font
 html {
   font-family: $bodyFont;
+  color: $textColor;
 }
 
 // Modular Font-Size Calculations
@@ -215,6 +274,7 @@ h1 {
 
 h2 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+  margin: $gutterWidth ;
 }
 
 h3 {

@@ -25,7 +25,7 @@
                 <h5><%= stock.packaging %></h5>
               </div>
               <div>
-                <h4 class="js-credit-cost"><%= stock.credits_per_package %></h4>
+                <h5 class="js-credit-cost"><%= gettext("Price: ") %><%= stock.credits_per_package %> <%= gettext(" noms") %></h5>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <span class="js-available-quantity"><%= stock.quantity %></span> <%= gettext(" available") %>
           </div>
           <div class="item_control-container">
-            <div class="js-quantity-control <%= hidden_quantity(stock, @package) %>">
+            <div class="js-quantity-control <%= hidden_quantity(stock, @package) %>  quantity_control_trash-container">
               <div class="remove-amount-add-button-container">
                 <button class="js-remove-stock plus-minus-button" type="button">
                   <svg class="minus-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><style>.cls-1{fill:#231f20;}</style></defs><title><%= gettext("Minus") %></title><path class="js-remove-stock add_sub-svg" d="M832.771,625H167.229a125,125,0,1,1,0-250H832.771a125,125,0,0,1,0,250Z"/></svg>
