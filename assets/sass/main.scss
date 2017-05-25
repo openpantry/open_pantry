@@ -31,7 +31,7 @@
 
 .right-side-container {
   border-left: $gutterWidth/2 solid $textColor;;
-  width: $nomsNcartContainerWidth - 1vw;
+  width: $nomsNcartContainerWidth;
   height: 100vh;
 }
 
@@ -40,7 +40,7 @@
   height: $nomsContainerHeight - 3vh;
   flex-direction: column;
   justify-content: space-around;
-  padding: 1vw;
+  padding: 2vh 1vw;
 }
 
 .account-action-buttons {
@@ -53,7 +53,7 @@
     margin: 0.5rem;
     padding: 0.5rem;
     font-size: 1rem;
-    color: textColor;
+    color: $textColor;
     text-decoration: none;
     border: 2px solid $textColor;
     border-radius: 1vh;
@@ -244,11 +244,12 @@ button.add-to-cart  {
 #cart {
   display: flex;
   flex-direction: column;
-  border-top: 1vw solid black;
+  border-top: 2vh solid black;
+  height: 65vh
 }
 
 .cart-heading {
-  padding: 1vw;
+  padding: 2vh;
 }
 
 .cart-container {
@@ -262,9 +263,9 @@ button.add-to-cart  {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start; 
-  padding: 1vh 1vh 0;
+  padding: 1vh  0 0 1vh;
   overflow-y: auto;
-  height: 44.35vh;
+  height: 58vh;
 }
 
 .cart-line_entry {
