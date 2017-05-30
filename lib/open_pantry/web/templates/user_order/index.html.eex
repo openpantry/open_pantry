@@ -18,14 +18,11 @@
   </thead>
   <tbody>
 <%= for order <- @orders do %>
-    <tr class="orders-single_entry">
-      <td><%= order.user.name %>, id: <%= order.user.id %></td>
-      <td><%= order.finalized %></td>
-      <td><%= order.ready_for_pickup %></td>
-      <td class="text-right">
-        <%= link "Show/edit order", to: user_order_path(@conn, :show, order), class: "btn btn-default btn-xs" %>
-      </td>
-    </tr>
+  <%= render SharedView,
+  "user_order_details.html",
+  order: order,
+  conn: @conn
+  %>
 <% end %>
   </tbody>
 </table>
