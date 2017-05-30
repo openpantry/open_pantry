@@ -4,7 +4,7 @@ defmodule OpenPantry.Web.UserOrderController do
   alias OpenPantry.UserOrder
 
   def index(conn, params) do
-    render(conn, "index.html", orders: orders_for_params(params))
+    render(conn, "index.html", orders: orders_for_params(params), conn: conn)
   end
 
   def show(conn, %{"id" => id}) do

@@ -3,6 +3,8 @@ defmodule OpenPantry.Web.FoodSelectionController do
   alias OpenPantry.User
   alias OpenPantry.UserOrder
   alias OpenPantry.FoodSelection
+  alias OpenPantry.Web.SharedView
+  alias OpenPantry.Web.Endpoint
   require IEx
   def index(conn, _params) do
     user = conn.assigns.user |> Repo.preload(:facility)
@@ -18,13 +20,15 @@ defmodule OpenPantry.Web.FoodSelectionController do
                                 user_order: UserOrder.changeset(user_order)
   end
   def update(conn, params = %{"id" => id}) do
-    UserOrder.find(String.to_integer(id))
+    UserOrder.find(String.to_integer(id), [:user, [user: :facility]])
     |> UserOrder.changeset(permitted_params(params))
     |> Repo.update
     |> handle_result(conn)
   end
 
-  defp handle_result({:ok, _}, conn) do
+  defp handle_result({:ok, user_order}, conn) do
+    facility = user_order.user.facility
+    Endpoint.broadcast("facility:#{facility.id}", "order_update", %{"html" => SharedView.render_order_link(user_order, conn)})
     conn
     |> put_flash(:info, gettext("Your order has been finalized!"))
     |> Plug.Conn.delete_resp_cookie("user_id")
