@@ -64,6 +64,10 @@ export default function(channel){
     $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
   });
 
+  channel.on('order_update', payload => {
+    $('.js-user-orders').prepend(payload.html)
+  });
+
   channel.on('update_distribution', payload => {
     const {id, html} = payload;
     const $html = $(html)
