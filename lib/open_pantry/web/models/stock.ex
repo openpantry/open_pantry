@@ -9,8 +9,9 @@ defmodule OpenPantry.Stock do
   alias OpenPantry.StockDistribution
   schema "stocks" do
     field :quantity, :integer
-    field :arrival, Ecto.DateTime
-    field :expiration, Ecto.DateTime
+    field :override_text, :string
+    field :arrival, Ecto.Date
+    field :expiration, Ecto.Date
     field :reorder_quantity, :integer
     field :weight, :decimal
     field :aisle, :string
@@ -37,7 +38,7 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
+    |> cast(params, [:quantity, :override_text, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
     |> cast_attachments(params, ~w(image)a)
     |> validate_required([:quantity, :facility_id, :storage])
     |> validate_stockable
@@ -52,8 +53,8 @@ defmodule OpenPantry.Stock do
   @spec stock_description(Stock.t) :: String.t
   def stock_description(stock) do
     loaded_stock = stockable_load(stock)
-    (loaded_stock.food && loaded_stock.food.longdesc)    ||
-    (loaded_stock.meal && loaded_stock.meal.description) ||
+    (loaded_stock.food && loaded_stock.override_text || loaded_stock.food.longdesc)    ||
+    (loaded_stock.meal && loaded_stock.meal.description)                               ||
     (loaded_stock.offer && loaded_stock.offer.description)
   end
 
@@ -62,6 +63,15 @@ defmodule OpenPantry.Stock do
     stock
     |> stockable_load
     |> stockable!
+  end
+
+  @spec stockable_name!(Stock.t) :: String.t
+  def stockable_name!(stock) do
+    item = stockable!(stock)
+    case item.__struct__ do
+      OpenPantry.Food -> item.longdesc
+      _ -> item.name
+    end
   end
 
   @spec stockable_name(Stock.t) :: String.t

@@ -1,0 +1,28 @@
+<h2>Listing orders</h2>
+
+<%= link "Finalized, not ready (default)", to: user_order_path(@conn, :index) %>
+<br/>
+<%= link "Ready for pickup", to: user_order_path(@conn, :index, ready: true) %>
+<br/>
+<%= link "All", to: user_order_path(@conn, :index, all: true) %>
+
+
+<table class="table table-striped orders-choose_user">
+  <thead>
+    <tr>
+      <th>Name/ID</th>
+      <th>Finalized</th>
+      <th>Ready for Pickup</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="js-user-orders">
+<%= for order <- @orders do %>
+  <%= render SharedView,
+  "user_order_details.html",
+  order: order,
+  conn: @conn
+  %>
+<% end %>
+  </tbody>
+</table>

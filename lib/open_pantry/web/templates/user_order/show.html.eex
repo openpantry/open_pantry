@@ -1,0 +1,63 @@
+<h2>Show order</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @order.user.name %>
+    <strong>ID:</strong>
+    <%= @order.user.id %>
+  </li>
+  <li>
+    Finalized: <%= @order.finalized %>, Ready for Pickup: <%= @order.ready_for_pickup %>
+  </li>
+
+</ul>
+
+<table class="table table-striped orders-table clear-user-agent-styles">
+  <thead>
+    <tr class="orders-table">
+      <th>Image</th>
+      <th>Quantity</th>
+      <th>Name</th>
+      <th>Weight</th>
+      <th>Aisle</th>
+      <th>Row</th>
+      <th>Shelf</th>
+      <th>Packaging</th>
+      <th>Storage</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="orders-table"">
+    <%= for stock_distribution <- @order.stock_distributions do %>
+        <tr class="orders-table">
+          <td>
+            <%= if stock_distribution.stock.image do %>
+              <%= img_tag(image_url(stock_distribution.stock), class: "stock-image") %>
+            <% end %>
+          </td>
+          <td><%= stock_distribution.quantity %></td>
+          <td><%= OpenPantry.Stock.stockable_name!(stock_distribution.stock) %></td>
+          <td><%= stock_distribution.stock.weight %></td>
+          <td><%= stock_distribution.stock.aisle %></td>
+          <td><%= stock_distribution.stock.row %></td>
+          <td><%= stock_distribution.stock.shelf %></td>
+          <td><%= stock_distribution.stock.packaging %></td>
+          <td><%= stock_distribution.stock.storage %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), [class: "btn-primary"], fn f -> %>
+  <%= hidden_input(f, :finalized, value: !@order.finalized) %>
+  <%= submit "Update Finalized to  #{!@order.finalized}" %>
+<% end %>
+
+<%= form_for OpenPantry.UserOrder.changeset(@order), food_selection_path(@conn, :update, "en", @order.id), [class: "btn-primary"], fn f -> %>
+  <%= hidden_input(f, :ready_for_pickup, value: !@order.ready_for_pickup) %>
+  <%= submit "Update Ready for pickup to #{!@order.ready_for_pickup}" %>
+<% end %>
+
+<%= link "Back", to: user_order_path(@conn, :index) %>

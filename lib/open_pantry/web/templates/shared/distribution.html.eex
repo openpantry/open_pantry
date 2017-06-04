@@ -1,14 +1,17 @@
-<tr class="js-meal-stock-row" data-stock-distribution-id="<%= @distribution.id %>">
-  <td class="description">
-    <%= stock_description(@distribution.stock) %>
-  </td>
-  <td class="packaging">
+<div class="js-meal-stock-row cart-line_entry" data-stock-distribution-id="<%= @distribution.id %>">
+  <div class="cart-line_entry" >
+    <p class="js-quantity-requested cart-detail">
+      <%= @distribution.quantity %>
+    </p>
+    <%= gettext("-") %>
+    <p class="description cart-detail">
+      <%= stock_description(@distribution.stock) %>
+    </p>
+  </div>
+  <p class="packaging cart-detail">
     <%= @distribution.stock.packaging %>
-  </td>
-  <td class="weight">
-    <%= @distribution.stock.weight %>
-  </td>
-  <td class="js-quantity-requested">
-    <%= @distribution.quantity %>
-  </td>
-</tr>
+  </p>
+  <p class="js-total-weight cart-detail">
+    <%= StockDistribution.total_weight(@distribution)%>
+  </p>
+</div>

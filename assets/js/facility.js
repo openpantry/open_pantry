@@ -43,9 +43,16 @@ export default function(channel){
 
 
   $('.js-stock-row').on('click', function(el){
-    if (fn = handlers[el.target.className]){
-      fn($(el.currentTarget));
-    };
+    el.target.classList.forEach(function(className){
+      if (fn = handlers[className]){
+        fn($(el.currentTarget));
+      };
+    })
+  })
+
+  $('.js-add-cart').on('click', function(el){
+    el.target.classList = el.target.classList + " hidden"
+    $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
   })
 
   channel.on('set_stock', payload => {
@@ -54,7 +61,11 @@ export default function(channel){
   });
 
   channel.on('current_credits', payload => {
-    $.each(payload, (type, credits) => $(`#${type}`).find('.js-credit-count').html(credits) )
+    $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
+  });
+
+  channel.on('order_update', payload => {
+    $('.js-user-orders').prepend(payload.html)
   });
 
   channel.on('update_distribution', payload => {
@@ -68,7 +79,7 @@ export default function(channel){
     } else if (existing.length && quantity == 0) {
       $(existing).remove()
     } else {
-      $('.js-cart').find('tbody').append(html)
+      $('.js-cart').find('.js-stock-list').append(html)
     }
   });
 

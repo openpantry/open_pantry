@@ -9,6 +9,19 @@
 
     <title>Welcome to OpenPantry!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <!-- Hotjar Tracking Code for http://open-pantry.herokuapp.com/ -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:512073,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    
   </head>
 
   <body>
@@ -29,7 +42,7 @@
 
     </div> <!-- /container -->
     <script>window.userToken = "<%= assigns[:user_token] %>";
-            window.facilityId = <%= assigns[:facility_id] %>;
+            window.facilityId = <%= assigns[:facility_id] || 1 %>;
     </script>
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -37,5 +50,10 @@
       crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+      $('.select2').select2();
+    </script>
   </body>
 </html>
