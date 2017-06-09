@@ -40,10 +40,11 @@
           <div class="weight">
             <%= stock.weight %>
           </div-->
-          <div class=" quantity-available">
-            <span class="js-available-quantity"><%= stock.quantity %></span> <%= gettext(" available") %>
-          </div>
+
           <div class="item_control-container">
+            <div class=" quantity-available">
+              <span class="js-available-quantity"><%= stock.quantity %></span> <%= gettext(" available") %>
+            </div>
             <div class="js-quantity-control <%= hidden_quantity(stock, @package) %>  quantity_control_trash-container">
               <div class="remove-amount-add-button-container">
                 <button class="js-remove-stock plus-minus-button" type="button">

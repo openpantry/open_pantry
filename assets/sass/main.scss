@@ -115,7 +115,8 @@
   width: $stockContainerWidth;
   display: flex;
   justify-content: space-between;
-  margin: 1vh 0;
+  align-items: center;
+  margin: .5vh 0;
   min-height: $stockEntryHeight;
 }
 
@@ -134,10 +135,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: $gutterWidth;
 }
 
 .item_control-container {
   display: flex;
+  margin-right: $gutterWidth;
 }
 
 .quantity_control_trash-container {
@@ -147,6 +150,7 @@
 
 .quantity-available {
   align-self: center;
+  margin-right: $gutterWidth;
 }
 
 // 
