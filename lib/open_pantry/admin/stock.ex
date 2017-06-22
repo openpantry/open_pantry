@@ -15,6 +15,8 @@ defmodule OpenPantry.ExAdmin.Stock do
         input stock, :row
         input stock, :shelf
         input stock, :credits_per_package
+        input stock, :max_per_package
+        input stock, :max_per_person
         input stock, :storage, RefrigerationEnum
         input stock, :image, OpenPantry.Image.Type
         input stock, :food, collection: OpenPantry.Food.all
