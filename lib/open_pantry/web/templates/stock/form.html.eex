@@ -84,6 +84,17 @@
     <%= error_tag f, :credits_per_package %>
   </div>
 
+  <div class="form-group">
+    <%= label f, :max_per_package, class: "control-label" %>
+    <%= number_input f, :max_per_package, class: "form-control" %>
+    <%= error_tag f, :max_per_package %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :max_per_person, class: "control-label" %>
+    <%= number_input f, :max_per_person, class: "form-control" %>
+    <%= error_tag f, :max_per_person %>
+  </div>
 
   <div class="form-group">
     <%= label f, :storage, class: "control-label" %>
