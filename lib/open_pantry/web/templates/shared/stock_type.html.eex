@@ -10,7 +10,11 @@
   <div class='js-stock-list table table-striped'>
     <div class=" stock-list">
       <%= for stock <- @stocks do %>
-        <div class="js-stock-row stock-entry <%= stock.storage %>" data-stock-id="<%= stock.id %>">
+        <div  class="js-stock-row stock-entry <%= stock.storage %>"
+              data-stock-id="<%= stock.id %>"
+              data-max-allowed="<%= max_allowed(stock, @family_members) %>"
+              data-max-allowed-message="<%= gettext("Max allowed") %>"
+              >
           <div class="item-details">
             <div class="stock-image-location">
               <%= if stock.image do %>
