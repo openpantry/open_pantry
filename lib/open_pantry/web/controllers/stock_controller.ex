@@ -37,7 +37,7 @@ defmodule OpenPantry.Web.StockController do
   end
 
   def update(conn, %{"id" => id, "stock" => stock_params}) do
-    stock = Repo.get!(Stock, id)
+    stock = Stock.find(String.to_integer(id), [:facility])
     changeset = Stock.changeset(stock, stock_params)
 
     case Repo.update(changeset) do
