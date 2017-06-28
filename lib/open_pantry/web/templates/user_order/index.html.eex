@@ -1,4 +1,4 @@
-<h2>Listing orders</h2>
+ <h2>Listing orders</h2>
 
 <%= link "Finalized, not ready (default)", to: user_order_path(@conn, :index) %>
 <br/>
