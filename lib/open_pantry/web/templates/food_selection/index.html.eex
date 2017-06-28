@@ -12,7 +12,7 @@
     <div class="nav nav-tab-container">
       <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
         <div class="<%= active(stock_type, @stock_by_type)%>">
-            <a class="nav-tab" href="#<%= stock_type %>" data-toggle="tab"> 
+            <a class="nav-tab" href="#<%= stock_type %>" data-toggle="tab">
               <h3><%= stock_type %> </h3>
             </a>
         </div>
@@ -28,7 +28,8 @@
           stock_by_type: @stock_by_type,
           stocks: stocks,
           package: @package,
-          credits: @credits
+          credits: @credits,
+          family_members: @conn.assigns[:user].family_members
       %>
       <% end %>
     </div>

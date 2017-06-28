@@ -4,7 +4,9 @@ defmodule OpenPantry.Web.UserOrderController do
   alias OpenPantry.UserOrder
 
   def index(conn, params) do
-    render(conn, "index.html", orders: orders_for_params(params))
+    conn
+    |> setup_channel_credentials(params)
+    |> render("index.html", orders: orders_for_params(params), conn: conn)
   end
 
   def show(conn, %{"id" => id}) do
@@ -24,5 +26,14 @@ defmodule OpenPantry.Web.UserOrderController do
   defp orders_for_params(_) do
     UserOrder.all(:user)
     |> Enum.filter(&(&1.finalized && !&1.ready_for_pickup))
+  end
+
+
+  @doc """
+    Temporary hack while hardcoding to facility 1, but needs some kind of user token for websocket auth
+  """
+  defp setup_channel_credentials(conn, _params) do
+    conn
+    |> assign(:user_token, Phoenix.Token.sign(conn, "user socket", 1))
   end
 end

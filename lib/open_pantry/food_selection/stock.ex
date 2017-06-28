@@ -19,6 +19,8 @@ defmodule OpenPantry.FoodSelection.Stock do
     field :weight, :decimal
     field :storage, RefrigerationEnum
     field :image, OpenPantry.Image.Type
+    field :max_per_person, :integer
+    field :max_per_package, :integer
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
