@@ -38,11 +38,6 @@ defmodule OpenPantry.Mixfile do
      {:phoenix_ecto,        "~> 3.0"},
      {:postgrex,            ">= 0.0.0"},
      {:phoenix_html,        "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0",   only: :dev},
-     {:credo,               "~> 0.5",   only: [:dev, :test]},
-     {:dialyxir,            "~> 0.5",   only: [:dev, :test], runtime: false},
-     {:ex_machina,          "~> 2.0",   only: [:dev, :test]},
-     {:wallaby,             "~> 0.16",  only: :test},
      {:ex_admin,            git: "https://github.com/smpallen99/ex_admin.git", branch: "phx-1.3"},
      {:gettext,             "~> 0.11"},
      {:geo,                 "~> 1.3"},
@@ -55,7 +50,14 @@ defmodule OpenPantry.Mixfile do
      {:poison,              "~> 3.1" },
      {:sweet_xml,           "~> 0.6" },
      {:logger_file_backend, "~> 0.0.9"},
-     {:cowboy,              "~> 1.0"}
+     {:cowboy,              "~> 1.0"},
+     {:guardian,            "~> 0.14"},
+     {:wallaby,             "~> 0.17",  only: :test},
+     {:phoenix_live_reload, "~> 1.0",   only: :dev},
+     {:credo,               "~> 0.5",   only: [:dev, :test]},
+     {:dialyxir,            "~> 0.5",   only: [:dev, :test], runtime: false},
+     {:ex_machina,          "~> 2.0",   only: [:dev, :test]},
+     {:cortex,              "~> 0.1",   only: [:dev, :test]}
    ]
   end
 
