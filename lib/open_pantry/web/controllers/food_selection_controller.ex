@@ -31,7 +31,7 @@ defmodule OpenPantry.Web.FoodSelectionController do
     Endpoint.broadcast("facility:#{facility.id}", "order_update", %{"html" => SharedView.render_order_link(user_order, conn)})
     conn
     |> put_flash(:info, gettext("Your order has been finalized!"))
-    |> Plug.Conn.delete_resp_cookie("user_id")
+    |> Plug.Conn.delete_resp_cookie("user_token")
     |> redirect(to: "/#{conn.assigns.locale || "en" }/")
   end
 

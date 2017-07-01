@@ -52,6 +52,7 @@ defmodule OpenPantry.Mixfile do
      {:logger_file_backend, "~> 0.0.9"},
      {:cowboy,              "~> 1.0"},
      {:guardian,            "~> 0.14"},
+     {:timex,               "~> 3.0"},
      {:wallaby,             "~> 0.17",  only: :test},
      {:phoenix_live_reload, "~> 1.0",   only: :dev},
      {:credo,               "~> 0.5",   only: [:dev, :test]},
