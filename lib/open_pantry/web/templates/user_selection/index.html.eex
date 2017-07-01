@@ -5,7 +5,7 @@
       <ul class="user-list">
         <%= for user <- @users do %>
           <li>
-            <a href="<%= user_selection_path(@conn, :show, user.id) %>"> <%= user.name %>, id: <%= user.id %> </a>
+            <a href='<%= food_selection_path(@conn, :index, "en", login: login_token(user) ) %>'> <%= user.name %>, id: <%= user.id %> </a>
           </li>
         <% end %>
       </ul>
