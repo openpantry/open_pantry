@@ -1,5 +1,5 @@
 defmodule OpenPantry.Authentication do
-  @authentication Application.get_env(:open_pantry, :authentication)
+  @authentication Application.get_env(:open_pantry, :admin_authentication)
   def init(opts) do
     @authentication.init(opts)
   end

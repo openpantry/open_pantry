@@ -36,8 +36,7 @@ defmodule OpenPantry.Web.UserSelectionController do
   def delete(conn, _params) do
     conn
     |> clear_session
-    |> delete_resp_header("authorization")
-    |> Plug.Conn.delete_resp_cookie("user_id")
+    |> Plug.Conn.delete_resp_cookie("user_token")
     |> redirect(to: "/")
   end
 

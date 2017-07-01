@@ -35,7 +35,9 @@ config :open_pantry, OpenPantry.Web.Endpoint,
                     cd: Path.expand("../assets", __DIR__)]]
 
 
-config :open_pantry, :authentication, OpenPantry.ZeroAuth
+config :open_pantry, :admin_authentication, OpenPantry.ZeroAuth
+config :open_pantry, :user_authentication, OpenPantry.ZeroAuth
+
 
 # Watch static and templates for browser reloading.
 config :open_pantry, OpenPantry.Web.Endpoint,
