@@ -62,7 +62,7 @@ defmodule OpenPantry.Plug.SetupUser do
   end
 
   defp user_from_token({:error, :no_token}, conn) do
-    {conn, GuestUser}
+    {conn, User.guest() }
   end
 
   defp assign_user_to_conn({conn, user}) do
