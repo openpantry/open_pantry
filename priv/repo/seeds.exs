@@ -79,15 +79,24 @@ File.read!("priv/repo/languages.json")
     end
   )
 
-User.changeset(%User{}, %{name: "Anonymous",
-                          family_members: 1,
+guest = User.changeset(%User{}, %{name: "Anonymous",
+                          family_members: 0,
                           primary_language_id: 184,
                           facility_id: 1,
                          })
-|> Repo.insert!()
+        |> Repo.insert!()
+
+demo =  User.changeset(%User{}, %{name: "Demo User",
+                          family_members: 4,
+                          primary_language_id: 184,
+                          facility_id: 1,
+                         })
+        |> Repo.insert!()
+
 
 for credit_type <- credit_types do
-  insert(:user_credit, credit_type: credit_type, user: (from u in User, where: u.id == 1) |> Repo.one )
+  insert(:user_credit, credit_type: credit_type, user: guest, balance: 0 )
+  insert(:user_credit, credit_type: credit_type, user: demo )
 end
 
 food_groups = for _ <- 1..3 do
