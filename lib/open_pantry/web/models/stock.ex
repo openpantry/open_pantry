@@ -40,10 +40,9 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, ~w(quantity override_text arrival expiration reorder_quantity aisle row shelf packaging credits_per_package storage food_id meal_id offer_id max_per_person max_per_package)a)
+    |> cast(params, ~w(quantity override_text arrival expiration reorder_quantity aisle row shelf packaging credits_per_package storage facility_id food_id meal_id offer_id max_per_person max_per_package)a)
     |> cast_attachments(params, ~w(image)a)
-    |> cast_assoc(:facility, required: true)
-    |> validate_required([:quantity, :storage])
+    |> validate_required([:quantity, :facility_id, :storage])
     |> validate_stockable
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end
