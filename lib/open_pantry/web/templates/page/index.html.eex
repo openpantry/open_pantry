@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "OpenPantry" %></h2>
+  <h2><%= gettext "Welcome to %{name}", name: "OpenPantry" %>, <%= @conn.assigns.user_name %></h2>
 </div>
 
 <div class="row">

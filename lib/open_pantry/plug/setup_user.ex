@@ -66,7 +66,9 @@ defmodule OpenPantry.Plug.SetupUser do
   end
 
   defp assign_user_to_conn({conn, user}) do
-    assign(conn, :user, user)
+    conn
+    |> assign(:user, user)
+    |> assign(:user_name, user.name)
   end
 
   defp put_cookie_if_logging_in({conn, user}) do
