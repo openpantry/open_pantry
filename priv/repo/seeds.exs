@@ -46,15 +46,15 @@ facility_params = [
 ]
 
 credit_type_params = [
-  %{name: "Proteinnoms",
+  %{name: "Protein",
     credits_per_period: 18,
     period_name: "Month"
     },
-  %{name: "Veggienoms",
+  %{name: "Veggies",
     credits_per_period: 18,
     period_name: "Month"
     },
-  %{name: "Carbnoms",
+  %{name: "Carbs",
     credits_per_period: 18,
     period_name: "Month"
   }
@@ -90,12 +90,12 @@ for credit_type <- credit_types do
   insert(:user_credit, credit_type: credit_type, user: (from u in User, where: u.id == 1) |> Repo.one )
 end
 
-food_groups = for _ <- 1..10 do
+food_groups = for _ <- 1..3 do
   insert(:food_group, credit_types: [Enum.random(credit_types)])
 end
 
 foods = for food_group <- food_groups do
-  for _ <- 1..3 do
+  for _ <- 1..2 do
     insert(:food, food_group: food_group)
   end
 end
