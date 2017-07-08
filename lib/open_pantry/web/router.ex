@@ -51,6 +51,7 @@ defmodule OpenPantry.Web.Router do
     pipe_through [:browser, :user_auth]
     resources "/languages", LanguageController
     resources "/user_selections", UserSelectionController
+    resources "/sessions", SessionController
   end
 
   scope "/", OpenPantry.Web do
