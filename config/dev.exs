@@ -36,7 +36,6 @@ config :open_pantry, OpenPantry.Web.Endpoint,
 
 
 config :open_pantry, :admin_authentication, OpenPantry.ZeroAuth
-config :open_pantry, :user_authentication, OpenPantry.ZeroAuth
 
 
 # Watch static and templates for browser reloading.

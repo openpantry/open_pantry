@@ -26,10 +26,6 @@ defmodule OpenPantry.Web.Router do
     plug Authentication, use_config: {:open_pantry, :admin_auth}
   end
 
-  pipeline :user_auth do
-    plug Authentication, use_config: {:open_pantry, :user_auth}
-  end
-
   pipeline :user_required do
     plug SetupUser, redirect_url: "/user_selections"
   end
@@ -46,23 +42,28 @@ defmodule OpenPantry.Web.Router do
     resources "/facilities", FacilityController
   end
 
+  scope "/", OpenPantry.Web do
+    pipe_through [:browser, :admin_auth]
+    resources "/user_selections", UserSelectionController
+  end
+
+
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :user_auth]
+    pipe_through [:browser]
     resources "/languages", LanguageController
-    resources "/user_selections", UserSelectionController
     resources "/sessions", SessionController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser, :user_auth] # Use the default browser stack
+    pipe_through [:localized_browser] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :user_auth, :user_required]
+    pipe_through [:localized_browser, :user_required]
 
     get "/", PageController, :index
     get "/styleguide", StyleController, :index

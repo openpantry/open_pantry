@@ -37,12 +37,6 @@ config :open_pantry, admin_auth: [
   realm: "Admin Area"
 ]
 
-config :open_pantry, user_auth: [
-  username: "admin",
-  password: {:system, "USER_PASSWORD"},
-  realm: "Food Selection"
-]
-
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional
