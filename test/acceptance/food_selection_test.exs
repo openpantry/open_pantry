@@ -2,7 +2,7 @@ defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.Web.AcceptanceCase, async: true
 
   import OpenPantry.CompleteFacility
-  import Wallaby.Query, only: [css: 2, button: 1]
+  import Wallaby.Query, only: [css: 2, button: 1, link: 1]
 
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()
@@ -45,7 +45,7 @@ defmodule OpenPantry.FoodSelectionTest do
 
     second_credit = session
     |> visit(food_selection_url(Endpoint, :index, "en"))
-    |> click_link(credit_type2.name)
+    |> click(link(credit_type2.name))
     |> find(Query.css("##{credit_type2.name}"))
     |> text
 
