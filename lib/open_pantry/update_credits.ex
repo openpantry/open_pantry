@@ -4,7 +4,7 @@ defmodule OpenPantry.UpdateCredits do
   alias OpenPantry.User
   alias OpenPantry.Repo
   import Ecto.Query, only: [from: 2]
-  def process_user(user, credit_types) do
+  defp process_user(user, credit_types) do
     user_id = user.id
     for credit_type <- credit_types do
       credit_type_id = credit_type.id
@@ -28,11 +28,20 @@ defmodule OpenPantry.UpdateCredits do
 
   end
 
-  def all() do
+  def renew_all() do
     credit_types  = CreditType |> Repo.all
     users         = User       |> Repo.all
     for user <- users do
       process_user(user, credit_types)
+    end
+  end
+
+  def biweekly_renewal() do
+    {_year, week, weekday} = Timex.now |> Timex.iso_triplet
+    odd_week = rem(week, 2) == 1
+    saturday = weekday == 7
+    if saturday && odd_week do
+      renew_all()
     end
   end
 end
