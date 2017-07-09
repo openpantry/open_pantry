@@ -1,6 +1,7 @@
 defmodule OpenPantry.Web.DisplayLogic do
   @hidden_class "hidden"
-  def active(first_type, [{first_type, _, _}|_tail]), do: "active"
+  @active_class "active"
+  def active(first_type, [{first_type, _, _}|_tail]), do: @active_class
   def active(_, [{_, _, _}|_tail]), do: ""
 
   def quantity(stock, package) do
@@ -9,6 +10,13 @@ defmodule OpenPantry.Web.DisplayLogic do
     else
       0
     end
+  end
+
+  def dasherize(string) do
+    string
+    |> String.replace(" ", "")
+    |> Macro.underscore()
+    |> String.replace("_", "-")
   end
 
   def display_stock_type(stock_struct) do
