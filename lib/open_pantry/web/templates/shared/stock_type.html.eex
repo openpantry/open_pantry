@@ -1,4 +1,4 @@
-<div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= @stock_type %>">
+<div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= dasherize(@stock_type) %>">
   <div class="nom-type-remaining">
     <h3>
       <%= @stock_type %> <%= gettext("remaining:") %>
