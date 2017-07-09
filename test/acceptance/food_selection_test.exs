@@ -2,18 +2,16 @@ defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.Web.AcceptanceCase, async: true
 
   import OpenPantry.CompleteFacility
+  import OpenPantry.Web.DisplayLogic, only: [dasherize: 1]
   import Wallaby.Query, only: [css: 2, button: 1, link: 1]
 
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()
 
-    first_credit = session
+    session
     |> visit(food_selection_url(Endpoint, :index, "en"))
-    |> find(Query.css("##{credit_type.name}"))
-    |> text
-
-    assert first_credit =~ ~r/#{credit_type.name}/
-    Wallaby.end_session(session)
+    |> assert_has(css(".#{dasherize(credit_type.name)}", text: credit_type.name))
+    |> Wallaby.end_session
   end
 
   test "selection table shows first foods in stock on load", %{session: session} do
