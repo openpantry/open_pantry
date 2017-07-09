@@ -38,7 +38,7 @@ defmodule OpenPantry.Web.FoodSelectionController do
   defp handle_result({:error, _changeset}, conn) do
     conn
     |> put_flash(:error, gettext("There was an error updating your order"))
-    |> redirect(to: food_selection_path(conn, :index, @conn.assigns.locale))
+    |> redirect(to: food_selection_path(conn, :index, conn.assigns.locale))
   end
 
   defp permitted_params(params) do
