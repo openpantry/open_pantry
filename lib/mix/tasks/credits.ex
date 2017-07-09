@@ -4,6 +4,6 @@ defmodule Mix.Tasks.Cron.UpdateCredits do
   @shortdoc "Refreshes all credits for all users in the system"
   def run(_) do
     {:ok, _started} = Application.ensure_all_started(:open_pantry)
-    OpenPantry.UpdateCredits.all()
+    OpenPantry.UpdateCredits.biweekly_renewal()
   end
 end
