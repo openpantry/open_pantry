@@ -46,7 +46,7 @@ defmodule OpenPantry.FoodSelectionTest do
     second_credit = session
     |> visit(food_selection_url(Endpoint, :index, "en"))
     |> click(link(credit_type2.name))
-    |> find(Query.css("##{credit_type2.name}"))
+    |> find(Query.css("##{ OpenPantry.Web.DisplayLogic.dasherize(credit_type2.name) }"))
     |> text
 
     assert second_credit =~ ~r/#{food2.longdesc}/
