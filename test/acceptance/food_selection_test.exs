@@ -1,11 +1,10 @@
 defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.Web.AcceptanceCase, async: true
-
   import OpenPantry.CompleteFacility
   import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
   import OpenPantry.Web.DisplayLogic, only: [dasherize: 1]
-  import Wallaby.Query, only: [css: 2, button: 1, link: 1]
-
+  import Wallaby.Query, only: [css: 2, css: 1, button: 1, link: 1]
+  @add_stock css(".js-add-stock")
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()
 
@@ -50,11 +49,10 @@ defmodule OpenPantry.FoodSelectionTest do
     %{user: user } = one_credit_facility()
     session = visit(session, "/en/food_selections?login=#{login_token(user)}")
 
-    take_screenshot session
-    assert has?(session, stock_available(20))
-    assert has?(session, stock_requested(0))
+    # assert has?(session, stock_available(20))
+    # assert has?(session, stock_requested(0))
 
-    click(session, button("+"))
+    click(session, button(@add_stock))
 
     assert has?(session, stock_available(19))
     assert has?(session, stock_requested(1))
