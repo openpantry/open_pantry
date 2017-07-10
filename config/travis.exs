@@ -34,6 +34,16 @@ config :open_pantry, OpenPantry.Repo,
 
 config :open_pantry, :admin_authentication, OpenPantry.ZeroAuth
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "OpenPantry",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: "I am not a very secret key",
+  serializer: OpenPantry.GuardianSerializer
+
 config :wallaby,
   max_wait_time: 5_000,
   screenshot_on_failure: true,
