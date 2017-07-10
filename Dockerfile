@@ -1,5 +1,5 @@
 # Elixir 1.4: https://hub.docker.com/_/elixir/
-FROM elixir:1.4
+FROM elixir:1.4.5
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install hex
