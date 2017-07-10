@@ -11,6 +11,7 @@ services:
     command:   mix phx.server
     environment:
       DOCKER: 'true'
+      GUARDIAN_SECRET_KEY: "A not very secret dev only key"
     volumes:
       - .:/app
     ports:

@@ -5,7 +5,9 @@
   * NOTES:
     * Requirements are still developing, help with all parts of the project are very much welcome!
     * We haven't finalized registration/authentication/etc requirements, and we want this to be usable by as many organizations as possible
-      * As a result, to defer decisions to the last responsible moment, user login is currently faked to just use first user in database via a "FakeUser" plug in routes.  Almost everything is faked/based on mockups leading up to ":locale/food_selections" route, which is the only functional part of the site besides admin at the moment
+    * Users are created/managed in the user_selections page, no registration is possible, basic auth is used for admins, and they create users who have magic login-links to be clicked on or emailed to them
+    * Though designed to be multi-facility, right now all users belong to the first facility in DB and everything defaults there.
+    * We plan to move the app to be multi-tenant and add an organization table that will allow other pantries besides Masbia to use and customize the software as well, but for now hosting seperately is an option, and we can help support this if you'd like to help us beta test at your pantry.
     * We're using ZenHub chrome extension for project management so if you install that you can see some of the epics and feature discussions there, and contribute to the discussion!
     * We have our mockups posted [here](https://invis.io/QPBK7WPB3).
     * If you represent, work with, or know a pantry program that might benefit from using this software, please get in touch or put them in touch so we can try and consider any special requirements or requests they might have sooner than later!
@@ -22,6 +24,7 @@
         * It will cd into assets directory and install npm packages via yarn
         * You can use another postgres, but you may have to manually install postgis
       * run from open_pantry dir `mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs`
+      * Expose an env var with some value in your bash config for `GUARDIAN_SECRET_KEY`, e.g. `export GUARDIAN_SECRET_KEY="A not very secret dev only key"`
       * Start Phoenix endpoint with `mix phx.server`, or `iex -S mix phx.server` (this gives a server and REPL/console in one window)
     * Docker/docker-compose (fake, factory generated data but no dependencies)
       * Install docker (on most systems this also installs docker-compose)
