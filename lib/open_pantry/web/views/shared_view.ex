@@ -16,7 +16,7 @@ defmodule OpenPantry.Web.SharedView do
   @doc """
     Renders a line for user order management index, or to send update to same page via channel
   """
-  def render_order_link(user_order = %UserOrder{id: id}, conn) do
+  def render_order_link(user_order = %UserOrder{id: _id}, conn) do
     render_to_string(__MODULE__, "user_order_details.html", order: user_order, conn: conn)
   end
 

@@ -45,14 +45,6 @@ defmodule OpenPantry.Plug.SetupUser do
     end
   end
 
-  defp redirect_and_notify(conn, user) do
-    conn
-    |> Plug.Conn.put_resp_cookie("user_token", UserSelectionView.login_token(user))
-    |> redirect(to: "/en/")
-    |> put_flash(:info, "You are now logged in as #{user.name}, user id ##{user.id}")
-    |> halt
-  end
-
   defp user_from_token({:ok, token}, conn) do
     %{"aud" => <<"User:",  id :: binary >>} = Guardian.decode_and_verify!(token)
     user = String.to_integer(id)
@@ -78,16 +70,4 @@ defmodule OpenPantry.Plug.SetupUser do
       {conn, user}
     end
   end
-
-
-  defp user_cookie(conn) do
-    user_id = conn.cookies["user_id"]
-    if Blank.blank?(user_id) do
-      0 # safe value, will not find user in query but will not error
-    else
-      String.to_integer(user_id)
-    end
-
-  end
-
 end
