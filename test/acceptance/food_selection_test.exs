@@ -46,6 +46,7 @@ defmodule OpenPantry.FoodSelectionTest do
     |> Wallaby.end_session
   end
 
+  @tag :pending
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do
     %{user: user } = one_credit_facility()
     session = visit(session, "/en/food_selections?login=#{login_token(user)}")
