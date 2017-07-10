@@ -17,38 +17,32 @@ defmodule OpenPantry.FoodSelectionTest do
   test "selection table shows first foods in stock on load", %{session: session} do
     %{credit_types: [credit_type|_], foods: [food|_]} = two_credit_facility()
 
-    first_credit = session
+    session
+    |> resize_window(2000, 2000)
     |> visit(food_selection_url(Endpoint, :index, "en"))
-    |> find(Query.css("##{credit_type.name}"))
-    |> text
-
-    assert first_credit =~ ~r/#{food.longdesc}/
-    Wallaby.end_session(session)
+    |> click(link(credit_type.name))
+    |> take_screenshot
+    |> assert_has(css(".#{dasherize(credit_type.name)}-stock-description", text: food.longdesc))
+    |> Wallaby.end_session
   end
 
   test "selection table does not show second food in stock on load", %{session: session} do
     %{credit_types: [credit_type|_], foods: [_|[food2]]} = two_credit_facility()
 
-    first_credit = session
+    session
     |> visit(food_selection_url(Endpoint, :index, "en"))
-    |> find(Query.css("##{credit_type.name}"))
-    |> text
-
-    refute first_credit =~ ~r/#{food2.longdesc}/
-    Wallaby.end_session(session)
+    |> refute_has(css(".#{dasherize(credit_type.name)}-stock-description", text: food2.longdesc))
+    |> Wallaby.end_session
   end
 
   test "selection table allows selecting second tab", %{session: session} do
     %{credit_types: [_|[credit_type2]], foods: [_|[food2]]} = two_credit_facility()
 
-    second_credit = session
+    session
     |> visit(food_selection_url(Endpoint, :index, "en"))
     |> click(link(credit_type2.name))
-    |> find(Query.css("##{ OpenPantry.Web.DisplayLogic.dasherize(credit_type2.name) }"))
-    |> text
-
-    assert second_credit =~ ~r/#{food2.longdesc}/
-    Wallaby.end_session(session)
+    |> assert_has(css(".#{dasherize(credit_type2.name)}-stock-description", text: food2.longdesc))
+    |> Wallaby.end_session
   end
 
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do

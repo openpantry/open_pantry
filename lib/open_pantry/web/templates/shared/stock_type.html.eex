@@ -22,7 +22,7 @@
               <% end %>
             </div>
             <div class="item-info">
-              <div class="description">
+              <div class="description <%= dasherize(@stock_type) %>-stock-description">
                 <h3><%= stock_description(stock) %></h3>
               </div>
               <div class="packaging">
