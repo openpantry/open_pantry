@@ -1,19 +1,23 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+    <h3 class="h2-heading">User Selection</h3>
       <ul class="user-list">
         <%= for user <- @users do %>
           <li>
-            <a href="<%= user_selection_path(@conn, :show, user.id) %>"> <%= user.name %>, id: <%= user.id %> </a>
+            <a href='<%= food_selection_path(@conn, :index, "en", login: login_token(user) ) %>'> <%= user.name %>, id: <%= user.id %> </a>
           </li>
         <% end %>
       </ul>
+      <h4 class="h3-heading">Add New User</h4>
       <%= form_for @changeset, user_selection_path(@conn, :create), fn f -> %>
         <label>
           Name: <%= text_input f, :name %>
         </label>
-
-        <%= submit "Submit" %>
+        <label>
+          Family members (default to 1): <%= number_input f, :family_members %>
+        </label>
+        <%= submit "Submit", [class: "btn-primary"]%>
       <% end %>
     </div>
   </div>

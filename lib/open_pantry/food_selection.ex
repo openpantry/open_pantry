@@ -21,10 +21,10 @@ defmodule OpenPantry.FoodSelection do
     where: stocks.arrival < ^now,
     where: stocks.expiration > ^now,
     where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
+    order_by: credit_type.name,
     preload: [stocks: [food: :food_group]])
     |> Repo.all
-    |> Enum.map(&({&1.name, &1.id, &1.stocks}))
+    |> Enum.map(&({&1.name, &1.id, in_stock(&1.stocks)}))
     |> Enum.uniq
     |> append_meals_if_any(facility)
   end
@@ -37,7 +37,7 @@ defmodule OpenPantry.FoodSelection do
     where: stocks.arrival < ^now,
     where: stocks.expiration > ^now,
     where: ^id == stocks.facility_id,
-    order_by: credit_type.inserted_at,
+    order_by: credit_type.name,
     preload: [stocks: [food: :food_group]])
     |> Repo.all
   end
@@ -62,6 +62,7 @@ defmodule OpenPantry.FoodSelection do
     where: fragment("? IS NOT NULL", stocks.meal_id),
     preload: [:meal])
     |> Repo.all
+    |> in_stock
   end
 
   @spec adjust_stock(integer(), integer(), integer(), integer() ) :: StockDistribution.t
@@ -74,13 +75,14 @@ defmodule OpenPantry.FoodSelection do
     |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution.id), [inc: [quantity: quantity]])
     |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
     |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
+    |> Multi.run(:validate_stock_distribution, StockDistribution, :validate_stock_distribution, [stock_distribution, quantity])
     |> Repo.transaction
     stock_distribution
   end
 
   @spec deduct_credits(Ecto.Multi.t, integer(), integer(), integer(), integer(), tuple() ) :: Ecto.Multi.t
   def deduct_credits(multi, cost, quantity, type_id, user_id, {nil, nil, _food_id}) do
-    Multi.update_all(multi, type_id, UserCredit.query_user_type(user_id, type_id), [inc: [balance: -(cost*quantity)]])
+    Multi.update_all(multi, "credit_type_#{type_id}", UserCredit.query_user_type(user_id, type_id), [inc: [balance: -(cost*quantity)]])
   end
   def deduct_credits(multi, _cost, _quantity, _type_id, _user_id, {nil, _offer_id, nil}), do: multi
   def deduct_credits(multi, cost, quantity, _type_id, user_id, {_meal_id, nil, nil}) do
@@ -89,6 +91,11 @@ defmodule OpenPantry.FoodSelection do
     |> Enum.reduce(multi, fn(credit_type_id, multi_accum) -> # deduct credits once for each food type, using above clause
         deduct_credits(multi_accum, cost, quantity, credit_type_id, user_id, {nil, nil, credit_type_id})
     end)
+  end
+
+  defp in_stock(stocks) do
+    stocks
+    |> Enum.reject(&(&1.quantity == 0))
   end
 
 end

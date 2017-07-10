@@ -1,10 +1,10 @@
 <h2>Show stock</h2>
 
-<ul>
+<ul class="manage_stocks-list">
 
   <li>
     <strong>Name:</strong>
-    <%= OpenPantry.Stock.stockable_name(@stock) %>
+    <%= OpenPantry.Stock.stock_description(@stock) %>
   </li>
 
   <%= if @stock.image do %>

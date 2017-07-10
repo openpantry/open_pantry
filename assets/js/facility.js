@@ -1,5 +1,6 @@
 export default function(channel){
   const intFromFindClass = (parent, className) => parseInt(parent.find(className).html(), 10)
+  const getMaxAllowed    = (row) => parseInt(row.data('max-allowed'), 10)
   const getAvailable     = (row) => intFromFindClass(row, '.js-available-quantity')
   const getQuantity      = (row) => intFromFindClass(row, '.js-current-quantity')
   const getCost          = (row) => intFromFindClass(row, '.js-credit-cost')
@@ -18,6 +19,11 @@ export default function(channel){
         setUserQuantity(row, getQuantity(row) + 1);
         setCredits(row, credits - cost);
       }
+      if (getQuantity(row) >= getMaxAllowed(row)) {
+        $(row).find(".js-add-stock").prop("disabled",true)
+        window.plus_button =  $(row).find(".js-add-stock").html();
+        $(row).find(".js-add-stock").text(row.data("max-allowed-message"))
+      }
     },
     "js-remove-stock": function(row){
       const currentQuantity = getQuantity(row)
@@ -27,6 +33,10 @@ export default function(channel){
         channel.push('release_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
         setUserQuantity(row, currentQuantity - 1);
         setCredits(row, credits + cost);
+      }
+      if (getQuantity(row) < getMaxAllowed(row)) {
+        $(row).find(".js-add-stock").prop("disabled",false)
+        $(row).find(".js-add-stock").html(window.plus_button)
       }
     },
     "js-clear-stock": function(row){
@@ -43,9 +53,16 @@ export default function(channel){
 
 
   $('.js-stock-row').on('click', function(el){
-    if (fn = handlers[el.target.className]){
-      fn($(el.currentTarget));
-    };
+    el.target.classList.forEach(function(className){
+      if (fn = handlers[className]){
+        fn($(el.currentTarget));
+      };
+    })
+  })
+
+  $('.js-add-cart').on('click', function(el){
+    el.target.classList = el.target.classList + " hidden"
+    $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
   })
 
   channel.on('set_stock', payload => {
@@ -54,7 +71,11 @@ export default function(channel){
   });
 
   channel.on('current_credits', payload => {
-    $.each(payload, (type, credits) => $(`#${type}`).find('.js-credit-count').html(credits) )
+    $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
+  });
+
+  channel.on('order_update', payload => {
+    $('.js-user-orders').prepend(payload.html)
   });
 
   channel.on('update_distribution', payload => {
@@ -68,7 +89,7 @@ export default function(channel){
     } else if (existing.length && quantity == 0) {
       $(existing).remove()
     } else {
-      $('.js-cart').find('tbody').append(html)
+      $('.js-cart').find('.js-stock-list').append(html)
     }
   });
 

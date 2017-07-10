@@ -1,4 +1,78 @@
-// Example file.
-$room-temp: red;
+// Responsive Breakpoints for include-media
+$minViewWidth: 20rem; //320px
+$midViewWidth: 56.25rem;  // 900px 
+$maxViewWidth: 112.5rem; //1800px
+
+$breakpoints: (
+  'phone': $minViewWidth,
+  'textBreak': 50rem, //800px
+  'tabletV': $midViewWidth,
+  'tabletH': 75rem, //1200px
+  'desktop': $maxViewWidth,
+) !default;
+
+// layout
+$goldenRatio: 1.618;
+$navTabHeight: 8vh;
+$nomsContainerHeight: 32vh;
+$stockContainerWidth: 100vw/$goldenRatio;
+$nomsNcartContainerWidth: 99vw-100vw/$goldenRatio;
+
+$cartHeight: 100vh-$nomsContainerHeight;
+$stockEntryImageSize: 7vw;
+$stockEntryHeight: 14vh;
+$nomTypeRemainingSize: 12vh;
+$gutterWidth: 2vw;
+$stockListHeight: 95vh - $navTabHeight - $nomTypeRemainingSize;
+
+// buttons
+$stockshoppingCartWidth: 3vw;
+$trashWidth: $gutterWidth*2;
+$plusMinusButtonWidth: 2*$gutterWidth;
+$addToCartWidth: $trashWidth + $plusMinusButtonWidth;
+
+// Font 
+$bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$headerFont: $bodyFont;
+
+$minFontSize: 1rem; 
+$maxFontSize: 1.5rem; //24px @16px base
+
+$modularHeadingScaleLarge: 1.333; // Perfect Fourth
+$modularHeadingScaleSmall: 1.125; // Major Second
+
+// Modular Heading Scale
+$h1Min: 1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h1Max: 1rem*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h2Min: 1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h2Max: 1rem*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h3Min:1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
+$h3Max: 1rem *$modularHeadingScaleLarge*$modularHeadingScaleLarge;
+
+$h4Min:1rem*$modularHeadingScaleSmall;
+$h4Max:1rem*$modularHeadingScaleLarge;
+
+$h5Min:1rem;
+$h5Max:1rem;
+
+$h6Min:1rem/$modularHeadingScaleSmall;
+$h6Max:1rem/$modularHeadingScaleLarge;
+
+
+// Line Height 
+// $baseLineHeight: 1.2rem;
+// $h1LineHeight: 2rem;
+// $h2LineHeight: 1.5rem;
+// $h3LineHeight: 1.25rem;
+// $h4LineHeight: 1rem;
+// $h5LineHeight: 0.875rem;
+
+
+
+// Colors
+$textColor: black;
+$room-temp: red; 
 $refrigerator: gray;
 $freezer: blue;

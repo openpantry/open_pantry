@@ -4,8 +4,6 @@ defmodule OpenPantry.Offer do
   schema "offers" do
     field :name, :string
     field :description, :string
-    field :max_per_person, :integer
-    field :max_per_package, :integer
 
     timestamps()
   end
@@ -15,7 +13,7 @@ defmodule OpenPantry.Offer do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :description, :max_per_person, :max_per_package])
+    |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
   end
 end

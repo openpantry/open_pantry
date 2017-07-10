@@ -11,7 +11,6 @@ defmodule OpenPantry.Web.FacilityChannel do
     socket = Phoenix.Socket.assign(socket, :facility_id, facility_id)
     {:ok, socket}
   end
-
   def handle_in("request_stock", %{"id" => stock_id, "quantity" => quantity, "type" => type_id}, socket) do
     spawn fn -> # DB constraint may error, don't take down channel with it
       FoodSelection.adjust_stock(stock_id, type_id, quantity, socket.assigns.user_id)

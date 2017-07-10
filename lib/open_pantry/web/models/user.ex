@@ -44,6 +44,11 @@ defmodule OpenPantry.User do
     |> Enum.min
   end
 
+  def guest() do
+    from(user in User, where: user.family_members == 0)
+    |> Repo.one!
+  end
+
   def facility_stocks(user) do
     Repo.preload(user, :facility).facility
     |> Repo.preload(:stocks)

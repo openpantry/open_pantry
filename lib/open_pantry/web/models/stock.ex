@@ -9,8 +9,9 @@ defmodule OpenPantry.Stock do
   alias OpenPantry.StockDistribution
   schema "stocks" do
     field :quantity, :integer
-    field :arrival, Ecto.DateTime
-    field :expiration, Ecto.DateTime
+    field :override_text, :string
+    field :arrival, Ecto.Date
+    field :expiration, Ecto.Date
     field :reorder_quantity, :integer
     field :weight, :decimal
     field :aisle, :string
@@ -20,6 +21,8 @@ defmodule OpenPantry.Stock do
     field :credits_per_package, :integer
     field :storage, RefrigerationEnum
     field :image, OpenPantry.Image.Type
+    field :max_per_person, :integer
+    field :max_per_package, :integer
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
@@ -37,7 +40,7 @@ defmodule OpenPantry.Stock do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:quantity, :arrival, :expiration, :reorder_quantity, :aisle, :row, :shelf, :packaging, :credits_per_package, :storage, :food_id, :meal_id, :offer_id, :facility_id])
+    |> cast(params, ~w(quantity override_text arrival expiration reorder_quantity aisle row shelf packaging credits_per_package storage facility_id food_id meal_id offer_id max_per_person max_per_package)a)
     |> cast_attachments(params, ~w(image)a)
     |> validate_required([:quantity, :facility_id, :storage])
     |> validate_stockable
@@ -52,8 +55,8 @@ defmodule OpenPantry.Stock do
   @spec stock_description(Stock.t) :: String.t
   def stock_description(stock) do
     loaded_stock = stockable_load(stock)
-    (loaded_stock.food && loaded_stock.food.longdesc)    ||
-    (loaded_stock.meal && loaded_stock.meal.description) ||
+    (loaded_stock.food && loaded_stock.override_text || loaded_stock.food.longdesc)    ||
+    (loaded_stock.meal && loaded_stock.meal.description)                               ||
     (loaded_stock.offer && loaded_stock.offer.description)
   end
 
@@ -62,6 +65,15 @@ defmodule OpenPantry.Stock do
     stock
     |> stockable_load
     |> stockable!
+  end
+
+  @spec stockable_name!(Stock.t) :: String.t
+  def stockable_name!(stock) do
+    item = stockable!(stock)
+    case item.__struct__ do
+      OpenPantry.Food -> item.longdesc
+      _ -> item.name
+    end
   end
 
   @spec stockable_name(Stock.t) :: String.t
@@ -81,6 +93,9 @@ defmodule OpenPantry.Stock do
     |> Repo.preload(:offer)
   end
 
+  @doc """
+    Stock is polymorphic to food, meal and offer, this validation ensures exactly one of these relations is present
+  """
   def validate_stockable(changeset) do
     [get_field(changeset, :food_id), get_field(changeset, :meal_id), get_field(changeset, :offer_id)]
     |> Enum.reject(&is_nil/1)

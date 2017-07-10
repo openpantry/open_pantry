@@ -11,13 +11,16 @@ defmodule OpenPantry.FoodSelection.Stock do
   alias OpenPantry.StockDistribution
   schema "stocks" do
     field :quantity, :integer
-    field :arrival, Ecto.DateTime
-    field :expiration, Ecto.DateTime
+    field :override_text, :string
+    field :arrival, Ecto.Date
+    field :expiration, Ecto.Date
     field :packaging, :string
     field :credits_per_package, :integer
     field :weight, :decimal
     field :storage, RefrigerationEnum
     field :image, OpenPantry.Image.Type
+    field :max_per_person, :integer
+    field :max_per_package, :integer
     belongs_to :food, Food, references: :ndb_no, type: :string
     belongs_to :meal, Meal
     belongs_to :offer, Offer
@@ -38,8 +41,8 @@ defmodule OpenPantry.FoodSelection.Stock do
   @spec stock_description(Stock.t) :: String.t
   def stock_description(stock) do
     loaded_stock = stockable_load(stock)
-    (loaded_stock.food && loaded_stock.food.longdesc)    ||
-    (loaded_stock.meal && loaded_stock.meal.description) ||
+    (loaded_stock.food && loaded_stock.override_text || loaded_stock.food.longdesc)    ||
+    (loaded_stock.meal && loaded_stock.meal.description)                               ||
     (loaded_stock.offer && loaded_stock.offer.description)
   end
 

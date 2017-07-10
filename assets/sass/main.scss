@@ -1,4 +1,371 @@
+@import "../node_modules/sass-autoprefixer/scss/prefixes";
+@import "vendors/meyerwebreset";
+@import "vendors/responsive-typography";
 @import "variables";
+@import "mixins";
+@import "vendors/include-media";
+
+.stock-entry {
+  .hidden {
+    display: none;
+  }
+}
+
+// Layout
+.container {
+  display: flex;
+  height: 100vh
+}
+// Food selection Layout
+.container-fluid,
+.main{
+  display: flex;
+}
+.stock-selection-container {
+  width: $stockContainerWidth;
+}
+
+.shopping-cart-svg {
+  width: $gutterWidth;
+  display: block;
+}
+
+.right-side-container {
+  border-left: $gutterWidth/2 solid $textColor;;
+  width: $nomsNcartContainerWidth;
+  height: 100vh;
+}
+
+.account-info-container {
+  @include vp-flex-direction(column);
+    @include vp-display(flex);
+  height: $nomsContainerHeight - 3vh;
+  justify-content: space-around;
+  padding: 2vh 1vw;
+}
+
+.account-action-buttons {
+  display: flex ;
+  width: 100%;
+  justify-content: space-around;
+
+  a.btn.btn-default,
+  button.btn.btn-default {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: $textColor;
+    text-decoration: none;
+    border: 2px solid $textColor;
+    border-radius: 1vh;
+    text-align: center;
+    line-height: normal;
+  }
+
+}
+
+
+// Tab-nav layout
+.nav-tab-container {
+  display: flex;
+  width: 100%;
+
+  a {
+    width: $stockContainerWidth/3;
+    text-align: center;
+  }
+}
+
+.nav-tab {
+  @include vp-flex-grow(1);
+  @include vp-display(flex);
+  height: $navTabHeight;
+  justify-content: center;
+  h3 {
+    align-self: center;
+
+  }
+}
+
+.tab-content{
+  .tab-pane {
+    display:none;
+
+    &.active {
+      @include vp-display(flex);
+      @include vp-flex-direction(column);
+    }
+  }
+}
+.nom-type-remaining {
+  @include vp-display(flex);
+  width: 100%;
+  height: $nomTypeRemainingSize;
+  justify-content: center;
+  align-items: center;
+}
+// Stock entry layout
+.stock-list  {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  max-height: $stockListHeight;
+  overflow-y: auto;
+}
+
+.stock-entry {
+  width: $stockContainerWidth;
+  @include vp-display(flex);
+  justify-content: space-between;
+  align-items: center;
+  margin: .5vh 0;
+  min-height: $stockEntryHeight;
+}
+
+.item-details {
+  @include vp-display(flex);
+  @include vp-flex-direction(row);
+}
+
+.stock-image-location, .stock-image {
+  width: $stockEntryImageSize;
+  height: $stockEntryImageSize;
+}
+
+.item-info,
+.flex-column {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  justify-content: space-between;
+  margin-left: $gutterWidth;
+}
+
+.item_control-container {
+  display: flex;
+  margin-right: $gutterWidth;
+}
+
+.quantity_control_trash-container {
+  @include vp-display(flex);
+  flex-direction: row;
+}
+
+.quantity-available {
+  align-self: center;
+  margin-right: $gutterWidth;
+}
+
+//
+// Manage oRders
+
+.orders-choose_user {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  overflow-y: auto;
+}
+
+
+.orders-single_entry {
+  display: block;
+}
+
+
+.clear-user-agent-styles table,
+.clear-user-agent-styles thead,
+.clear-user-agent-styles tbody,
+.clear-user-agent-styles tfoot,
+.clear-user-agent-styles tr,
+.clear-user-agent-styles th,
+.clear-user-agent-styles td {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-collapse: inherit;
+    border-spacing: 0;
+    border-color: inherit;
+    vertical-align: inherit;
+    text-align: left;
+    font-weight: inherit;
+    -webkit-border-horizontal-spacing: 0;
+    -webkit-border-vertical-spacing: 0;
+}
+.clear-user-agent-styles th,
+.clear-user-agent-styles td {
+  display: inline;
+}
+
+//Buttons
+
+button.btn-primary,
+form.btn-primary button {
+  border: 1px solid $textColor;
+  border-radius: 5px;
+  padding: .2rem;
+}
+button {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.remove-amount-add-button-container {
+  @include vp-display(flex);
+  @include vp-flex-direction(column-reverse);
+  align-items: center;
+  justify-content: space-around;
+}
+
+button.plus-minus-button {
+    @include vp-display(flex);
+    @include vp-flex-direction(column);
+    justify-content: center;
+    align-items: center;
+    width: $plusMinusButtonWidth;
+}
+
+button.add-to-cart  {
+   @include vp-display(flex);
+   @include vp-flex-direction(column);
+   justify-content: center;
+   align-items: center;
+   width: $addToCartWidth;
+}
+
+ svg.plus-svg,
+ svg.minus-svg,
+ svg.trashcan-svg {
+  width: $gutterWidth;
+ }
+
+.clear-action {
+  width: $trashWidth;
+}
+
+
+// Cart
+
+#cart {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  border-top: 2vh solid black;
+  height: 65vh
+}
+
+.cart-heading {
+  padding: 2vh;
+}
+
+.cart-container {
+  @include vp-display(flex);
+}
+
+
+.cart-items-container {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  @include vp-align-items(flex-start);
+  @include vp-justify-content(flex-start);
+  margin-top: 2vh;
+  padding: 1vh  0 0 1vh;
+  overflow-y: auto;
+  height: 58vh;
+}
+
+.cart-line_entry {
+  margin: 0.2vh 0;
+  max-height: 1.2rem;
+}
+
+.cart-detail {
+    display: inline-block ;
+  }
+
+
+form.shopping_cart-button  button{
+  // border: 1px solid $textColor;
+  font-size: 1.5rem;
+  background-color: #2A2A2A;
+  width: $nomsNcartContainerWidth;
+  text-align: center;
+  align-self: center;
+  color: white;
+  padding: $gutterWidth;
+}
+
+// Manage pages
+main {
+    @include vp-display(flex);
+    @include vp-flex-direction(column);
+}
+
+.form-group{
+  display: block;
+}
+
+input.form-control,
+#user_family_members {
+  box-shadow: inset 0 0 0.1rem 0 rgba(0,0,0,0.5);
+}
+
+// User selection/entry
+//
+ul.user-list {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+}
+
+.h2-heading {
+  margin: 1vw;
+}
+
+.h3-heading {
+  margin: 1vw;
+  display: block;
+}
+
+// Font
+html {
+  font-family: $bodyFont;
+  color: $textColor;
+}
+
+// Modular Font-Size Calculations
+html {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
+}
+
+h1 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+}
+
+h2 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+  margin: $gutterWidth;
+}
+
+h3 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
+}
+
+h4 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
+}
+
+h5 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+h6 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+.add_sub-svg {
+  @include fluid-type(height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max );
+}
+
+
 
 .legend {
   .room_temperature {
@@ -24,3 +391,7 @@
      color: $freezer;
   }
 }
+
+
+
+// Layout

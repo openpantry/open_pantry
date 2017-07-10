@@ -37,13 +37,18 @@ config :open_pantry, admin_auth: [
   realm: "Admin Area"
 ]
 
-config :open_pantry, user_auth: [
-  username: "admin",
-  password: {:system, "USER_PASSWORD"},
-  realm: "Food Selection"
-]
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "OpenPantry",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
+  serializer: OpenPantry.GuardianSerializer
 
-config :open_pantry, :authentication, BasicAuth
+config :open_pantry, :admin_authentication, BasicAuth
+config :open_pantry, :user_authentication, BasicAuth # GuardianAuth or SetupUser?
 config :ex_admin,
   repo: OpenPantry.Repo,
   module: OpenPantry.Web,

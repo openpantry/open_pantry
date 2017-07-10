@@ -15,6 +15,14 @@
       * We are using POEditor.com for translation, contribute to translations here: https://poeditor.com/join/project/wBfgEEUCht
 
   * Getting started with development:
+    * Mac homebrew:
+      * ensure homebrew is installed (instructions at https://brew.sh/ or paste `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` into terminal)
+      * brew bundle
+        * This will install elixir, erlang, yarn, and download Postgres.app which has postgis preinstalled
+        * It will cd into assets directory and install npm packages via yarn
+        * You can use another postgres, but you may have to manually install postgis
+      * run from open_pantry dir `mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs`
+      * Start Phoenix endpoint with `mix phx.server`, or `iex -S mix phx.server` (this gives a server and REPL/console in one window)
     * Docker/docker-compose (fake, factory generated data but no dependencies)
       * Install docker (on most systems this also installs docker-compose)
       * Clone the OpenPantry repo and cd into directory
@@ -23,12 +31,9 @@
       * Temporary work-around steps for known bug in docker-compose setup:
         * Install node package manager if not already present via `npm install`
         * Install yarn via `npm install -g yarn`
-        * cd into open_pantry and Run `cd Assets`
-        * run `yarn install`
-
-
-
-    * Local/native development on Mac/Linux (detailed instructions only for Mac at present, similar for linux)
+        * run `cd assets` from open_pantry directory
+        * run `yarn`
+    * Local/native development on Mac/Linux manually, without automation from `brew bundle` via Brewfile above (detailed instructions only for Mac at present, similar for linux)
       * Install Postgres (Mac)
           * Download and install the Postgresapp.com from [their site](https://postgresapp.com/documentation/install.html)
               * Execute the following command in Terminal to configure your $PATH, and then close & reopen the window:
