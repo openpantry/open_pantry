@@ -2,6 +2,7 @@ defmodule OpenPantry.FoodSelectionTest do
   use OpenPantry.Web.AcceptanceCase, async: true
 
   import OpenPantry.CompleteFacility
+  import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
   import OpenPantry.Web.DisplayLogic, only: [dasherize: 1]
   import Wallaby.Query, only: [css: 2, button: 1, link: 1]
 
@@ -46,8 +47,8 @@ defmodule OpenPantry.FoodSelectionTest do
   end
 
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do
-    one_credit_facility()
-    session = visit(session, "/en/food_selections")
+    %{user: user } = one_credit_facility()
+    session = visit(session, "/en/food_selections?login=#{login_token(user)}")
 
     take_screenshot session
     assert has?(session, stock_available(20))
