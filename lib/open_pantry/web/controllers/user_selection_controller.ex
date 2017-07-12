@@ -4,6 +4,7 @@ defmodule OpenPantry.Web.UserSelectionController do
   alias OpenPantry.CreditType
   alias OpenPantry.UserCredit
   alias OpenPantry.Facility
+  import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
   @hardcoded_facility_id 1
   @unknown_language_id 184
 
@@ -53,7 +54,7 @@ defmodule OpenPantry.Web.UserSelectionController do
   defp redirect_and_notify(conn, user) do
     conn
     |> Plug.Conn.put_resp_cookie("user_id", Integer.to_string(user.id))
-    |> redirect(to: "/en/")
+    |> redirect(to: "/en?login=#{login_token(user)}")
     |> put_flash(:info, "You are now logged in as #{user.name}, user id ##{user.id}")
     |> halt
   end
