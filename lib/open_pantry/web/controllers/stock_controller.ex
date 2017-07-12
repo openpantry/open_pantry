@@ -5,6 +5,8 @@ defmodule OpenPantry.Web.StockController do
 
   def index(conn, _params) do
     stocks = Repo.all(Stock)
+    |>Enum.sort_by(&(&1.override_text)) 
+
     render(conn, "index.html", stocks: stocks)
   end
 
