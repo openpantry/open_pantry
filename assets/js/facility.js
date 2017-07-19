@@ -53,15 +53,18 @@ export default function(channel){
 
 
   $('.js-stock-row').on('click', function(el){
-    el.target.classList.forEach(function(className){
-      if (fn = handlers[className]){
-        fn($(el.currentTarget));
-      };
-    })
+    if (el.target && el.target.classList && typeof(el.target.classList.forEach) == 'function') { // weirdness with PhantomJS
+      el.target.classList.forEach(function(className){
+        fn = handlers[className]
+        if (fn){
+          fn($(el.currentTarget));
+        };
+      })
+    }
   })
 
   $('.js-add-cart').on('click', function(el){
-    el.target.classList = el.target.classList + " hidden"
+    el.target.classList.add("hidden")
     $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
   })
 
