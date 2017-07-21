@@ -1,6 +1,6 @@
 // Responsive Breakpoints for include-media
 $minViewWidth: 20rem; //320px
-$midViewWidth: 56.25rem;  // 900px 
+$midViewWidth: 56.25rem;  // 900px
 $maxViewWidth: 112.5rem; //1800px
 
 $breakpoints: (
@@ -31,11 +31,11 @@ $trashWidth: $gutterWidth*2;
 $plusMinusButtonWidth: 2*$gutterWidth;
 $addToCartWidth: $trashWidth + $plusMinusButtonWidth;
 
-// Font 
+// Font
 $bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $headerFont: $bodyFont;
 
-$minFontSize: 1rem; 
+$minFontSize: 1rem;
 $maxFontSize: 1.5rem; //24px @16px base
 
 $modularHeadingScaleLarge: 1.333; // Perfect Fourth
@@ -61,7 +61,7 @@ $h6Min:1rem/$modularHeadingScaleSmall;
 $h6Max:1rem/$modularHeadingScaleLarge;
 
 
-// Line Height 
+// Line Height
 // $baseLineHeight: 1.2rem;
 // $h1LineHeight: 2rem;
 // $h2LineHeight: 1.5rem;
@@ -72,7 +72,8 @@ $h6Max:1rem/$modularHeadingScaleLarge;
 
 
 // Colors
+$borderColor:  darkgrey;
 $textColor: black;
-$room-temp: red; 
+$room-temp: red;
 $refrigerator: gray;
 $freezer: blue;
