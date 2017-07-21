@@ -38,7 +38,7 @@
 
 .account-info-container {
   @include vp-flex-direction(column);
-    @include vp-display(flex);
+  @include vp-display(flex);
   height: $nomsContainerHeight - 3vh;
   justify-content: space-around;
   padding: 2vh 1vw;
@@ -81,10 +81,18 @@
   @include vp-display(flex);
   height: $navTabHeight;
   justify-content: center;
+  border: 1px solid $borderColor;
+
+  border-radius: $gutterWidth*2 $gutterWidth*2 0 0
+
+
   h3 {
     align-self: center;
-
   }
+}
+
+.active .nav-tab {
+  border-bottom: none;
 }
 
 .tab-content{
