@@ -81,19 +81,16 @@
   @include vp-display(flex);
   height: $navTabHeight;
   justify-content: center;
+  align-items: center;
   border: 1px solid $borderColor;
+  border-radius: $gutterWidth $gutterWidth 0 0;
 
-  border-radius: $gutterWidth*2 $gutterWidth*2 0 0
-
-
-  h3 {
-    align-self: center;
+  &.active {
+    border-bottom: none;
   }
 }
 
-.active .nav-tab {
-  border-bottom: none;
-}
+
 
 .tab-content{
   .tab-pane {
