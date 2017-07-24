@@ -10,7 +10,7 @@ export default function(channel){
   const setTotalQuantity = (row, newQuantity) => row.find('.js-available-quantity').html(newQuantity)
   const setCredits       = (row, newQuantity) => row.parents('.js-stock-type').find('.js-credit-count').html(newQuantity)
   var fn;
-  let handlers = {
+  let stockHandlers = {
     "js-add-stock": function(row){
       const credits = getCredits(row);
       const cost    = getCost(row);
@@ -55,7 +55,7 @@ export default function(channel){
   $('.js-stock-row').on('click', function(el){
     if (el.target && el.target.classList && typeof(el.target.classList.forEach) == 'function') { // weirdness with PhantomJS
       el.target.classList.forEach(function(className){
-        fn = handlers[className]
+        fn = stockHandlers[className]
         if (fn){
           fn($(el.currentTarget));
         };
@@ -66,7 +66,12 @@ export default function(channel){
   $('.js-add-cart').on('click', function(el){
     el.target.classList.add("hidden")
     $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
-  })
+  });
+
+  $('.nav-tab').on('click', function(tab){
+    $('.nav-tab.active').toggleClass("active");
+    $(tab.currentTarget).addClass("active");
+  });
 
   channel.on('set_stock', payload => {
     const {id, quantity} = payload;
