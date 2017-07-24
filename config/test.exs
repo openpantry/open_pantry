@@ -45,6 +45,7 @@ config :guardian, Guardian,
   serializer: OpenPantry.GuardianSerializer
 
 config :wallaby,
+  driver: Wallaby.Experimental.Chrome,
   max_wait_time: 5_000,
   screenshot_on_failure: true,
   js_errors: true,

@@ -53,7 +53,7 @@ defmodule OpenPantry.Mixfile do
      {:cowboy,              "~> 1.0"},
      {:guardian,            "~> 0.14"},
      {:timex,               "~> 3.0"},
-     {:wallaby,             "~> 0.17",  only: :test},
+     {:wallaby,             "~> 0.18",  only: :test},
      {:phoenix_live_reload, "~> 1.0",   only: :dev},
      {:credo,               "~> 0.5",   only: [:dev, :test]},
      {:dialyxir,            "~> 0.5",   only: [:dev, :test], runtime: false},
