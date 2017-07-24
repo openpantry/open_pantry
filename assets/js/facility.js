@@ -34,14 +34,19 @@ export default function(channel){
     })
   }
   var fn;
-  let handlers = {
-    "js-add-stock": function($row){
-      const credits = getCredits($row);
-      const cost    = getCost($row);
-      if (getAvailable($row) > 0 && credits >= cost) {
-        channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-        setUserQuantity($row, getQuantity($row) + 1);
-        setCredits($row, credits - cost);
+  let stockHandlers = {
+    "js-add-stock": function(row){
+      const credits = getCredits(row);
+      const cost    = getCost(row);
+      if (getAvailable(row) > 0 && credits >= cost) {
+        channel.push('request_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
+        setUserQuantity(row, getQuantity(row) + 1);
+        setCredits(row, credits - cost);
+      }
+      if (getQuantity(row) >= getMaxAllowed(row)) {
+        $(row).find(".js-add-stock").prop("disabled",true)
+        window.plus_button =  $(row).find(".js-add-stock").html();
+        $(row).find(".js-add-stock").text(row.data("max-allowed-message"))
       }
     },
     "js-remove-stock": function($row){
@@ -71,7 +76,7 @@ export default function(channel){
   $('.js-stock-row').on('click', function(el){
     if (el.target && el.target.classList && typeof(el.target.classList.forEach) == 'function') { // weirdness with PhantomJS
       el.target.classList.forEach(function(className){
-        fn = handlers[className]
+        fn = stockHandlers[className]
         if (fn){
           fn($(el.currentTarget));
         };
@@ -82,7 +87,12 @@ export default function(channel){
   $('.js-add-cart').on('click', function(el){
     el.target.classList.add("hidden")
     $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
-  })
+  });
+
+  $('.nav-tab').on('click', function(tab){
+    $('.nav-tab.active').toggleClass("active");
+    $(tab.currentTarget).addClass("active");
+  });
 
   channel.on('current_credits', payload => {
     $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
