@@ -44,6 +44,10 @@ $maxFontSize: 1.5rem; //24px @16px base
 $modularHeadingScaleLarge: 1.333; // Perfect Fourth
 $modularHeadingScaleSmall: 1.125; // Major Second
 
+// Line Height
+$minLineHeight: 1.2rem;
+$maxlineHeight: 1.8rem;
+
 // Modular Heading Scale
 $h1Min: 1rem*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall*$modularHeadingScaleSmall;
 $h1Max: 1rem*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge*$modularHeadingScaleLarge;
@@ -63,14 +67,6 @@ $h5Max:1rem;
 $h6Min:1rem/$modularHeadingScaleSmall;
 $h6Max:1rem/$modularHeadingScaleLarge;
 
-
-// Line Height
-// $baseLineHeight: 1.2rem;
-// $h1LineHeight: 2rem;
-// $h2LineHeight: 1.5rem;
-// $h3LineHeight: 1.25rem;
-// $h4LineHeight: 1rem;
-// $h5LineHeight: 0.875rem;
 
 
 

@@ -11,11 +11,9 @@
   <div class="stock-selection-container">
     <div class="nav nav-tab-container">
       <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
-        <div class="">
             <a class="nav-tab <%= dasherize(stock_type) %> <%= active(stock_type, @stock_by_type)%>" href="#<%= dasherize(stock_type) %>" data-toggle="tab">
               <h3><%= stock_type %></h3>
             </a>
-        </div>
       <% end %>
     </div>
 

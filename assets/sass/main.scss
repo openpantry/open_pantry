@@ -339,6 +339,7 @@ html {
 // Modular Font-Size Calculations
 html {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $minLineHeight, $maxlineHeight);
 }
 
 h1 {
