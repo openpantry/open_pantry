@@ -1,7 +1,10 @@
 // Responsive Breakpoints for include-media
+$minViewWidth: 320px;
 $minViewWidth: 20rem; //320px
-$midViewWidth: 56.25rem;  // 900px
-$maxViewWidth: 112.5rem; //1800px
+$midViewWidth: 900px;
+$midViewWidth: 56.25rem; // 900px
+$maxViewWidth: 1800px;
+$maxViewWidth: 112.5rem; //1800p
 
 $breakpoints: (
   'phone': $minViewWidth,
