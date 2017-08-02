@@ -8,11 +8,6 @@
   </li>
 
   <li>
-    <strong>Location:</strong>
-    <%= @facility.location %>
-  </li>
-
-  <li>
     <strong>Address1:</strong>
     <%= @facility.address1 %>
   </li>

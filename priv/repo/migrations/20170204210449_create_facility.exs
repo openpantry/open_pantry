@@ -4,7 +4,7 @@ defmodule OpenPantry.Repo.Migrations.CreateFacility do
   def change do
     create table(:facilities) do
       add :name, :string
-      add :location, :geometry
+      add :location, :string
       add :address1, :string
       add :address2, :string
       add :city, :string
