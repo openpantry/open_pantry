@@ -21,7 +21,6 @@ import OpenPantry.Factory
 facility_params = [
   %{name: "Flatbush",
     max_occupancy: 100,
-    location: %Geo.Point{coordinates: {-73.965288, 40.624061}},
     address1: "1372 Coney Island Ave",
     city: "Brooklyn",
     region: "NY",
@@ -29,7 +28,6 @@ facility_params = [
     },
   %{name: "Boro Park",
     max_occupancy: 20,
-    location: %Geo.Point{coordinates: {-73.995519, 40.632360}},
     address1: "5402 New Utrecht Ave",
     city: "Brooklyn",
     region: "NY",

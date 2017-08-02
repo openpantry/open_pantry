@@ -2,7 +2,6 @@ defmodule OpenPantry.Facility do
   use OpenPantry.Web, :model
   schema "facilities" do
     field :name, :string
-    field :location, Geo.Point
     field :address1, :string
     field :address2, :string
     field :city, :string
@@ -24,7 +23,7 @@ defmodule OpenPantry.Facility do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :location, :address1, :address2, :city, :region, :postal_code, :max_occupancy, :square_meterage_storage])
+    |> cast(params, [:name, :address1, :address2, :city, :region, :postal_code, :max_occupancy, :square_meterage_storage])
     |> unique_constraint(:name)
     |> validate_required([:name])
   end
