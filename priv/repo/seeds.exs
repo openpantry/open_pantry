@@ -35,7 +35,6 @@ facility_params = [
     },
   %{name: "Queens",
     max_occupancy: 50,
-    location: %Geo.Point{coordinates: {-73.858008, 40.728167}},
     address1: "98-08 Queens Blvd",
     city: "Queens",
     region: "NY",
