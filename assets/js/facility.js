@@ -56,7 +56,7 @@ export default function(channel){
     el.target.classList.forEach(function(className){
       if (fn = handlers[className]){
         fn($(el.currentTarget));
-      };
+      }
     })
   })
 
