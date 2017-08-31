@@ -1,9 +1,8 @@
 defmodule OpenPantry.Web.Router do
-  alias OpenPantry.Authentication
-  alias OpenPantry.Plug.SetupUser
-  alias OpenPantry.Plug.Locale
   use OpenPantry.Web, :router
   use ExAdmin.Router
+
+  alias OpenPantry.Plugs
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,11 +10,12 @@ defmodule OpenPantry.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Plugs.Facility
   end
 
   pipeline :localized_browser do
     plug :browser
-    plug Locale, "en"
+    plug Plugs.Locale, "en"
   end
 
   pipeline :api do
@@ -23,11 +23,11 @@ defmodule OpenPantry.Web.Router do
   end
 
   pipeline :admin_auth do
-    plug Authentication, use_config: {:open_pantry, :admin_auth}
+    plug Plugs.Authentication, use_config: {:open_pantry, :admin_auth}
   end
 
   pipeline :user_required do
-    plug SetupUser, redirect_url: "/user_selections"
+    plug Plugs.SetupUser, redirect_url: "/user_selections"
   end
 
   scope "/admin", ExAdmin do

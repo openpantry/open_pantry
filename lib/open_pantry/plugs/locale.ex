@@ -1,5 +1,5 @@
 # based on http://code.parent.co/practical-i18n-with-phoenix-and-elixir/
-defmodule OpenPantry.Plug.Locale do
+defmodule OpenPantry.Plugs.Locale do
   import Plug.Conn
 
   def init(default), do: default
