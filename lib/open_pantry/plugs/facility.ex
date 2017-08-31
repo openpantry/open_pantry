@@ -1,4 +1,6 @@
 defmodule OpenPantry.Plugs.Facility do
+  import Ecto.Query, only: [from: 2]
+
   alias OpenPantry.{Repo, Facility}
 
   def init(_opts) do
@@ -8,7 +10,12 @@ defmodule OpenPantry.Plugs.Facility do
 
   def call(conn, domain_length) do
     subdomain = subdomain(conn.host, domain_length)
-    facility = Repo.get_by!(Facility, subdomain: subdomain)
+
+    facility =
+      case Repo.get_by(Facility, subdomain: subdomain) do
+        nil -> Repo.one!(from Facility, limit: 1)
+        facility -> facility
+      end
 
     Plug.Conn.assign(conn, :facility, facility)
   end
