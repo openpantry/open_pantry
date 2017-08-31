@@ -1,4 +1,4 @@
-defmodule OpenPantry.Plug.SetupUser do
+defmodule OpenPantry.Plugs.SetupUser do
   alias OpenPantry.User
   alias OpenPantry.Repo
   alias OpenPantry.Web.UserSelectionView
