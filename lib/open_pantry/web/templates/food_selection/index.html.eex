@@ -50,6 +50,7 @@
           <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
             <%=  @credits[stock_type] %>
           </span>
+          <span class="hidden js-credit-type"><%= type_id %></span>
         </span>
       <%= end %>
     </div>
