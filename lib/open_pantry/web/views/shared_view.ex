@@ -1,4 +1,5 @@
 defmodule OpenPantry.Web.SharedView do
+  @default_max 999
   use OpenPantry.Web, :view
   import OpenPantry.Stock
   import OpenPantry.Web.DisplayLogic
@@ -30,7 +31,7 @@ defmodule OpenPantry.Web.SharedView do
                   else
                     nil
                   end
-    stock.max_per_package || max_family || stock.quantity
+    stock.max_per_package || max_family || @default_max
   end
 
 end

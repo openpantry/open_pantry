@@ -1,14 +1,29 @@
 export default function(channel){
   const intFromFindClass = (parent, className) => parseInt(parent.find(className).html(), 10)
   const getMaxAllowed    = (row) => parseInt(row.data('max-allowed'), 10)
+  const getStockQuantity = (row) => parseInt(row.data('stock-available'), 10)
   const getAvailable     = (row) => intFromFindClass(row, '.js-available-quantity')
   const getQuantity      = (row) => intFromFindClass(row, '.js-current-quantity')
   const getCost          = (row) => intFromFindClass(row, '.js-credit-cost')
   const getCredits       = (row) => intFromFindClass(row.parents('.js-stock-type'), '.js-credit-count')
   const getType          = (row) => row.parents('.js-stock-type').find('.js-credit-count').data('credit-type')
+  const setStockQuantity = (row, newQuantity) => row.data('stock-available', newQuantity)
   const setUserQuantity  = (row, newQuantity) => row.find('.js-current-quantity').html(newQuantity)
   const setTotalQuantity = (row, newQuantity) => row.find('.js-available-quantity').html(newQuantity)
   const setCredits       = (row, newQuantity) => row.parents('.js-stock-type').find('.js-credit-count').html(newQuantity)
+  const getCreditGroup   = (creditTypeName) => $(`*[data-credit-group="${creditTypeName}"]`)
+  const updateQuantities = (creditGroupId, $updateRow, availableStockQuantity) => {
+    $(getCreditGroup(creditGroupId)).find('.js-stock-row').toArray().forEach(row => {
+      const $row = $(row);
+      const [cost, credits, maxAllowed] = [getCost($row), getCredits($row), getMaxAllowed($row)];
+      const affordAmount = Math.floor(credits / cost);
+      if ($updateRow && $row.data('stock-id') === $updateRow.data('stock-id')){
+        setStockQuantity($row, availableStockQuantity)
+      }
+      const rowStockQuantity = getStockQuantity($row);
+      setTotalQuantity($row, _.min([affordAmount, maxAllowed, rowStockQuantity]));
+    })
+  }
   var fn;
   let handlers = {
     "js-add-stock": function(row){
@@ -19,7 +34,7 @@ export default function(channel){
         setUserQuantity(row, getQuantity(row) + 1);
         setCredits(row, credits - cost);
       }
-      if (getQuantity(row) >= getMaxAllowed(row)) {
+      if (getAvailable(row) == 0) {
         $(row).find(".js-add-stock").prop("disabled",true)
         window.plus_button =  $(row).find(".js-add-stock").html();
         $(row).find(".js-add-stock").text(row.data("max-allowed-message"))
@@ -33,10 +48,12 @@ export default function(channel){
         channel.push('release_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
         setUserQuantity(row, currentQuantity - 1);
         setCredits(row, credits + cost);
-      }
-      if (getQuantity(row) < getMaxAllowed(row)) {
-        $(row).find(".js-add-stock").prop("disabled",false)
-        $(row).find(".js-add-stock").html(window.plus_button)
+        setTimeout(function(){
+          if (getAvailable(row) > 0) {
+            $(row).find(".js-add-stock").prop("disabled",false)
+            $(row).find(".js-add-stock").html(window.plus_button)
+          }
+        }, 100)
       }
     },
     "js-clear-stock": function(row){
@@ -68,11 +85,6 @@ export default function(channel){
     $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
   })
 
-  channel.on('set_stock', payload => {
-    const {id, quantity} = payload;
-    setTotalQuantity($(`*[data-stock-id="${id}"]`), quantity);
-  });
-
   channel.on('current_credits', payload => {
     $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
   });
@@ -96,4 +108,11 @@ export default function(channel){
     }
   });
 
+  channel.on('set_stock', function(payload){
+    const {id, quantity} = payload;
+    const $row = $(`*[data-stock-id="${id}"]`);
+    updateQuantities(getType($row), $row, quantity)
+  });
+  //initialize quantities for all credit types
+  $('.js-credit-type').toArray().map(el => $(el).text()).forEach(stockType => updateQuantities(stockType))
 }
