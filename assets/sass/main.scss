@@ -331,6 +331,11 @@ ul.user-list {
 }
 
 // Font
+body {
+  line-height: 1.5;
+  
+}
+
 html {
   font-family: $bodyFont;
   color: $textColor;

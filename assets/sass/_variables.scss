@@ -38,7 +38,10 @@ $addToCartWidth: $trashWidth + $plusMinusButtonWidth;
 $bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $headerFont: $bodyFont;
 
+$minFontSize: 16px;
 $minFontSize: 1rem;
+
+$maxFontSize: 24px; //24px @16px base
 $maxFontSize: 1.5rem; //24px @16px base
 
 $modularHeadingScaleLarge: 1.333; // Perfect Fourth
