@@ -72,12 +72,23 @@ defmodule OpenPantry.FoodSelection do
     stock_distribution = StockDistribution.find_or_create(package.id, stock.id)
     cost = stock.credits_per_package
     Multi.new
-    |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution.id), [inc: [quantity: quantity]])
     |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
     |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
-    |> Multi.run(:validate_stock_distribution, StockDistribution, :validate_stock_distribution, [stock_distribution, quantity])
+    |> update_stock_distribution(stock_distribution, quantity)
     |> Repo.transaction
     stock_distribution
+  end
+
+  @spec update_stock_distribution(Ecto.Multi.t, StockDistribution.t, integer() ) :: Ecto.Multi.t
+  def update_stock_distribution(multi, stock_distribution, quantity) do
+    if stock_distribution.quantity + quantity <= 0 do
+      multi
+      |> Multi.delete(:stock_distribution, stock_distribution)
+    else
+      multi
+      |> Multi.update_all(:stock_distribution, StockDistribution.query(stock_distribution.id), [inc: [quantity: quantity]])
+      |> Multi.run(:validate_stock_distribution, StockDistribution, :validate_stock_distribution, [stock_distribution, quantity])
+    end
   end
 
   @spec deduct_credits(Ecto.Multi.t, integer(), integer(), integer(), integer(), tuple() ) :: Ecto.Multi.t

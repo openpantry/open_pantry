@@ -96,7 +96,7 @@ export default function(channel){
     const {id, html} = payload;
     const $html = $(html)
     const existing = $('.js-cart').find(`*[data-stock-distribution-id="${id}"]`).first();
-    const quantity = intFromFindClass($html, '.js-quantity-requested')
+    const quantity = intFromFindClass($html, '.js-quantity-requested') || 0;
 
     if (existing.length && quantity > 0) {
       $(existing).html($html.html())
