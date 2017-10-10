@@ -1,5 +1,5 @@
 export default function(channel){
-  const intFromFindClass = (parent, className) => parseInt(parent.find(className).html(), 10)
+  const intFromFindClass = (parent, className) => parseInt(parent.find(className).html(), 10) || 0
   const getMaxAllowed    = (row) => parseInt(row.data('max-allowed'), 10)
   const getStockQuantity = (row) => parseInt(row.data('stock-available'), 10)
   const getAvailable     = (row) => intFromFindClass(row, '.js-available-quantity')
@@ -96,7 +96,7 @@ export default function(channel){
     const {id, html} = payload;
     const $html = $(html)
     const existing = $('.js-cart').find(`*[data-stock-distribution-id="${id}"]`).first();
-    const quantity = intFromFindClass($html, '.js-quantity-requested') || 0;
+    const quantity = intFromFindClass($html, '.js-quantity-requested')
 
     if (existing.length && quantity > 0) {
       $(existing).html($html.html())
