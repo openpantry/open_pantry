@@ -32,13 +32,15 @@ defmodule OpenPantry.FoodSelection do
   def play() do # way more data than needed, but one query! :-/
     id = 1
     now = DateTime.utc_now
-    from(credit_type in CreditType,
-    join: stocks in assoc(credit_type, :stocks),
-    where: stocks.arrival < ^now,
-    where: stocks.expiration > ^now,
-    where: ^id == stocks.facility_id,
+    from(stock in Stock,
+    join: food in assoc(stock, :food),
+    join: food_group in assoc(stock, :food_group),
+    join: credit_type in assoc(food_group, :credit_types),
+    where: stock.arrival < ^now,
+    where: stock.expiration > ^now,
+    where: ^id == stock.facility_id,
     order_by: credit_type.name,
-    preload: [stocks: [food: :food_group]])
+    select: [stock.id, food.longdesc, food.manufacturer_name, food_group.foodgroup_desc, credit_type.name])
     |> Repo.all
   end
 
