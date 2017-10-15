@@ -32,7 +32,6 @@ defmodule OpenPantry.FoodSelection do
     |> Repo.all
     |> Enum.group_by(&({&1.credit_name, &1.credit_id}), &(&1.stock))
     |> Enum.map(&({elem(elem(&1, 0), 0), elem(elem(&1, 0), 1), elem(&1, 1)}))
-    |> Enum.uniq
     |> append_meals_if_any(facility)
   end
 
