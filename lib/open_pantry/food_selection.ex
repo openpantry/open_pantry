@@ -16,32 +16,24 @@ defmodule OpenPantry.FoodSelection do
   @spec stock_by_type(Facility.t) :: list(tuple())
   def stock_by_type(facility = %Facility{id: id}) do # way more data than needed, but one query! :-/
     now = DateTime.utc_now
-    from(credit_type in CreditType,
-    join: stocks in assoc(credit_type, :stocks),
-    where: stocks.arrival < ^now,
-    where: stocks.expiration > ^now,
-    where: ^id == stocks.facility_id,
-    order_by: credit_type.name,
-    preload: [stocks: [food: :food_group]])
-    |> Repo.all
-    |> Enum.map(&({&1.name, &1.id, in_stock(&1.stocks)}))
-    |> Enum.uniq
-    |> append_meals_if_any(facility)
-  end
-
-  def play() do # way more data than needed, but one query! :-/
-    id = 1
-    now = DateTime.utc_now
     from(stock in Stock,
-    join: food in assoc(stock, :food),
-    join: food_group in assoc(food, :food_group),
-    join: credit_type in assoc(food_group, :credit_types),
+    join: credit_type in assoc(stock, :credit_types),
     where: stock.arrival < ^now,
     where: stock.expiration > ^now,
     where: ^id == stock.facility_id,
+    where: stock.quantity > 0,
     order_by: credit_type.name,
-    select: [stock.id, food.longdesc, food.manufacturer_name, food_group.foodgroup_desc, credit_type.name])
+    select: %{
+      stock: stock,
+      credit_name: credit_type.name,
+      credit_id: credit_type.id
+    },
+    preload: [food: :food_group])
     |> Repo.all
+    |> Enum.group_by(&({&1.credit_name, &1.credit_id}), &(&1.stock))
+    |> Enum.map(&({elem(elem(&1, 0), 0), elem(elem(&1, 0), 1), elem(&1, 1)}))
+    |> Enum.uniq
+    |> append_meals_if_any(facility)
   end
 
   @spec append_meals_if_any(list(tuple()), Facility.t) :: list(tuple())
