@@ -111,9 +111,9 @@
 }
 // Stock entry layout
 .stock-list  {
-  @include vp-display(flex);
-  @include vp-flex-direction(column);
+  @include vp-display(flex);;
   max-height: $stockListHeight;
+  align-items: center;
   overflow-y: auto;
 }
 
@@ -124,6 +124,10 @@
   align-items: center;
   margin: .5vh 0;
   min-height: $stockEntryHeight;
+  width: $stockEntryWidth;
+	border: 1px solid #8B3DBD;
+	border-radius: 11px;
+	background: radial-gradient(circle, rgba(139,61,189,0.3) 0%, #FFFFFF 100%);
 }
 
 .item-details {
@@ -132,8 +136,9 @@
 }
 
 .stock-image-location, .stock-image {
-  width: $stockEntryImageSize;
-  height: $stockEntryImageSize;
+  border-radius: 11px 11px 0 0;
+  width: 99%;
+  height: 99%;
 }
 
 .item-info,
@@ -333,7 +338,7 @@ ul.user-list {
 // Font
 body {
   line-height: 1.5;
-  
+
 }
 
 html {

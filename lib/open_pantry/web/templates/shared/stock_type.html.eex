@@ -16,7 +16,6 @@
               data-stock-available="<%= stock.quantity %>"
               data-max-allowed-message="<%= gettext("Max allowed") %>"
               >
-          <div class="item-details">
             <div class="stock-image-location">
               <%= if stock.image do %>
                 <%= img_tag(image_url(stock), class: "stock-image") %>
@@ -38,7 +37,6 @@
                 </h5>
               </div>
             </div>
-          </div>
           <!--div class="manufacturer">
             <%= stock.food_id && stock.food.manufacturer_name %>
           </div>

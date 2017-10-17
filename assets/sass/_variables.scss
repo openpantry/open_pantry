@@ -15,17 +15,19 @@ $breakpoints: (
 ) !default;
 
 // layout
+$gutterWidth: 2vw;
 $goldenRatio: 1.618;
 $navTabHeight: 8vh;
 $nomsContainerHeight: 32vh;
 $stockContainerWidth: 100vw/$goldenRatio;
+$stockEntryWidth: $stockContainerWidth/3-$gutterWidth*2;
 $nomsNcartContainerWidth: 99vw-100vw/$goldenRatio;
 
 $cartHeight: 100vh-$nomsContainerHeight;
 $stockEntryImageSize: 7vw;
 $stockEntryHeight: 14vh;
 $nomTypeRemainingSize: 12vh;
-$gutterWidth: 2vw;
+
 $stockListHeight: 95vh - $navTabHeight - $nomTypeRemainingSize;
 
 // buttons
@@ -38,10 +40,7 @@ $addToCartWidth: $trashWidth + $plusMinusButtonWidth;
 $bodyFont: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $headerFont: $bodyFont;
 
-$minFontSize: 16px;
 $minFontSize: 1rem;
-
-$maxFontSize: 24px; //24px @16px base
 $maxFontSize: 1.5rem; //24px @16px base
 
 $modularHeadingScaleLarge: 1.333; // Perfect Fourth
