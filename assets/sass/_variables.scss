@@ -19,8 +19,8 @@ $gutterWidth: 2vw;
 $goldenRatio: 1.618;
 $navTabHeight: 8vh;
 $nomsContainerHeight: 32vh;
-$stockContainerWidth: 100vw/$goldenRatio;
-$stockEntryWidth: $stockContainerWidth/3-$gutterWidth*2;
+$stockContainerWidth: 100vw;
+$stockEntryWidth: $stockContainerWidth/3-2vw;
 $nomsNcartContainerWidth: 99vw-100vw/$goldenRatio;
 
 $cartHeight: 100vh-$nomsContainerHeight;

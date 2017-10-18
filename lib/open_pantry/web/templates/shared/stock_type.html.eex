@@ -1,4 +1,4 @@
-<div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= dasherize(@stock_type) %>" data-credit-group="<%= @type_id %>">
+<div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= dasherize(@stock_type) %>">
   <div class="nom-type-remaining">
     <h3>
       <%= @stock_type %> <%= gettext("remaining:") %>
@@ -13,9 +13,9 @@
         <div  class="js-stock-row stock-entry <%= stock.storage %>"
               data-stock-id="<%= stock.id %>"
               data-max-allowed="<%= max_allowed(stock, @family_members) %>"
-              data-stock-available="<%= stock.quantity %>"
               data-max-allowed-message="<%= gettext("Max allowed") %>"
               >
+          <div class="item-details">
             <div class="stock-image-location">
               <%= if stock.image do %>
                 <%= img_tag(image_url(stock), class: "stock-image") %>
@@ -37,6 +37,7 @@
                 </h5>
               </div>
             </div>
+          </div>
           <!--div class="manufacturer">
             <%= stock.food_id && stock.food.manufacturer_name %>
           </div>
@@ -46,7 +47,7 @@
 
           <div class="item_control-container">
             <div class=" quantity-available">
-              <span class="js-available-quantity"></span> <%= gettext(" available") %>
+              <span class="js-available-quantity"><%= stock.quantity %></span> <%= gettext(" available") %>
             </div>
             <div class="js-quantity-control <%= hidden_quantity(stock, @package) %>  quantity_control_trash-container">
               <div class="remove-amount-add-button-container">

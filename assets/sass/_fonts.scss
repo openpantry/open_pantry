@@ -1,0 +1,41 @@
+// Font
+body {
+  line-height: 1.5;
+
+}
+
+html {
+  font-family: $bodyFont;
+  color: $textColor;
+}
+
+// Modular Font-Size Calculations
+html {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $minLineHeight, $maxlineHeight);
+}
+
+h1 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+}
+
+h2 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+  margin: $gutterWidth;
+}
+
+h3 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
+}
+
+h4 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
+}
+
+h5 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}
+
+h6 {
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+}

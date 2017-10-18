@@ -4,6 +4,7 @@
 @import "variables";
 @import "mixins";
 @import "vendors/include-media";
+@import "fonts";
 
 .stock-entry {
   .hidden {
@@ -71,7 +72,6 @@
   width: 100%;
 
   a {
-    width: $stockContainerWidth/3;
     text-align: center;
   }
 }
@@ -113,15 +113,15 @@
 .stock-list  {
   @include vp-display(flex);;
   max-height: $stockListHeight;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-around;
   overflow-y: auto;
+  width: $stockContainerWidth;
 }
 
 .stock-entry {
-  width: $stockContainerWidth;
   @include vp-display(flex);
   justify-content: space-between;
-  align-items: center;
   margin: .5vh 0;
   min-height: $stockEntryHeight;
   width: $stockEntryWidth;
@@ -133,12 +133,12 @@
 .item-details {
   @include vp-display(flex);
   @include vp-flex-direction(row);
+  width: inherit;
 }
 
 .stock-image-location, .stock-image {
   border-radius: 11px 11px 0 0;
-  width: 99%;
-  height: 99%;
+  width: inherit;
 }
 
 .item-info,
@@ -335,47 +335,7 @@ ul.user-list {
   display: block;
 }
 
-// Font
-body {
-  line-height: 1.5;
 
-}
-
-html {
-  font-family: $bodyFont;
-  color: $textColor;
-}
-
-// Modular Font-Size Calculations
-html {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $minFontSize, $maxFontSize);
-  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $minLineHeight, $maxlineHeight);
-}
-
-h1 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
-}
-
-h2 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
-  margin: $gutterWidth;
-}
-
-h3 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
-}
-
-h4 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
-}
-
-h5 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
-}
-
-h6 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
-}
 
 .add_sub-svg {
   @include fluid-type(height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max );
