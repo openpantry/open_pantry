@@ -55,7 +55,7 @@ defmodule OpenPantry.Stock do
   @spec stock_description(Stock.t) :: String.t
   def stock_description(stock) do
     loaded_stock = stockable_load(stock)
-    (loaded_stock.food && loaded_stock.override_text || loaded_stock.food.longdesc)    ||
+    (loaded_stock.food && (loaded_stock.override_text || loaded_stock.food.longdesc))    ||
     (loaded_stock.meal && loaded_stock.meal.description)                               ||
     (loaded_stock.offer && loaded_stock.offer.description)
   end
