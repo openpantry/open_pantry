@@ -4,7 +4,20 @@ defmodule OpenPantry.Web.StockController do
   alias OpenPantry.Stock
 
   def index(conn, _params) do
-    stocks = Repo.all(Stock)
+    stocks =
+      from(stock in Stock,
+        left_join: food in assoc(stock, :food),
+        left_join: meal in assoc(stock, :meal),
+        left_join: offer in assoc(stock, :offer),
+        order_by: fragment("coalesce(?, '') || coalesce(?, '') || coalesce(?, '') || coalesce(?, '')",
+          stock.override_text,
+          food.longdesc,
+          meal.description,
+          offer.description
+        ),
+        preload: [:food, :meal, :offer]
+      )
+      |> Repo.all()
     render(conn, "index.html", stocks: stocks)
   end
 
