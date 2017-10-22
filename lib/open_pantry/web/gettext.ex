@@ -23,14 +23,14 @@ defmodule OpenPantry.Web.Gettext do
   use Gettext, otp_app: :open_pantry
 
 
+  @config Application.get_env(:open_pantry, __MODULE__)
+
   def supported_locales do
     known = Gettext.known_locales(OpenPantry.Web.Gettext)
-    allowed = config[:locales]
+    allowed = @config[:locales]
 
     MapSet.intersection(Enum.into(known, MapSet.new), Enum.into(allowed, MapSet.new))
     |> MapSet.to_list
   end
-
-  defp config, do: Application.get_env(:open_pantry, __MODULE__)
 
 end

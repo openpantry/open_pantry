@@ -29,9 +29,7 @@ defmodule OpenPantry.Web.UserOrderController do
   end
 
 
-  @doc """
-    Temporary hack while hardcoding to facility 1, but needs some kind of user token for websocket auth
-  """
+  # Temporary hack while hardcoding to facility 1, but needs some kind of user token for websocket auth
   defp setup_channel_credentials(conn, _params) do
     conn
     |> assign(:user_token, Phoenix.Token.sign(conn, "user socket", 1))

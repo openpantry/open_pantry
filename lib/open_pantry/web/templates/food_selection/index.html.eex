@@ -52,7 +52,7 @@
           </span>
           <span class="hidden js-credit-type"><%= type_id %></span>
         </span>
-      <%= end %>
+      <% end %>
     </div>
 
     <div class="tab-pane js-cart cart-container" id="cart">

@@ -25,7 +25,8 @@ defmodule OpenPantry.StockDistribution do
   end
 
   def validate_max_per_order(changeset, options \\ []) do
-    validate_change(changeset, :quantity, fn _, quantity ->
+    # we validate the quantity from the changeset, not this arg
+    validate_change(changeset, :quantity, fn _, _quantity ->
 
       case validate_stock_distribution(%{}, changeset.data) do
         {:ok, _} ->
@@ -44,12 +45,13 @@ defmodule OpenPantry.StockDistribution do
     end
   end
 
-  defp per_person_ok?(stock_distribution = %StockDistribution{ stock: %Stock{ max_per_person: nil } }), do: true
-  defp per_package_ok?(stock_distribution = %StockDistribution{ stock: %Stock{ max_per_package: nil } }), do: true
+  defp per_person_ok?(%StockDistribution{ stock: %Stock{ max_per_person: nil } }), do: true
 
   defp per_person_ok?(stock_distribution) do
     stock_distribution.quantity <= stock_distribution.stock.max_per_person * stock_distribution.user.family_members
   end
+
+  defp per_package_ok?(%StockDistribution{ stock: %Stock{ max_per_package: nil } }), do: true
 
   defp per_package_ok?(stock_distribution) do
     stock_distribution.quantity <= stock_distribution.stock.max_per_package
