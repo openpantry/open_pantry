@@ -15,6 +15,7 @@ defmodule OpenPantry.Web.AcceptanceCase do
     end
   end
 
+  # TODO: find a way to silence the warning about tags var not being used
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(OpenPantry.Repo)
 
