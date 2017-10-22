@@ -30,12 +30,11 @@ defmodule OpenPantry.Web.SharedView do
   end
 
   def max_allowed(stock, family_members) do
-    max_family =  if stock.max_per_person do
-                    stock.max_per_person * family_members
-                  else
-                    nil
-                  end
-    stock.max_per_package || max_family || @default_max
+    cond do
+      stock.max_per_package -> stock.max_per_package
+      stock.max_per_person  -> stock.max_per_person * family_members
+      true                  -> @default_max
+    end
   end
 
 end
