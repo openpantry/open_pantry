@@ -4,44 +4,32 @@ defmodule Blank do
   """
 
   @doc """
-  Returns `true` if data is considered blank/empty.  What is considered blank?
+  Returns `true` if data is considered blank/empty.
+  What is considered blank?
 
   * Empty strings, empty lists, and empty maps
   * The atoms `false` and `nil`
 
-  Everything else is non-blank.  That includes whitespace-only strings, and all integers, even 0.  (Other types of numbers have not been implemented yet.)
+  Everything else is non-blank.  That includes
+  whitespace-only strings, and all integers, even 0.
+  (Other types of numbers have not been implemented yet.)
+
+  This was mostly adapted from
+  https://gist.github.com/erikreedstrom/5104f5eea925cdece6e4 .
 
   ## Examples
 
     iex> Blank.blank? ""  # empty is the only blank string
     true
 
-    iex> Blank.blank? "hello, world!"
+    iex> Blank.blank? " "  # note the space in there
     false
 
-    iex> Blank.blank? 0  # integers are never blank, not even 0
-    false
-
-    iex> Blank.blank? []  # empty is the only blank list
+    iex> Blank.blank? []  # [] is the only blank list
     true
 
-    iex> Blank.blank? [:foo]
-    false
-
-    iex> Blank.blank? %{}  # empty is the only blank map
+    iex> Blank.blank? %{}  # %{} is the only blank map
     true
-
-    iex> Blank.blank? %{ foo: :bar }
-    false
-
-    iex> Blank.blank? false  # false and nil are the only blank atoms
-    true
-
-    iex> Blank.blank? nil
-    true
-
-    iex> Blank.blank? :any_other_atom
-    false
   """
   def blank?(data) do
     Blank.Protocol.blank?(data)

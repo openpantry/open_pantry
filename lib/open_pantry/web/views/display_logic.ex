@@ -18,22 +18,13 @@ defmodule OpenPantry.Web.DisplayLogic do
   stock or credit.  For more on the underscore format, see:
   https://hexdocs.pm/elixir/Macro.html#underscore/1
 
-  This does not handle acronyms well when not followed by a capital letter,
-  with maybe spaces between.  See examples.
-
   ## Examples:
 
   iex> OpenPantry.Web.DisplayLogic.dasherize "American Express"
   "american-express"
 
-  iex> OpenPantry.Web.DisplayLogic.dasherize "Foo.Bar"
-  "foo/bar"
-
   iex> OpenPantry.Web.DisplayLogic.dasherize "NASA Low Residue"
   "nasa-low-residue"
-
-  iex> OpenPantry.Web.DisplayLogic.dasherize "NASA-Approved Low Residue"
-  "nas-a--approved-low-residue"
   """
   def dasherize(string) do
     string
