@@ -46,13 +46,11 @@ defmodule OpenPantry.StockDistribution do
   end
 
   defp per_person_ok?(%StockDistribution{ stock: %Stock{ max_per_person: nil } }), do: true
-
   defp per_person_ok?(stock_distribution) do
     stock_distribution.quantity <= stock_distribution.stock.max_per_person * stock_distribution.user.family_members
   end
 
   defp per_package_ok?(%StockDistribution{ stock: %Stock{ max_per_package: nil } }), do: true
-
   defp per_package_ok?(stock_distribution) do
     stock_distribution.quantity <= stock_distribution.stock.max_per_package
   end
