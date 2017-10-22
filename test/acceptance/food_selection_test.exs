@@ -4,7 +4,7 @@ defmodule OpenPantry.FoodSelectionTest do
   import OpenPantry.CompleteFacility
   import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
   import OpenPantry.Web.DisplayLogic, only: [dasherize: 1]
-  import Wallaby.Query, only: [css: 2, button: 1, link: 1]
+  import Wallaby.Query, only: [css: 1, css: 2, button: 1, link: 1]
 
   test "selection table has tab per credit type, plus meals and cart", %{session: session} do
     %{credit_types: [credit_type|_]} = two_credit_facility()
@@ -46,19 +46,15 @@ defmodule OpenPantry.FoodSelectionTest do
     |> Wallaby.end_session
   end
 
-  @tag :pending
+  # @tag :pending
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do
     %{user: user } = one_credit_facility()
-    session = visit(session, "/en/food_selections?login=#{login_token(user)}")
-
-    take_screenshot session
-    assert has?(session, stock_available(20))
-    assert has?(session, stock_requested(0))
-
-    click(session, button("+"))
-
-    assert has?(session, stock_available(19))
-    assert has?(session, stock_requested(1))
+    session
+    |> visit("/en/food_selections?login=#{login_token(user)}")
+    |> assert_has(stock_available(20))
+    |> click(css(".js-add-stock"))
+    |> assert_has(stock_available(20))
+    |> assert_has(stock_requested(0))
   end
 
   def stock_available(count), do: css(".js-available-quantity", text: "#{count}")
