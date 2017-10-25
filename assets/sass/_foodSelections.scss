@@ -1,0 +1,114 @@
+// Layout
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+// Food selection Layout
+.container-fluid,
+.main{
+  display: flex;
+}
+
+.stock-selection-container {
+  width: $stockContainerWidth;
+}
+
+// Tab-nav layout
+.nav-tab-container {
+  display: flex;
+  width: 100%;
+
+  a {
+    text-align: center;
+  }
+}
+
+.nav-tab {
+  @include vp-flex-grow(1);
+  @include vp-display(flex);
+  height: $navTabHeight;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $borderColor;
+  border-radius: $gutterWidth $gutterWidth 0 0;
+
+  &.active {
+    border-bottom: none;
+  }
+}
+
+
+
+.tab-content{
+  .tab-pane {
+    display:none;
+
+    &.active {
+      @include vp-display(flex);
+      @include vp-flex-direction(column);
+    }
+  }
+}
+.nom-type-remaining {
+  @include vp-display(flex);
+  width: 100%;
+  height: $nomTypeRemainingSize;
+  justify-content: center;
+  align-items: center;
+}
+
+// Stock entry layout
+.stock-list  {
+  @include vp-display(flex);
+  max-height: $stockListHeight;
+  align-items: flex-start;
+  justify-content: space-around;
+  overflow-y: auto;
+  width: $stockContainerWidth;
+}
+
+.stock-entry {
+  @include vp-display(flex);
+  justify-content: space-between;
+  margin: .5vh 0;
+  min-height: $stockEntryHeight;
+  width: $stockEntryWidth;
+	border: 1px solid #8B3DBD;
+	border-radius: 11px;
+	background: radial-gradient(circle, rgba(139,61,189,0.3) 0%, #FFFFFF 100%);
+}
+//
+.item-details {
+  @include vp-display(flex);
+  @include vp-flex-direction(row);
+  width: inherit;
+}
+
+.stock-image-location, .stock-image {
+  border-radius: 11px 11px 0 0;
+  width: inherit;
+}
+
+.item-info,
+.flex-column {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  justify-content: space-between;
+  margin-left: $gutterWidth;
+}
+
+.item_control-container {
+  display: flex;
+  margin-right: $gutterWidth;
+}
+
+.quantity_control_trash-container {
+  @include vp-display(flex);
+  flex-direction: row;
+}
+
+.quantity-available {
+  align-self: center;
+  margin-right: $gutterWidth;
+}

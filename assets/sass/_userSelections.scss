@@ -1,0 +1,21 @@
+// User selection/entry
+
+ul.user-list {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+}
+
+.h2-heading {
+  margin: 1vw;
+}
+
+.h3-heading {
+  margin: 1vw;
+  display: block;
+}
+
+
+
+.add_sub-svg {
+  @include fluid-type(height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max );
+}
