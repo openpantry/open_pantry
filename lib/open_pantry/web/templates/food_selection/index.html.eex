@@ -13,9 +13,9 @@
       <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
             <a class="nav-tab <%= dasherize(stock_type) %> <%= active(stock_type, @stock_by_type)%>" href="#<%= dasherize(stock_type) %>" data-toggle="tab">
               <h3><%= stock_type %></h3>
-              <span class="js-credit-count credit-amount" >
+              <!-- <span class="js-credit-count credit-amount" >
                 <%=  @credits[stock_type] %>
-              </span>
+              </span> -->
             </a>
       <% end %>
     </div>
@@ -32,42 +32,6 @@
           credits: @credits,
           family_members: @conn.assigns[:user].family_members
       %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class= "right-side-container">
-    <div class="account-info-container">
-      <h4>
-        <%= gettext "Thank you for testing our Beta app!" %>
-      </h4>
-      <div class="account-action-buttons">
-          <a class="btn btn-default" href="<%= page_path(@conn, :index, @conn.assigns.locale ) %>"><%= gettext "Back" %></a>
-          <%= button(gettext("Log out"), to: session_path(@conn, :delete, @conn.assigns[:user].id, method: :delete), method: "delete", class: "btn btn-default")  %>
-      </div>
-      <%= for {stock_type, type_id, _stocks} <- @stock_by_type do %>
-        <div class="credits-remaining"> <%= stock_type %> <%= gettext("remaining:") %></div>
-        <span class="js-<%= stock_type %>-credit-count">
-          <span class="js-credit-count credit-type-<%= type_id %>" data-credit-type="<%= type_id %>" >
-            <%=  @credits[stock_type] %>
-          </span>
-          <span class="hidden js-credit-type"><%= type_id %></span>
-        </span>
-      <% end %>
-    </div>
-
-    <div class="tab-pane js-cart cart-container" id="cart">
-      <h3 class="cart-heading">
-        <%= gettext "Shopping Cart" %>
-      </h3>
-      <div class='table table-striped js-stock-list cart-items-container'>
-          <%= for distribution <- @distributions do %>
-          <%= render SharedView, "distribution.html", distribution: distribution %>
-          <% end %>
-      </div>
-      <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button"], fn f -> %>
-      <%= hidden_input(f, :finalized, value: true) %>
-      <%= submit gettext("Complete your order!") %>
       <% end %>
     </div>
   </div>

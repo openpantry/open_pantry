@@ -1,12 +1,4 @@
 <div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= dasherize(@stock_type) %>">
-  <div class="nom-type-remaining">
-    <h3>
-      <%= @stock_type %> <%= gettext("remaining:") %>
-      <span class="js-credit-count credit-amount" data-credit-type="<%= @type_id %>" >
-        <%=  @credits[@stock_type] %>
-      </span>
-    </h3>
-  </div>
   <div class='js-stock-list table table-striped'>
     <div class=" stock-list">
       <%= for stock <- @stocks do %>

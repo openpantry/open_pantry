@@ -17,7 +17,7 @@
 // Tab-nav layout
 .nav-tab-container {
   display: flex;
-  width: 100%;
+  width: 100vw;
 
   a {
     text-align: center;
@@ -81,7 +81,7 @@
 //
 .item-details {
   @include vp-display(flex);
-  @include vp-flex-direction(row);
+  // @include vp-flex-direction(row);
   width: inherit;
 }
 
