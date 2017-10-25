@@ -17,25 +17,32 @@ html {
 
 h1 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h1Min, $h1Max);
+
 }
 
 h2 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h2Min, $h2Max);
   margin: $gutterWidth;
 }
 
 h3 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h3Min, $h3Max);
 }
 
 h4 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h4Min, $h4Max);
 }
 
 h5 {
   @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
 }
 
 h6 {
-  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h5Min, $h5Max);
+  @include fluid-type(font-size, $minViewWidth, $maxViewWidth, $h6Min, $h6Max);
+  @include fluid-type(line-height, $minViewWidth, $maxViewWidth, $h6Min, $h6Max);
 }
