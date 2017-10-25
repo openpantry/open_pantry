@@ -1,6 +1,6 @@
 <div class="tab-pane js-stock-type <%= active(@stock_type, @stock_by_type)%>" id="<%= dasherize(@stock_type) %>">
   <div class='js-stock-list table table-striped'>
-    <div class=" stock-list">
+    <div class="order-stock_list">
       <%= for stock <- @stocks do %>
         <div  class="js-stock-row stock-entry <%= stock.storage %>"
               data-stock-id="<%= stock.id %>"

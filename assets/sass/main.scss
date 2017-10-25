@@ -12,57 +12,17 @@
 @import "languages";
 @import "userSelections";
 
-
+body {
+	height: 100vh;
+	width: 100vw;
+	background: linear-gradient(135deg, #205E74 0%, #2A6539 100%);
+}
 
 .stock-entry {
   .hidden {
     display: none;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-
-
-// .clear-user-agent-styles table,
-// .clear-user-agent-styles thead,
-// .clear-user-agent-styles tbody,
-// .clear-user-agent-styles tfoot,
-// .clear-user-agent-styles tr,
-// .clear-user-agent-styles th,
-// .clear-user-agent-styles td {
-//     display: block;
-//     width: auto;
-//     height: auto;
-//     margin: 0;
-//     padding: 0;
-//     border: none;
-//     border-collapse: inherit;
-//     border-spacing: 0;
-//     border-color: inherit;
-//     vertical-align: inherit;
-//     text-align: left;
-//     font-weight: inherit;
-//     -webkit-border-horizontal-spacing: 0;
-//     -webkit-border-vertical-spacing: 0;
-// }
-// .clear-user-agent-styles th,
-// .clear-user-agent-styles td {
-//   display: inline;
-// }
-
-//Buttons
 
 button.btn-primary,
 form.btn-primary button {
@@ -76,38 +36,7 @@ button {
   padding: 0;
 }
 
-.remove-amount-add-button-container {
-  @include vp-display(flex);
-  @include vp-flex-direction(column-reverse);
-  align-items: center;
-  justify-content: space-around;
-}
 
-button.plus-minus-button {
-    @include vp-display(flex);
-    @include vp-flex-direction(column);
-    justify-content: center;
-    align-items: center;
-    width: $plusMinusButtonWidth;
-}
-
-button.add-to-cart  {
-   @include vp-display(flex);
-   @include vp-flex-direction(column);
-   justify-content: center;
-   align-items: center;
-   width: $addToCartWidth;
-}
-
- svg.plus-svg,
- svg.minus-svg,
- svg.trashcan-svg {
-  width: $gutterWidth;
- }
-
-.clear-action {
-  width: $trashWidth;
-}
 
 
 

@@ -1,0 +1,11 @@
+// Manage orders
+
+.orders-choose_user {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  overflow-y: auto;
+}
+
+.orders-single_entry {
+  display: block;
+}

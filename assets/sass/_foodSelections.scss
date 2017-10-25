@@ -2,6 +2,7 @@
 .container {
   display: flex;
   height: 100vh;
+  width: 70vw; //revisit
 }
 
 // Food selection Layout
@@ -30,15 +31,27 @@
   height: $navTabHeight;
   justify-content: center;
   align-items: center;
-  border: 1px solid $borderColor;
-  border-radius: $gutterWidth $gutterWidth 0 0;
-
-  &.active {
-    border-bottom: none;
+  // border: 1px solid $borderColor;
+  // border-radius: $gutterWidth $gutterWidth 0 0;
+    &.carbs {
+      background-color: rgba(59,136,189,0.8);
+      &.active {
+        background-color: rgba(59,136,189, 1.0);
+      }
+    }
+    &.proteins {
+      background-color: rgba(139,61,189,0.8);
+      &.active {
+        background-color: rgba(139,61,189,1.0);
+      }
+    }
+    &.veggies {
+    	background-color: rgba(131,189,73,0.8);
+      &.active {
+        background-color: rgba(131,189,73,1.0);
+      }
+    }
   }
-}
-
-
 
 .tab-content{
   .tab-pane {
@@ -59,7 +72,7 @@
 }
 
 // Stock entry layout
-.stock-list  {
+.order-stock_list  {
   @include vp-display(flex);
   max-height: $stockListHeight;
   align-items: flex-start;
@@ -111,4 +124,36 @@
 .quantity-available {
   align-self: center;
   margin-right: $gutterWidth;
+}
+.remove-amount-add-button-container {
+  @include vp-display(flex);
+  @include vp-flex-direction(column-reverse);
+  align-items: center;
+  justify-content: space-around;
+}
+
+button.plus-minus-button {
+    @include vp-display(flex);
+    @include vp-flex-direction(column);
+    justify-content: center;
+    align-items: center;
+    width: $plusMinusButtonWidth;
+}
+
+button.add-to-cart  {
+   @include vp-display(flex);
+   @include vp-flex-direction(column);
+   justify-content: center;
+   align-items: center;
+   width: $addToCartWidth;
+}
+
+ svg.plus-svg,
+ svg.minus-svg,
+ svg.trashcan-svg {
+  width: $gutterWidth;
+ }
+
+.clear-action {
+  width: $trashWidth;
 }
