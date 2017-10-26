@@ -35,6 +35,8 @@ defmodule OpenPantry.Stock do
     timestamps()
   end
 
+  @type stockable() :: Meal.t | Food.t | Offer.t
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
@@ -47,7 +49,7 @@ defmodule OpenPantry.Stock do
     |> check_constraint(:quantity, name: :non_negative_quantity)
   end
 
-  @spec stockable!(Stock.t) :: Meal.t | Food.t | Offer.t
+  @spec stockable!(Stock.t) :: stockable()
   def stockable!(stock) do
     stock.food || stock.meal || stock.offer
   end
@@ -60,7 +62,7 @@ defmodule OpenPantry.Stock do
     (loaded_stock.offer && loaded_stock.offer.description)
   end
 
-  @spec stockable(Stock.t) :: Stock.t
+  @spec stockable(Stock.t) :: stockable()
   def stockable(stock) do
     stock
     |> stockable_load
