@@ -41,6 +41,7 @@ defmodule OpenPantry.Mixfile do
      {:ex_admin,            git: "https://github.com/smpallen99/ex_admin.git", branch: "phx-1.3"},
      {:gettext,             "~> 0.11"},
      {:basic_auth,          "~> 2.1"},
+     {:ecto,                "~> 2.2", override: true},
      {:ecto_enum,           "~> 1.0"},
      {:arc,                 "~> 0.8.0"},
      {:arc_ecto,            "~> 0.7.0"},
