@@ -29,7 +29,8 @@
           stocks: stocks,
           package: @package,
           credits: @credits,
-          family_members: @conn.assigns[:user].family_members
+          family_members: @conn.assigns[:user].family_members,
+          conn: @conn
       %>
       <% end %>
     </div>
@@ -61,7 +62,7 @@
       </h3>
       <div class='table table-striped js-stock-list cart-items-container'>
           <%= for distribution <- @distributions do %>
-          <%= render SharedView, "distribution.html", distribution: distribution %>
+          <%= render SharedView, "distribution.html", distribution: distribution, conn: @conn %>
           <% end %>
       </div>
       <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button"], fn f -> %>
