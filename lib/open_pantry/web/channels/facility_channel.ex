@@ -31,7 +31,7 @@ defmodule OpenPantry.Web.FacilityChannel do
     stock = Stock.find(stock_distribution.stock_id)
     broadcast! socket, "set_stock", %{"id" => stock.id, "quantity" => stock.quantity}
     push socket, "current_credits", User.credits(socket.assigns.user_id)
-    push socket, "update_distribution", %{"id" => stock_distribution.id, "html" => SharedView.render_distribution(stock_distribution) }
+    push socket, "update_distribution", %{"id" => stock_distribution.id, "html" => SharedView.render_distribution(stock_distribution, socket) }
   end
 
 end
