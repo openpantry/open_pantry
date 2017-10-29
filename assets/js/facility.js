@@ -79,6 +79,11 @@ export default function(channel){
     }
   })
 
+  $('.js-cart').on('click', '.js-clear-cart-line', function(el){
+    const stockId = $(el.target).closest('.js-meal-stock-row').data('stock-id');
+    $('.js-stock-row[data-stock-id="' + stockId + '"] .js-clear-stock').click();
+  });
+
   $('.js-add-cart').on('click', function(el){
     el.target.classList.add("hidden")
     $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
