@@ -114,7 +114,7 @@ export default function(channel){
 
   channel.on('set_stock', function(payload){
     const {id, quantity} = payload;
-    const $row = $(`*[data-stock-id="${id}"]`);
+    const $row = $(`.js-stock-row[data-stock-id="${id}"]`);
     updateQuantities(getType($row), $row, quantity)
   });
   //initialize quantities for all credit types
