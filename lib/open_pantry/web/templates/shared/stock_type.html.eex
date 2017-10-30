@@ -53,7 +53,7 @@
             <div class="js-quantity-control <%= hidden_quantity(stock, @package) %>  quantity_control_trash-container">
               <div class="remove-amount-add-button-container">
                 <button class="js-remove-stock plus-minus-button" type="button">
-                  <img class="minus-svg js-remove-stock add_sub-svg" src="<%= static_path(@conn, "/images/svg/Minus.svg") %>" />
+                  <img class="minus-svg add_sub-svg" src="<%= static_path(@conn, "/images/svg/Minus.svg") %>" />
                 </button>
                 <div class="js-current-quantity item_quantity-counter">
                   <%= quantity(stock, @package) %>
@@ -63,7 +63,7 @@
                 </button>
               </div>
               <button class="clear-action js-clear-stock" type="button">
-                <img class="trashcan-svg js-clear-stock" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" type="image/svg+xml">
+                <img class="trashcan-svg" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" type="image/svg+xml">
               </button>
             </div>
             <button class="js-add-stock add-to-cart js-add-cart <%= hidden_add_to_cart(stock, @package) %>" type="button" >
