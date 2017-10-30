@@ -33,60 +33,52 @@ export default function(channel){
       }
     })
   }
-  var fn;
-  let handlers = {
-    "js-add-stock": function($row){
+
+  $('.js-stock-list').on('click', '.js-add-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const credits = getCredits($row);
+    const cost    = getCost($row);
+    if (getAvailable($row) > 0 && credits >= cost) {
+      channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
+      setUserQuantity($row, getQuantity($row) + 1);
+      setCredits($row, credits - cost);
+    }
+  });
+
+  $('.js-stock-list').on('click', '.js-remove-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const currentQuantity = getQuantity($row)
+    if (currentQuantity > 0) {
       const credits = getCredits($row);
       const cost    = getCost($row);
-      if (getAvailable($row) > 0 && credits >= cost) {
-        channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-        setUserQuantity($row, getQuantity($row) + 1);
-        setCredits($row, credits - cost);
-      }
-    },
-    "js-remove-stock": function($row){
-      const currentQuantity = getQuantity($row)
-      if (currentQuantity > 0) {
-        const credits = getCredits($row);
-        const cost    = getCost($row);
-        channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-        setUserQuantity($row, currentQuantity - 1);
-        setCredits($row, credits + cost);
-        setTimeout(function(){updateQuantities(getType($row))}, 100);
-      }
-    },
-    "js-clear-stock": function($row){
-      const currentQuantity = getQuantity($row)
-      if (currentQuantity > 0) {
-        const credits = getCredits($row);
-        const cost    = getCost($row);
-        channel.push('release_stock', { id: $row.data('stock-id'), quantity: getQuantity($row), type: getType($row) });
-        setUserQuantity($row, 0)
-        setCredits($row, credits + cost * currentQuantity);
-        setTimeout(function(){updateQuantities(getType($row))}, 100);
-      }
+      channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
+      setUserQuantity($row, currentQuantity - 1);
+      setCredits($row, credits + cost);
+      setTimeout(function(){updateQuantities(getType($row))}, 100);
     }
-  }
+  });
 
-  $('.js-stock-row').on('click', function(el){
-    if (el.target && el.target.classList && typeof(el.target.classList.forEach) == 'function') { // weirdness with PhantomJS
-      el.target.classList.forEach(function(className){
-        fn = handlers[className]
-        if (fn){
-          fn($(el.currentTarget));
-        };
-      })
+  $('.js-stock-list').on('click', '.js-clear-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const currentQuantity = getQuantity($row)
+    if (currentQuantity > 0) {
+      const credits = getCredits($row);
+      const cost    = getCost($row);
+      channel.push('release_stock', { id: $row.data('stock-id'), quantity: getQuantity($row), type: getType($row) });
+      setUserQuantity($row, 0)
+      setCredits($row, credits + cost * currentQuantity);
+      setTimeout(function(){updateQuantities(getType($row))}, 100);
     }
-  })
+  });
 
-  $('.js-cart').on('click', '.js-clear-cart-line', function(el){
-    const stockId = $(el.target).closest('.js-meal-stock-row').data('stock-id');
+  $('.js-cart').on('click', '.js-clear-cart-line', function(){
+    const stockId = $(this).closest('.js-meal-stock-row').data('stock-id');
     $('.js-stock-row[data-stock-id="' + stockId + '"] .js-clear-stock').click();
   });
 
-  $('.js-add-cart').on('click', function(el){
-    el.target.classList.add("hidden")
-    $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
+  $('.js-add-cart').on('click', function(){
+    $(this).addClass("hidden")
+    $(this).parent().find(".js-quantity-control").removeClass("hidden")
   })
 
   channel.on('current_credits', payload => {

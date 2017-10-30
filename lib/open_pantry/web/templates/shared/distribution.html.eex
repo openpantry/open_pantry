@@ -15,6 +15,6 @@
     <%= StockDistribution.total_weight(@distribution)%>
   </p>
   <button class="clear-action js-clear-cart-line" type="button">
-    <img class="trashcan-svg js-clear-cart-line" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" />
+    <img class="trashcan-svg" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" />
   </button>
 </div>
