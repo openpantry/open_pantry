@@ -10,6 +10,9 @@ defmodule OpenPantry.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :facility_specified do
     plug Plugs.Facility
   end
 
@@ -43,11 +46,9 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :facility_specified, :admin_auth]
     resources "/user_selections", UserSelectionController
   end
-
-
 
   scope "/", OpenPantry.Web do
     pipe_through [:browser]
@@ -56,14 +57,14 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser] # Use the default browser stack
+    pipe_through [:localized_browser, :facility_specified] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :user_required]
+    pipe_through [:localized_browser, :facility_specified, :user_required]
 
     get "/", PageController, :index
     get "/styleguide", StyleController, :index

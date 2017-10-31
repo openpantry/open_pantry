@@ -3,7 +3,6 @@ defmodule OpenPantry.Web.UserSelectionController do
   alias OpenPantry.User
   alias OpenPantry.CreditType
   alias OpenPantry.UserCredit
-  alias OpenPantry.Facility
   import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
   @unknown_language_id 184
 
