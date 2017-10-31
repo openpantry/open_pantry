@@ -4,15 +4,11 @@ defmodule OpenPantry.Plugs.Facility do
   alias OpenPantry.{Repo, Facility}
 
   def init(_opts) do
-    Application.get_env(:open_pantry, OpenPantry.Web.Endpoint)[:url][:host]
-    |> String.length()
   end
 
-  def call(conn, domain_length) do
-    subdomain = subdomain(conn.host, domain_length)
-
+  def call(conn, _opts) do
     facility =
-      case Repo.get_by(Facility, subdomain: subdomain) do
+      case Repo.get_by(Facility, subdomain: subdomain(conn.host)) do
         nil -> Repo.one!(from Facility, limit: 1)
         facility -> facility
       end
@@ -20,8 +16,9 @@ defmodule OpenPantry.Plugs.Facility do
     Plug.Conn.assign(conn, :facility, facility)
   end
 
-  defp subdomain(host, domain_length) do
-    to = -domain_length - 2
-    String.slice(host, 0..to)
+  defp subdomain(host) do
+    host
+    |> String.split(".")
+    |> hd()
   end
 end
