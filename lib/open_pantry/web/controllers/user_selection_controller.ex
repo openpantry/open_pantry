@@ -5,11 +5,10 @@ defmodule OpenPantry.Web.UserSelectionController do
   alias OpenPantry.UserCredit
   alias OpenPantry.Facility
   import OpenPantry.Web.UserSelectionView, only: [login_token: 1]
-  @hardcoded_facility_id 1
   @unknown_language_id 184
 
   def index(conn, _params) do
-    facility = Facility.find(@hardcoded_facility_id, :users)
+    facility = facility(conn) |> Repo.preload(:users)
     render conn, "index.html",  users: facility.users, conn: conn, changeset: User.changeset(%User{})
   end
 
@@ -22,7 +21,7 @@ defmodule OpenPantry.Web.UserSelectionController do
     user =  User.changeset(%User{}, %{name: name_from_params(params),
                                       family_members: family_members_from_params(params),
                                       primary_language_id: @unknown_language_id,
-                                      facility_id: @hardcoded_facility_id,
+                                      facility_id: facility(conn).id,
                                      })
             |> Repo.insert!()
 
@@ -48,6 +47,10 @@ defmodule OpenPantry.Web.UserSelectionController do
     else
       String.to_integer(params["user"]["family_members"])
     end
+  end
+
+  defp facility(conn) do
+    conn.assigns[:facility]
   end
 
 
