@@ -1,6 +1,7 @@
 // Layout
 .container {
-  display: flex;
+  @include vp-display(flex);
+  @include vp-justify-content(center);
   height: 100vh;
   width: 70vw; //revisit
 }
@@ -68,11 +69,12 @@
 // Stock entry layout
 .order-stock_list  {
   @include vp-display(flex);
-  max-height: $stockListHeight;
   align-items: flex-start;
   justify-content: space-around;
   overflow-y: auto;
   width: $stockContainerWidth;
+  height: 100vh;
+  background-color: $stockContainer;
 }
 
 .stock-entry {
@@ -82,7 +84,7 @@
   min-height: $stockEntryHeight;
   max-height: 2x$stockEntryHeight;
   width: $stockEntryWidth;
-	border: 1px solid #8B3DBD;
+	// border: 1px solid #8B3DBD;
 	border-radius: 11px;
 	background: radial-gradient(circle, rgba(139,61,189,0.3) 0%, #FFFFFF 100%);
 }
