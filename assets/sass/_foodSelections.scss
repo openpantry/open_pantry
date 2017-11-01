@@ -19,6 +19,7 @@
 .nav-tab-container {
   display: flex;
   width: 100vw;
+  background-color: white;
 
   a {
     text-align: center;
@@ -39,7 +40,7 @@
         background-color: rgba(59,136,189, 1.0);
       }
     }
-    &.proteins {
+    &.protein {
       background-color: rgba(139,61,189,0.8);
       &.active {
         background-color: rgba(139,61,189,1.0);
@@ -63,13 +64,6 @@
     }
   }
 }
-.nom-type-remaining {
-  @include vp-display(flex);
-  width: 100%;
-  height: $nomTypeRemainingSize;
-  justify-content: center;
-  align-items: center;
-}
 
 // Stock entry layout
 .order-stock_list  {
@@ -83,9 +77,10 @@
 
 .stock-entry {
   @include vp-display(flex);
-  justify-content: space-between;
+  @include vp-flex-direction(column);
   margin: .5vh 0;
   min-height: $stockEntryHeight;
+  max-height: 2x$stockEntryHeight;
   width: $stockEntryWidth;
 	border: 1px solid #8B3DBD;
 	border-radius: 11px;
@@ -94,7 +89,7 @@
 //
 .item-details {
   @include vp-display(flex);
-  // @include vp-flex-direction(row);
+  @include vp-flex-direction(column);
   width: inherit;
 }
 
@@ -112,7 +107,7 @@
 }
 
 .item_control-container {
-  display: flex;
+  @include vp-display(flex);
   margin-right: $gutterWidth;
 }
 
