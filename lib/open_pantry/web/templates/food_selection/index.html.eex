@@ -65,6 +65,10 @@
           <%= render SharedView, "distribution.html", distribution: distribution, conn: @conn %>
           <% end %>
       </div>
+      <button class="clear-action js-clear-cart" type="button">
+        <img class="trashcan-svg" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" />
+        <%= gettext "Empty Cart" %>
+      </button>
       <%= form_for @user_order, food_selection_path(@conn, :update, @conn.assigns.locale, @user_order.data.id), [class: "shopping_cart-button"], fn f -> %>
       <%= hidden_input(f, :finalized, value: true) %>
       <%= submit gettext("Complete your order!") %>
