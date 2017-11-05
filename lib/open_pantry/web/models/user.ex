@@ -49,10 +49,6 @@ defmodule OpenPantry.User do
     |> Repo.one!
   end
 
-  def is_guest(user) do
-    user.family_members == 0
-  end
-
   def facility_stocks(user) do
     Repo.preload(user, :facility).facility
     |> Repo.preload(:stocks)
