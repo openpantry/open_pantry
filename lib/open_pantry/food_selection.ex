@@ -72,14 +72,19 @@ defmodule OpenPantry.FoodSelection do
       end
 
     result =
-      Multi.new
-      |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
-      |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
-      |> update_stock_distribution(stock_distribution, quantity)
-      |> Repo.transaction
+      try do
+        Multi.new
+        |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
+        |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
+        |> update_stock_distribution(stock_distribution, quantity)
+        |> Repo.transaction
+      rescue
+        error -> {:error, error}
+      end
 
     case result do
       {:ok, _} -> {:ok, stock_distribution}
+      {:error, reason} -> {:error, reason}
       {:error, failed_operation, _, _} -> {:error, failed_operation}
     end
   end
