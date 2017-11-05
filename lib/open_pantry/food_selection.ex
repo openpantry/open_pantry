@@ -58,18 +58,30 @@ defmodule OpenPantry.FoodSelection do
     |> in_stock
   end
 
-  @spec adjust_stock(integer(), integer(), integer(), integer() ) :: StockDistribution.t
+  @spec adjust_stock(integer(), integer(), integer(), integer() ) :: tuple()
   def adjust_stock(stock_id, type_id, quantity, user_id) do
     stock = Stock.find(stock_id)
     package = UserOrder.find_current(user_id)
     stock_distribution = StockDistribution.find_or_create(package.id, stock.id)
     cost = stock.credits_per_package
-    Multi.new
-    |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
-    |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
-    |> update_stock_distribution(stock_distribution, quantity)
-    |> Repo.transaction
-    stock_distribution
+    quantity =
+      if stock_distribution.quantity + quantity < 0 do
+        -stock_distribution.quantity
+      else
+        quantity
+      end
+
+    result =
+      Multi.new
+      |> Multi.update_all(:stock, Stock.query(stock.id), [inc: [quantity: -quantity]])
+      |> deduct_credits(cost, quantity, type_id, user_id, {stock.meal_id, stock.offer_id, stock.food_id })
+      |> update_stock_distribution(stock_distribution, quantity)
+      |> Repo.transaction
+
+    case result do
+      {:ok, _} -> {:ok, stock_distribution}
+      {:error, failed_operation, _, _} -> {:error, failed_operation}
+    end
   end
 
   @spec update_stock_distribution(Ecto.Multi.t, StockDistribution.t, integer() ) :: Ecto.Multi.t

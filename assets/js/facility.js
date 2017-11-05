@@ -39,9 +39,14 @@ export default function(channel){
     const credits = getCredits($row);
     const cost    = getCost($row);
     if (getAvailable($row) > 0 && credits >= cost) {
-      channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-      setUserQuantity($row, getQuantity($row) + 1);
-      setCredits($row, credits - cost);
+      channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) })
+        .receive("ok", function() {
+          setUserQuantity($row, getQuantity($row) + 1);
+          setCredits($row, credits - cost);
+        })
+        .receive("error", function() {
+          // TODO: Manage errors
+        });
     }
   });
 
@@ -51,10 +56,15 @@ export default function(channel){
     if (currentQuantity > 0) {
       const credits = getCredits($row);
       const cost    = getCost($row);
-      channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-      setUserQuantity($row, currentQuantity - 1);
-      setCredits($row, credits + cost);
-      setTimeout(function(){updateQuantities(getType($row))}, 100);
+      channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) })
+        .receive("ok", function() {
+          setUserQuantity($row, currentQuantity - 1);
+          setCredits($row, credits + cost);
+          setTimeout(function(){updateQuantities(getType($row))}, 100);
+        })
+        .receive("error", function() {
+          // TODO: Manage errors
+        });
     }
   });
 
