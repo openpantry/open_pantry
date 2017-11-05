@@ -1,6 +1,7 @@
 defmodule OpenPantry.StockDistribution do
   use OpenPantry.Web, :model
   alias OpenPantry.UserOrder
+  alias OpenPantry.User
   alias OpenPantry.Stock
 
   schema "stock_distributions" do
@@ -37,22 +38,32 @@ defmodule OpenPantry.StockDistribution do
     end)
   end
 
-  def validate_stock_distribution(map, stock_distribution, quantity \\ 1) do
-    if quantity < 1 || per_person_ok?(stock_distribution) && per_package_ok?(stock_distribution) do
+  def validate_stock_distribution(map, stock_distribution, quantity \\ nil) do
+    new_quantity =
+      if quantity == nil do
+        stock_distribution.quantity
+      else
+        stock_distribution.quantity + quantity
+      end
+    if quantity < 1 || per_person_ok?(stock_distribution, new_quantity) && per_package_ok?(stock_distribution, new_quantity) do
       {:ok, map}
     else
       {:error, map}
     end
   end
 
-  defp per_person_ok?(%StockDistribution{ stock: %Stock{ max_per_person: nil } }), do: true
-  defp per_person_ok?(stock_distribution) do
-    stock_distribution.quantity <= stock_distribution.stock.max_per_person * stock_distribution.user.family_members
+  defp per_person_ok?(%StockDistribution{ stock: %Stock{ max_per_person: nil } }, _quantity), do: true
+  defp per_person_ok?(stock_distribution, quantity) do
+    if User.is_guest(stock_distribution.user) do
+      quantity <= stock_distribution.stock.max_per_person
+    else
+      quantity <= stock_distribution.stock.max_per_person * stock_distribution.user.family_members
+    end
   end
 
-  defp per_package_ok?(%StockDistribution{ stock: %Stock{ max_per_package: nil } }), do: true
-  defp per_package_ok?(stock_distribution) do
-    stock_distribution.quantity <= stock_distribution.stock.max_per_package
+  defp per_package_ok?(%StockDistribution{ stock: %Stock{ max_per_package: nil } }, _quantity), do: true
+  defp per_package_ok?(stock_distribution, quantity) do
+    quantity <= stock_distribution.stock.max_per_package
   end
 
   @spec package(integer()) :: UserOrder.t
