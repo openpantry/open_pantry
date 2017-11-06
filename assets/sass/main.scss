@@ -36,6 +36,68 @@ button {
   padding: 0;
 }
 
+.remove-amount-add-button-container {
+  @include vp-display(flex);
+  @include vp-flex-direction(column-reverse);
+  align-items: center;
+  justify-content: space-around;
+}
+
+button.plus-minus-button {
+    @include vp-display(flex);
+    @include vp-flex-direction(column);
+    justify-content: center;
+    align-items: center;
+    width: $plusMinusButtonWidth;
+}
+
+button.add-to-cart  {
+   @include vp-display(flex);
+   @include vp-flex-direction(column);
+   justify-content: center;
+   align-items: center;
+   width: $addToCartWidth;
+}
+
+ img.plus-svg,
+ img.minus-svg,
+ img.trashcan-svg {
+  width: $gutterWidth;
+ }
+
+.clear-action {
+  width: $trashWidth;
+}
+
+
+// Cart
+
+#cart {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  border-top: 2vh solid black;
+  height: 65vh
+}
+
+.cart-heading {
+  padding: 2vh;
+}
+
+.cart-container {
+  @include vp-display(flex);
+}
+
+
+.cart-items-container {
+  @include vp-display(flex);
+  @include vp-flex-direction(column);
+  @include vp-align-items(flex-start);
+  @include vp-justify-content(flex-start);
+  margin-top: 2vh;
+  padding: 1vh  0 0 1vh;
+  overflow-y: auto;
+  height: 58vh;
+}
 
 
 

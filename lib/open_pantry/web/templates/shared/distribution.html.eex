@@ -1,4 +1,4 @@
-<div class="js-meal-stock-row cart-line_entry" data-stock-distribution-id="<%= @distribution.id %>">
+<div class="js-meal-stock-row cart-line_entry" data-stock-distribution-id="<%= @distribution.id %>" data-stock-id="<%= @distribution.stock.id %>">
   <div class="cart-line_entry" >
     <p class="js-quantity-requested cart-detail">
       <%= @distribution.quantity %>
@@ -14,4 +14,7 @@
   <p class="js-total-weight cart-detail">
     <%= StockDistribution.total_weight(@distribution)%>
   </p>
+  <button class="clear-action js-clear-cart-line" type="button">
+    <img class="trashcan-svg" src="<%= static_path(@conn, "/images/svg/Trashcan.svg") %>" />
+  </button>
 </div>

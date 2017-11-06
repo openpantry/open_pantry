@@ -1,9 +1,8 @@
 defmodule OpenPantry.Web.Router do
-  alias OpenPantry.Authentication
-  alias OpenPantry.Plug.SetupUser
-  alias OpenPantry.Plug.Locale
   use OpenPantry.Web, :router
   use ExAdmin.Router
+
+  alias OpenPantry.Plugs
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,9 +12,13 @@ defmodule OpenPantry.Web.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :facility_specified do
+    plug Plugs.Facility
+  end
+
   pipeline :localized_browser do
     plug :browser
-    plug Locale, "en"
+    plug Plugs.Locale, "en"
   end
 
   pipeline :api do
@@ -23,11 +26,11 @@ defmodule OpenPantry.Web.Router do
   end
 
   pipeline :admin_auth do
-    plug Authentication, use_config: {:open_pantry, :admin_auth}
+    plug Plugs.Authentication, use_config: {:open_pantry, :admin_auth}
   end
 
   pipeline :user_required do
-    plug SetupUser, redirect_url: "/user_selections"
+    plug Plugs.SetupUser, redirect_url: "/user_selections"
   end
 
   scope "/admin", ExAdmin do
@@ -43,11 +46,9 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :facility_specified, :admin_auth]
     resources "/user_selections", UserSelectionController
   end
-
-
 
   scope "/", OpenPantry.Web do
     pipe_through [:browser]
@@ -56,14 +57,14 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser] # Use the default browser stack
+    pipe_through [:localized_browser, :facility_specified] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :user_required]
+    pipe_through [:localized_browser, :facility_specified, :user_required]
 
     get "/", PageController, :index
     get "/styleguide", StyleController, :index

@@ -20,6 +20,7 @@ import OpenPantry.Factory
 
 facility_params = [
   %{name: "Flatbush",
+    subdomain: "flatbush",
     max_occupancy: 100,
     address1: "1372 Coney Island Ave",
     city: "Brooklyn",
@@ -27,6 +28,7 @@ facility_params = [
     postal_code: "11230"
     },
   %{name: "Boro Park",
+    subdomain: "boro-park",
     max_occupancy: 20,
     address1: "5402 New Utrecht Ave",
     city: "Brooklyn",
@@ -34,6 +36,7 @@ facility_params = [
     postal_code: "11219"
     },
   %{name: "Queens",
+    subdomain: "queens",
     max_occupancy: 50,
     address1: "98-08 Queens Blvd",
     city: "Queens",

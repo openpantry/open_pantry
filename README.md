@@ -47,7 +47,6 @@
       * if using Postgres.app you must initialize a data directory after installing, and follow instructions for adding CLI tools to your Terminal path...  `which psql` but succeed when done
         * (instructions defaulting to Mac below... for simplicity, linux users extrapolate, Windows, I have no idea, PR's with instructions for either/both welcome)
       * Install Elixir/Erlang (`brew install elixir`)
-      * Install postgis (`brew install postgis`)
       * Install NPM and yarn (`brew install node && npm install -g yarn`)
       * Clone this repository locally, `git clone git@github.com:openpantry/open_pantry.git`
       * cd into the directory `cd open_pantry`

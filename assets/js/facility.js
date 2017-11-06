@@ -33,66 +33,53 @@ export default function(channel){
       }
     })
   }
-  var fn;
-  let stockHandlers = {
-    "js-add-stock": function(row){
-      const credits = getCredits(row);
-      const cost    = getCost(row);
-      if (getAvailable(row) > 0 && credits >= cost) {
-        channel.push('request_stock', { id: row.data('stock-id'), quantity: 1, type: getType(row) });
-        setUserQuantity(row, getQuantity(row) + 1);
-        setCredits(row, credits - cost);
-      }
-      if (getQuantity(row) >= getMaxAllowed(row)) {
-        $(row).find(".js-add-stock").prop("disabled",true)
-        window.plus_button =  $(row).find(".js-add-stock").html();
-        $(row).find(".js-add-stock").text(row.data("max-allowed-message"))
-      }
-    },
-    "js-remove-stock": function($row){
-      const currentQuantity = getQuantity($row)
-      if (currentQuantity > 0) {
-        const credits = getCredits($row);
-        const cost    = getCost($row);
-        channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
-        setUserQuantity($row, currentQuantity - 1);
-        setCredits($row, credits + cost);
-        setTimeout(function(){updateQuantities(getType($row))}, 100);
-      }
-    },
-    "js-clear-stock": function($row){
-      const currentQuantity = getQuantity($row)
-      if (currentQuantity > 0) {
-        const credits = getCredits($row);
-        const cost    = getCost($row);
-        channel.push('release_stock', { id: $row.data('stock-id'), quantity: getQuantity($row), type: getType($row) });
-        setUserQuantity($row, 0)
-        setCredits($row, credits + cost * currentQuantity);
-        setTimeout(function(){updateQuantities(getType($row))}, 100);
-      }
-    }
-  }
 
-  $('.js-stock-row').on('click', function(el){
-    if (el.target && el.target.classList && typeof(el.target.classList.forEach) == 'function') { // weirdness with PhantomJS
-      el.target.classList.forEach(function(className){
-        fn = stockHandlers[className]
-        if (fn){
-          fn($(el.currentTarget));
-        };
-      })
+  $('.js-stock-list').on('click', '.js-add-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const credits = getCredits($row);
+    const cost    = getCost($row);
+    if (getAvailable($row) > 0 && credits >= cost) {
+      channel.push('request_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
+      setUserQuantity($row, getQuantity($row) + 1);
+      setCredits($row, credits - cost);
     }
+  });
+
+  $('.js-stock-list').on('click', '.js-remove-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const currentQuantity = getQuantity($row)
+    if (currentQuantity > 0) {
+      const credits = getCredits($row);
+      const cost    = getCost($row);
+      channel.push('release_stock', { id: $row.data('stock-id'), quantity: 1, type: getType($row) });
+      setUserQuantity($row, currentQuantity - 1);
+      setCredits($row, credits + cost);
+      setTimeout(function(){updateQuantities(getType($row))}, 100);
+    }
+  });
+
+  $('.js-stock-list').on('click', '.js-clear-stock', function(){
+    const $row = $(this).closest('.js-stock-row');
+    const currentQuantity = getQuantity($row)
+    if (currentQuantity > 0) {
+      const credits = getCredits($row);
+      const cost    = getCost($row);
+      channel.push('release_stock', { id: $row.data('stock-id'), quantity: getQuantity($row), type: getType($row) });
+      setUserQuantity($row, 0)
+      setCredits($row, credits + cost * currentQuantity);
+      setTimeout(function(){updateQuantities(getType($row))}, 100);
+    }
+  });
+
+  $('.js-cart').on('click', '.js-clear-cart-line', function(){
+    const stockId = $(this).closest('.js-meal-stock-row').data('stock-id');
+    $('.js-stock-row[data-stock-id="' + stockId + '"] .js-clear-stock').click();
+  });
+
+  $('.js-add-cart').on('click', function(){
+    $(this).addClass("hidden")
+    $(this).parent().find(".js-quantity-control").removeClass("hidden")
   })
-
-  $('.js-add-cart').on('click', function(el){
-    el.target.classList.add("hidden")
-    $(el.target).parent().find(".js-quantity-control").removeClass("hidden")
-  });
-
-  $('.nav-tab').on('click', function(tab){
-    $('.nav-tab.active').toggleClass("active");
-    $(tab.currentTarget).addClass("active");
-  });
 
   channel.on('current_credits', payload => {
     $.each(payload, (type, credits) => $(`.js-${type}-credit-count`).find('.js-credit-count').html(credits) )
@@ -119,7 +106,7 @@ export default function(channel){
 
   channel.on('set_stock', function(payload){
     const {id, quantity} = payload;
-    const $row = $(`*[data-stock-id="${id}"]`);
+    const $row = $(`.js-stock-row[data-stock-id="${id}"]`);
     updateQuantities(getType($row), $row, quantity)
   });
   //initialize quantities for all credit types

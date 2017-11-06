@@ -10,9 +10,9 @@ defmodule OpenPantry.Web.SharedView do
   @doc """
     Renders a distribution line item for food selection index, or to send update to same page via channel
   """
-  def render_distribution(%StockDistribution{id: id}) do
+  def render_distribution(%StockDistribution{id: id}, conn) do
     try do
-      render_to_string(__MODULE__, "distribution.html", distribution: StockDistribution.find(id, [:stock]))
+      render_to_string(__MODULE__, "distribution.html", distribution: StockDistribution.find(id, [:stock]), conn: conn)
     rescue
       Ecto.NoResultsError -> ""
     end
