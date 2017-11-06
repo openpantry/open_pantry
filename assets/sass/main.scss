@@ -39,23 +39,23 @@ button {
 .remove-amount-add-button-container {
   @include vp-display(flex);
   @include vp-flex-direction(column-reverse);
-  align-items: center;
-  justify-content: space-around;
+  @include vp-align-items(center);
+  @include vp-justify-content(space-around);
 }
 
 button.plus-minus-button {
     @include vp-display(flex);
     @include vp-flex-direction(column);
-    justify-content: center;
-    align-items: center;
+    @include vp-justify-content(center);
+    @include vp-align-items(center);
     width: $plusMinusButtonWidth;
 }
 
 button.add-to-cart  {
    @include vp-display(flex);
    @include vp-flex-direction(column);
-   justify-content: center;
-   align-items: center;
+   @include vp-justify-content(center);
+   @include vp-align-items(center);
    width: $addToCartWidth;
 }
 
