@@ -1,3 +1,4 @@
-https://github.com/heroku/heroku-buildpack-nodejs.git#34cffc9b6397bc1ce97a4b5e911fa771fc4e7907
-https://github.com/HashNuke/heroku-buildpack-elixir.git#36f2ff22d0236589256d9044091b950b7cc565d2
-
+https://github.com/gigalixir/gigalixir-buildpack-clean-cache.git
+https://github.com/HashNuke/heroku-buildpack-elixir
+https://github.com/gjaldon/heroku-buildpack-phoenix-static
+https://github.com/gigalixir/gigalixir-buildpack-distillery.git
