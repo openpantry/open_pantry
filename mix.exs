@@ -19,7 +19,7 @@ defmodule OpenPantry.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {OpenPantry, []},
-     extra_applications: [:logger]
+     extra_applications: [:logger, :ueberauth, :ueberauth_identity]
     ]
   end
 
@@ -51,6 +51,8 @@ defmodule OpenPantry.Mixfile do
      {:logger_file_backend, "~> 0.0.9"},
      {:cowboy,              "~> 1.0"},
      {:guardian,            "~> 0.14"},
+     {:ueberauth,           "~> 0.4"},
+     {:ueberauth_identity,  "~> 0.2"},
      {:timex,               "~> 3.0"},
      {:wallaby,             "~> 0.17",  only: :test},
      {:phoenix_live_reload, "~> 1.0",   only: :dev},

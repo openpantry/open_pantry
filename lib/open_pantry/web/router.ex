@@ -33,6 +33,15 @@ defmodule OpenPantry.Web.Router do
     plug Plugs.SetupUser, redirect_url: "/user_selections"
   end
 
+  scope "/auth", OpenPantry.Web do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/identity/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
   scope "/admin", ExAdmin do
     pipe_through [:browser, :admin_auth]
     admin_routes()

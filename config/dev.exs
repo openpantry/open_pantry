@@ -37,6 +37,12 @@ config :open_pantry, OpenPantry.Web.Endpoint,
 
 config :open_pantry, :admin_authentication, OpenPantry.ZeroAuth
 
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {Ueberauth.Strategy.Identity, [
+      callback_methods: ["POST"]
+    ]}
+  ]
 
 # Watch static and templates for browser reloading.
 config :open_pantry, OpenPantry.Web.Endpoint,
