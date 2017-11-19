@@ -25,8 +25,13 @@ defmodule OpenPantry.Web.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :admin_auth do
-    plug Plugs.Authentication, use_config: {:open_pantry, :admin_auth}
+    plug Guardian.Plug.EnsureAuthenticated, handler: OpenPantry.Web.AuthController
   end
 
   pipeline :user_required do
@@ -34,28 +39,29 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/auth", OpenPantry.Web do
-    pipe_through :browser
+    pipe_through [:browser, :browser_auth]
 
+    get "/logout", AuthController, :delete
+    delete "/logout", AuthController, :delete
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     post "/identity/callback", AuthController, :callback
-    delete "/logout", AuthController, :delete
   end
 
   scope "/admin", ExAdmin do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :browser_auth, :admin_auth]
     admin_routes()
   end
 
   scope "/manage", OpenPantry.Web do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :browser_auth, :admin_auth]
     resources "/stocks", StockController
     resources "/orders", UserOrderController, only: [:index, :show]
     resources "/facilities", FacilityController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :facility_specified, :admin_auth]
+    pipe_through [:browser, :browser_auth, :facility_specified, :admin_auth]
     resources "/user_selections", UserSelectionController
   end
 

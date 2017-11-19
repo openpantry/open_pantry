@@ -31,12 +31,6 @@ config :open_pantry,
                      zh
                     )
 
-config :open_pantry, admin_auth: [
-  username: "admin",
-  password: {:system, "ADMIN_PASSWORD"},
-  realm: "Admin Area"
-]
-
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional
@@ -47,8 +41,13 @@ config :guardian, Guardian,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: OpenPantry.GuardianSerializer
 
-config :open_pantry, :admin_authentication, BasicAuth
-config :open_pantry, :user_authentication, BasicAuth # GuardianAuth or SetupUser?
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {Ueberauth.Strategy.Identity, [
+      callback_methods: ["POST"]
+    ]}
+  ]
+
 config :ex_admin,
   repo: OpenPantry.Repo,
   module: OpenPantry.Web,
