@@ -52,6 +52,8 @@ defmodule OpenPantry.Mixfile do
      {:guardian,            "~> 0.14"},
      {:ueberauth,           "~> 0.4"},
      {:ueberauth_identity,  "~> 0.2"},
+     {:comeonin,            "~> 4.0"},
+     {:bcrypt_elixir,       "~> 1.0"},
      {:timex,               "~> 3.0"},
      {:wallaby,             "~> 0.17",  only: :test},
      {:phoenix_live_reload, "~> 1.0",   only: :dev},

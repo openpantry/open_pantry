@@ -18,9 +18,12 @@ defmodule OpenPantry.Web.UserSelectionController do
 
   def create(conn, params) do
     user =  User.changeset(%User{}, %{name: name_from_params(params),
+                                      email: params["user"]["email"],
                                       family_members: family_members_from_params(params),
                                       primary_language_id: @unknown_language_id,
                                       facility_id: facility(conn).id,
+                                      password: params["user"]["password"],
+                                      password_confirmation: params["user"]["password_confirmation"],
                                      })
             |> Repo.insert!()
 

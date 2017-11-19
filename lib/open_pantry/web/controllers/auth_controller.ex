@@ -26,19 +26,23 @@ defmodule OpenPantry.Web.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    expiry =
-      Timex.now
-      |> Timex.add( Timex.Duration.from_days(1))
-      |> Timex.to_unix
-    path = get_session(conn, :redirect_url) || "/"
+    case OpenPantry.UserFromAuth.get(auth) do
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Failed to authenticate.")
+        |> render("request.html", callback_url: Helpers.callback_url(conn))
+      user ->
+        expiry =
+          Timex.now
+          |> Timex.add( Timex.Duration.from_days(1))
+          |> Timex.to_unix
+        path = get_session(conn, :redirect_url) || "/"
 
-    # TODO: really check auth.
-    user = OpenPantry.User.guest
-
-    conn
-    |> Guardian.Plug.sign_in(user, :admin, %{exp: expiry})
-    |> put_flash(:info, "Successfully authenticated.")
-    |> redirect(to: path)
+        conn
+        |> Guardian.Plug.sign_in(user, :admin, %{exp: expiry})
+        |> put_flash(:info, "Successfully authenticated.")
+        |> redirect(to: path)
+    end
   end
 
   def unauthenticated(conn, params) do

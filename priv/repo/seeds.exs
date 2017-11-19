@@ -93,6 +93,16 @@ demo =  User.changeset(%User{}, %{name: "Demo User",
                          })
         |> Repo.insert!()
 
+admin =  User.changeset(%User{}, %{name: "Facility Admin",
+                          family_members: 0,
+                          primary_language_id: 184,
+                          facility_id: 1,
+                          email: "admin@example.com",
+                          password: "password",
+                          password_confirmation: "password"
+                         })
+        |> Repo.insert!()
+
 
 for credit_type <- credit_types do
   insert(:user_credit, credit_type: credit_type, user: guest, balance: 0 )

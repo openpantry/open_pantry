@@ -15,7 +15,16 @@
           Name: <%= text_input f, :name %>
         </label>
         <label>
+          Email: <%= text_input f, :email %>
+        </label>
+        <label>
           Family members (default to 1): <%= number_input f, :family_members %>
+        </label>
+        <label>
+          Password: <%= password_input f, :password %>
+        </label>
+        <label>
+          Password confirmation: <%= password_input f, :password_confirmation %>
         </label>
         <%= submit "Submit", [class: "btn-primary"]%>
       <% end %>
