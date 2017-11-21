@@ -14,7 +14,8 @@ use Mix.Config
 config :open_pantry, OpenPantry.Web.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: System.get_env("APP_HOST"), port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
+  check_origin: false
 
 # Do not print debug messages in production
 config :logger, level: :info
