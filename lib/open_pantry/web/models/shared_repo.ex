@@ -9,7 +9,7 @@ defmodule OpenPantry.SharedRepo do
       @spec find(integer()) :: __MODULE__.t | nil
       def find(id) when is_integer(id), do:  query(id) |> Repo.one!
 
-      @spec find(integer(), list(atom()) | atom()) :: __MODULE__.t | nil
+      @spec find(integer(), [atom()] | atom()) :: __MODULE__.t | nil
       def find(id, preload) when is_integer(id) do
         query(id, preload) |> Repo.one!
       end
@@ -19,7 +19,7 @@ defmodule OpenPantry.SharedRepo do
         all([])
       end
 
-      @spec all(list(atom())) :: list(__MODULE__.t) | []
+      @spec all([atom()] | atom()) :: list(__MODULE__.t) | []
       def all(preload) do
         query_all(preload) |> Repo.all
       end
@@ -29,7 +29,7 @@ defmodule OpenPantry.SharedRepo do
         query_all([])
       end
 
-      @spec query_all(list(atom() | atom())) :: Ecto.Query.t
+      @spec query_all([atom()] | atom()) :: Ecto.Query.t
       def query_all(preload) do
         from(_struct in __MODULE__,
         preload: ^preload)
@@ -40,7 +40,7 @@ defmodule OpenPantry.SharedRepo do
         from(struct in __MODULE__,
         where: struct.id == ^id)
       end
-      @spec query(integer(), list(atom() | atom())) :: Ecto.Query.t
+      @spec query(integer(), [atom()] | atom()) :: Ecto.Query.t
       def query(id, preload) when is_integer(id) do
         from(struct in __MODULE__,
         where: struct.id == ^id,
