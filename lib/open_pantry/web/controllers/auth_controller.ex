@@ -39,7 +39,7 @@ defmodule OpenPantry.Web.AuthController do
         path = get_session(conn, :redirect_url) || "/"
 
         conn
-        |> Guardian.Plug.sign_in(user, :admin, %{exp: expiry})
+        |> Guardian.Plug.sign_in(user, :admin, %{exp: expiry, perms: %{role: [user.role]}})
         |> put_flash(:info, "Successfully authenticated.")
         |> redirect(to: path)
     end
@@ -50,5 +50,11 @@ defmodule OpenPantry.Web.AuthController do
     |> put_flash(:error, "Authentication required")
     |> put_session(:redirect_url, conn.request_path)
     |> redirect(to: auth_path(conn, :request, "identity"))
+  end
+
+  def forbidden(conn, params) do
+    conn
+    |> put_flash(:error, "Access denied")
+    |> redirect(to: "/")
   end
 end

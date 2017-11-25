@@ -39,7 +39,10 @@ config :guardian, Guardian,
   allowed_drift: 2000,
   verify_issuer: true, # optional
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: OpenPantry.GuardianSerializer
+  serializer: OpenPantry.GuardianSerializer,
+  permissions: %{
+    role: [:guest, :worker, :admin, :superadmin]
+  }
 
 config :ueberauth, Ueberauth,
   providers: [

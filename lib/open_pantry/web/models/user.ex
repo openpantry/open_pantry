@@ -53,7 +53,7 @@ defmodule OpenPantry.User do
   end
 
   def guest() do
-    from(user in User, where: user.family_members == 0)
+    from(user in User, where: user.role == ^:guest)
     |> Repo.one!
   end
 
