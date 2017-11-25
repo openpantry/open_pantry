@@ -11,7 +11,7 @@ defmodule OpenPantry.User do
     field :role, UserRoleEnum
 
     field :hashed_password, :string
-    field :password, :string, virtual: true, default: "********"
+    field :password, :string, virtual: true, default: ""
     field :password_confirmation, :string, virtual: true, default: ""
 
     belongs_to :facility, OpenPantry.Facility

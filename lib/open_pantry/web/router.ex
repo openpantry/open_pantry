@@ -58,6 +58,7 @@ defmodule OpenPantry.Web.Router do
     resources "/stocks", StockController
     resources "/orders", UserOrderController, only: [:index, :show]
     resources "/facilities", FacilityController
+    resources "/users", UserController
   end
 
   scope "/", OpenPantry.Web do
