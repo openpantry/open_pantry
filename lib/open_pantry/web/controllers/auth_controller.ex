@@ -52,7 +52,7 @@ defmodule OpenPantry.Web.AuthController do
     |> redirect(to: auth_path(conn, :request, "identity"))
   end
 
-  def forbidden(conn, params) do
+  def unauthorized(conn, params) do
     conn
     |> put_flash(:error, "Access denied")
     |> redirect(to: "/")

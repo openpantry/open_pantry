@@ -32,7 +32,7 @@ defmodule OpenPantry.Web.Router do
 
   pipeline :admin_auth do
     plug Guardian.Plug.EnsureAuthenticated, handler: OpenPantry.Web.AuthController
-    plug Guardian.Plug.EnsurePermissions, on_failure: {OpenPantry.Web.AuthController, :forbidden}, role: [:superadmin]
+    plug Guardian.Plug.EnsurePermissions, handler: OpenPantry.Web.AuthController, role: [:superadmin]
   end
 
   pipeline :user_required do
@@ -68,22 +68,26 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser]
+    pipe_through [:browser, :browser_auth]
     resources "/languages", LanguageController
     resources "/sessions", SessionController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser, :facility_specified] # Use the default browser stack
+    pipe_through [:localized_browser, :browser_auth, :facility_specified] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :facility_specified, :user_required]
+    pipe_through [:localized_browser, :browser_auth, :facility_specified, :user_required]
 
     get "/", PageController, :index
+  end
+
+  scope "/:locale", OpenPantry.Web do
+    pipe_through [:localized_browser, :facility_specified, :user_required]
     get "/styleguide", StyleController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController
