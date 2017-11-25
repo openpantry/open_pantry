@@ -67,7 +67,6 @@ defmodule OpenPantry.User do
   defp validate_password(changeset) do
     case get_change(changeset, :password) do
       nil -> changeset
-      "********" -> changeset
       password ->
         if password == get_change(changeset, :password_confirmation) do
           put_change(changeset, :hashed_password, Comeonin.Bcrypt.hashpwsalt(password))

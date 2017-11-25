@@ -49,13 +49,13 @@
 
   <div class="form-group">
     <%= label f, :role, class: "control-label" %>
-    <%= select f, :role, [{'',nil}|UserRoleEnum.__enum_map__],  class: "form-control" %>
+    <%= select f, :role, [{'', nil} | UserRoleEnum.__enum_map__],  class: "form-control" %>
     <%= error_tag f, :role %>
   </div>
 
   <div class="form-group">
     <%= label f, :facility_id, class: "control-label" %>
-    <%= select f, :facility_id, [{'',nil}|facility_list()], class: "form-control" %>
+    <%= select f, :facility_id, [{'', nil} | facility_list()], class: "form-control" %>
     <%= error_tag f, :facility %>
   </div>
 

@@ -45,14 +45,14 @@ defmodule OpenPantry.Web.AuthController do
     end
   end
 
-  def unauthenticated(conn, params) do
+  def unauthenticated(conn, _params) do
     conn
     |> put_flash(:error, "Authentication required")
     |> put_session(:redirect_url, conn.request_path)
     |> redirect(to: auth_path(conn, :request, "identity"))
   end
 
-  def unauthorized(conn, params) do
+  def unauthorized(conn, _params) do
     conn
     |> put_flash(:error, "Access denied")
     |> redirect(to: "/")
