@@ -8,6 +8,7 @@ defmodule OpenPantry.User do
     field :phone, :string
     field :ok_to_text, :boolean, default: false
     field :family_members, :integer
+    field :role, UserRoleEnum
 
     field :hashed_password, :string
     field :password, :string, virtual: true, default: "********"
@@ -28,7 +29,7 @@ defmodule OpenPantry.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :facility_id, :password, :password_confirmation])
+    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :facility_id, :password, :password_confirmation, :role])
     |> unique_constraint(:email)
     |> validate_password
     |> validate_required([:name, :family_members, :primary_language_id, :facility_id])
@@ -63,7 +64,7 @@ defmodule OpenPantry.User do
     |> Enum.map(&Stock.stockable/1)
   end
 
-  def validate_password(changeset) do
+  defp validate_password(changeset) do
     case get_change(changeset, :password) do
       nil -> changeset
       "********" -> changeset
