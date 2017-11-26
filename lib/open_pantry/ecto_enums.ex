@@ -6,3 +6,4 @@ import EctoEnum
 #defenum StatusEnum, :status, [:registered, :active, :inactive, :archived]
 
 defenum RefrigerationEnum, :refrigeration, [:freezer, :refrigerator, :room_temperature]
+defenum UserRoleEnum, :role, [:guest, :worker, :admin, :superadmin]

@@ -1,12 +1,19 @@
 defmodule OpenPantry.User do
   use OpenPantry.Web, :model
   alias OpenPantry.Stock
+
   schema "users" do
     field :email, :string
     field :name, :string
     field :phone, :string
     field :ok_to_text, :boolean, default: false
     field :family_members, :integer
+    field :role, UserRoleEnum
+
+    field :hashed_password, :string
+    field :password, :string, virtual: true, default: ""
+    field :password_confirmation, :string, virtual: true, default: ""
+
     belongs_to :facility, OpenPantry.Facility
     has_many :foods, through: [:facility, :food]
     many_to_many :languages, OpenPantry.Language, join_through: "user_languages"
@@ -22,8 +29,9 @@ defmodule OpenPantry.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :facility_id])
+    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :facility_id, :password, :password_confirmation, :role])
     |> unique_constraint(:email)
+    |> validate_password
     |> validate_required([:name, :family_members, :primary_language_id, :facility_id])
   end
 
@@ -45,7 +53,7 @@ defmodule OpenPantry.User do
   end
 
   def guest() do
-    from(user in User, where: user.family_members == 0)
+    from(user in User, where: user.role == ^:guest)
     |> Repo.one!
   end
 
@@ -56,4 +64,15 @@ defmodule OpenPantry.User do
     |> Enum.map(&Stock.stockable/1)
   end
 
+  defp validate_password(changeset) do
+    case get_change(changeset, :password) do
+      nil -> changeset
+      password ->
+        if password == get_change(changeset, :password_confirmation) do
+          put_change(changeset, :hashed_password, Comeonin.Bcrypt.hashpwsalt(password))
+        else
+          add_error(changeset, :password, "The password and password confirmation don't match.")
+        end
+    end
+  end
 end

@@ -83,6 +83,7 @@ guest = User.changeset(%User{}, %{name: "Anonymous",
                           family_members: 0,
                           primary_language_id: 184,
                           facility_id: 1,
+                          role: :guest
                          })
         |> Repo.insert!()
 
@@ -90,6 +91,17 @@ demo =  User.changeset(%User{}, %{name: "Demo User",
                           family_members: 4,
                           primary_language_id: 184,
                           facility_id: 1,
+                         })
+        |> Repo.insert!()
+
+admin =  User.changeset(%User{}, %{name: "Facility Admin",
+                          family_members: 0,
+                          primary_language_id: 184,
+                          facility_id: 1,
+                          email: "admin@example.com",
+                          password: "password",
+                          password_confirmation: "password"
+                          role: :superadmin
                          })
         |> Repo.insert!()
 

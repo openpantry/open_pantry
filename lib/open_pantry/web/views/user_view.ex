@@ -13,4 +13,14 @@ defmodule OpenPantry.Web.UserView do
   def render("user.json", %{user: user}) do
     %{id: user.id}
   end
+
+  def facility_list do
+    OpenPantry.Facility.all()
+    |> Enum.map(&({&1.name, &1.id}))
+  end
+
+  def language_list do
+    OpenPantry.Language.all()
+    |> Enum.map(&({&1.english_name, &1.id}))
+  end
 end

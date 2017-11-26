@@ -25,48 +25,69 @@ defmodule OpenPantry.Web.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :admin_auth do
-    plug Plugs.Authentication, use_config: {:open_pantry, :admin_auth}
+    plug Guardian.Plug.EnsureAuthenticated, handler: OpenPantry.Web.AuthController
+    plug Guardian.Plug.EnsurePermissions, handler: OpenPantry.Web.AuthController, role: [:superadmin]
   end
 
   pipeline :user_required do
     plug Plugs.SetupUser, redirect_url: "/user_selections"
   end
 
+  scope "/auth", OpenPantry.Web do
+    pipe_through [:browser, :browser_auth]
+
+    get "/logout", AuthController, :delete
+    delete "/logout", AuthController, :delete
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/identity/callback", AuthController, :callback
+  end
+
   scope "/admin", ExAdmin do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :browser_auth, :admin_auth]
     admin_routes()
   end
 
   scope "/manage", OpenPantry.Web do
-    pipe_through [:browser, :admin_auth]
+    pipe_through [:browser, :browser_auth, :admin_auth]
     resources "/stocks", StockController
     resources "/orders", UserOrderController, only: [:index, :show]
     resources "/facilities", FacilityController
+    resources "/users", UserController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :facility_specified, :admin_auth]
+    pipe_through [:browser, :browser_auth, :facility_specified, :admin_auth]
     resources "/user_selections", UserSelectionController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser]
+    pipe_through [:browser, :browser_auth]
     resources "/languages", LanguageController
     resources "/sessions", SessionController
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser, :facility_specified] # Use the default browser stack
+    pipe_through [:localized_browser, :browser_auth, :facility_specified] # Use the default browser stack
 
     get "/", PageController, :unused
   end
 
 
   scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :facility_specified, :user_required]
+    pipe_through [:localized_browser, :browser_auth, :facility_specified, :user_required]
 
     get "/", PageController, :index
+  end
+
+  scope "/:locale", OpenPantry.Web do
+    pipe_through [:localized_browser, :facility_specified, :user_required]
     get "/styleguide", StyleController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController

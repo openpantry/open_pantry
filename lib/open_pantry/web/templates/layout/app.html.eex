@@ -31,6 +31,12 @@
           <ul class="nav nav-pills pull-right">
           </ul>
         </nav>
+        <%= if user = Guardian.Plug.current_resource(@conn) do %>
+          <p>
+            Current user : <%= user.name %>
+            <%= link "Logout", to: auth_path(@conn, :delete) %>
+          </p>
+        <% end %>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

@@ -9,7 +9,7 @@ defmodule OpenPantry.CompleteFacility do
   def credit_types(type_count) when is_integer(type_count) do
     facility = insert(:facility)
     user = insert(:user, facility: facility)
-    guest_user = insert(:user, facility: facility, family_members: 0)
+    guest_user = insert(:user, facility: facility, family_members: 0, role: :guest)
     food_groups = for _ <- 1..type_count do
       insert(:food_group)
     end

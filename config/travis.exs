@@ -32,8 +32,6 @@ config :open_pantry, OpenPantry.Repo,
   ownership_timeout: Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :open_pantry, :admin_authentication, OpenPantry.ZeroAuth
-
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional

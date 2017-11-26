@@ -105,7 +105,7 @@
   align-items: center;
 }
 // Stock entry layout
-.stock-list  {
+.stock-list, .user-list {
   @include vp-display(flex);
   @include vp-flex-direction(column);
   max-height: $stockListHeight;
