@@ -100,7 +100,7 @@ admin =  User.changeset(%User{}, %{name: "Facility Admin",
                           facility_id: 1,
                           email: "admin@example.com",
                           password: "password",
-                          password_confirmation: "password"
+                          password_confirmation: "password",
                           role: :superadmin
                          })
         |> Repo.insert!()
