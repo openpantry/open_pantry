@@ -3,18 +3,18 @@
 ## A management system for pantry programs to help people eat healthy meals with dignity
 
   * NOTES:
-    * Requirements are still developing, help with all parts of the project are very much welcome!
-    * We haven't finalized registration/authentication/etc requirements, and we want this to be usable by as many organizations as possible
-    * Users are created/managed in the user_selections page, no registration is possible, basic auth is used for admins, and they create users who have magic login-links to be clicked on or emailed to them
-    * Though designed to be multi-facility, right now all users belong to the first facility in DB and everything defaults there.
-    * We plan to move the app to be multi-tenant and add an organization table that will allow other pantries besides Masbia to use and customize the software as well, but for now hosting seperately is an option, and we can help support this if you'd like to help us beta test at your pantry.
-    * We're using ZenHub chrome extension for project management so if you install that you can see some of the epics and feature discussions there, and contribute to the discussion!
-    * We have our mockups posted [here](https://invis.io/QPBK7WPB3).
-    * If you represent, work with, or know a pantry program that might benefit from using this software, please get in touch or put them in touch so we can try and consider any special requirements or requests they might have sooner than later!
-    * We are attempting to make this multi lingual from the start with as much and as many baked in translations as we can
+    * We are moving towards a SaaS like model, with one subdomain per facility, and facilities are managed by super-admins or by facility specific admins
+    * Masbia has several locations, but we're trying to validate the scope and use-case for other organizations, please get in touch if you work with one 
+    * Users are created/managed per facility on a user_selections page, and globally in a /manage/users page.
+    * Food recipients are managed as users and can be logged in via magic login-links to be clicked on or emailed to them
+    * We've been using ZenHub chrome extension for project management but this has caused some confusion, so we may move away from it...
+    * Some mockups and UX flow for where we're trying to head are posted [here](https://invis.io/QPBK7WPB3).  
+    * We initially attempted to make this multi lingual from the start but have largely deferred this work until things are more stable.
       * We have partial translations started for 9 languages
       * We have thousands of foods from USDA nutritional database ready for dynamic translation
-      * We are using POEditor.com for translation, contribute to translations here: https://poeditor.com/join/project/wBfgEEUCht
+      * We are using POEditor.com for static site translation, contribute to translations here: https://poeditor.com/join/project/wBfgEEUCht
+      * We probably need to move to a database driven translation system for foods, given the quantity we are trying to manage, but we still need translation help.
+      * Our curent best source for food images, facts and translations may be https://us.openfoodfacts.org/ but we started with USDA database and much work is needed to leverage/combine and rework the data model to pull photos and translations from openfoodfacts
 
   * Getting started with development:
     * Mac homebrew:
