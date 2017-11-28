@@ -76,6 +76,12 @@ export default function(channel){
     $('.js-stock-row[data-stock-id="' + stockId + '"] .js-clear-stock').click();
   });
 
+  $('.js-cart').on('click', '.js-clear-cart', function(){
+    $('.js-cart').find('.js-clear-cart-line').each(function() {
+      $(this).click();
+    });
+  });
+
   $('.js-add-cart').on('click', function(){
     $(this).addClass("hidden")
     $(this).parent().find(".js-quantity-control").removeClass("hidden")
