@@ -5,8 +5,11 @@
     "postinstall": "node_modules/.bin/brunch build"
   },
   "dependencies": {
+    "babel-preset-react": "^6.24.1",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "sass-autoprefixer": "^1.0.1"
   },
   "devDependencies": {

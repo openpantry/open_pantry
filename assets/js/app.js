@@ -24,3 +24,9 @@ socket.connect();
 let channel = socket.channel(`facility:${window.facilityId}`, {});
 channel.join();
 $(facility(channel))
+
+export var App = {
+  run: function(){
+    console.log('javascript running')
+  }
+}
