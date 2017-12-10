@@ -32,7 +32,8 @@ defmodule OpenPantry.Web.Router do
 
   pipeline :admin_auth do
     plug Guardian.Plug.EnsureAuthenticated, handler: OpenPantry.Web.AuthController
-    plug Guardian.Plug.EnsurePermissions, handler: OpenPantry.Web.AuthController, role: [:superadmin]
+    plug Guardian.Plug.EnsurePermissions, handler: OpenPantry.Web.AuthController,
+      one_of: [%{role: [:admin]}, %{role: [:superadmin]}]
   end
 
   pipeline :user_required do

@@ -5,7 +5,7 @@ defmodule OpenPantry.Web.UserController do
   alias OpenPantry.User
 
   def index(conn, _params) do
-    users = Repo.all(User)
+    users = User |> Repo.filter_facility(conn) |> Repo.all
     render(conn, "index.html", users: users)
   end
 
@@ -26,18 +26,18 @@ defmodule OpenPantry.Web.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = get_user(id)
+    user = get_user(id, conn)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = get_user(id)
+    user = get_user(id, conn)
     changeset = User.changeset(user, %{})
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = get_user(id)
+    user = get_user(id, conn)
 
     case update_user(user, user_params) do
       {:ok, user} ->
@@ -50,7 +50,7 @@ defmodule OpenPantry.Web.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = get_user(id, conn)
     {:ok, _user} = Repo.delete(user)
 
     conn
@@ -58,8 +58,8 @@ defmodule OpenPantry.Web.UserController do
     |> redirect(to: user_path(conn, :index))
   end
 
-  defp get_user(id) do
-    User |> Repo.get!(id)
+  defp get_user(id, conn) do
+    User |> Repo.filter_facility(conn) |> Repo.get!(id)
   end
 
   defp create_user(attrs \\ %{}) do

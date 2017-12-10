@@ -3,6 +3,8 @@ defmodule OpenPantry.Web.FacilityController do
 
   alias OpenPantry.Facility
 
+  plug Guardian.Plug.EnsurePermissions, handler: OpenPantry.Web.AuthController, role: [:superadmin]
+
   def index(conn, _params) do
     facilities = Repo.all(Facility)
     render(conn, "index.html", facilities: facilities)
