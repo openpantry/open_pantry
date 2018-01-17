@@ -1,15 +1,13 @@
-<%= form_tag @callback_url, method: "post" do %>
-  <div class='control-group'>
-    <label class='control-label' for='email-input'>Email</label>
-    <input class='form-control' type='email' name='email' value='<%= @conn.params["email"] %>' />
-  </div>
+<div id="auth_request">
+  <img src="<%= static_path(@conn, "/images/auth_logo.png") %>" />
 
-  <div class='control-group'>
-    <label class='control-label' for='password-input'>Password</label>
-    <input class='form-control' type='password' name='password' />
-  </div>
+  <div>
+    <%= form_tag @callback_url, method: "post" do %>
+      <input type='email' name='email' placeholder='name@email.com' value='<%= @conn.params["email"] %>' autofocus />
 
-  <div class='control-group'>
-    <button class='btn btn-primary'>Login</button>
+      <input type='password' name='password' placeholder='password' />
+
+      <button class="btn btn-primary">Log In</button>
+    <% end %>
   </div>
-<% end %>
+</div>
