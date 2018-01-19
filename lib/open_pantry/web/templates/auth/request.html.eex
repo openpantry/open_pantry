@@ -1,13 +1,15 @@
 <div id="auth_request">
   <img src="<%= static_path(@conn, "/images/auth_logo.png") %>" />
 
-  <div>
-    <%= form_tag @callback_url, method: "post" do %>
+  <%= form_tag @callback_url, method: "post", class: "ui form" do %>
+    <div class="field">
       <input type='email' name='email' placeholder='name@email.com' value='<%= @conn.params["email"] %>' autofocus />
+    </div>
 
+    <div class="field">
       <input type='password' name='password' placeholder='password' />
+    </div>
 
-      <button class="btn btn-primary">Log In</button>
-    <% end %>
-  </div>
+    <button class="ui large primary button">Log In</button>
+  <% end %>
 </div>
