@@ -46,11 +46,15 @@ defmodule OpenPantry.Plugs.SetupUser do
   end
 
   defp user_from_token({:ok, token}, conn) do
-    %{"aud" => <<"User:",  id :: binary >>} = Guardian.decode_and_verify!(token)
-    user = String.to_integer(id)
-          |> User.query
-          |> Repo.one
-    {conn, user}
+    try do
+      %{"aud" => <<"User:",  id :: binary >>} = Guardian.decode_and_verify!(token)
+      user = String.to_integer(id)
+            |> User.query
+            |> Repo.one
+      {conn, user}
+    rescue
+      RuntimeError -> {conn, User.guest()}
+    end
   end
 
   defp user_from_token({:error, :no_token}, conn) do
