@@ -8,9 +8,9 @@
     </h3>
   </div>
   <div class='js-stock-list table table-striped'>
-    <div class=" stock-list">
+    <div class="stock-list">
       <%= for stock <- @stocks do %>
-        <div  class="js-stock-row stock-entry <%= stock.storage %>"
+        <div  class="ui segment js-stock-row stock-entry <%= stock.storage %>"
               data-stock-id="<%= stock.id %>"
               data-max-allowed="<%= max_allowed(stock, @family_members) %>"
               data-stock-available="<%= stock.quantity %>"
