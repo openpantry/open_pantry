@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Welcome to OpenPantry!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic-ui.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
     <!-- Hotjar Tracking Code for http://open-pantry.herokuapp.com/ -->
@@ -21,29 +22,40 @@
             a.appendChild(r);
         })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-          </ul>
-        </nav>
-        <%= if user = Guardian.Plug.current_resource(@conn) do %>
-          <p>
-            Current user : <%= user.name %>
-            <%= link "Logout", to: auth_path(@conn, :delete) %>
-          </p>
+    <header class="ui menu">
+      <div class="item">
+        <%= gettext "Thank you for testing our Beta app!" %> &nbsp;&nbsp;
+
+        <%= unless Map.has_key?(@conn.assigns, :landing_page) do %>
+          <a href="<%= page_path(@conn, :index, @conn.assigns |> Map.get(:locale, "en") ) %>"><%= gettext "Back" %></a>
         <% end %>
-      </header>
+      </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= if user = Guardian.Plug.current_resource(@conn) do %>
+        <div class="right menu">
+          <div class="ui item">
+            Current user : <%= user.name %>
+          </div>
+          <%= link "Logout", to: auth_path(@conn, :delete), class: "ui item" %>
+        </div>
+      <% end %>
+    </header>
 
+    <div class="container">
       <main role="main">
-        <%= render @view_module, @view_template, assigns %>
+        <%= if get_flash(@conn, :info) != nil do %>
+          <p class="ui green inverted segment" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= if get_flash(@conn, :error) != nil do %>
+          <p class="ui red inverted segment" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
+
+        <div class="<%= if !Map.has_key?(@conn.assigns, :landing_page), do: "ui segment" %>">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </main>
 
     </div> <!-- /container -->
@@ -54,8 +66,8 @@
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="<%= static_path(@conn, "/js/semantic-ui.js") %>" />
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>

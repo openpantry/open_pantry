@@ -3,6 +3,7 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
+        "js/semantic-ui.js": ["vendor/semantic-ui/semantic.js"],
         "js/app.js": /^(js)|(node_modules)/,
         "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
         "js/admin_lte2.js": ["vendor/admin_lte2.js"],
@@ -13,12 +14,12 @@ exports.config = {
      order: {
         before: [
           "vendor/jquery.min.js",
-          "vendor/bootstrap.min.js"
         ]
       }
     },
     stylesheets: {
       joinTo: {
+        "css/semantic-ui.css": ["vendor/semantic-ui/semantic.css"],
         "css/app.css": /^(css|sass)/,
         "css/admin_lte2.css": ["vendor/admin_lte2.css"],
         "css/active_admin.css.css": ["vendor/active_admin.css.css"],
