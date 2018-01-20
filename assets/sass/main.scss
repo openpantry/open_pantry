@@ -408,17 +408,19 @@ body {
 
 // Layout
 
-#page_index {
-  text-align: center;
+body {
+  // Landing page
+  #page_index {
+    text-align: center;
 
-  h2 { color: white }
+    h2 { color: white }
 
-  .grid {
-    .column {
-      a { width: 400px; }
+    .grid {
+      .column {
+        a { width: 400px; }
+      }
     }
   }
-}
 
 // Sign-in page
 
