@@ -3,7 +3,7 @@
     <div class="ui segment">
       <div class="ui tabular menu">
         <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
-          <a class="item" data-tab="<%= dasherize(stock_type) %>">
+          <a class="item <%= dasherize(stock_type) %>" href="#<%= dasherize(stock_type) %>" data-tab="<%= dasherize(stock_type) %>">
             <%= stock_type %>
           </a>
         <% end %>
