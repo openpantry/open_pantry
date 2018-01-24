@@ -1,6 +1,6 @@
 <div class="ui grid">
   <div class="ten wide">
-    <div class="ui segment">
+    <div class="ui vertical segment">
       <div class="ui tabular menu">
         <%= for {stock_type, _type_id, _stocks} <- @stock_by_type do %>
           <a class="item <%= dasherize(stock_type) %>" href="#<%= dasherize(stock_type) %>" data-tab="<%= dasherize(stock_type) %>">
@@ -8,7 +8,9 @@
           </a>
         <% end %>
       </div>
+    </div>
 
+    <div class="ui vertical segment">
       <%= for {stock_type, type_id, stocks} <- @stock_by_type do %>
         <div class="ui tab" data-tab="<%= dasherize(stock_type) %>">
           <%= render SharedView,
