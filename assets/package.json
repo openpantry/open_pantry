@@ -17,7 +17,8 @@
     "javascript-brunch": "~2.0.0",
     "phantomjs-prebuilt": "^2.1.8",
     "sass-brunch": "^2.10.4",
-    "uglify-js-brunch": "~2.0.1"
+    "uglify-js-brunch": "~2.0.1",
+    "semantic-ui": "~2.2.13"
   },
   "engines": {
     "node": "~ 0.12.1"
