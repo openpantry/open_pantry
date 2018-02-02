@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>Welcome to OpenPantry!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic-ui.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
     <!-- Hotjar Tracking Code for http://open-pantry.herokuapp.com/ -->
@@ -68,7 +68,7 @@
       crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-    <script src="<%= static_path(@conn, "/js/semantic-ui.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/semantic.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>

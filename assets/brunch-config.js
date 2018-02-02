@@ -3,11 +3,11 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/semantic-ui.js": ["vendor/semantic-ui/semantic.js"],
         "js/app.js": /^(js)|(node_modules)/,
         "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
         "js/admin_lte2.js": ["vendor/admin_lte2.js"],
         "js/jquery.min.js": ["vendor/jquery.min.js"],
+        "js/semantic.js": ["node_modules/semantic-ui/dist/semantic.js"]
       },
       // To change the order of concatenation of files, explicitly mention here
       // https://github.com/brunch/brunch/tree/master/docs#concatenation
@@ -19,10 +19,10 @@ exports.config = {
     },
     stylesheets: {
       joinTo: {
-        "css/semantic-ui.css": ["vendor/semantic-ui/semantic.css"],
         "css/app.css": /^(css|sass)/,
         "css/admin_lte2.css": ["vendor/admin_lte2.css"],
         "css/active_admin.css.css": ["vendor/active_admin.css.css"],
+        "css/semantic.css": ["node_modules/semantic-ui/dist/semantic.css"]
       },
       order: {
         after: ["css/app.css"] // concat app.css last
