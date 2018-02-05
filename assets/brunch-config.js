@@ -7,14 +7,12 @@ exports.config = {
         "js/ex_admin_common.js": ["vendor/ex_admin_common.js"],
         "js/admin_lte2.js": ["vendor/admin_lte2.js"],
         "js/jquery.min.js": ["vendor/jquery.min.js"],
+        "js/semantic.js": ["vendor/yarn/semantic-ui/dist/semantic.js"]
       },
       // To change the order of concatenation of files, explicitly mention here
       // https://github.com/brunch/brunch/tree/master/docs#concatenation
      order: {
-        before: [
-          "vendor/jquery.min.js",
-          "vendor/bootstrap.min.js"
-        ]
+        before: ["vendor/jquery.min.js"]
       }
     },
     stylesheets: {
@@ -22,6 +20,7 @@ exports.config = {
         "css/app.css": /^(css|sass)/,
         "css/admin_lte2.css": ["vendor/admin_lte2.css"],
         "css/active_admin.css.css": ["vendor/active_admin.css.css"],
+        "css/semantic.css": ["vendor/yarn/semantic-ui/dist/semantic.css"]
       },
       order: {
         after: ["css/app.css"] // concat app.css last
