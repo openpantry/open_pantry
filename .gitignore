@@ -11,4 +11,5 @@ openpantry.dump
 uploads/*
 assets/css/main.css
 assets/css/main.css.map
-
+assets/vendor/yarn
+.DS_Store

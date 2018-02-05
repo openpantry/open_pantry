@@ -1,5 +1,5 @@
 {
-  "base": "node_modules/semantic-ui/",
+  "base": "vendor/yarn/semantic-ui/",
   "paths": {
     "source": {
       "config": "src/theme.config",
