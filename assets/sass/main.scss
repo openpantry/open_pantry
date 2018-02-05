@@ -108,8 +108,7 @@
 .stock-list, .user-list {
   @include vp-display(flex);
   @include vp-flex-direction(column);
-  max-height: $stockListHeight;
-  overflow-y: auto;
+  //max-height: $stockListHeight;
 }
 
 .stock-entry {
@@ -117,7 +116,6 @@
   @include vp-display(flex);
   justify-content: space-between;
   align-items: center;
-  margin: .5vh 0;
   min-height: $stockEntryHeight;
 }
 
@@ -400,38 +398,45 @@ body {
   main {
     width: 100%;
   }
+
+  header.ui.menu {
+    a.item {
+      color: #2C70BA;
+    }
+  }
 }
 
-button.btn-primary {
-  border: 0;
-  border-radius: 5px;
-  padding: 1rem 2.5rem;
-  background-color: #0084BD;
-  color: white;
-  font-size: 1rem;
-}
+// End Layout
 
-// Layout
+body {
+  // Landing page
+  #page_index {
+    text-align: center;
 
-// Sign-in page
+    h2 { color: white }
 
-#auth_request {
-  margin: 0 auto;
+    .grid {
+      .column {
+        a { width: 400px; }
+      }
+    }
+  }
 
-  margin-top: 145px;
+  // Sign-in page
+  #auth_request {
+    margin: 0 auto;
 
-  text-align: center;
-  padding: 70px 150px;
+    margin-top: 145px;
 
-  background-image: radial-gradient(#C7DAD5 70%, #86ADA2 100%);
-  border-radius: 10px;
-  box-shadow: 0px 0px 15px black;
+    text-align: center;
+    padding: 70px 150px;
 
-  form input {
-    display: block;
-    margin: 30px auto;
-    height: 40px;
-    width: 250px;
-    font-size: 20px;
+    background-image: radial-gradient(#C7DAD5 70%, #86ADA2 100%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px black;
+
+    img {
+      margin: 50px 0 ;
+    }
   }
 }
