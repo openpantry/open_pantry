@@ -1,3 +1,7 @@
+if !Map.has_key?(System.get_env(), "GUARDIAN_SECRET_KEY") do
+  raise "GUARDIAN_SECRET_KEY environment variable not set.  It must be set for this application to work correctly"
+end
+
 defmodule OpenPantry.Mixfile do
   use Mix.Project
 
