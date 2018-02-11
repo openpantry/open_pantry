@@ -7,7 +7,7 @@ defmodule OpenPantry.Factory do
       email: sequence(:email, &"email-#{&1}@example.com"),
       family_members: 1,
       primary_language: build(:language),
-      facility: build(:facility)
+      facilities: [build(:facility)]
     }
   end
 

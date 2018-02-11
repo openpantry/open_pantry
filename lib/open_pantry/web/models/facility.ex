@@ -10,7 +10,7 @@ defmodule OpenPantry.Facility do
     field :postal_code, :string
     field :max_occupancy, :integer
     field :square_meterage_storage, :float
-    has_many :users, OpenPantry.User, on_delete: :nilify_all
+    many_to_many :users, OpenPantry.User, join_through: "user_facilities"
     has_many :stocks, OpenPantry.Stock, on_delete: :delete_all
     has_many :foods, through: [:stocks, :food]
     has_many :food_groups, through: [:foods, :food_group]
