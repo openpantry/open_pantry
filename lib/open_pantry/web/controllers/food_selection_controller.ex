@@ -7,8 +7,8 @@ defmodule OpenPantry.Web.FoodSelectionController do
   alias OpenPantry.Web.Endpoint
   require IEx
   def index(conn, _params) do
-    user = conn.assigns.user |> Repo.preload(:facility)
-    stock_by_type = FoodSelection.stock_by_type(user.facility)
+    user = conn.assigns.user
+    stock_by_type = FoodSelection.stock_by_type(conn.assigns.facility)
     user_order = UserOrder.find_or_create(user) |> Repo.preload(:stock_distributions)
     distributions = user_order.stock_distributions
                     |> Repo.preload(:stock)
@@ -20,7 +20,7 @@ defmodule OpenPantry.Web.FoodSelectionController do
                                 user_order: UserOrder.changeset(user_order)
   end
   def update(conn, params = %{"id" => id}) do
-    UserOrder.find(String.to_integer(id), [:user, [user: :facility]])
+    UserOrder.find(String.to_integer(id), [:user, [user: :facilities]])
     |> UserOrder.changeset(permitted_params(params))
     |> Repo.update
     |> handle_result(conn)

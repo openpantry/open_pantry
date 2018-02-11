@@ -82,7 +82,7 @@ File.read!("priv/repo/languages.json")
 guest = User.changeset(%User{}, %{name: "Anonymous",
                           family_members: 0,
                           primary_language_id: 184,
-                          facility_id: 1,
+                          facilities: [1],
                           role: :guest
                          })
         |> Repo.insert!()
@@ -90,14 +90,14 @@ guest = User.changeset(%User{}, %{name: "Anonymous",
 demo =  User.changeset(%User{}, %{name: "Demo User",
                           family_members: 4,
                           primary_language_id: 184,
-                          facility_id: 1,
+                          facilities: [1],
                          })
         |> Repo.insert!()
 
 admin =  User.changeset(%User{}, %{name: "Facility Admin",
                           family_members: 0,
                           primary_language_id: 184,
-                          facility_id: 1,
+                          facilities: [1],
                           email: "admin@example.com",
                           password: "password",
                           password_confirmation: "password",

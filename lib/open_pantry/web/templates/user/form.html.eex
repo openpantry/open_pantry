@@ -53,11 +53,13 @@
     <%= error_tag f, :role %>
   </div>
 
+<!--
   <div class="form-group">
-    <%= label f, :facility_id, class: "control-label" %>
-    <%= select f, :facility_id, [{'', nil} | facility_list()], class: "form-control" %>
-    <%= error_tag f, :facility %>
+    <%#= label f, :facility_id, class: "control-label" %>
+    <%#= select f, :facility_id, [{'', nil} | facility_list()], class: "form-control" %>
+    <%#= error_tag f, :facility %>
   </div>
+-->
 
   <div class="form-group">
     <%= label f, :primary_language_id, class: "control-label" %>
