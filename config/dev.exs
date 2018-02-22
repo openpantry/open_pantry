@@ -35,6 +35,9 @@ config :open_pantry, OpenPantry.Web.Endpoint,
                     cd: Path.expand("../assets", __DIR__)]]
 
 
+config :guardian, Guardian,
+  secret_key: "A not very secret dev only key"
+
 # Watch static and templates for browser reloading.
 config :open_pantry, OpenPantry.Web.Endpoint,
   live_reload: [
