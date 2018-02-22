@@ -6,6 +6,10 @@ defmodule OpenPantry do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    if !Application.get_env(:guardian, Guardian)[:secret_key] do
+      raise "GUARDIAN_SECRET_KEY environment variable not set.  It must be set for this application to work correctly"
+    end
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository

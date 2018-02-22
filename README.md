@@ -24,7 +24,6 @@
         * It will cd into assets directory and install npm packages via yarn
         * You can use another postgres, but you may have to manually install postgis
       * run from open_pantry dir `mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs`
-      * Expose an env var with some value in your bash config for `GUARDIAN_SECRET_KEY`, e.g. `export GUARDIAN_SECRET_KEY="A not very secret dev only key"`
       * Start Phoenix endpoint with `mix phx.server`, or `iex -S mix phx.server` (this gives a server and REPL/console in one window)
     * Docker/docker-compose (fake, factory generated data but no dependencies)
       * Install docker (on most systems this also installs docker-compose)
