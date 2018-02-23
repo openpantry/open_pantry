@@ -28,10 +28,6 @@
     <header class="ui menu">
       <div class="item">
         <%= gettext "Thank you for testing our Beta app!" %> &nbsp;&nbsp;
-
-        <%= unless Map.has_key?(@conn.assigns, :landing_page) do %>
-          <a href="<%= page_path(@conn, :index, @conn.assigns |> Map.get(:locale, "en") ) %>"><%= gettext "Back" %></a>
-        <% end %>
       </div>
 
       <%= if user = Guardian.Plug.current_resource(@conn) do %>

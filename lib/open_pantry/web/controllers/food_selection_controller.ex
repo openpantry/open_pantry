@@ -32,13 +32,13 @@ defmodule OpenPantry.Web.FoodSelectionController do
     conn
     |> put_flash(:info, gettext("Your order has been finalized!"))
     |> Plug.Conn.delete_resp_cookie("user_token")
-    |> redirect(to: "/#{conn.assigns.locale || "en" }/")
+    |> redirect(to: "/")
   end
 
   defp handle_result({:error, _changeset}, conn) do
     conn
     |> put_flash(:error, gettext("There was an error updating your order"))
-    |> redirect(to: food_selection_path(conn, :index, conn.assigns.locale))
+    |> redirect(to: food_selection_path(conn, :index))
   end
 
   defp permitted_params(params) do
