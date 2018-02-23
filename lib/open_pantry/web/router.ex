@@ -16,11 +16,6 @@ defmodule OpenPantry.Web.Router do
     plug Plugs.Facility
   end
 
-  pipeline :localized_browser do
-    plug :browser
-    plug Plugs.Locale, "en"
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -75,20 +70,13 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:localized_browser, :browser_auth, :facility_specified] # Use the default browser stack
+    pipe_through [:browser, :browser_auth, :facility_specified, :user_required]
 
-    get "/", PageController, :unused
+    get "/", FoodSelectionController, :index
   end
 
-
-  scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :browser_auth, :facility_specified, :user_required]
-
-    get "/", PageController, :index
-  end
-
-  scope "/:locale", OpenPantry.Web do
-    pipe_through [:localized_browser, :facility_specified, :user_required]
+  scope "/", OpenPantry.Web do
+    pipe_through [:browser, :facility_specified, :user_required]
     get "/styleguide", StyleController, :index
     resources "/registrations", RegistrationController
     resources "/food_selections", FoodSelectionController
