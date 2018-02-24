@@ -27,13 +27,6 @@ defmodule OpenPantry.Repo.Migrations.CreateOpenPantry.OpenPantry.UserManagedFaci
   end
 
   def down do
-    for uf <- OpenPantry.Repo.all(UserManagedFacility) do
-      from(u in "users",
-        update: [set: [facility_id: ^uf.facility_id]],
-        where: u.id == ^uf.user_id)
-      |> OpenPantry.Repo.update_all([])
-    end
-
     drop table(:user_managed_facilities)
   end
 end
