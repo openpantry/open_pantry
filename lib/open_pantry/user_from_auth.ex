@@ -4,9 +4,11 @@ defmodule OpenPantry.UserFromAuth do
   import Ecto.Query, only: [from: 2]
 
   def get(auth) do
-    user =
-      from(u in User, where: u.email == ^auth.info.email, preload: [:managed_facilities])
-      |> Repo.one
+    user = Repo.one(
+      from u in User,
+      where: u.email == ^auth.info.email,
+      preload: [:managed_facilities]
+    )
     case user do
       nil -> {:error, :not_found}
       %User{hashed_password: nil} -> {:error, :no_password}
