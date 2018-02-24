@@ -5,7 +5,7 @@ defmodule OpenPantry.UserFromAuth do
 
   def get(auth) do
     user =
-      from(u in User, where: u.email == ^auth.info.email, preload: [:facilities])
+      from(u in User, where: u.email == ^auth.info.email, preload: [:managed_facilities])
       |> Repo.one
     case user do
       nil -> {:error, :not_found}

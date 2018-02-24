@@ -1,5 +1,6 @@
 defmodule OpenPantry.User do
   use OpenPantry.Web, :model
+  alias OpenPantry.Stock
 
   schema "users" do
     field :email, :string
@@ -13,8 +14,9 @@ defmodule OpenPantry.User do
     field :password, :string, virtual: true, default: ""
     field :password_confirmation, :string, virtual: true, default: ""
 
-    many_to_many :facilities, OpenPantry.Facility, join_through: "user_facilities"
-    has_many :foods, through: [:facilities, :facility, :food]
+    many_to_many :managed_facilities, OpenPantry.Facility, join_through: "user_managed_facilities"
+    belongs_to :facility, OpenPantry.Facility
+    has_many :foods, through: [:facility, :food]
     many_to_many :languages, OpenPantry.Language, join_through: "user_languages"
     has_many :user_orders, OpenPantry.UserOrder
     has_many :stock_distributions, through: [:user_orders, :stock_distributions]
@@ -28,10 +30,10 @@ defmodule OpenPantry.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :password, :password_confirmation, :role])
+    |> cast(params, [:email, :name, :phone, :ok_to_text, :family_members, :primary_language_id, :facility_id, :password, :password_confirmation, :role])
     |> unique_constraint(:email)
     |> validate_password
-    |> validate_required([:name, :family_members, :primary_language_id])
+    |> validate_required([:name, :family_members, :primary_language_id, :facility_id])
   end
 
   def credits(user_id) when is_integer(user_id), do: find(user_id) |> credits
@@ -54,6 +56,13 @@ defmodule OpenPantry.User do
   def guest() do
     from(user in User, where: user.role == ^:guest)
     |> Repo.one!
+  end
+
+  def facility_stocks(user) do
+    Repo.preload(user, :facility).facility
+    |> Repo.preload(:stocks)
+    |> (&(&1.stocks)).()
+    |> Enum.map(&Stock.stockable/1)
   end
 
   defp validate_password(changeset) do
