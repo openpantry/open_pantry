@@ -12,7 +12,7 @@ defmodule OpenPantry.Repo do
       %User{role: :superadmin} ->
         query
       %User{role: :admin, managed_facilities: facilities} when length(facilities) > 0 ->
-        from q in query, where: q.facility in ^facilities
+        from q in query, where: q.facility_id in ^Enum.map(facilities, &(&1.id))
       _ ->
         from q in query, where: is_nil(q.facility_id)
     end
