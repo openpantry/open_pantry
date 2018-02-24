@@ -45,8 +45,8 @@ defmodule OpenPantry.Web.UserOrderController do
     case user do
       %User{role: :superadmin} ->
         query
-      %User{role: :admin, facility_id: facility_id} when facility_id > 0 ->
-        Query.from q in query, join: u in assoc(q, :user), where: u.facility_id == ^facility_id
+      %User{role: :admin, managed_facilities: facilities} when length(facilities) > 0 ->
+        Query.from q in query, join: u in assoc(q, :user), where: u.facility_id in ^Enum.map(facilities, &(&1.id))
       _ ->
         Query.from q in query, join: u in assoc(q, :user), where: is_nil(u.facility_id)
     end

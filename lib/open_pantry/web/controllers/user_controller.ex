@@ -1,8 +1,10 @@
 defmodule OpenPantry.Web.UserController do
   use OpenPantry.Web, :controller
 
+  alias Ecto.Query
   alias OpenPantry.Repo
   alias OpenPantry.User
+  alias OpenPantry.Facility
 
   def index(conn, _params) do
     users = User |> Repo.filter_facility(conn) |> Repo.all
@@ -59,7 +61,7 @@ defmodule OpenPantry.Web.UserController do
   end
 
   defp get_user(id, conn) do
-    User |> Repo.filter_facility(conn) |> Repo.get!(id)
+    User |> Repo.filter_facility(conn) |> Query.preload(:managed_facilities) |> Repo.get!(id)
   end
 
   defp create_user(attrs \\ %{}) do
@@ -69,8 +71,10 @@ defmodule OpenPantry.Web.UserController do
   end
 
   defp update_user(%User{} = user, attrs) do
+    managed_facilities = Facility |> Query.where([f], f.id in ^attrs["managed_facilities"]) |> Repo.all
     user
     |> User.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:managed_facilities, managed_facilities)
     |> Repo.update()
   end
 end

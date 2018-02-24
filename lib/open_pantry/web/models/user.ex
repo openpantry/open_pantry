@@ -14,7 +14,7 @@ defmodule OpenPantry.User do
     field :password, :string, virtual: true, default: ""
     field :password_confirmation, :string, virtual: true, default: ""
 
-    many_to_many :managed_facilities, OpenPantry.Facility, join_through: "user_managed_facilities"
+    many_to_many :managed_facilities, OpenPantry.Facility, join_through: OpenPantry.UserManagedFacility, on_replace: :delete
     belongs_to :facility, OpenPantry.Facility
     has_many :foods, through: [:facility, :food]
     many_to_many :languages, OpenPantry.Language, join_through: "user_languages"

@@ -53,13 +53,17 @@
     <%= error_tag f, :role %>
   </div>
 
-<!--
   <div class="form-group">
-    <%#= label f, :facility_id, class: "control-label" %>
-    <%#= select f, :facility_id, [{'', nil} | facility_list()], class: "form-control" %>
-    <%#= error_tag f, :facility %>
+    <%= label f, :facility_id, class: "control-label" %>
+    <%= select f, :facility_id, [{'', nil} | facility_list()], class: "form-control" %>
+    <%= error_tag f, :facility %>
   </div>
--->
+
+  <div class="form-group">
+    <%= label f, :managed_facilities, class: "control-label" %>
+    <%= multiple_select f, :managed_facilities, facility_list(), selected: Enum.map(f.data.managed_facilities, &(&1.id)), class: "form-control" %>
+    <%= error_tag f, :managed_facilities %>
+  </div>
 
   <div class="form-group">
     <%= label f, :primary_language_id, class: "control-label" %>
