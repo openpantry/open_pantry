@@ -11,7 +11,7 @@ defmodule OpenPantry.Repo do
     case user do
       %User{role: :superadmin} ->
         query
-      %User{role: :admin, facilities: facilities} when length(facilities) > 0 ->
+      %User{role: :admin, managed_facilities: facilities} when length(facilities) > 0 ->
         from q in query, where: q.facility in ^facilities
       _ ->
         from q in query, where: is_nil(q.facility_id)

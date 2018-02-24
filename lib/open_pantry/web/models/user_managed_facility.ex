@@ -1,9 +1,9 @@
-defmodule OpenPantry.UserFacility do
+defmodule OpenPantry.UserManagedFacility do
   use Ecto.Schema
   import Ecto.Changeset
-  alias OpenPantry.UserFacility
+  alias OpenPantry.UserManagedFacility
 
-  schema "user_facilities" do
+  schema "user_managed_facilities" do
     belongs_to :user, OpenPantry.User
     belongs_to :facility, OpenPantry.Facility
 
@@ -11,7 +11,7 @@ defmodule OpenPantry.UserFacility do
   end
 
   @doc false
-  def changeset(%UserFacility{} = user_facility, attrs) do
+  def changeset(%UserManagedFacility{} = user_facility, attrs) do
     user_facility
     |> cast(attrs, [:user_id, :facility_id])
     |> validate_required([:user_id, :facility_id])
