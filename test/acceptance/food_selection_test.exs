@@ -10,7 +10,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [credit_type|_]} = two_credit_facility()
 
     session
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit(food_selection_url(Endpoint, :index))
     |> assert_has(css(".#{dasherize(credit_type.name)}", text: credit_type.name))
     |> Wallaby.end_session
   end
@@ -20,7 +20,7 @@ defmodule OpenPantry.FoodSelectionTest do
 
     session
     |> resize_window(2000, 2000)
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit(food_selection_url(Endpoint, :index))
     |> click(link(credit_type.name))
     |> take_screenshot
     |> assert_has(css(".#{dasherize(credit_type.name)}-stock-description", text: food.longdesc))
@@ -31,7 +31,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [credit_type|_], foods: [_|[food2]]} = two_credit_facility()
 
     session
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit(food_selection_url(Endpoint, :index))
     |> refute_has(css(".#{dasherize(credit_type.name)}-stock-description", text: food2.longdesc))
     |> Wallaby.end_session
   end
@@ -40,7 +40,7 @@ defmodule OpenPantry.FoodSelectionTest do
     %{credit_types: [_|[credit_type2]], foods: [_|[food2]]} = two_credit_facility()
 
     session
-    |> visit(food_selection_url(Endpoint, :index, "en"))
+    |> visit(food_selection_url(Endpoint, :index))
     |> click(link(credit_type2.name))
     |> assert_has(css(".#{dasherize(credit_type2.name)}-stock-description", text: food2.longdesc))
     |> Wallaby.end_session
