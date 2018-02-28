@@ -29,7 +29,7 @@ export default function(channel){
       }
       else if (getAvailable($row) > 0) {
         $row.find(".js-add-stock").prop("disabled",false)
-        $row.find(".js-add-stock").html(window.plus_button)
+        $row.find(".js-add-stock:not(.js-add-cart)").html(window.plus_button)
       }
     })
   }
