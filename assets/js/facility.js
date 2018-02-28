@@ -31,6 +31,16 @@ export default function(channel){
         $row.find(".js-add-stock").prop("disabled",false)
         $row.find(".js-add-stock:not(.js-add-cart)").html(window.plus_button)
       }
+
+      // toggle cart/quantity control on/off based on quantity
+      const quantity = getQuantity($row);
+      if (quantity === 0) {
+        $row.find(".js-add-cart").removeClass("hidden");
+        $row.find(".js-quantity-control").addClass("hidden");
+      } else {
+        $row.find(".js-add-cart").addClass("hidden");
+        $row.find(".js-quantity-control").removeClass("hidden");
+      }
     })
   }
 
