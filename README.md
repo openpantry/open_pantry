@@ -30,11 +30,6 @@
       * Clone the OpenPantry repo and cd into directory
       * Run `docker-compose run setup`
       * Run `docker-compose up web`
-      * Temporary work-around steps for known bug in docker-compose setup:
-        * Install node package manager if not already present via `npm install`
-        * Install yarn via `npm install -g yarn`
-        * run `cd assets` from open_pantry directory
-        * run `yarn`
     * Local/native development on Mac/Linux manually, without automation from `brew bundle` via Brewfile above (detailed instructions only for Mac at present, similar for linux)
       * Install Postgres (Mac)
           * Download and install the Postgresapp.com from [their site](https://postgresapp.com/documentation/install.html)
