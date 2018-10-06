@@ -15,7 +15,7 @@
     <%= for user <- @users do %>
         <tr>
           <td><%= user.email %></td>
-          <td><a href='<%= food_selection_path(@conn, :index, "en", login: login_token(user) ) %>'> <%= user.name %>, id: <%= user.id %> </a></td>
+          <td><a href='<%= food_selection_path(@conn, :index, login: login_token(user) ) %>'> <%= user.name %>, id: <%= user.id %> </a></td>
           <td><%= user.role %></td>
           <td><%= user.family_members %></td>
 
