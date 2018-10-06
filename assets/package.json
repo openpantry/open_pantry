@@ -2,7 +2,7 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "postinstall": "node_modules/.bin/brunch build"
+    "postinstall": "node_modules/brunch/bin/brunch build"
   },
   "dependencies": {
     "phoenix": "file:../deps/phoenix",

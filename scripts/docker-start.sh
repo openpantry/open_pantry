@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd assets
+cd assets/
 yarn
 cd ..
 mix phx.server
