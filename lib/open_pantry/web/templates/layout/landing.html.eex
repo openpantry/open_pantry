@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Welcome to OpenPantry!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <!-- Hotjar Tracking Code for http://open-pantry.herokuapp.com/ -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:512073,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+  </head>
+
+  <body>
+    <header class="ui menu">
+      <div class="menu">
+        <%= link "Home", to: page_path(@conn, :index), class: "ui item" %>
+      </div>
+
+      <div class="right menu">
+        <%= link "Pantry Login", to: user_selection_path(@conn, :index), class: "ui item" %>
+      </div>
+    </header>
+
+    <div class="container">
+      <main role="main">
+        <%= if get_flash(@conn, :info) != nil do %>
+          <p class="ui green inverted segment" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= if get_flash(@conn, :error) != nil do %>
+          <p class="ui red inverted segment" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
+
+        <%= render @view_module, @view_template, assigns %>
+
+        <div class="ui inverted vertical footer segment stripe">
+          <div class="ui container">
+            <div class="ui menu inverted">
+              <div class="menu">
+                <%= link "Home", to: page_path(@conn, :index), class: "ui item" %>
+              </div>
+              <div class="menu">
+                <%= link "Pantry Login", to: user_selection_path(@conn, :index), class: "ui item" %>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div> <!-- /container -->
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="<%= static_path(@conn, "/js/semantic.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+      $('.select2').select2();
+    </script>
+  </body>
+</html>

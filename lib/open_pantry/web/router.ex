@@ -12,6 +12,10 @@ defmodule OpenPantry.Web.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :landing_layout do
+    plug :put_layout, {OpenPantry.Web.LayoutView, :landing}
+  end
+
   pipeline :facility_specified do
     plug Plugs.Facility
   end
@@ -70,9 +74,9 @@ defmodule OpenPantry.Web.Router do
   end
 
   scope "/", OpenPantry.Web do
-    pipe_through [:browser, :browser_auth, :facility_specified, :user_required]
+    pipe_through [:browser, :landing_layout]
 
-    get "/", FoodSelectionController, :index
+    get "/", PageController, :index
   end
 
   scope "/", OpenPantry.Web do

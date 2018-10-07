@@ -1,16 +1,57 @@
-<div id="page_index">
-  <h2><%= gettext "Welcome to %{name}", name: "OpenPantry" %>!</h2>
+<div class="ui vertical masthead center aligned segment">
+  <div class="ui text container">
+    <h1 class="ui inverted header">
+      <img src="<%= static_path(@conn, "/images/logo1.png") %>" />
+    </h1>
+  </div>
+</div>
 
-  <div class="ui two column grid">
-    <%= for language <- @languages do %>
-      <div class="column">
-        <a href="<%= food_selection_path(@conn, :index, language.iso_code) %>" class="ui basic centered inverted button">
-          <%= language.native_name %>
-        </a>
+<div class="ui stripe segment">
+  <div class="ui middle aligned stackable grid container">
+    <div class="row">
+      <div class="six wide right floated column">
+        <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui large bordered image">
       </div>
-    <% end %>
-    <!--<div class="column">
-      <a href="<%= language_path(@conn, :index) %>">... (all languages)</a>
-    </div>-->
+      <div class="ten wide column">
+        <h3 class="ui header">How it works</h3>
+        <div class="ui bulleted list">
+          <div class="item">Volunteer or staff members access pantry site with Administrator chosen access pin</div>
+          <div class="item">Clients are given an allocation of points to user per visit</div>
+          <div class="item">They use a simple interface to select items they want based on USDA's my plate ratios</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui stripe segment blue inverted">
+  <div class="ui grid container">
+    <div class="ui padded equal height grid">
+      <div class="row">
+        <div class="four wide right column">
+          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <p>
+            Client Information can be completely anonymous or linked to user accounts
+          </p>
+        </div>
+        <div class="four wide right column">
+          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <p>
+            Items are grouped in categories and points are assigned according to the USDA MyPlate ratios
+          </p>
+        </div>
+        <div class="four wide right column">
+          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <p>
+            Points are scalable to family size allowing clients to choose for whatever size family you choose
+          </p>
+        </div>
+        <div class="four wide right column">
+          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <p>
+            Multilingual options allows clients to select items in their native language
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
