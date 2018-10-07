@@ -445,3 +445,58 @@ body {
     }
   }
 }
+
+.masthead.segment {
+  min-height: 500px;
+  padding: 1em 0em;
+}
+.masthead h1.ui.header {
+  margin-top: 1em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  font-weight: normal;
+}
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+.masthead .header img {
+  width: 6.5em;
+}
+
+.stripe.ui.segment {
+  margin: 0;
+  padding: 1em;
+}
+.stripe .container {
+  max-height: 500px;
+}
+.stripe p {
+  padding-top: 2em;
+}
+.stripe .equal.height .row {
+  padding-top: 5em;
+}
+
+.footer .container {
+  max-height: 60px;
+}
+
+@media only screen and (max-width: 700px) {
+  .masthead.segment {
+    min-height: 200px;
+  }
+  .masthead h1.ui.header {
+    font-size: 2em;
+    margin-top: 1.5em;
+  }
+  .masthead h2 {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+  }
+}
+
