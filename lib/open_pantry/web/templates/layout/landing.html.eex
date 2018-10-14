@@ -7,9 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome to OpenPantry!</title>
+    <title>OpenPantry - Healthy food with dignity and choice</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
     <!-- Hotjar Tracking Code for http://open-pantry.herokuapp.com/ -->
     <script>

@@ -488,7 +488,12 @@ body {
   max-height: 60px;
 }
 
-@media only screen and (max-width: 700px) {
+.landing-icon {
+  text-align: center;
+  min-height: 150px;
+}
+
+@media only screen and (max-width: 768px) {
   .masthead.segment {
     min-height: 200px;
   }
@@ -501,6 +506,14 @@ body {
   .masthead h2 {
     margin-top: .5em;
     font-size: 1.5em;
+  }
+
+  .stripe .container {
+    max-height: 1200px;
+  }
+
+  .footer .container {
+    max-height: 60px;
   }
 }
 
