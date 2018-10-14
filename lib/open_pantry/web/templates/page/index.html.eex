@@ -10,7 +10,7 @@
   <div class="ui middle aligned stackable grid container">
     <div class="row">
       <div class="six wide right floated column">
-        <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui large bordered image">
+        <img src="<%= static_path(@conn, "/images/fox.png") %>" class="ui large bordered image">
       </div>
       <div class="ten wide column">
         <h3 class="ui header">How it works</h3>
@@ -25,28 +25,36 @@
 </div>
 <div class="ui stripe segment blue inverted">
   <div class="ui grid container">
-    <div class="ui padded equal height grid">
+    <div class="ui padded equal height stackable grid">
       <div class="row">
         <div class="four wide right column">
-          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <div class="landing-icon">
+            <i class="fas fa-smile-beam" style="font-size: 120px;"></i>
+          </div>
           <p>
             Client Information can be completely anonymous or linked to user accounts
           </p>
         </div>
         <div class="four wide right column">
-          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <div class="landing-icon">
+            <i class="fas fa-utensils" style="font-size: 120px;"></i>
+          </div>
           <p>
             Items are grouped in categories and points are assigned according to the USDA MyPlate ratios
           </p>
         </div>
         <div class="four wide right column">
-          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <div class="landing-icon">
+            <i class="fas fa-users" style="font-size: 120px;"></i>
+          </div>
           <p>
             Points are scalable to family size allowing clients to choose for whatever size family you choose
           </p>
         </div>
         <div class="four wide right column">
-          <img src="<%= static_path(@conn, "/images/open-pantry-logo-square@2x.png") %>" class="ui small circular image centered">
+          <div class="landing-icon">
+            <i class="fas fa-language" style="font-size: 120px;"></i>
+          </div>
           <p>
             Multilingual options allows clients to select items in their native language
           </p>
